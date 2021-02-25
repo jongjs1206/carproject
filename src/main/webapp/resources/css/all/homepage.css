@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+.bg-opacity {
+	opacity: 0.3;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+
+.con_title_front {
+	z-index: 20;
+	margin-top: 300px;
+	margin-bottom: 450px;
+}
+
+.course__item{
+	margin: 30px;
+}
+
+.course__item>img{
+	width:100%;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 30px;
+}
+.p_list_contents{
+	border-top: 1px solid #939393;
+	border-left: 1px solid #939393;
+	border-right: 1px solid #939393;
+	border-bottom: 1px solid #939393;
+	padding: 18px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 30px;
+}
+.price_save{
+	display: flex;
+	justify-content: space-between;
+}
+.fa-heart{
+	font-size: 25px;
+	position: relative;
+	right: 10px;
+	color: #939393;
+}
+
+
+
+.visual button {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 50px;
+	height: 50px;
+	background: rgba(0,0,0,0);
+	border: none;
+}
+
+.visual button:before {
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	color: var(--main-color);
+	font-size: 30px;
+}
+
+.visual button.slick-prev {
+	left: 0;
+	font-size: 0;
+	color: transparent;
+}
+
+.visual button.slick-prev:before {
+	content: "\f053";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+
+.visual button.slick-next {
+	right: 0;
+	font-size: 0;
+	color: transparent;
+}
+
+.visual button.slick-next:before {
+	content: "\f054";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+
+.title_center{
+	text-align: center;
+}
+
