@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> header.jsp </title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap"
@@ -35,7 +35,7 @@
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                               <a href="index.html"><img src="../resources/assets/img/logo/logo.png" alt=""></a>
+                               <a href="#"><img src="../resources/assets/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                     <div class="col-xl-8 col-lg-8">
@@ -43,22 +43,21 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="services.html">Service</a></li>
-                                        <li><a href="blog.html">Blog</a>
+                                        <li><a href="#">국산차</a></li>
+                                        <li><a href="#">수입차</a></li>
+                                        <li><a href="#">내 차 팔기</a></li>
+                                        <li><a href="#l">자동차 뉴스</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Blog Details</a></li>
+                                                <li><a href="#">Blog</a></li>
+                                                <li><a href="#">Blog Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Pages</a>
+                                        <li><a href="#">Q&A</a>
                                             <ul class="submenu">
-                                                <li><a href="rooms.html">Rooms</a>
-                                                <li><a href="elements.html">Element</a></li>
+                                                <li><a href="#">Rooms</a>
+                                                <li><a href="#">Element</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -66,7 +65,10 @@
                         <div class="col-xl-2 col-lg-2">
                             <!-- header-btn -->
                             <div class="header-btn">
-                                <a href="#" class="btn btn1 d-none d-lg-block ">Book Online</a>
+                            <!-- 
+                                <a href="#" class="btn btn1 d-none d-lg-block ">Login</a>
+                                -->
+                                <a href="#" class="btn more-btn1" id="login-color-menu"> Login/회원가입 <i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                         <!-- Mobile Menu -->
