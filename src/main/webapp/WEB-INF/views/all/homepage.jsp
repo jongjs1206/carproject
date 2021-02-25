@@ -497,8 +497,9 @@
 		</div>
 		<!-- Gallery img End-->
 	</main>
-	<%@ include file="../header.jsp"%>
 	
+	<%@ include file="../footer.jsp"%>
+
 	<!-- JS here -->
 
 	<!-- All JS Custom Plugins Link Here here -->
