@@ -498,6 +498,8 @@
 		<!-- Gallery img End-->
 	</main>
 	
+	<%@ include file="../footer.jsp"%>
+	
 
 	<!-- JS here -->
 
