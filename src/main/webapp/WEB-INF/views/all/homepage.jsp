@@ -67,12 +67,10 @@
 							<div class="col-xl-9">
 								<div class="h1-slider-caption">
 									<img class='bluecar' alt=""
-										style="width: 700px; position: absolute; z-index: 0; top: 42%; right: -28%;"
+										style="width: 80%; position: absolute; z-index: 0; top: 42%; right: -28%;"
 										src="../resources/img/car1.png">
-									<h1 data-animation="fadeInUp" data-delay=".4s">top hotel
-										in the city</h1>
-									<h3 data-animation="fadeInDown" data-delay=".4s">Hotel &
-										Resourt</h3>
+									<h1 data-animation="fadeInUp" data-delay=".4s">중고차 사이트 사차원!</h1>
+									<h3 data-animation="fadeInDown" data-delay=".4s">가짜 매물 X</h3>
 								</div>
 							</div>
 						</div>
@@ -89,28 +87,28 @@
 				<div class="row">
 					<div class="col-xl-5 col-lg-6">
 						<div class="customer-img mb-120">
-							<img src="../resources/assets/img/customer/customar1.png"
+							<img src="../resources/img/sell.jpg"
 								class="customar-img1" alt=""> <img
 								src="../resources/assets/img/customer/customar2.png"
 								class="customar-img2" alt="">
 							<div class="service-experience heartbeat">
 								<h3>
-									25 Years of Service<br>Experience
+									저희 사이트는 개인회원이<br>거래하는 사이트 입니다.
 								</h3>
 							</div>
 						</div>
 					</div>
 					<div class=" col-xl-4 col-lg-4">
 						<div class="customer-caption">
-							<span>About our company</span>
-							<h2>Make the customer the hero of your story</h2>
+							<span></span>
+							<h2>개인 차량 매물 등록</h2>
 							<div class="caption-details">
-								<p class="pera-dtails">Lorem ipsum dolor sit amet,
-									consectetur adipisic- ing elit, sed do eiusmod tempor inc.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna
-									aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-								<a href="#" class="btn more-btn1">Learn More <i
+								<p class="pera-dtails">코인을 충전하여 글을 등록할 수 있습니다.</p>
+								<p>
+								글을 등록한 순간부터 2주동안 게시됩니다.
+								<br>1코인에 1건의 글을 등록할 수 있으며 1코인은 10,000원으로 살 수 있습니다.
+								<br>허위 매물 등록시 삭제를 당할 수 있으며 코인은 돌려주지 않습니다.</p>
+								<a href="#" class="btn more-btn1">글 등록 <i
 									class="ti-angle-right"></i>
 								</a>
 							</div>
@@ -129,9 +127,9 @@
 						<!--font-back-tittle  -->
 						<div class="font-back-tittle mb-45">
 							<div class="archivment-front">
-								<h3>Our Rooms</h3>
+								<h3>최신 차량 매물</h3>
 							</div>
-							<h3 class="archivment-back">Our Rooms</h3>
+							<h3 class="archivment-back">최신 차량 매물</h3>
 						</div>
 					</div>
 				</div>
@@ -141,14 +139,16 @@
 						<div class="single-room mb-50">
 							<div class="room-img">
 								<a href="rooms.html"><img
-									src="../resources/assets/img/rooms/room1.jpg" alt=""></a>
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="room-caption">
 								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
 								</h3>
 								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
 								</div>
 							</div>
 						</div>
@@ -158,31 +158,16 @@
 						<div class="single-room mb-50">
 							<div class="room-img">
 								<a href="rooms.html"><img
-									src="../resources/assets/img/rooms/room2.jpg" alt=""></a>
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="room-caption">
 								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
 								</h3>
 								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"> <img
-									src="../resources/assets/img/rooms/room3.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
-								</h3>
-								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
 								</div>
 							</div>
 						</div>
@@ -192,14 +177,16 @@
 						<div class="single-room mb-50">
 							<div class="room-img">
 								<a href="rooms.html"><img
-									src="../resources/assets/img/rooms/room4.jpg" alt=""></a>
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="room-caption">
 								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
 								</h3>
 								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
 								</div>
 							</div>
 						</div>
@@ -209,14 +196,16 @@
 						<div class="single-room mb-50">
 							<div class="room-img">
 								<a href="rooms.html"><img
-									src="../resources/assets/img/rooms/room5.jpg" alt=""></a>
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="room-caption">
 								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
 								</h3>
 								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
 								</div>
 							</div>
 						</div>
@@ -225,29 +214,40 @@
 						<!-- Single Room -->
 						<div class="single-room mb-50">
 							<div class="room-img">
-								<a href="rooms.html"> <img
-									src="../resources/assets/img/rooms/room6.jpg" alt=""></a>
+								<a href="rooms.html"><img
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="room-caption">
 								<h3>
-									<a href="rooms.html">Classic Double Bed</a>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
 								</h3>
 								<div class="per-night">
-									<span><u>$</u>150 <span>/ par night</span></span>
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row justify-content-center">
-					<div class="room-btn pt-70">
-						<a href="#" class="btn view-btn1">View more <i
-							class="ti-angle-right"></i>
-						</a>
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<!-- Single Room -->
+						<div class="single-room mb-50">
+							<div class="room-img">
+								<a href="rooms.html"><img
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
+							</div>
+							<div class="room-caption">
+								<h3>
+									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
+								</h3>
+								<div class="per-night">
+									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
+									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
+									
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-
 		</section>
 		<!-- Room End -->
 
@@ -497,8 +497,8 @@
 		</div>
 		<!-- Gallery img End-->
 	</main>
+	<%@ include file="../header.jsp"%>
 	
-
 	<!-- JS here -->
 
 	<!-- All JS Custom Plugins Link Here here -->
