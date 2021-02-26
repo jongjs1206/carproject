@@ -68,7 +68,7 @@
                             <!-- 
                                 <a href="#" class="btn btn1 d-none d-lg-block ">Login</a>
                                 -->
-                                <a href="#" class="btn more-btn1" id="login-color-menu"> Login/회원가입 <i class="ti-angle-right"></i> </a>
+                                <a href="join.do" class="btn more-btn1" id="login-color-menu"> Login/회원가입 <i class="ti-angle-right"></i> </a>
                             </div>
                         </div>
                         <!-- Mobile Menu -->
