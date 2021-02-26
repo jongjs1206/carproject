@@ -45,220 +45,225 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-	
-<link rel="stylesheet" href="../resources/css/all/join.css"
+
+<link rel="stylesheet" href="../resources/css/all/join_login.css"
 	type="text/css">
-	
+
 <script type="text/javascript" src="../resources/js/all/join.js"></script>
 </head>
-<body >
+<body>
 
 	<%@ include file="../header.jsp"%>
 
 	<main class="background_color">
-		
 
-	<!-- Application Form Section Begin -->
-	<div class="container box-login">
-	  <div class="noMenuLogo">
-			<a href="/carproject/all/homepage.do"><img src="../resources/img/logo.png" alt="logo"></a>
-		</div>
-		
+
+		<!-- Application Form Section Begin -->
+		<div class="container box-login">
+			<div class="noMenuLogo">
+				<a href="/carproject/all/homepage.do"><img
+					src="../resources/img/logo.png" alt="logo"></a>
+			</div>
+
 			<hr class="cmm-line mg-b40 pad-t20">
 
-		<section class="content--center-block">
+			<section class="content--center-block">
 
 
-			<form method="post" action="userInsert.do" id="join" role="form">
+				<form method="post" action="userInsert.do" id="join" role="form">
 
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>인증</span>
-					</div>
-					<div class="cmm-input-area">
-						<div class="mg-b10">
-							<span class="inp-t w400"><input type="text" title="휴대전화번호"
-								id="hand" name="hand" autocomplete="off"
-								onkeydown="win.onlyNumber(event);"
-								onkeyup="win.removeChar(event)" maxlength="11"
-								placeholder="휴대폰번호 입력" tk_security="true"></span>
-							<button type="button" class="joinBtns more-btn1" id="btnSend">
-								<span>인증번호 전송</span>
-							</button>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>인증</span>
 						</div>
-						<div>
-							<div class="inp-t inp-time w400">
-								<input type="text" title="인증번호 입력" name="certCode" id="certCode"
-									maxlength="6" autocomplete="off"
+						<div class="cmm-input-area">
+							<div class="mg-b10">
+								<span class="inp-t w400"><input type="text"
+									title="휴대전화번호" id="hand" name="hand" autocomplete="off"
 									onkeydown="win.onlyNumber(event);"
-									onkeyup="win.removeChar(event)" readonly=""
-									placeholder="인증번호 입력" tk_security="true">
-								<div class="t-txt" id="timer" style="display: block;"></div>
+									onkeyup="win.removeChar(event)" maxlength="11"
+									placeholder="휴대폰번호 입력" tk_security="true"></span>
+								<button type="button" class="joinBtns more-btn1" id="btnSend">
+									<span>인증번호 전송</span>
+								</button>
 							</div>
-							<button type="button" class="joinBtns more-btn1" id="certNumChk">
-								<span>인증번호 확인</span>
-							</button>
-							<button type="button" class="joinBtns more-btn1" id="btnSend2">
-								<span>재전송</span>
+							<div>
+								<div class="inp-t inp-time w400">
+									<input type="text" title="인증번호 입력" name="certCode"
+										id="certCode" maxlength="6" autocomplete="off"
+										onkeydown="win.onlyNumber(event);"
+										onkeyup="win.removeChar(event)" readonly=""
+										placeholder="인증번호 입력" tk_security="true">
+									<div class="t-txt" id="timer" style="display: block;"></div>
+								</div>
+								<button type="button" class="joinBtns more-btn1" id="certNumChk">
+									<span>인증번호 확인</span>
+								</button>
+								<button type="button" class="joinBtns more-btn1" id="btnSend2">
+									<span>재전송</span>
+								</button>
+								<div class="form-txt">
+									<span class="ft-red" id="certAlert"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<hr class="cmm-line mg-b40 pad-t20">
+
+
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>아이디</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"> <input type="text" id="m_id"
+								name="m_id" autocomplete="off"
+								maxlength="20" title="아이디" tk_security="true">
+							</span>
+							<button type="button" class="joinBtns more-btn1"
+								id="btnIdDuplChk" name="btnIdDuplChk">
+								<span>중복확인</span>
 							</button>
 							<div class="form-txt">
-								<span class="ft-red" id="certAlert"></span>
+								<span class="ft-black" id="idAlert1" style="display: none;"></span>
+								<span class="ft-red" id="idAlert2"></span>
 							</div>
 						</div>
 					</div>
-				</div>
 
 
-				<hr class="cmm-line mg-b40 pad-t20">
 
 
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>아이디</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t"> <input type="text" id="m_id"
-							name="m_id" onkeyup="win.idValidChk();" autocomplete="off"
-							maxlength="20" title="아이디" tk_security="true">
-						</span>
-						<button type="button" class="joinBtns more-btn1" 	id="btnIdDuplChk" name="btnIdDuplChk">
-							<span>중복확인</span>
-						</button>
-						<div class="form-txt">
-							<span class="ft-black" id="idAlert1" style="display: none;"></span>
-							<span class="ft-red" id="idAlert2"></span>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>비밀번호</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"> <input type="password" title="비밀번호"
+								maxlength="20" min="6" id="m_pw" name="m_pw" data-enc="on"
+								autocomplete="off" >
+							</span>
+							<div class="form-txt">
+								<span class="ft-red" id="passwordAlert1"></span>
+								<ul class="ft-list">
+									<li><span class="icon">*</span>비밀번호는 영문자, 특수문자, 숫자 포함 형태의
+										6~20자리로 입력해주세요.</li>
+									<li><span class="icon">*</span>아이디를 포함한 문자/숫자는 비밀번호로 사용할 수
+										없습니다.</li>
+									<li><span class="icon">*</span>동일한 문자/숫자 3자리 이상은 입력이
+										불가합니다.(ex. aaa,111 등)</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-
-
-
-
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>비밀번호</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t"> <input type="password" title="비밀번호"
-							maxlength="20" min="6" data-enc="on" id="m_pw" name="m_pw"
-							autocomplete="off" tk_security="true">
-						</span>
-						<div class="form-txt">
-							<span class="ft-red" id="passwordAlert1"></span>
-							<ul class="ft-list">
-								<li><span class="icon">*</span>영문,숫자,특수기호를 2가지 이상 조합하여
-									6~20자의 문자를 입력해주세요. (공백 입력불가)</li>
-								<li><span class="icon">*</span>아이디를 포함한 문자/숫자는 비밀번호로 사용할 수
-									없습니다.</li>
-								<li><span class="icon">*</span>동일한 문자/숫자 3자리 이상은 입력이
-									불가합니다.(ex. aaa,111 등)</li>
-							</ul>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>비밀번호확인</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"><input type="password" title="비밀번호"
+								id="m_pwConfirm" name="loginPassChk" min="6" maxlength="20"
+								data-enc="on" autocomplete="off" ></span>
+							<div class="form-txt">
+								<span class="ft-red" id="passwordAlert2"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>비밀번호확인</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t"><input type="password" title="비밀번호"
-							id="loginPassChk" name="loginPassChk" min="6" maxlength="20"
-							data-enc="on" autocomplete="off" tk_security="true"></span>
-						<div class="form-txt">
-							<span class="ft-red" id="passwordAlert2"></span>
+					<hr class="cmm-line mg-b40 pad-t20">
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>이름</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"><input type="text" title="이름"
+								id="m_name" name="m_name" maxlength="10" autocomplete="off"
+								tk_security="true"></span>
+							<div class="form-txt">
+								<span class="ft-red" id="nameAlert"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<hr class="cmm-line mg-b40 pad-t20">
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>이름</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t"><input type="text" title="이름"
-							id="m_name" name="m_name" maxlength="10" autocomplete="off"
-							tk_security="true"></span>
-						<div class="form-txt">
-							<span class="ft-red" id="nameAlert"></span>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>성별</span>
+						</div>
+						<div class="cmm-input-area">
+							<div class="ck-wrap mg-t20" id="divGenderArea">
+								<button type="button" id="gender_m"
+									class="joinBtns gender more-btn1 ck-item">
+									<span>남</span>
+								</button>
+								<button type="button" id="gender_w"
+									class="joinBtns gender more-btn1 ck-item">
+									<span>여</span>
+								</button>
+							  <input type="hidden" id="gender" name="gender" value="">
+							</div>
+							<div class="form-txt">
+								<span class="ft-red" id="genderAlert"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>성별</span>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>생년월일</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"> <input type="text" id="birth"
+								name="birth" maxlength="8" autocomplete="off" title="생년월일"
+								placeholder="예) 19890909" tk_security="true">
+							</span>
+							<div class="form-txt">
+								<span class="ft-red" id="birthDayAlert"></span>
+							</div>
+						</div>
 					</div>
-					<div class="cmm-input-area">
-						<div class="ck-wrap mg-t20" id="divGenderArea">
-							<button type="button" data="038100"	class="joinBtns more-btn1 ck-item ck-on">
-								<span>남</span>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>이메일</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t" style="width: 140px;"><input
+								type="text" id="email1" name="email1" title="이메일 주소"
+								tk_security="true"></span> <span class="form-t">@</span> <span
+								class="inp-t" style="width: 140px;"><input type="text"
+								id="email2" name="email2" title="직접입력 이메일" tk_security="true"></span>
+							<button type="button" class="joinBtns more-btn1"
+								id="btnEmailDuplChk">
+								<span>중복확인</span>
 							</button>
-							<button type="button" data="038110" class="joinBtns more-btn1 ck-item">
-								<span>여</span>
-							</button>
-						</div>
-						<div class="form-txt">
-							<span class="ft-red" id="genderAlert"></span>
+							<div class="form-txt">
+								<span class="ft-red" id="emailAlert"></span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>생년월일</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t"> <input type="text" id="birth"
-							name="birth" maxlength="8" autocomplete="off" title="생년월일"
-							placeholder="예) 19890909" tk_security="true">
-						</span>
-						<div class="form-txt">
-							<span class="ft-red" id="birthDayAlert"></span>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>휴대폰번호</span>
+						</div>
+						<div class="cmm-input-area">
+							<div class="inp-t inp-cer" style="width: 310px;">
+								<input type="text" title="휴대폰번호" id="tel" name="tel" readonly=""
+									tk_security="true">
+								<div class="t-txt" style="display: block;">인증완료</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>이메일</span>
-					</div>
-					<div class="cmm-input-area">
-						<span class="inp-t" style="width: 140px;"><input
-							type="text" id="email1" name="email1" title="이메일 주소"
-							tk_security="true"></span> <span class="form-t">@</span> <span
-							class="inp-t" style="width: 140px;"><input type="text"
-							id="email2" name="email2" title="직접입력 이메일" tk_security="true"></span>
-						<button type="button" class="joinBtns more-btn1" 
-							id="btnEmailDuplChk">
-							<span>중복확인</span>
-						</button>
-						<div class="form-txt">
-							<span class="ft-red" id="emailAlert"></span>
-						</div>
-					</div>
-				</div>
-				<div class="cmm-basic-info">
-					<div class="cmm-tit">
-						<span>휴대폰번호</span>
-					</div>
-					<div class="cmm-input-area">
-						<div class="inp-t inp-cer" style="width: 310px;">
-							<input type="text" title="휴대폰번호" id="tel" name="tel" readonly=""
-								tk_security="true">
-							<div class="t-txt" style="display: block;">인증완료</div>
-						</div>
-					</div>
-				</div>
 
-				<hr class="cmm-line mg-b30 pad-t10">
-				<div class="joinBtnDiv">
-					<a id="joinDiv" class="btn border-btn"><span>회원가입</span></a>
-				</div>
+					<hr class="cmm-line mg-b30 pad-t10">
+					<div class="joinBtnDiv">
+						<a id="joinDiv" class="btn border-btn"><span>회원가입</span></a>
+					</div>
 
-			</form>
+				</form>
 
-			<!--end of container  -->
-		</section>
-	</div>
+				<!--end of container  -->
+			</section>
+		</div>
 	</main>
-	
+
 	<%@ include file="../footer.jsp"%>
 
 	<!-- JS here -->

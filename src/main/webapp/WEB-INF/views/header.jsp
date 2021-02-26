@@ -80,7 +80,7 @@
                             <!-- 
                                 <a href="#" class="btn btn1 d-none d-lg-block ">Login</a>
                             -->    
-                                <a href="../user/login.do" class="btn more-btn1" id="login-color-menu"> Login <i class="ti-angle-right"></i> </a>
+                                <a href="../all/login.do" class="btn more-btn1" id="login-color-menu"> Login <i class="ti-angle-right"></i> </a>
                                 <a href="../all/join.do" class="btn more-btn1" id="login-color-menu"> 회원가입 <i class="ti-angle-right"></i> </a>
                             
                             </div>

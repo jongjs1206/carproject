@@ -7,6 +7,10 @@
 */
 
 
+
+/* join */
+
+
 .box-login {
     margin: 0 auto;
     padding : 0 5%;
@@ -107,7 +111,7 @@ input[type="password" i] {
 	color : #dca73a;
 }
 
-#joinDiv:hover > span .{
+#joinDiv:hover > span {
 	color : white;
 }
 .background_color{
@@ -120,7 +124,7 @@ input[type="password" i] {
 	align-items: center;
 }
 .noMenuLogo img{
-	 width: auto; height: auto;
+	width: auto; height: auto;
     max-width: 400px;
     margin: 10% 0 20% 0;
 }
@@ -152,4 +156,117 @@ input[type="password" i] {
     transition: all 0.3s ease 0s;
     vertical-align: middle;
     white-space: nowrap;
+}
+
+
+.joinBtns.gender{
+	background: #fff;
+	color: #dca73a;
+}
+
+.joinBtns.gender.genderOn{
+	background: #dca73a;
+	color: #fff;
+    padding: 17px 7px;
+    border: inset;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+/*login*/
+
+.Button_uibtn__1tGCl {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.Button_uibtn_silver__3Ho2C {
+    color: #fff;
+    border: 0;
+    border-radius: 100px;
+    background: #E1C998;
+}
+
+.Button_uibtn_white__3l1tT {
+    color: #666;
+    border: 1px solid #bfbfbf;
+    border-radius: 100px;
+    background: #fff;
+}
+.InputText_uiinput_txt__3jtqA .InputText_inner_square__38iB2 input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.LoginMyFindButton_area__245Jy {
+    margin-top: 15px;
+    text-align: center;
+}
+.LoginMyFindButton_link__fee2S {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 13px;
+    color: #999;
+}
+.LoginSnsButton_tit__1kT5i {
+    display: inline-block;
+    position: relative;
+    padding: 0 13px;
+    background: #fff;
+    font-size: 15px;
+    color: #bfbfbf;
+    font-weight: 400;
+}
+.LoginSnsButton_login_warning__IPZhy {
+    margin-top: 35px;
+    font-size: 13px;
+    color: #bfbdbd;
+    text-align: center;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.Footer_footer_wrap__SixRg {
+    padding: 20px 0;
+    margin: 0 auto;
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+}
+.LoginSnsButton_tit_area__bRqmB {
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
 }
