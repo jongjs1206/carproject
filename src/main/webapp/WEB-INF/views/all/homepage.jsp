@@ -259,12 +259,10 @@
 					<div class="row justify-content-end">
 						<div class="col-lg-8 col-md-8">
 							<div class="dining-caption">
-								<span>Our resturent</span>
-								<h3>Dining & Drinks</h3>
+								<span>news</span>
+								<h3>자동차 뉴스</h3>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod<br> tempor incididunt ut labore et dolore magna
-									aliqua. Ut enim ad minim <br>veniam, quis nostrud.
+									자동차에 관련된 최신 정보를 모아 놓았습니다.
 								</p>
 								<a href="#" class="btn border-btn">Learn More <i
 									class="ti-angle-right"></i>
@@ -280,12 +278,11 @@
 					<div class="row justify-content-start">
 						<div class="col-lg-8 col-md-8">
 							<div class="dining-caption text-right">
-								<span>Our Pool</span>
-								<h3>Swimming Pool</h3>
+								<span>prediction</span>
+								<h3>시세 확인 & 예측</h3>
 								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-									do eiusmod<br> tempor incididunt ut labore et dolore magna
-									aliqua. Ut enim ad minim <br>veniam, quis nostrud.
+									과거의 자동차 판매가격을 기준으로 평균 시세를 보여주고<br>
+									미래의 시세를 예측하여 나타내 줍니다.
 								</p>
 								<a href="#" class="btn border-btn">Learn More <i
 									class="ti-angle-right"></i></a>
@@ -297,85 +294,19 @@
 		</div>
 		<!-- Dining End -->
 
-		<!-- Testimonial Start -->
-		<div class="testimonial-area testimonial-padding">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-xl-9 col-lg-9 col-md-9">
-						<div class="h1-testimonial-active">
-							<!-- Single Testimonial -->
-							<div class="single-testimonial pt-65">
-								<!-- Testimonial tittle -->
-								<div class="font-back-tittle mb-105">
-									<div class="archivment-front">
-										<img src="../resources/assets/img/logo/testimonial.png" alt="">
-									</div>
-									<h3 class="archivment-back">Testimonial</h3>
-								</div>
-								<!-- Testimonial Content -->
-								<div class="testimonial-caption text-center">
-									<p>Yorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do eiusmod tempor incididunt ut labore et dolore
-										magna aliqua. Ut enim ad minim veniam, quis nostrud
-										exercitation ullamco laboris nisi.</p>
-									<!-- Rattion -->
-									<div class="testimonial-ratting">
-										<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-											class="fas fa-star"></i>
-									</div>
-									<div class="rattiong-caption">
-										<span>Clifford Frazier, <span>Regular Client</span>
-										</span>
-									</div>
-								</div>
-							</div>
-							<!-- Single Testimonial -->
-							<div class="single-testimonial  pt-65">
-								<!-- Testimonial tittle -->
-								<div class="font-back-tittle mb-105">
-									<div class="archivment-front">
-										<img src="../resources/assets/img/logo/testimonial.png" alt="">
-									</div>
-									<h3 class="archivment-back">Testimonial</h3>
-								</div>
-								<!-- Testimonial Content -->
-								<div class="testimonial-caption text-center">
-									<p>Yorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do eiusmod tempor incididunt ut labore et dolore
-										magna aliqua. Ut enim ad minim veniam, quis nostrud
-										exercitation ullamco laboris nisi.</p>
-									<div class="testimonial-ratting">
-										<a href="#"><i class="fas fa-star"></i></a> <a href="#"><i
-											class="fas fa-star"></i></a> <a href="#"><i
-											class="fas fa-star"></i></a> <a href="#"><i
-											class="fas fa-star"></i></a> <a href="#"><i
-											class="fas fa-star"></i></a>
-									</div>
-									<div class="rattiong-caption">
-										<span>Clifford Frazier, <span>Regular Client</span>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Testimonial End -->
+		
 
 		<!-- Blog Start -->
-		<div class="blog-area blog-padding">
+		<div class="blog-area testimonial-padding">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-8">
 						<!-- Seciton Tittle  -->
 						<div class="font-back-tittle mb-50">
 							<div class="archivment-front">
-								<h3>Our Blog</h3>
+								<h3>구매 후기</h3>
 							</div>
-							<h3 class="archivment-back">Recent News</h3>
+							<h3 class="archivment-back">구매후기</h3>
 						</div>
 					</div>
 				</div>
@@ -385,26 +316,23 @@
 						<div class="single-blog mb-30">
 							<div class="blog-img">
 								<a href="single-blog.html"><img
-									src="../resources/assets/img/our_blog/blog-img1.jpg" alt=""></a>
+									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
 							</div>
 							<div class="blog-caption">
 								<div class="blog-cap-top d-flex justify-content-between mb-40">
-									<span>news</span>
+									<span>상품 정보</span>
 									<ul>
-										<li>by<a href="#"> Jhon Guru</a></li>
+										<li style="font-size: 18px;">구매자<a style="font-size: 18px; href="#"> 정재상</a></li>
 									</ul>
 								</div>
 								<div class="blog-cap-mid">
 									<p>
-										<a href="single-blog.html">5 Simple Tricks for Getting
-											Stellar Hotel Service Wherever You Are</a>
+										<a href="single-blog.html">아주 굿굿굿 이에요</a>
 									</p>
 								</div>
 								<!-- Comments -->
 								<div class="blog-cap-bottom d-flex justify-content-between">
-									<span>Feb 28, 2020</span> <span><img
-										src="../resources/assets/img/our_blog/blog-comments-icon.jpg"
-										alt="">3</span>
+									<span></span> <span>2020-08-15</span>
 								</div>
 							</div>
 						</div>
@@ -472,30 +400,7 @@
 		</div>
 		<!-- Blog End -->
 
-		<!-- Gallery img Start-->
-		<div class="gallery-area fix">
-			<div class="container-fluid p-0">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="gallery-active owl-carousel">
-							<div class="gallery-img">
-								<a href="#"><img
-									src="../resources/assets/img/gallery/gallery1.jpg" alt=""></a>
-							</div>
-							<div class="gallery-img">
-								<a href="#"><img
-									src="../resources/assets/img/gallery/gallery2.jpg" alt=""></a>
-							</div>
-							<div class="gallery-img">
-								<a href="#"><img
-									src="../resources/assets/img/gallery/gallery3.jpg" alt=""></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Gallery img End-->
+		
 	</main>
 	
 	<%@ include file="../footer.jsp"%>
