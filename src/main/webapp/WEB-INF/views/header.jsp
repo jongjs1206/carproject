@@ -35,7 +35,7 @@
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                               <a href="#"><img src="../resources/assets/img/logo/logo.png" alt=""></a>
+                               <a href="#"><img src="../resources/assets/img/logo/4d-logo.png" width="200" height="70" alt=""></a>
                             </div>
                         </div>
                     <div class="col-xl-8 col-lg-8">
@@ -43,10 +43,10 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
-                                        <li><a href="#">국산차</a></li>
+                                        <li><a href="../all/product_list.do">국산차</a></li>
                                         <li><a href="#">수입차</a></li>
                                         <li><a href="#">내 차 팔기</a></li>
-                                        <li><a href="#l">자동차 뉴스</a>
+                                        <li><a href="../user/coinInfo.do">자동차 뉴스</a>
                                             <ul class="submenu">
                                                 <li><a href="#">Blog</a></li>
                                                 <li><a href="#">Blog Details</a></li>
@@ -54,10 +54,14 @@
                                         </li>
                                         <li><a href="#">Q&A</a>
                                             <ul class="submenu">
-                                                <li><a href="#">Rooms</a>
-                                                <li><a href="#">Element</a></li>
+                                                <li><a href="../all/find_idpw.do">아이디/비밀번호찾기</a>
+                                                <li><a href="../user/memInfo.do">memInfo.do</a></li>
+                                                <li><a href="../user/mysale_list.do">mysale_list.do</a></li>
+                                                <li><a href="../user/mywish_list.do">mywish_list.do</a></li>
+                                                <li><a href="../user/user.do">user.do</a></li>
                                             </ul>
                                         </li>
+                                        <li><a href="#">채팅</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -67,8 +71,10 @@
                             <div class="header-btn">
                             <!-- 
                                 <a href="#" class="btn btn1 d-none d-lg-block ">Login</a>
-                                -->
-                                <a href="#" class="btn more-btn1" id="login-color-menu"> Login/회원가입 <i class="ti-angle-right"></i> </a>
+                            -->    
+                                <a href="../all/login.do" class="btn more-btn1" id="login-color-menu"> Login <i class="ti-angle-right"></i> </a>
+                                <a href="../all/join.do" class="btn more-btn1" id="login-color-menu"> 회원가입 <i class="ti-angle-right"></i> </a>
+                            
                             </div>
                         </div>
                         <!-- Mobile Menu -->
