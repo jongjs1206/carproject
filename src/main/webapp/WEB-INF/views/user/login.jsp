@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
@@ -45,7 +47,8 @@
                     <h1 class="Header_logo_big__2fSem"><a href="/mycar/all/homepage.do"><img src="" alt="logo" class="Header_img__20HzF"></a></h1>
                 </div>
                 <div class="Layout_contents__2nVdg Layout_normal__2IFQF">
-                    <form>
+                    <c:url value="/login" var="loginUrl" />
+					<form:form action='${loginUrl}' method='post'>
                         <div>
                             <div class="">
                                 <div class="AlignBoxInput_uialign_block__3ZoMq">
@@ -72,7 +75,7 @@
                             </div>
                             <div class=" " style="margin-top: 30px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_silver__3Ho2C Button_uibtn_size_h50__cWPtg" disabled=""> 로그인 </button></div>
                         </div>
-                    </form>
+                    </form:form>
                     <div class="LoginMyFindButton_area__245Jy"><a class="LoginMyFindButton_link__fee2S" href="/mycar/all/find_idpw.do">아이디/비밀번호 찾기</a><a class="LoginMyFindButton_link__fee2S" href="/mycar/all/join.do">회원가입</a></div>
                     <div class="LoginSnsButton_tit_area__bRqmB"><strong class="LoginSnsButton_tit__1kT5i">간편하게 시작하기</strong></div>
                     <div class="LoginSnsButton_btn_area__1HZfa">

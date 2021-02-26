@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,35 +69,36 @@
 					src="../resources/img/logo.png" alt="logo"></a>
 			</div>
                 <div class="Layout_contents__2nVdg Layout_normal__2IFQF">
-                    <form>
+                    <c:url value="/login" var="loginUrl" />
+					<form:form action='${loginUrl}' method='post'>
                         <div>
                             <div class="">
                                 <div class="AlignBoxInput_uialign_block__3ZoMq">
                                     <div class="AlignBoxInput_uialign_item__3Gy6x col1">
                                         <div class="InputText_uiinput_txt__3jtqA" data-testid="wrap_input">
                                         <div class="InputText_placeholder_text__13dap" role="button">아이디</div>
-                                            <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25"><input type="text" id="id" name="id" maxlength="20" data-testid="input" inputmode="" value="">
+                                            <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25">
+                                            <input type="text" id="m_id" name="m_id" maxlength="20" data-testid="input" inputmode="" value="">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="AlignBoxInput_uialign_item__3Gy6x col1">
                                         <div class="InputText_uiinput_txt__3jtqA" data-testid="wrap_input" style="margin-top: 10px;">
                                         <div class="InputText_placeholder_text__13dap" role="button">비밀번호</div>
-                                            <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25"><input type="password" id="password" name="password" maxlength="" data-testid="input" inputmode="" value="">
+                                            <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25">
+                                            <input type="password" id="m_pw" name="m_pw" maxlength="" data-testid="input" inputmode="" value="">
                                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="" style="margin-top: 15px;">
-                                <div class="AlignBoxInput_uialign_inline__1-PtZ">
-                                    <div class="AlignBoxInput_uialign_item__3Gy6x col2"><span class="dIB" style="margin-right: 10px;"><span class="InputCheckBox_uiinput__3nGZz"><input type="checkbox" id="autid" name="autoid"><label for="autid" class="txt_item InputCheckBox_label_size14__39GjL"><span class="">아이디 저장</span></label></span></span></div>
-                                </div>
-                            </div>
-                            <div class=" " style="margin-top: 30px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_silver__3Ho2C Button_uibtn_size_h50__cWPtg" disabled=""> 로그인 </button></div>
+                            <c:if test="${param.error != null}">
+								<p>아이디와 비밀번호가 잘못되었습니다.</p>
+							</c:if>
+                            <div class=" " style="margin-top: 30px;"><button type="submit" class="Button_uibtn__1tGCl Button_uibtn_silver__3Ho2C Button_uibtn_size_h50__cWPtg"> 로그인 </button></div>
                         </div>
-                    </form>
+                    </form:form>
                     <div class="LoginMyFindButton_area__245Jy"><a class="LoginMyFindButton_link__fee2S" href="/mycar/all/find_idpw.do">아이디/비밀번호 찾기</a><a class="LoginMyFindButton_link__fee2S" href="../all/join.do">회원가입</a></div>
                     <div class="LoginSnsButton_tit_area__bRqmB"><strong class="LoginSnsButton_tit__1kT5i">간편하게 시작하기</strong></div>
                     <div class="LoginSnsButton_btn_area__1HZfa">
