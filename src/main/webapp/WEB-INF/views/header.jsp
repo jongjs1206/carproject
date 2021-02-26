@@ -66,6 +66,7 @@
                                                 <li><a href="../user/mysale_list.do">mysale_list.do</a></li>
                                                 <li><a href="../user/mywish_list.do">mywish_list.do</a></li>
                                                 <li><a href="../user/user.do">user.do</a></li>
+                                                <li><a href="../admin/admin.do">어드민</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">채팅</a></li>
@@ -78,9 +79,10 @@
                             <div class="header-btn">
                             <!-- 
                                 <a href="#" class="btn btn1 d-none d-lg-block ">Login</a>
-                                -->
-                                <a href="join.do" class="btn more-btn1" id="login-color-menu"> Login/회원가입 <i class="ti-angle-right"></i> </a>
-
+                            -->    
+                                <a href="../user/login.do" class="btn more-btn1" id="login-color-menu"> Login <i class="ti-angle-right"></i> </a>
+                                <a href="../all/join.do" class="btn more-btn1" id="login-color-menu"> 회원가입 <i class="ti-angle-right"></i> </a>
+                            
                             </div>
                         </div>
                         <!-- Mobile Menu -->
