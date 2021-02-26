@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+
+.side-vehicle {
+	font-weight: normal;
+	line-height: 1.4;
+	color: #333;
+	word-break: keep-all;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	width: 130px;
+	margin-bottom: 5px;
+	background: #FAFAFA;
+	border: 1px solid #DCDCDC;
+	border-radius: 8px;
+	font-size: 14px;
+	z-index: 10;
+	
+}
+
+.side-vehicle__head-text {
+	word-break: keep-all;
+	-webkit-font-smoothing: antialiased;
+	font-size: 14px;
+	line-height: inherit;
+	color: inherit;
+	cursor: pointer;
+	font-weight: bolder;
+	display: block;
+	padding: 9px 0;
+	border-bottom: 1px solid #DCDCDC;
+	text-align: center;
+}
+
+.side-vehicle__head-number {
+	word-break: keep-all;
+	-webkit-font-smoothing: antialiased;
+	cursor: pointer;
+	text-align: center;
+	display: inline-block;
+	margin-top: 10px;
+	padding: 0 7px;
+	border-radius: 10px;
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+.side-vehicle__image {
+	margin: 10px;
+	width: 80%;
+}
+.side-vehicle__item-delete{
+	border:none;
+	color: #191D34;
+	background-color:rgba(0,0,0,0);
+	position: relative;
+	left: 70px;
+	bottom: 10px;
+	font-weight: bold;
+}
+.line{
+	margin: 0px;
+}
+.side-vehicle__bottom{
+	font-size: 15px;
+	text-align: center;
+	margin: 12px;
+}
+.side-vehicle__fraction-current{
+	font-weight: bold;
+}
+.side-vehicle__prev,.side-vehicle__next{
+	border: none;
+	background-color:rgba(0,0,0,0);
+	opacity: 0.3;
+}
+.side_all{
+	z-index : 100;
+	position: fixed;
+	bottom: 130px;
+	right: 10px;
+}
+@media screen and (max-width:1460px){
+	.recent-view-car-list{
+		display: none;
+	}
+}
