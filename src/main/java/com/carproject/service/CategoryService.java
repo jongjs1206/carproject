@@ -1,9 +1,8 @@
 package com.carproject.service;
 
+import java.util.HashMap;
 import java.util.List;
 
-import com.carproject.domain.CategoryVO;
-
 public interface CategoryService {
-	public List<CategoryVO> categoryselect();
+	public List<HashMap<String, Object>> categoryselect();
 }
