@@ -4,8 +4,8 @@
 <mapper namespace="categoryMap">
 
 <!-- 로그인 -->
-<select id="categoryselect" resultType="category">
-select * from category
+<select id="categoryselect" resultType="hashmap">
+	select * from category group by jejosa order by jejosa
 </select>
 
 </mapper>

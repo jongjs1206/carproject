@@ -1,5 +1,24 @@
 @charset "UTF-8";
 
+.country{
+	margin-bottom: 10px;
+}
+
+.country>span{
+	cursor: pointer;
+	margin-right: 10px;
+	margin-left: 5px;
+	padding-bottom: 3px;
+}
+
+.downline{
+	border-bottom: 3px solid #8b00ff;
+}
+
+.country>span:hover{
+	border-bottom: 3px solid #8b00ff;
+}
+
 .maker_margin{
 	margin-top: 100px;
 }

@@ -1,13 +1,13 @@
 package com.carproject.service;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.dao.CategoryDAOImpl;
-import com.carproject.domain.CategoryVO;
 
 @Repository("CategoryService")
 public class CategoryServiceImpl implements CategoryService{
@@ -16,7 +16,7 @@ public class CategoryServiceImpl implements CategoryService{
 	private CategoryDAOImpl categoryDAO;
 	
 	@Override
-	public List<CategoryVO> categoryselect(){
+	public List<HashMap<String, Object>> categoryselect(){
 		return categoryDAO.categoryselect();
 	}
 	

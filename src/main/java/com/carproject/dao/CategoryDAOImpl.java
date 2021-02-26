@@ -1,13 +1,12 @@
 package com.carproject.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.carproject.domain.CategoryVO;
 
 @Repository("CategoryDAO")
 public class CategoryDAOImpl implements CategoryDAO{
@@ -16,7 +15,7 @@ public class CategoryDAOImpl implements CategoryDAO{
 	private SqlSessionTemplate mybatis;
 	
 	@Override
-	public List<CategoryVO> categoryselect() {
+	public List<HashMap<String, Object>> categoryselect() {
 		System.out.println("===>  CategoryMapper categoryselect 호출");
 		return mybatis.selectList("categoryMap.categoryselect");
 	}
