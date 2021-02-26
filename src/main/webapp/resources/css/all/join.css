@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+/*
+작성자 : 문희주
+내용 : 로그인 관련 css
+
+*/
+
+
+.box-login {
+    margin: 0 auto;
+    padding : 0 5%;
+    max-width: 50%;
+    background-color: white;
+    border-radius: 2em 2em 2em 2em;
+}
+.box-login > div {
+    margin: 0 auto;
+}
+.noMenuLogo {
+    text-align: center;
+}
+article, aside, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+.cmm-basic-info {
+    margin-bottom: 20px;
+}
+.cmm-basic-info .cmm-tit {
+    float: left;
+    display: inline-block;
+    width: 100px;
+}
+.cmm-basic-info .cmm-input-area {
+    padding: 0 0 0 100px;
+}
+.mg-b10 {
+    margin-bottom: 10px !important;
+}
+.ft-list > li {
+    position: relative;
+    line-height: 24px;
+    padding-left: 10px;
+    color: #666;
+}
+blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, select, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+    letter-spacing: -.5px;
+}
+.inp-t > input {
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 26px;
+    width: 100%;
+    border: 0 none;
+    font-size: 16px;
+    color: #222;
+    background-color: transparent;
+    outline: 0;
+}
+button, input, select, textarea {
+    vertical-align: middle;
+}
+element.style {
+    display: block;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, select, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+    letter-spacing: -.5px;
+}
+button, input {
+    overflow: visible;
+}
+input[type="password" i] {
+    -webkit-text-security: disc !important;
+    padding: 1px 2px;
+}
+.inp-t {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 220px;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.inp-t.inp-cer > .t-txt {
+    position: absolute;
+    right: 19px;
+    top: 6px;
+    display: none;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 24px;
+    font-size: 14px;
+    color: #2666c6;
+}
+
+#joinDiv > span {
+	color : #dca73a;
+}
+
+#joinDiv:hover > span .{
+	color : white;
+}
+.background_color{
+	padding: 10% 0;
+	background-color: #dca73a;
+}
+.noMenuLogo{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.noMenuLogo img{
+	 width: auto; height: auto;
+    max-width: 400px;
+    margin: 10% 0 20% 0;
+}
+
+.joinBtnDiv{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5% 0;
+}
+
+.joinBtns {
+    -moz-user-select: none;
+    background: #dca73a;
+    border: medium none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    padding: 20px 10px;
+    text-align: center;
+    text-transform: capitalize;
+    touch-action: manipulation;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+}

@@ -61,7 +61,7 @@
                                         <li><a href="#">Q&A</a></li>
                                         <li><a href="#">메뉴모음</a>
                                             <ul class="submenu">
-                                                <li><a href="../all/product_list.do">아이디/비밀번호찾기</a>
+                                                <li><a href="#" onClick="window.open('find_idpw.do','아이디/비밀번호 찾기','width=500,height=500,toolbar=no,scrollbars=no,left=200,top=100')">아이디/비밀번호찾기</a>
                                                 <li><a href="../user/memInfo.do">memInfo.do</a></li>
                                                 <li><a href="../user/mysale_list.do">mysale_list.do</a></li>
                                                 <li><a href="../user/mywish_list.do">mywish_list.do</a></li>
