@@ -19,7 +19,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <strong>CAR</b>
+                    <strong>CAR</strong>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                                         <li><a href="#">수입차</a></li>
                                         <li><a href="#">내 차 팔기</a>
                                         	<ul class="submenu">
-                                        		<li><a href="../user/sale.do">글쓰기</a></li>
+                                        		<li><a href="../user/sales.do">글쓰기</a></li>
                                         		<li><a href="../user/salesDetail.do">내 글 확인</a></li>
                                         	</ul>
                                        	</li>
@@ -57,7 +57,12 @@
                                                 <li><a href="../all/carnewsBoardview.do">뉴스페이지</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">구매후기</a></li>
+                                        <li><a href="#">구매후기</a>
+                                        	<ul class="submenu">
+                                        		<li><a href="../user/review.do">후기글 쓰기</a></li>
+                                        		<li><a href="../user/reviewDetail.do">후기글 확인</a></li>
+                                        	</ul>
+                                        </li>
                                         <li><a href="#">Q&A</a></li>
                                         <li><a href="#">메뉴모음</a>
                                             <ul class="submenu">
@@ -69,7 +74,10 @@
                                                 <li><a href="../admin/admin.do">어드민</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">채팅</a></li>
+                                        <li>
+                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=670, left=0, top=0, scrollbars=yes');return false">
+                                        	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
