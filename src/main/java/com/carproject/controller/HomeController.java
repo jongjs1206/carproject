@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	@RequestMapping("{step1}/{step2}.do")
 	public String loginPage(@PathVariable String step1,@PathVariable String step2) {
-		
 		return step1+"/"+step2;
 	}
 	

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,14 +53,14 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 
-<script type="text/javascript" src="../resources/js/all/homepage.js"></script>
+<script type="text/javascript" src="../resources/js/all/product_list.js"></script>
 </head>
 <body>
 
 	<%@ include file="../header.jsp"%>
 	<%@ include file="../side.jsp"%>
 	<!-- slider Area Start-->
-	
+
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
@@ -75,26 +78,28 @@
 		</div>
 	</div>
 	<!-- slider Area End-->
-	
-	
+
+
+
 	<!-- 세부검색 -->
 	<div class="container maker_margin">
-	<div class='country'>
-		<span class='downline'>전체</span>|
-		<span>국산차</span>|
-		<span>수입차</span>
-	</div>
-	<div class="wrap-finder-maker">
+		<div class='country'>
+			<span class='downline'>전체</span>| <span>국산차</span>| <span>수입차</span>
+		</div>
+		<div class="wrap-finder-maker">
 			<!-- 제조사 -->
 			<div class="area-maker">
 				<h4>제조사</h4>
 				<div class="list-comm js-tabs">
 					<dl class="group-list">
-						<dd class="is-active is-selected">
-							<button type="button" onclick="car_depth_lite('21', 1, '');">
-								<span class="t1">벤츠</span> <span class="t2 mkCnt_21">1,339</span>
-							</button>
-						</dd>
+						<c:forEach var="mycategory" items="${category}">
+							<dd class="is-active is-selected">
+								<button type="button" class="btn_category">
+									<span>${mycategory.jejosa}</span> <span
+										class="t2 mkCnt_21">1,339</span>
+								</button>
+							</dd>
+						</c:forEach>
 					</dl>
 				</div>
 			</div>
@@ -104,181 +109,10 @@
 				<h4>모델</h4>
 				<div class="list-comm js-tabs">
 					<dl class="group-list">
-						<dd>
-							<button type="button" onclick="modelSel(353, this);">
-								<span class="t1">A클래스</span><span class="t2 grCnt_353">12</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(354, this);">
-								<span class="t1">B클래스 (마이비)</span><span class="t2 grCnt_354">5</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(355, this);">
-								<span class="t1">C클래스</span><span class="t2 grCnt_355">112</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(356, this);">
-								<span class="t1">E클래스</span><span class="t2 grCnt_356">252</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(807, this);">
-								<span class="t1">CLA클래스</span><span class="t2 grCnt_807">24</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(369, this);">
-								<span class="t1">CLK클래스</span><span class="t2 grCnt_369">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(357, this);">
-								<span class="t1">CLS클래스</span><span class="t2 grCnt_357">71</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(358, this);">
-								<span class="t1">S클래스</span><span class="t2 grCnt_358">409</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(359, this);">
-								<span class="t1">마이바흐 S클래스</span><span class="t2 grCnt_359">60</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(817, this);">
-								<span class="t1">GLA클래스</span><span class="t2 grCnt_817">23</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(1065, this);">
-								<span class="t1">GLB클래스</span><span class="t2 grCnt_1065">0</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(876, this);">
-								<span class="t1">GLC클래스</span><span class="t2 grCnt_876">63</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(873, this);">
-								<span class="t1">GLE클래스</span><span class="t2 grCnt_873">36</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(360, this);">
-								<span class="t1">GLK클래스</span><span class="t2 grCnt_360">3</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(889, this);">
-								<span class="t1">GLS클래스</span><span class="t2 grCnt_889">20</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(361, this);">
-								<span class="t1">GL클래스</span><span class="t2 grCnt_361">5</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(362, this);">
-								<span class="t1">G클래스 (G바겐)</span><span class="t2 grCnt_362">93</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(363, this);">
-								<span class="t1">M클래스</span><span class="t2 grCnt_363">10</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(842, this);">
-								<span class="t1">AMG GT</span><span class="t2 grCnt_842">41</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(364, this);">
-								<span class="t1">R클래스</span><span class="t2 grCnt_364">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(365, this);">
-								<span class="t1">V클래스</span><span class="t2 grCnt_365">6</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(366, this);">
-								<span class="t1">스프린터</span><span class="t2 grCnt_366">30</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(1060, this);">
-								<span class="t1">유니목</span><span class="t2 grCnt_1060">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(1007, this);">
-								<span class="t1">EQC</span><span class="t2 grCnt_1007">0</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(368, this);">
-								<span class="t1">SLK클래스</span><span class="t2 grCnt_368">7</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(370, this);">
-								<span class="t1">SL클래스</span><span class="t2 grCnt_370">26</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(381, this);">
-								<span class="t1">CL클래스</span><span class="t2 grCnt_381">8</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(906, this);">
-								<span class="t1">SLC클래스</span><span class="t2 grCnt_906">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(371, this);">
-								<span class="t1">SLS AMG</span><span class="t2 grCnt_371">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(372, this);">
-								<span class="t1">SLR 맥라렌</span><span class="t2 grCnt_372">4</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(380, this);">
-								<span class="t1">SEL/SEC</span><span class="t2 grCnt_380">10</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(375, this);">
-								<span class="t1">190</span><span class="t2 grCnt_375">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(959, this);">
-								<span class="t1">280</span><span class="t2 grCnt_959">1</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(1062, this);">
-								<span class="t1">600</span><span class="t2 grCnt_1062">0</span>
-							</button>
-						</dd>
-						<dd>
-							<button type="button" onclick="modelSel(382, this);">
-								<span class="t1">기타</span><span class="t2 grCnt_382">2</span>
-							</button>
-						</dd>
+						<div class="cell-jejo">
+							<span>제조사를 <br>선택하세요.
+							</span>
+						</div>
 					</dl>
 				</div>
 			</div>
@@ -287,13 +121,11 @@
 				<h4>세부모델</h4>
 				<div class="list-comm">
 					<dl class="group-list">
-
-						<div class="default-cont tbl-mode">
-							<div class="cell-mode">
-								<span>모델을 <br>선택하세요.
-								</span>
-							</div>
+						<div class="cell-mode">
+							<span>모델을 <br>선택하세요.
+							</span>
 						</div>
+
 						<dd class="c_model_353" style="display: none;">
 							<span class="optBox"><input type="checkbox"
 								id="detail2101" name="model_no[]" value="2101"
@@ -811,12 +643,9 @@
 				<h4>등급</h4>
 				<div class="list-comm">
 					<dl class="group-list js-tree">
-
-						<div class="default-cont tbl-mode">
-							<div class="cell-mode">
-								<span>세부모델을 <br>선택하세요.
-								</span>
-							</div>
+						<div class="cell-detail">
+							<span>세부모델을 <br>선택하세요.
+							</span>
 						</div>
 					</dl>
 				</div>
@@ -826,12 +655,14 @@
 	</div>
 	<div class="container">
 		<div style="display: flex; justify-content: flex-end;">
-			<input type='text' placeholder="차명을 입력하세요" style="border: none; border-bottom:1px solid;;margin-top:30px; width: 200px;">
-			<button  style="color:white;border-radius:3px;  font-weight:bold; background-color:var(--main-color); width:60px; margin-top:30px; border: none; margin-left: 10px;">검색</button>
+			<input type='text' placeholder="차명을 입력하세요"
+				style="border: none; border-bottom: 1px solid;; margin-top: 30px; width: 200px;">
+			<button
+				style="color: white; border-radius: 3px; font-weight: bold; background-color: var(- -main-color); width: 60px; margin-top: 30px; border: none; margin-left: 10px;">검색</button>
 		</div>
 	</div>
-	
-	
+
+
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
@@ -1185,7 +1016,8 @@
 	</section>
 	<!-- Room End -->
 
-	<nav class="blog-pagination justify-content-center d-flex" style="position: relative; bottom: 100px;">
+	<nav class="blog-pagination justify-content-center d-flex"
+		style="position: relative; bottom: 100px;">
 		<ul class="pagination">
 			<li class="page-item"><a href="#" class="page-link"
 				aria-label="Previous"> <i class="ti-angle-left"></i>
