@@ -68,7 +68,6 @@
 
 			<section class="content--center-block">
 
-
 				<form method="post" action="userInsert.do" id="join" role="form">
 
 					<div class="cmm-basic-info">
@@ -242,7 +241,6 @@
 					<div class="joinBtnDiv">
 						<a id="joinDiv" class="btn border-btn"><span>회원가입</span></a>
 					</div>
-
 				</form>
 
 				<!--end of container  -->

@@ -25,6 +25,12 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===>  MemberMapper userInsert() 호출");
 		return mybatis.insert("MemberMAP.insertMember", vo);
 	}
+	
+	@Override
+	public MemberVO checkUniqueId(MemberVO vo) {
+		System.out.println("===> MemberMapper checkUniqueId 호출");
+		return mybatis.selectOne("MemberMAP.checkUniqueId", vo);
+	}
 
 	
 

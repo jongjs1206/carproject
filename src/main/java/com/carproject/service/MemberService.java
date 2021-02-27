@@ -12,6 +12,7 @@ import com.carproject.domain.MemberVO;
 public interface MemberService {
 	
 	public int userInsert(MemberVO vo );
+	public MemberVO checkUniqueId( MemberVO vo);
 	
 	
 }

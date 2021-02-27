@@ -14,4 +14,6 @@ public interface MemberDAO {
 	 */
 	int memberInsert(MemberVO vo);
 	
+	MemberVO checkUniqueId( MemberVO vo );
+	
 }
