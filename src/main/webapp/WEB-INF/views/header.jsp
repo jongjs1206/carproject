@@ -56,7 +56,7 @@
 										<li><a href="../all/product_list.do">매장</a></li>
 										<li><a href="#">내 차 팔기</a>
 											<ul class="submenu">
-												<li><a href="../user/sale.do">글쓰기</a></li>
+												<li><a href="../user/sales.do">글쓰기</a></li>
 												<li><a href="../user/salesDetail.do">내 글 확인</a></li>
 											</ul></li>
 										<li><a href="../user/coinInfo.do">자동차 뉴스</a>
@@ -80,6 +80,11 @@
 												<li><a href="../user/mem.do">mem.do</a></li>
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
+											
+										<li>
+                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=670, left=0, top=0, scrollbars=yes');return false">
+                                        	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
+                                        </li>
 										<li style="width: 40px;"></li>
 
 										<sec:authorize access="isAnonymous()">
