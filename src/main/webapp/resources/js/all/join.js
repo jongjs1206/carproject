@@ -52,6 +52,8 @@ var checkId = function(id) {
 			alert("아이디는 한글을 포함 할 수 없습니다.");
 			return false;
 		}
+	//$("#m_id").prop('readonly', true);
+	//$('#m_id').addClass('readOnly');
 	return true;
 }
 
@@ -85,21 +87,54 @@ var checkPw = function(pw, pwConfirm) {
 		return true;
 }
 
-//이름 빈캄 체크
+//이름 빈칸 체크
 var checkName = function(name) {
 	if(name == ''){
 		alert("이름(닉네임)을 입력해주세요.");
 		m_name.focus();
-		return;
+		return false;
 	}
 	return true;
 }
 
-//성별 체크
-var checkGender = function(sex){
-	
-	gender.val(sex)
 
+
+//성별 체크
+$('#gender_m').click(function(){
+	$('#gender_w').removeClass('genderOn');
+	$('#gender_m').addClass('genderOn');
+	gender.val($('#gender_m').val())
+})
+
+$('#gender_w').click(function(){
+	$('#gender_m').removeClass('genderOn');
+	$('#gender_w').addClass('genderOn');
+	gender.val($('#gender_w').val())
+})
+
+var checkGender = function(gender) {
+	if(gender == ''){
+		alert("성별을 선택해주세요.");
+		return false;
+	}
+	return true;
+}
+
+
+
+//이메일 체크
+
+var checkEmail = function(email1, email2) {
+		if(email1 == '' || email2 == ''){
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+	email.val(email1+'@'+email2)
+	//$("#email1").prop('readonly', true);
+	//$("#email2").prop('readonly', true);
+	//$("#email1").prop('readonly', true);
+	//$("#email2").prop('readonly', true);
+	return true;
 }
 
 
@@ -112,8 +147,12 @@ var checkGender = function(sex){
 //아이디 중복 확인 클릭 시
 $('#btnIdDuplChk').click(function() {
 	checkId(m_id.val());
-	
 
+		});
+
+//이메일 중복확인 클릭 시
+$('#btnEmailDuplChk').click(function() {
+	checkEmail($('#email1').val(),$('#email2').val());
 		});
 
 
@@ -121,19 +160,17 @@ $('#btnIdDuplChk').click(function() {
 
 
 
-
-
-
 $('#joinDiv').click(function() {
-/*
+
 	if(checkId(m_id.val()) && checkPw(m_pw.val(), m_pwConfirm.val())
-	&& checkName(m_name.val())
+	&& checkName(m_name.val() && checkGender(gender.val()))
 	){
 		$('#join').submit();
 	}
-*/
+
 
 //$('#join').submit();
+
 
 
 

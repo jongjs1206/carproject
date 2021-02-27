@@ -24,7 +24,7 @@ public class MemberVO {
 	private String ex_date; /* 탈퇴일 */
 	private String state; /* 상태 */
 	
-	private String active; /*  */
+	private int active; /*  */
 	private String etc; /*  */
 	
 	private String auth; /* 권한 */
@@ -136,10 +136,10 @@ public class MemberVO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getActive() {
+	public int getActive() {
 		return active;
 	}
-	public void setActive(String active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 	public String getEtc() {

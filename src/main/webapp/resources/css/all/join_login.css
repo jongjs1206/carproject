@@ -270,3 +270,7 @@ p {
     margin-top: 30px;
     text-align: center;
 }
+
+.readOnly{
+	background-color: #d3d3d3 !important;
+}

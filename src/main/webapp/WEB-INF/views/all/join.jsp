@@ -65,7 +65,6 @@
 					src="../resources/img/logo.png" alt="logo"></a>
 			</div>
 
-			<hr class="cmm-line mg-b40 pad-t20">
 
 			<section class="content--center-block">
 
@@ -73,40 +72,7 @@
 				<form method="post" action="userInsert.do" id="join" role="form">
 
 					<div class="cmm-basic-info">
-						<div class="cmm-tit">
-							<span>인증</span>
-						</div>
-						<div class="cmm-input-area">
-							<div class="mg-b10">
-								<span class="inp-t w400"><input type="text"
-									title="휴대전화번호" id="hand" name="hand" autocomplete="off"
-									onkeydown="win.onlyNumber(event);"
-									onkeyup="win.removeChar(event)" maxlength="11"
-									placeholder="휴대폰번호 입력" tk_security="true"></span>
-								<button type="button" class="joinBtns more-btn1" id="btnSend">
-									<span>인증번호 전송</span>
-								</button>
-							</div>
-							<div>
-								<div class="inp-t inp-time w400">
-									<input type="text" title="인증번호 입력" name="certCode"
-										id="certCode" maxlength="6" autocomplete="off"
-										onkeydown="win.onlyNumber(event);"
-										onkeyup="win.removeChar(event)" readonly=""
-										placeholder="인증번호 입력" tk_security="true">
-									<div class="t-txt" id="timer" style="display: block;"></div>
-								</div>
-								<button type="button" class="joinBtns more-btn1" id="certNumChk">
-									<span>인증번호 확인</span>
-								</button>
-								<button type="button" class="joinBtns more-btn1" id="btnSend2">
-									<span>재전송</span>
-								</button>
-								<div class="form-txt">
-									<span class="ft-red" id="certAlert"></span>
-								</div>
-							</div>
-						</div>
+
 					</div>
 
 
@@ -191,15 +157,15 @@
 						</div>
 						<div class="cmm-input-area">
 							<div class="ck-wrap mg-t20" id="divGenderArea">
-								<button type="button" id="gender_m"
+								<button type="button" id="gender_m" value="남"
 									class="joinBtns gender more-btn1 ck-item">
 									<span>남</span>
 								</button>
-								<button type="button" id="gender_w"
+								<button type="button" id="gender_w" value="여"
 									class="joinBtns gender more-btn1 ck-item">
 									<span>여</span>
 								</button>
-							  <input type="hidden" id="gender" name="gender" value="">
+							  <input type="hidden" id="gender" name="gender">
 							</div>
 							<div class="form-txt">
 								<span class="ft-red" id="genderAlert"></span>
@@ -229,7 +195,8 @@
 								type="text" id="email1" name="email1" title="이메일 주소"
 								tk_security="true"></span> <span class="form-t">@</span> <span
 								class="inp-t" style="width: 140px;"><input type="text"
-								id="email2" name="email2" title="직접입력 이메일" tk_security="true"></span>
+								id="email2" name="email2" title="직접입력 이메일"></span>
+							  <input type="hidden" id="email" name="email">
 							<button type="button" class="joinBtns more-btn1"
 								id="btnEmailDuplChk">
 								<span>중복확인</span>
@@ -244,12 +211,31 @@
 							<span>휴대폰번호</span>
 						</div>
 						<div class="cmm-input-area">
-							<div class="inp-t inp-cer" style="width: 310px;">
-								<input type="text" title="휴대폰번호" id="tel" name="tel" readonly=""
-									tk_security="true">
-								<div class="t-txt" style="display: block;">인증완료</div>
+							<div class="mg-b10">
+								<span class="inp-t w400"><input type="text"
+									title="휴대전화번호" id="tel" name="tel" autocomplete="off" maxlength="11"
+									placeholder="휴대폰번호 입력" tk_security="true"></span>
+								<button type="button" class="joinBtns more-btn1" id="btnSend">
+									<span>인증번호 전송</span>
+								</button>
+							</div>
+							<div>
+								<div class="inp-t inp-time w400">
+									<input type="text" title="인증번호 입력" name="certCode"
+										id="certCode" maxlength="6" autocomplete="off" readonly=""
+										placeholder="인증번호 입력" >
+									<div class="t-txt" id="timer" style="display: block;"></div>
+								</div>
+								<button type="button" class="joinBtns more-btn1" id="certNumChk">
+									<span>인증번호 확인</span>
+								</button>
+								<div class="form-txt">
+									<span class="ft-red" id="certAlert"></span>
+								</div>
 							</div>
 						</div>
+
+
 					</div>
 
 					<hr class="cmm-line mg-b30 pad-t10">

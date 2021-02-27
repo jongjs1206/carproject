@@ -6,8 +6,8 @@
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member
-		(m_id, m_pw, m_name, gender, email, birth, tel, w_date)
+		(m_id, m_pw, m_name, gender, email, birth, tel, w_date, state, active)
 		VALUES
-		(#{m_id},#{m_pw},#{m_name},#{gender},"null",#{birth},#{tel},sysdate())
+		(#{m_id},#{m_pw},#{m_name},#{gender},#{email},#{birth},#{tel},sysdate(),'normal',1)
 	</insert>
 </mapper>
