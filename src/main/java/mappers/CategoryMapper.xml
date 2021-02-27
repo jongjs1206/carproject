@@ -3,9 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="categoryMap">
 
-<!-- 로그인 -->
+<!-- 카테고리 가져오기 -->
 <select id="categoryselect" resultType="hashmap">
 	select * from category group by jejosa order by jejosa
+</select>
+
+<select id="modelselect" resultType="hashmap" parameterType="String">
+	select * from category where jejosa=#{jejosa}
 </select>
 
 </mapper>

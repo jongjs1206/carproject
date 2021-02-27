@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.service.CategoryService;
@@ -24,10 +23,11 @@ public class UserController {
 		model.addAttribute("category",category);
 	}
 	
-	@RequestMapping(value = "all/category.do", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	@RequestMapping("all/category.do")
 	@ResponseBody
-	public String category(@RequestBody String category) {
+	public List<HashMap<String, Object>> category(String category) {
 		System.out.println(category);
-		return category;
+		List<HashMap<String, Object>> model = categoryService.modelselect(category);
+		return model;
 	}
 }
