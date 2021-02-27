@@ -10,6 +10,11 @@ $(function() {
 			var tel = $('#tel');
 			var w_date = $('#w_date');
 			
+			var idDuplCheck = false;
+			var emailDuplCheck = false;
+			var telDuplCheck = false;
+			
+			
 			var Length = 0; 
 			var engCheck = /[a-z]/; 
 			var korCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
@@ -162,6 +167,9 @@ $('#btnEmailDuplChk').click(function() {
 
 $('#joinDiv').click(function() {
 
+
+
+
 	if(checkId(m_id.val()) && checkPw(m_pw.val(), m_pwConfirm.val())
 	&& checkName(m_name.val() && checkGender(gender.val()))
 	){
@@ -190,63 +198,4 @@ $('#joinDiv').click(function() {
 
 
 
-
-
-
-$('#joinDiv').click(function() {
-
-			
-			if(birth.val() == ''){
-				$('#info').text("생일 선택해주세요.");
-				return;
-				
-			
-			if(email.val() == ''){
-				$('#info').text("이메일을 입력해주세요.");
-				email.focus();
-				return;
-			}
-			if (!emailRule.test(email.val())){
-				$('#info').text("이메일 형식이 아닙니다.");
-				return;
-			}
-			
-			}
-			
-
-		//중복확인	
-		$.ajax({
-	 	type : 'post',
-	 	
-	 	async : true, //비동기 통신
-	 	
-	 	url : 'check.do', //*****요청(request) jsp는x mvc안타겠다는 얘기
-	 	
-	 	contentType : 'application/x-www-form-urlencoded;charset=utf-8', //한글처리
-	 	
-	 	data : {'m_name' : $('#m_name').val(),
-	 				'email' : $('#email').val(),
-	 				'm_id' : $('#m_id').val(),
-	 				'pass' : $('#pass').val(),
-	 				'birth' : $('#birth').val(),
-	 				'gender' : $('#gender').val()
-	 	},
-	 	
-	 	success : function(result){
-	 		$('#info').text(result);
-	 		if(result=='성공'){
-	 		//$('#join').submit();
-	 		}
-	 	},
-	 	
-	 	error : function(err){
-	 		console.log(err);
-	 	}
-	 	
-	 })        
-		 
-		
-		
-		
-		});
 	});
