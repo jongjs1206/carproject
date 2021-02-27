@@ -24,10 +24,10 @@ public class UserController {
 		model.addAttribute("category",category);
 	}
 	
-	@RequestMapping(value = "all/category.do", method=RequestMethod.POST)
+	@RequestMapping(value = "all/category.do", method=RequestMethod.POST, produces="application/text;charset=utf8")
 	@ResponseBody
 	public String category(@RequestBody String category) {
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		System.out.println(category);
 		return category;
 	}
 }

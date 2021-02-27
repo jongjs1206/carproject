@@ -1,17 +1,25 @@
 $(function() {
+	var token = $("input[name='_csrf']").val();
+	var header = "X-CSRF-TOKEN";
+
 	var choose1;
 	$('.btn_category').click(function(){
-		choose=$(this).children().first().text();
-		alert('1');
+		choose1 = $(this).children().first().text();
+		alert(choose1);
 		$.ajax({
-			type : 'post',
+			type : 'POST',
 			async : true,
-			url : 'category.do',
+			url : '../all/category.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/json",
 			dataType : 'text',
 			data : choose1,
-			contentType  : 'application/x-www-form-urlencoded;charset=utf-8', //한글처리
-			success: function(category){
-				alert('2');								
+			
+			success: function(data){
+				alert(data);							
         	},
 			error : function(err){ console.log(err)}  //실패했을때
 		});
