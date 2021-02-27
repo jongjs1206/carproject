@@ -7,7 +7,7 @@
 <link rel="icon" href="resources/images/etc/favicon.png">
 <title>title</title>
 <script type="text/javascript">
-	window.self.location = "all/homepage.do";
+	window.self.location = "../all/homepage.do";
 </script>
 </head>
 

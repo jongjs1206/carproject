@@ -174,14 +174,6 @@ input[type="password" i] {
 
 
 
-
-
-
-
-
-
-
-
 /*login*/
 
 .Button_uibtn__1tGCl {
@@ -198,6 +190,7 @@ input[type="password" i] {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    cursor: pointer;
 }
 .Button_uibtn_silver__3Ho2C {
     color: #fff;
@@ -271,6 +264,20 @@ p {
     text-align: center;
 }
 
-.readOnly{
-	background-color: #d3d3d3 !important;
+
+.error{
+	color: #ff3399;
 }
+
+@media only screen and (max-width: 1200px) {
+    .box-login  {
+        max-width: 70%
+	}
+}
+@media only screen and (max-width: 1000px) {
+    .box-login  {
+        max-width: 100%
+	}
+}
+
+

@@ -2,7 +2,6 @@ package com.carproject.domain;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,22 +13,19 @@ public class MemberVO {
 	private String m_id ; /* 아이디 */
 	private String m_pw; /* 비밀번호 */
 	private String m_name; /* 이름 */
-	private String birth; /* 생일 */
 	private String gender; /* 성별 */
 	private String email; /* 이메일 */
-	private String tel; /* 이메일 */
+	private String birth; /* 생일 */
+	private String tel; /* 전화번호 */
 	private String photo; /* 프로필사진 */
 	private String coin; /* 프로필사진 */
 	private String w_date; /* 가입일 */
 	private String ex_date; /* 탈퇴일 */
 	private String state; /* 상태 */
-	
-	private int active; /*  */
+	private String enabled; /*  */
 	private String etc; /*  */
 	
-	private String auth; /* 권한 */
-	private String push_key; /* ?? */
-	
+	private String auth; /* 권한 */	
 	private long picSize; /* 프로필사진용량 */
 	
 	
@@ -136,11 +132,13 @@ public class MemberVO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getActive() {
-		return active;
+
+	public String getEnabled() {
+		return enabled;
 	}
-	public void setActive(int active) {
-		this.active = active;
+
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 	public String getEtc() {
 		return etc;
@@ -153,12 +151,6 @@ public class MemberVO {
 	}
 	public void setAuth(String auth) {
 		this.auth = auth;
-	}
-	public String getPush_key() {
-		return push_key;
-	}
-	public void setPush_key(String push_key) {
-		this.push_key = push_key;
 	}
 	public long getPicSize() {
 		return picSize;
