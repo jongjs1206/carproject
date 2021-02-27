@@ -132,9 +132,11 @@ public class MemberVO {
 	public void setState(String state) {
 		this.state = state;
 	}
+
 	public String getEnabled() {
 		return enabled;
 	}
+
 	public void setEnabled(String enabled) {
 		this.enabled = enabled;
 	}

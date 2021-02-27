@@ -86,7 +86,7 @@
                                         <div class="InputText_uiinput_txt__3jtqA" data-testid="wrap_input" style="margin-top: 10px;">
                                         <div class="InputText_placeholder_text__13dap" role="button">비밀번호</div>
                                             <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25">
-                                            <input type="password" id="m_pw" name="m_pw" maxlength="" data-testid="input" inputmode="" value="">
+                                            <input style="font-family: '고딕';" type="password" id="m_pw" name="m_pw" maxlength="" data-testid="input" inputmode="" value="">
                                                 
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <c:if test="${param.error != null}">
-								<p>아이디와 비밀번호가 잘못되었습니다.</p>
+								<p class='error'>아이디와 비밀번호가 잘못되었습니다.</p>
 							</c:if>
                             <div class=" " style="margin-top: 30px;"><button type="submit" class="Button_uibtn__1tGCl Button_uibtn_silver__3Ho2C Button_uibtn_size_h50__cWPtg"> 로그인 </button></div>
                         </div>

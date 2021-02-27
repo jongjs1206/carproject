@@ -7,7 +7,8 @@
 <link rel="icon" href="resources/images/etc/favicon.png">
 <title>title</title>
 <script type="text/javascript">
-	window.self.location = "all/homepage.do";
+	alert('접근 권한이 없습니다.');
+	window.self.location = "../all/homepage.do";
 </script>
 </head>
 
