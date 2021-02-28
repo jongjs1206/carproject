@@ -6,8 +6,17 @@
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member
-		(m_id, m_pw, m_name, gender, email, birth, tel, w_date, state, active)
+		(m_id, m_pw, m_name, gender, email, birth, tel, w_date, state, enabled)
 		VALUES
 		(#{m_id},#{m_pw},#{m_name},#{gender},#{email},#{birth},#{tel},sysdate(),'normal',1)
 	</insert>
+	
+	<select id="checkUniqueId" parameterType="member" resultType="member">
+		SELECT * FROM member
+		WHERE m_id=#{m_id}
+	</select>
+	
+	
+	
+
 </mapper>

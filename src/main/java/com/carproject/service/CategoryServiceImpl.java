@@ -19,5 +19,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<HashMap<String, Object>> categoryselect(){
 		return categoryDAO.categoryselect();
 	}
+
+	@Override
+	public List<HashMap<String, Object>> modelselect(String category) {
+		return categoryDAO.modelselect(category);
+	}
 	
 }

@@ -1,28 +1,27 @@
 $(function() {
 
-			var m_id = $('#m_id');
-			var m_pw = $('#m_pw');
-			var m_pwConfirm = $('#m_pwConfirm');			
-			var m_name = $('#m_name');
-			var gender = $('#gender');
-			var email = $('#email');
-			var birth = $('#birth');
-			var tel = $('#tel');
-			var w_date = $('#w_date');
-			
-			var idDuplCheck = false;
-			var emailDuplCheck = false;
-			var telDuplCheck = false;
-			
-			
-			var Length = 0; 
-			var engCheck = /[a-z]/; 
-			var korCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-			var numCheck = /[0-9]/; 
-			var specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
-			var emailRule	 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-			var passRule = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-			
+
+	var m_id = $('#m_id');
+	var m_pw = $('#m_pw');
+	var m_pwConfirm = $('#m_pwConfirm');			
+	var m_name = $('#m_name');
+	var gender = $('#gender');
+	var email = $('#email');
+	var birth = $('#birth');
+	var tel = $('#tel');
+	var w_date = $('#w_date');
+	
+	var joinPassCheck = false;
+	var infoMessage = "";
+	
+	var Length = 0; 
+	var engCheck = /[a-z]/; 
+	var korCheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	var numCheck = /[0-9]/; 
+	var specialCheck = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+	var emailRule	 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	var passRule = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+
 
 	//escape 16진수로 바꿔줌 한글은 길이6
 	//바이트 구하는 함수
@@ -37,75 +36,11 @@ $(function() {
     return len;
 	}
 	
-	
-//아이디 체크
-
-var checkId = function(id) {
-		if(id == ''){
-			alert("아이디를 입력해주세요.");
-			return false;
-		}
-			if (id.search(/\s/) != -1) {
-			alert("아이디는 빈칸을 포함 할 수 없습니다.");
-			return false;
-		}
-		if (specialCheck.test(id)){
-			alert("아이디는 특수문자를 포함 할 수 없습니다.");
-			return false;
-		}
-		if (korCheck.test(id)){
-			alert("아이디는 한글을 포함 할 수 없습니다.");
-			return false;
-		}
-	//$("#m_id").prop('readonly', true);
-	//$('#m_id').addClass('readOnly');
-	return true;
-}
-
-//비밀번호 체크
-var checkPw = function(pw, pwConfirm) {
-
-		if(pw == ''){
-			alert("비밀번호를 입력해주세요.");
-			m_pw.focus();
-			return false;
-		}
-		if (!passRule.test(pw)){
-			alert("비밀번호는 영문자, 특수문자, 숫자 포함 형태의 6~20자리 이내로 설정하셔야 합니다.");
-			return false;
-		}		
-		
-		if(pwConfirm == ''){
-			alert("비밀번호 확인을 입력해주세요.");
-			m_pwConfirm.focus();
-			return false;
-		}
-		
-		
-		if(pw != pwConfirm){
-			alert("비밀번호가 일치하지 않습니다.");
-			m_pwConfirm.val('');
-			m_pwConfirm.focus();
-			return false;
-		}
-		
-		return true;
-}
-
-//이름 빈칸 체크
-var checkName = function(name) {
-	if(name == ''){
-		alert("이름(닉네임)을 입력해주세요.");
-		m_name.focus();
-		return false;
-	}
-	return true;
-}
-
 
 
 //성별 체크
 $('#gender_m').click(function(){
+
 	$('#gender_w').removeClass('genderOn');
 	$('#gender_m').addClass('genderOn');
 	gender.val($('#gender_m').val())
@@ -118,84 +53,107 @@ $('#gender_w').click(function(){
 })
 
 var checkGender = function(gender) {
+
+	joinPassCheck = false;
+	
 	if(gender == ''){
 		alert("성별을 선택해주세요.");
-		return false;
+	}else{
+	joinPassCheck = true;
 	}
-	return true;
 }
 
 
+//아이디 체크
+var checkId = function(id) {
 
-//이메일 체크
-
-var checkEmail = function(email1, email2) {
-		if(email1 == '' || email2 == ''){
-			alert("이메일을 입력해주세요.");
-			return false;
+		joinPassCheck = false;
+		
+		if(id == ''){
+			infoMessage = "아이디를 입력해주세요.";
+		}else if(id.search(/\s/) != -1) {
+			infoMessage = "아이디는 빈칸을 포함 할 수 없습니다.";
+		}else if(specialCheck.test(id)){
+			infoMessage = "아이디는 특수문자를 포함 할 수 없습니다.";
+		}else if(korCheck.test(id)){
+			infoMessage = "아이디는 한글을 포함 할 수 없습니다.";
+		}else{
+			joinPassCheck = true;
 		}
-	email.val(email1+'@'+email2)
-	//$("#email1").prop('readonly', true);
-	//$("#email2").prop('readonly', true);
-	//$("#email1").prop('readonly', true);
-	//$("#email2").prop('readonly', true);
-	return true;
+
 }
-
-
-
-
-
-
 
 
 //아이디 중복 확인 클릭 시
 $('#btnIdDuplChk').click(function() {
+
+//id 유효성 체크
 	checkId(m_id.val());
+	
+	if(!joinPassCheck){
+	alert(infoMessage)
+	}
+	
+/*
+//유효성 체크 통과 시, 중복 체크
+	else{
+	
+	$.ajax({
+ 	type : 'post',
+ 	
+ 	async : true, //비동기 통신
+ 	
+ 	url : 'checkId.do', //*****요청(request) jsp는x mvc안타겠다는 얘기
+ 	
+ 	contentType : 'application/x-www-form-urlencoded;charset=utf-8', //한글처리
+ 	
+ 	data : {'m_id' : $('#m_id').val()
+ 	},
+
+ 	
+ 	success : function(result){
+		infoMessage = result;
+		if(result="이미 존재하는 아이디 입니다."){
+		joinPassCheck = false;
+		}
+		alert(infoMessage);
+ 	},
+ 	
+ 	error : function(x, e) {
+                  if (x.status == 0) {
+                    alert('You are offline!!n Please Check Your Network.');
+                  } else if (x.status == 404) {
+                    alert('Requested URL not found.');
+                  } else if (x.status == 500) {
+                    alert('Internel Server Error.');
+                  } else if (e == 'parsererror') {
+                    alert('Error.nParsing JSON Request failed.');
+                  } else if (e == 'timeout') {
+                    alert('Request Time out.');
+                  } else {
+                    alert('Unknow Error.n' + x.responseText);
+                  }
+                }
+ 	
+ });
+ 
+
+	
+	}
+*/
 
 		});
 
-//이메일 중복확인 클릭 시
-$('#btnEmailDuplChk').click(function() {
-	checkEmail($('#email1').val(),$('#email2').val());
-		});
 
-
-
-
-
-
+//회원가입 버튼 클릭 시
 $('#joinDiv').click(function() {
 
 
-
-
-	if(checkId(m_id.val()) && checkPw(m_pw.val(), m_pwConfirm.val())
-	&& checkName(m_name.val() && checkGender(gender.val()))
-	){
-		$('#join').submit();
-	}
-
-
-//$('#join').submit();
-
-
+	$('#join').submit();
+			
 
 
 });
-		
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-	});
+}); //end of function

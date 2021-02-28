@@ -19,4 +19,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 		System.out.println("===>  CategoryMapper categoryselect 호출");
 		return mybatis.selectList("categoryMap.categoryselect");
 	}
+
+	@Override
+	public List<HashMap<String, Object>> modelselect(String category) {
+		System.out.println("===>  CategoryMapper modelselect 호출");
+		return mybatis.selectList("categoryMap.modelselect", category);
+	}
 }
