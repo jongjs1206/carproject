@@ -58,6 +58,14 @@
 											<ul class="submenu">
 												<li><a href="../user/sales.do">글쓰기</a></li>
 												<li><a href="../user/salesDetail.do">내 글 확인</a></li>
+												<li>
+													<a href="#" onclick="window.open('../user/sendMessage.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=500, left=0, top=0, scrollbars=yes');return false">
+													쪽지 보내기</a>
+												</li>
+												<li>
+													<a href="../user/MessageDetail.do">쪽지 내용 확인</a>
+												</li>
+												<li><a href="../user/receiveMessage.do">쪽지함</a></li>
 											</ul></li>
 										<li><a href="../user/coinInfo.do">자동차 뉴스</a>
 											<ul class="submenu">
