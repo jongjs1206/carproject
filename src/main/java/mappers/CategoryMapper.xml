@@ -12,4 +12,16 @@
 	select * from category where jejosa=#{jejosa}
 </select>
 
+<select id="detailselect" resultType="hashmap" parameterType="String">
+	select * from (select * from category where car_num=#{car_num}) m inner join detail d where m.car_num = d.car_num
+</select>
+
+<select id="gradeselect" resultType="hashmap" parameterType="String">
+	select * from grade where d_id=#{d_id} group by grade1
+</select>
+
+<select id="grade2select" resultType="hashmap" parameterType="grade">
+	select * from grade where d_id=#{d_id} and grade1=#{grade1}
+</select>
+
 </mapper>
