@@ -5,23 +5,74 @@
 
 <!-- 카테고리 가져오기 -->
 <select id="categoryselect" resultType="hashmap">
-	select * from category group by jejosa order by jejosa
+	select *  
+	from (select * from category group by jejosa) cate left join  
+	(select c.jejosa as jejosa, count(*) as count 
+	from category c inner join detail d on c.car_num=d.car_num 
+	inner join grade g on g.d_id=d.d_id 
+	inner join sell s on s.g_id = g.g_id group by c.jejosa) t 
+	on cate.jejosa = t.jejosa
 </select>
 
 <select id="modelselect" resultType="hashmap" parameterType="String">
-	select * from category where jejosa=#{jejosa}
+	select * from (select * from category where jejosa=#{jejosa}) mo 
+	left join (select model,count(*) as count from 
+	(select * from category where jejosa=#{jejosa}) c 
+	inner join detail d on c.car_num=d.car_num 
+	inner join grade g on g.d_id=d.d_id 
+	inner join sell s on s.g_id = g.g_id group by model) t 
+	on mo.model = t.model
 </select>
 
 <select id="detailselect" resultType="hashmap" parameterType="String">
-	select * from (select * from category where car_num=#{car_num}) m inner join detail d where m.car_num = d.car_num
+	select * from (select d_id, detail from 
+	(select * from category where car_num=#{car_num}) m 
+	inner join detail d where m.car_num = d.car_num) t1 
+	left join (select detail, count(*) as count from 
+	(select d_id, detail from 
+	(select * from category where car_num=#{car_num}) m 
+	inner join detail d where m.car_num = d.car_num) t 
+	inner join grade g on g.d_id=t.d_id 
+	inner join sell s on s.g_id = g.g_id group by detail) t2 on t1.detail = t2.detail
 </select>
 
 <select id="gradeselect" resultType="hashmap" parameterType="String">
-	select * from grade where d_id=#{d_id} group by grade1
+	select * from (select * from grade where d_id=#{d_id} group by grade1) t1 
+	left join (select grade1, count(*) as count from 
+	(select * from grade where d_id=#{d_id}) g 
+	inner join sell s on s.g_id = g.g_id group by grade1) t2 on t1.grade1 = t2.grade1 
+	order by t1.grade1
 </select>
 
 <select id="grade2select" resultType="hashmap" parameterType="grade">
-	select * from grade where d_id=#{d_id} and grade1=#{grade1}
+	select * from (select * from grade where d_id=#{d_id} and grade1=#{grade1}) t1 
+	left join (select grade2, count(*) as count from 
+	(select * from grade where d_id=#{d_id} and grade1=#{grade1}) g 
+	inner join sell s on s.g_id = g.g_id group by grade2) t2 on t1.grade2 = t2.grade2
+</select>
+
+<select id="countryselect" resultType="hashmap" parameterType="String">
+	select * from (select * from category where abroad = #{abroad} group by jejosa) t1 
+	left join (select jejosa, count(*) as count from 
+	(select * from category where abroad = #{abroad}) c 
+	inner join detail d on c.car_num=d.car_num inner join grade g on g.d_id=d.d_id 
+	inner join sell s on s.g_id = g.g_id group by jejosa) t2 on t1.jejosa = t2.jejosa
+</select>
+
+<select id="sellselect" resultType="hashmap">
+	<![CDATA[ select * from 
+	(select @rownum:=@rownum+1 as rnum,sell_id, w_date, price, image, title, option from sell,(select @rownum:=0) as r order by w_date desc) t 
+	where rnum<=15]]>
+</select>
+
+<select id="category_productselect" resultType="hashmap" parameterType="String">
+	<![CDATA[ select * from (select @rownum:=@rownum+1 as rnum]]>  
+	, sell_id, w_date, price, image, title, option option from    
+	(select sell_id, w_date, price, image, title, option from   
+	(select * from category where jejosa=#{jejosa})   
+	 c inner join detail d on c.car_num = d.car_num   
+	 inner join grade g on g.d_id=d.d_id inner join sell s on s.g_id = g.g_id) t,    
+	 <![CDATA[(select @rownum:=0) as r  order by w_date desc) t2 where rnum<=15]]>  
 </select>
 
 </mapper>

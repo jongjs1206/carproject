@@ -108,6 +108,7 @@
 												<li><a>정재상<i class="fas fa-user-tie"></i></a>
 											<ul class="submenu">
 												<li><a href="../user/sale.do">글쓰기</a></li>
+												<li><a href="../user/coin.do">내 코인</a></li>
 												<li><a><input type="submit" value="로그아웃"></a></li>
 											</ul></li>
 										</sec:authorize>

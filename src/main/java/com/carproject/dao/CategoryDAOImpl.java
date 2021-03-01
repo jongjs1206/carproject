@@ -45,4 +45,22 @@ public class CategoryDAOImpl implements CategoryDAO{
 		System.out.println("===>  CategoryMapper grade2select 호출");
 		return mybatis.selectList("categoryMap.grade2select", vo);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> countryselect(String abroad) {
+		System.out.println("===>  CategoryMapper countryselect 호출");
+		return mybatis.selectList("categoryMap.countryselect", abroad);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> sellselect() {
+		System.out.println("===>  CategoryMapper sellselect 호출");
+		return mybatis.selectList("categoryMap.sellselect");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> category_productselect(String category) {
+		System.out.println("===>  CategoryMapper category_productselect 호출");
+		return mybatis.selectList("categoryMap.category_productselect", category);
+	}
 }
