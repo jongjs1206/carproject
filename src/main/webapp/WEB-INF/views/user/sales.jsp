@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +26,26 @@
 	<link rel="stylesheet" href="../resources/assets/css/nice-select_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/style_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/responsive.css">
+	
+	<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+	integrity="sha512-JO6JyFPJupQKZf7icgZkHwuq/rAQxH7COqvEd4WdK52AtHPedwHog05T69pIelI69jVN/zZbW6TuHfH2mS8j/Q=="
+	crossorigin="anonymous"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
+	
+	<script type="text/javascript" src="../resources/js/all/sales.js"></script>
 </head>
 <body>
 
-	<%@ include file="../header.jsp"%>
+	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- side bar -->
+	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -45,9 +63,9 @@
       </div>
   </div>	<!-- slider Area End-->
 
-    <!--================ 판매글 부분 =================-->
-   <section class="blog_area single-post-area section-padding" style="padding:10px; ">
-      <div class="container">
+	<!--================ 판매글 부분 =================-->
+   	<section class="blog_area single-post-area section-padding" style="padding:10px; ">
+      	<div class="container">
             <div class="row">
                 <div class="col-lg-16">
                     <div class="salesform">
@@ -84,18 +102,18 @@
 										<hr style="margin:10px 0;">	
 										<div style="font-size:14px; display: flex; line-height: 35px;">
 											차량명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<select class='carBrand' name='carBrand'>
-		                                          	<option value="제조사">제조사</option>
-		                                           	<option value="현대" style="font-size:13px;">현대</option>
-		                                           	<option value="제네시스">제네시스</option>
-		                                           	<option value="기아">기아</option>
-		                                           	<option value="쉐보레(국산)">쉐보레(국산)</option>
-		                                           	<option value="GM대우">GM대우</option>
-		                                           	<option value="르노삼성">르노삼성</option>
-		                                           	<option value="쌍용">쌍용</option>
-		                                           	<option value="어울림모터스">어울림모터스</option>
-		                                           	<option value="기타 국산차">기타 국산차</option>
-		                                    </select>
+												<select class='carBrand' name='carBrand'>
+			                                          	<option value="">제조사</option>
+			                                           	<!-- <option value="현대" style="font-size:13px;">현대</option>
+			                                           	<option value="제네시스">제네시스</option>
+			                                           	<option value="기아">기아</option>
+			                                           	<option value="쉐보레(국산)">쉐보레(국산)</option>
+			                                           	<option value="GM대우">GM대우</option>
+			                                           	<option value="르노삼성">르노삼성</option>
+			                                           	<option value="쌍용">쌍용</option>
+			                                           	<option value="어울림모터스">어울림모터스</option>
+			                                           	<option value="기타 국산차">기타 국산차</option> -->
+			                                    </select>
 											<select class='carModel' name='carModel' > 
 	                                         	<option value="">모델</option>
 	                                        </select>
@@ -111,7 +129,7 @@
 	                                        </div><hr style="margin:10px 0;"><!-- end of 차량명 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 연식/색상 -->
                                         	연식&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-                                        	<input type="date" id="year" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
+                                        	<input type="date" id="carYear" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
                                         		text-align:center; border-radius: 7px;">
                                    	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                    	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -134,8 +152,8 @@
                                         </div><hr style="margin:10px 0;">	<!-- end of 주행거리/배기량 -->
                                         <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 사고여부/판매가격 -->	
 	                                    	사고여부&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    		<input name="accident" type="radio" id="accident1" value="n" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
-                                     		<input name="accident" type="radio" id="accident2" value="n" >&nbsp; 사고
+                                    		<input class="accident" type="radio" id="accident1" value="n" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
+                                     		<input class="accident" type="radio" id="accident2" value="n" >&nbsp; 사고
                                      		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                      		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                      		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

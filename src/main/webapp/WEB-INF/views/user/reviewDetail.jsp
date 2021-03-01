@@ -28,7 +28,8 @@
 </head>
 <body>
 
-	<%@ include file="../header.jsp"%>
+	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- side bar -->
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -48,6 +49,7 @@
   	
   	<!--================ 글 내용 부분 =================-->
 	<section class="blog_area single-post-area section-padding" style="padding:20px 0 120px 0;">
+	<form>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-11">
@@ -269,7 +271,15 @@
 						</div>	<!-- end of 후기글 -->
 				</div>	<!-- end of 왼쪽부분 -->
 			</div>	<!-- end of row -->
+			<div class="col-lg-16 text-center">
+				<a href="#">
+			    <button type="submit" class="modifyBtn" 
+					style="border-radius: 12px; background-color:#dca73a; border:0; color:white; text-align:center; 
+				    width:100px; height:50px; margin:20px 0 30px;">
+			        수정하기</button></a>
+			</div>
 		</div>
+		</form>
 	</section>	<!--================ 후기글 end =================-->
    
 	<%@ include file="../footer.jsp"%>

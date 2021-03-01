@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +26,26 @@
 	<link rel="stylesheet" href="../resources/assets/css/nice-select_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/style_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/responsive.css">
+	
+	<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+	integrity="sha512-JO6JyFPJupQKZf7icgZkHwuq/rAQxH7COqvEd4WdK52AtHPedwHog05T69pIelI69jVN/zZbW6TuHfH2mS8j/Q=="
+	crossorigin="anonymous"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
+	
+	<script type="text/javascript" src="../resources/js/all/sales.js"></script>
 </head>
 <body>
 
-	<%@ include file="../header.jsp"%>
+	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- side bar -->
+	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -47,6 +65,7 @@
   	
 	<!--================ 글 내용 부분 =================-->
 	<section class="blog_area single-post-area section-padding">
+	<form>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7">
@@ -59,7 +78,7 @@
 							<div style="width: 9%; margin:0 1px 1px 0;">
 								<img style="width: 100%; margin: 0px" src="../resources/img/car/ex_car<%=i%>.jpg">
 	                        </div>
-							<%
+							<% 
 								}
 							%>
 						</div><br/><br/>	<!-- end of 썸네일 -->
@@ -68,29 +87,30 @@
 								<h5>기본 정보</h5><hr style="margin:20px 0 10px 0;">
 								<table class="detail-info-table" style="font-size:13px; width:500px; height:200px; ">
 									<tbody>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">차량번호</th>
-											<td>358주9077</td>
-											<th scope="col">주행거리</th>
-											<td>8,727km</td>
-											
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">연식</th>
-											<td>2020.07(21년형)</td>
-											<th scope="col">연료</th>
-											<td>가솔린</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">변속기</th>
-											<td>자동</td>
-											<th scope="col">배기량</th>
-											<td>3,470 cc(380마력)</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">색상</th>
-											<td>검정색</td>
-										</tr>
+										<c:forEach var="mycategory" items="${category}">
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">차량번호</th>
+												<td>358주9077</td>
+												<th scope="col">주행거리</th>
+												<td>8,727km</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">연식</th>
+												<td>2020.07(21년형)</td>
+												<th scope="col">연료</th>
+												<td>가솔린</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">변속기</th>
+												<td>자동</td>
+												<th scope="col">배기량</th>
+												<td>3,470 cc(380마력)</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">색상</th>
+												<td>검정색</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>	
@@ -370,7 +390,15 @@
 	                </div>	<!-- end of 차 / 판매자 정보 -->
 				</div>	<!-- end of 오른쪽 위 -->
 			</div>	<!-- end of row -->
+			<div class="col-lg-16 text-center">
+				<a href="#">
+			    <button type="submit" class="modifyBtn" 
+					style="border-radius: 12px; background-color:#dca73a; border:0; color:white; text-align:center; 
+				    width:100px; height:50px; margin:20px 0 30px;">
+			        수정하기</button></a>
+		    </div>
 		</div>
+		</form>
 	</section>
    <!--================ Blog Area end =================-->
   	
