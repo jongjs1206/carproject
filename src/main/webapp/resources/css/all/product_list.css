@@ -313,3 +313,9 @@ button.btn-ch {
 .sub-list{
 	margin: 0px;
 }
+.fa-heart{
+	cursor: pointer;
+}
+.fa-heart:hover{
+	color: pink;
+}

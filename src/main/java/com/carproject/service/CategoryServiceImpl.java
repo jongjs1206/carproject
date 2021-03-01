@@ -40,5 +40,20 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<HashMap<String, Object>> grade2select(GradeVO vo) {
 		return categoryDAO.grade2select(vo);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> countryselect(String abroad) {
+		return categoryDAO.countryselect(abroad);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> sellselect() {
+		return categoryDAO.sellselect();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> category_productselect(String category) {
+		return categoryDAO.category_productselect(category);
+	}
 	
 }

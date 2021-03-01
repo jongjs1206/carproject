@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -94,13 +95,22 @@
 			<div class="area-maker">
 				<h4>제조사</h4>
 				<div class="list-comm js-tabs">
-					<dl class="group-list">
+					<dl class="group-list abroad_table">
 						<c:forEach var="mycategory" items="${category}">
-							<dd class="category_list" style="">
-								<button type="button" class="btn_category">
-									<span>${mycategory.jejosa}</span> <span class="t2 mkCnt_21">1,339</span>
-								</button>
-							</dd>
+							<c:if test="${null eq mycategory.count}">
+								<dd class="category_list">
+									<button type="button" class="btn_category">
+										<span>${mycategory.jejosa}</span> <span class="t2 mkCnt_21">0</span>
+									</button>
+								</dd>
+							</c:if>
+							<c:if test="${null ne mycategory.count}">
+								<dd class="category_list">
+									<button type="button" class="btn_category">
+										<span>${mycategory.jejosa}</span> <span class="t2 mkCnt_21">${mycategory.count}</span>
+									</button>
+								</dd>
+							</c:if>
 						</c:forEach>
 					</dl>
 				</div>
@@ -152,363 +162,54 @@
 	<div class="container">
 		<div style="display: flex; justify-content: flex-end;">
 			<input type='text' placeholder="차명을 입력하세요"
-				style="border: none; border-bottom: 1px solid;; margin-top: 30px; width: 200px;">
+				style="border: none; border-bottom: 3px solid #DCA73A; margin-top: 30px; margin-bottom: 30px; width: 200px;">
 			<button
-				style="color: white; border-radius: 3px; font-weight: bold; background-color: var(- -main-color); width: 60px; margin-top: 30px; border: none; margin-left: 10px;">검색</button>
+				style="color: white; border-radius: 3px; font-weight: bold; margin-bottom: 30px; background-color: #DCA73A; width: 60px; margin-top: 30px; border: none; margin-left: 10px;">검색</button>
 		</div>
 	</div>
 
-
+	<sec:authorize access="isAuthenticated()">
+		<input type="hidden" class='login_on' value='ok'/>										
+	</sec:authorize>
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
-
 			<div class="row">
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
+				<c:forEach var="product_sell" items="${sell}">
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<!-- Single Room -->
+						<div class="single-room mb-50">
+							<div class="room-img">
+								<a class='go_detail1' href="../all/detail.do?num=${product_sell.sell_id}"><img class="car_image" style="height: 277px;"
+									src="${product_sell.image}img1.png"
+									alt=""></a>
+							</div>
+							<div class="room-caption" style="height: 220px;">
+								<h3 style="height: 50px;">
+									<a class='go_detail2' href="../all/detail.do?num=${product_sell.sell_id}">${product_sell.title}</a>
+								</h3>
+								<div class="per-night">
+								<span><span class='car_opt'>${product_sell.resultoption}</span></span>
+								
+								<c:if test="${product_sell.resultoption eq ''}">
+									<span><span class='car_opt'>옵션이 등록되지 않음</span></span>
+								</c:if>
+									<div style="margin-top: 5px;">
+										<span class='car_price' style="font-size: 26px;">
+										<fmt:formatNumber value="${product_sell.price}" pattern="#,###" />만원</span>
+										
+										<i class="fas fa-heart wish"></i>
+										
+										
+									</div>
+									<input type="hidden" class='car_id' value="${product_sell.sell_id}"/>
 								</div>
-
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xl-4 col-lg-6 col-md-6">
-					<!-- Single Room -->
-					<div class="single-room mb-50">
-						<div class="room-img">
-							<a href="rooms.html"><img
-								src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg"
-								alt=""></a>
-						</div>
-						<div class="room-caption">
-							<h3>
-								<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-							</h3>
-							<div class="per-night">
-								<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-								<div>
-									<span style="font-size: 26px;">3,099만원</span><i
-										class="fas fa-heart"></i>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+			</div>
+		</div>
 	</section>
 	<!-- Room End -->
 
