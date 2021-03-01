@@ -316,6 +316,7 @@ button.btn-ch {
 .fa-heart{
 	cursor: pointer;
 }
-.fa-heart:hover{
+
+.color_pink{
 	color: pink;
 }

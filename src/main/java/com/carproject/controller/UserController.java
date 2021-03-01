@@ -3,6 +3,8 @@ package com.carproject.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.MemberVO;
 import com.carproject.service.CategoryService;
+import com.carproject.service.MemberService;
 
 @Controller
 public class UserController {
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private MemberService memberService;
 	
 	String[] alloption = {"선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", 
 			"LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트", "하이빔어시스트", 
@@ -38,11 +44,27 @@ public class UserController {
 			"MP3", "DMB", "CD플레이어", "AV시스템", "뒷좌석TV",
 			"텔레매틱스", "스마트폰미러링"};
 	
-	@RequestMapping("all/homepage.do")
-	public void homepage() {
+	@RequestMapping("all/log.do")
+	public String login(HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	      
-	    System.out.println(principal);
+		String id="";
+	    if (principal instanceof UserDetails) {
+	         id = ((UserDetails)principal).getUsername();
+	    }
+	    MemberVO vo = new MemberVO();
+	    vo.setM_id(id);
+	    
+	    MemberVO info = memberService.checkUniqueId(vo);
+	    
+	    session.setAttribute("info", info);
+	    return "all/homepage";
+	}
+	
+	@RequestMapping("all/out.do")
+	public String out(HttpSession session) {
+		session.invalidate();
+	    return "all/login.do";
 	}
 	
 	/*
