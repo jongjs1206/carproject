@@ -42,6 +42,13 @@ public class MemberServiceImpl implements MemberService{
 	  {	
 		  return memberDAO.checkUniqueId(vo);
 	  }
+	  
+	  //구글 로그인
+	  public int addGoogleEmail( MemberVO vo)
+	  {	
+		  return memberDAO.addGoogleEmail(vo);
+	  }
+	  
 
 	
 	

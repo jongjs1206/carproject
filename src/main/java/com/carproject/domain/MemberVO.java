@@ -25,6 +25,9 @@ public class MemberVO {
 	private String enabled; /*  */
 	private String etc; /*  */
 	
+
+	private String gmail; /*  구글 로그인*/
+	
 	private String auth; /* 권한 */	
 	private long picSize; /* 프로필사진용량 */
 	
@@ -157,5 +160,12 @@ public class MemberVO {
 	}
 	public void setPicSize(long picSize) {
 		this.picSize = picSize;
+	}
+	
+	public String getGmail() {
+		return gmail;
+	}
+	public void setGmail(String gmail) {
+		this.gmail = gmail;
 	}
 }

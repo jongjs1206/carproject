@@ -14,6 +14,7 @@ public interface MemberService {
 	public int userInsert(MemberVO vo );
 	public MemberVO checkUniqueId( MemberVO vo);
 	
+	public int addGoogleEmail( MemberVO vo);
 	
 }
 

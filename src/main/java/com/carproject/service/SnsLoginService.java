@@ -10,8 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
 
@@ -30,7 +34,7 @@ public class SnsLoginService {
 	@Value("#{config['google.redirect']}")
 	private String redirect;
 	
-	
+//google login redirect url
   public String googleRedirect() {
   
     String googleRedirect = googleUrl+"?scope=email&access_type=offline&response_type=code&client_id="+googleId+"&redirect_uri="+redirect;
@@ -38,6 +42,7 @@ public class SnsLoginService {
 	  return googleRedirect;
   }
   
+ //코드 받아서 token 받기
 public String getToken(String code) {
 	
 	
@@ -84,9 +89,19 @@ public String getToken(String code) {
 	
 }
 
-public void getGoogleEmail(String access_token) {
+// id token에서 email 정보 추출
+public String getGoogleEmail(String googleLoginInfo) {
 	
+	JsonParser Parser = new JsonParser();
+	JsonObject jsonObj = (JsonObject) Parser.parse(googleLoginInfo);
+
+	String id_token = jsonObj.get("id_token").getAsString();
+	String[] load = id_token.split("\\.");
+
+    byte[] payload = Base64.decodeBase64(load[1]);
+    JsonObject jsonPayload =  (JsonObject) Parser.parse(new String(payload));
 	
+	return jsonPayload.get("email").getAsString();
 }
 
 }
