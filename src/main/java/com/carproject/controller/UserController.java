@@ -11,12 +11,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.CategoryService;
 import com.carproject.service.MemberService;
+
 
 @Controller
 public class UserController {
@@ -45,7 +47,7 @@ public class UserController {
 			"텔레매틱스", "스마트폰미러링"};
 	
 	@RequestMapping("all/log.do")
-	public String login(HttpSession session) {
+	public String login(HttpSession session, @RequestParam(name = "social") String social) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	      
 		String id="";
@@ -58,6 +60,7 @@ public class UserController {
 	    MemberVO info = memberService.checkUniqueId(vo);
 	    
 	    session.setAttribute("info", info);
+	    
 	    return "all/homepage";
 	}
 	
