@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.carproject.dao.CategoryDAOImpl;
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 
 @Repository("CategoryService")
 public class CategoryServiceImpl implements CategoryService{
@@ -47,13 +48,23 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> sellselect() {
-		return categoryDAO.sellselect();
+	public List<HashMap<String, Object>> sellselect(HeartVO vo) {
+		return categoryDAO.sellselect(vo);
 	}
 
 	@Override
-	public List<HashMap<String, Object>> category_productselect(String category) {
-		return categoryDAO.category_productselect(category);
+	public List<HashMap<String, Object>> category_productselect(HeartVO vo) {
+		return categoryDAO.category_productselect(vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> model_productselect(HeartVO vo) {
+		return categoryDAO.model_productselect(vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> grade_productselect(HeartVO vo) {
+		return categoryDAO.grade_productselect(vo);
 	}
 	
 }

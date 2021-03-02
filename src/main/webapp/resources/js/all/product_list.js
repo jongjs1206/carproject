@@ -6,6 +6,7 @@ $(function() {
 	var choose2;
 	var choose3;
 	var choose4;
+	
 	$(document).on("click",".btn_category",function(){
 		choose1 = $(this).children().first().text();
 		$('.btn_category').removeClass('btn-ch');
@@ -16,6 +17,9 @@ $(function() {
 		$('.optdd').remove();
 		$('.cell-detail').removeClass('off');
 		$('.optgrade').remove();
+		
+		$('.fa-heart').removeClass('color_pink');
+		$('.heart_on_off').val('off');
 		$.ajax({
 			type : 'post',
 			async : true,
@@ -56,19 +60,10 @@ $(function() {
 			},
 			contentType: "application/x-www-form-urlencoded;charset=utf-8",
 			dataType : 'json',
-			data : {"category" : choose1},
+			data : {"id" : $('.login_on').val(),
+			"category" : choose1},
 			success: function(list){
-				for ( var count = 0; count < list.length ; count++){					
-					$(".go_detail1:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
-					$(".go_detail2:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
-					$(".car_image:eq("+count+")").attr("src", list[count].image+'img1.png');
-					$(".go_detail2:eq("+count+")").text(list[count].title);
-					if(list[count].resultoption=='')
-						$(".car_opt:eq("+count+")").text("옵션이 등록되지 않음");
-					else	
-						$(".car_opt:eq("+count+")").text(list[count].resultoption);
-					$(".car_price:eq("+count+")").text(comma(list[count].price)+'만원');
-				}							
+				car_liston(list);					
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
@@ -82,6 +77,9 @@ $(function() {
 		$('.optdd').remove();
 		$('.cell-detail').removeClass('off');
 		$('.optgrade').remove();
+		
+		$('.fa-heart').removeClass('color_pink');
+		$('.heart_on_off').val('off');
 		$.ajax({
 			type : 'post',
 			async : true,
@@ -109,6 +107,24 @@ $(function() {
         	},
 			error : function(err){ console.log(err)}  //실패했을때
 		});
+		
+		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/model_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
 	});
 	
 	$(document).on("click",".op_ck",function(){
@@ -117,6 +133,9 @@ $(function() {
 			$('.cell-detail').addClass('off');
 			$('.two-detail').addClass('off');
 			choose3=$(".op_ck:checked").next().next().val();
+			
+			$('.fa-heart').removeClass('color_pink');
+			$('.heart_on_off').val('off');
 			
 			$.ajax({
 			type : 'post',
@@ -150,6 +169,33 @@ $(function() {
 		}else{
 			$('.two-detail').removeClass('off');
 		}
+		
+		var options = "";
+		
+		$(".op_ck:checked").each(function(i,elements){
+    		options = options+$(this).next().text()+"','";
+    	});
+    	
+    	alert(options.slice(0,-2));
+    	
+    	$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/grade_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-2)},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
 	});
 	
 	
@@ -275,6 +321,25 @@ $(function() {
 				if($(this).next().val()=='on'){
 					$(this).next().val('off');
 					$(this).removeClass('color_pink');
+					
+					$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/heart_off.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"sell_id":$(this).next().next().val()},
+			success: function(){
+				
+        	},
+				error : function(err){ console.log(err)}  //실패했을때
+				});
+				
 				}else{
 					$(this).next().val('on');
 					$(this).addClass('color_pink');
@@ -294,12 +359,41 @@ $(function() {
 			success: function(){
 				
         	},
-			error : function(err){ console.log(err)}  //실패했을때
-		});
+				error : function(err){ console.log(err)}  //실패했을때
+				});
 				}
 			}
 	});
 	
+	function car_liston(list){
+		if(list.length == 0){
+					$('.no_carlist').removeClass('off');
+					$('.product_all').addClass('off');
+				}else{
+					$('.product_all').removeClass('off');
+					$('.no_carlist').addClass('off');
+				}
+				for ( var count = 0; count < 15-list.length; count++){
+					$(".product_all:eq("+ (14-count) +")").addClass('off');
+				}
+				for ( var count = 0; count < list.length ; count++){					
+					$(".go_detail1:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
+					$(".go_detail2:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
+					$(".car_image:eq("+count+")").attr("src", list[count].image+'img1.png');
+					$(".go_detail2:eq("+count+")").text(list[count].title);
+					if(list[count].resultoption=='')
+						$(".car_opt:eq("+count+")").text("옵션이 등록되지 않음");
+					else	
+						$(".car_opt:eq("+count+")").text(list[count].resultoption);
+					$(".car_price:eq("+count+")").text(comma(list[count].price)+'만원');
+					$(".sell_id:eq("+count+")").val(list[count].sell_id);
+					
+					if(list[count].ht=='1'){
+						$(".fa-heart:eq("+count+")").addClass('color_pink');
+						$(".heart_on_off:eq("+count+")").val('on');
+					}
+				}		
+	}
 	
 	
 	function comma(num){

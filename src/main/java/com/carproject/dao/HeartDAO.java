@@ -8,4 +8,6 @@ import com.carproject.domain.HeartVO;
 
 public interface HeartDAO {
 	void insertHeart(HeartVO vo);
+	void deleteHeart(HeartVO vo);
+	List<HeartVO> selectHeart(String m_id);
 }

@@ -1,6 +1,8 @@
 package com.carproject.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,16 @@ public class HeartServiceImpl implements HeartService{
 	@Override
 	public void insertHeart(HeartVO vo) {
 		heartDAO.insertHeart(vo);
+	}
+
+	@Override
+	public List<HeartVO> selectHeart(String m_id) {
+		return heartDAO.selectHeart(m_id);
+	}
+
+	@Override
+	public void deleteHeart(HeartVO vo) {
+		heartDAO.deleteHeart(vo);
 	}
 
 }

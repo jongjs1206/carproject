@@ -174,9 +174,10 @@
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
-			<div class="row">
+			<hr>
+			<div class="row" style="display: flex; justify-content: center;">
 				<c:forEach var="product_sell" items="${sell}">
-					<div class="col-xl-4 col-lg-6 col-md-6">
+					<div class="col-xl-4 col-lg-6 col-md-6 product_all">
 						<!-- Single Room -->
 						<div class="single-room mb-50">
 							<div class="room-img">
@@ -197,9 +198,16 @@
 									<div style="margin-top: 5px;">
 										<span class='car_price' style="font-size: 26px;">
 										<fmt:formatNumber value="${product_sell.price}" pattern="#,###" />만원</span>
-										
-										<i class="fas fa-heart wish"></i>
-										<input type="hidden" class='heart_on_off' value="off"/>
+										<c:choose>
+										<c:when test="${product_sell.ht eq '1'}">
+											<i class="fas fa-heart wish color_pink"></i>									
+											<input type="hidden" class='heart_on_off' value="on"/>
+										</c:when>
+										<c:otherwise>
+											<i class="fas fa-heart wish"></i>	
+											<input type="hidden" class='heart_on_off' value="off"/>
+										</c:otherwise>
+										</c:choose>
 										<input type="hidden" class='sell_id' value="${product_sell.sell_id}"/>									
 									</div>
 								</div>
@@ -207,6 +215,9 @@
 						</div>
 					</div>
 				</c:forEach>
+				<div class='no_carlist off'>
+					등록된 차량이 없습니다.
+				</div>
 			</div>
 		</div>
 	</section>

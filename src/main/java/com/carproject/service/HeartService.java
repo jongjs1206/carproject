@@ -7,4 +7,6 @@ import com.carproject.domain.HeartVO;
 
 public interface HeartService {
 	public void insertHeart(HeartVO vo);
+	public void deleteHeart(HeartVO vo);
+	public List<HeartVO> selectHeart(String m_id);
 }

@@ -8,4 +8,12 @@
 		INSERT INTO heart VALUES (nextval(heart_w_id_sq),#{m_id},#{sell_id},sysdate())
 	</insert>
 
+	<insert id="deleteHeart" parameterType="heart">
+		delete from heart where m_id = #{m_id} and sell_id = #{sell_id}
+	</insert>
+
+	<select id="selectHeart" resultType="heart" parameterType="String">
+		select * from heart where m_id=#{m_id}
+	</select>
+
 </mapper>

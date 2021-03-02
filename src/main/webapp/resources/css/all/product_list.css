@@ -320,3 +320,9 @@ button.btn-ch {
 .color_pink{
 	color: pink;
 }
+
+.no_carlist{
+	font-size: 30px;
+	margin-top: 100px;
+	margin-bottom: 300px;
+}
