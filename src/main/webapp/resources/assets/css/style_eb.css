@@ -2580,7 +2580,7 @@ label {
 .h1-testimonial-active button.slick-arrow {
   position: absolute;
   top: 50%;
-  left: -133px;
+  left: -50px;	/* 수정 -133 -> -50*/
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -2610,7 +2610,7 @@ label {
 
 .h1-testimonial-active button.slick-next {
   left: auto;
-  right: -133px; }
+  right: -50px; }	/* 수정 -133 -> -50*/
   @media only screen and (min-width: 576px) and (max-width: 767px) {
     .h1-testimonial-active button.slick-next {
       right: -45px; } }

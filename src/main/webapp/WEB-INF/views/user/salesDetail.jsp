@@ -70,45 +70,51 @@
 			<div class="row">
 				<div class="col-lg-7">
 					<div class="carImg" style="margin:0 0 0 0;">
+					<div class="row justify-content-center">
+					<div class="h1-testimonial-active slick-initialized slick-slider">
+						<button type="button" class="slick-prev slick-arrow" style="display: block;"><i class="ti-angle-left"></i></button>
 						<img src="../resources/img/car/ex_car1.jpg" alt=""><hr style="margin:10px 0 10px 0;">	<!-- 차 대표 이미지 -->
-                        <div class="thumbnail" style="display: flex; flex-wrap: wrap;" > <!-- 썸네일 -->
-							<%
-								for(int i = 1; i <= 20; i++){
-							%>
-							<div style="width: 9%; margin:0 1px 1px 0;">
-								<img style="width: 100%; margin: 0px" src="../resources/img/car/ex_car<%=i%>.jpg">
-	                        </div>
-							<% 
-								}
-							%>
+						<button type="button" class="slick-next slick-arrow" style="display: block;"><i class="ti-angle-right"></i></button>
+	                </div></div>
+	                    <div class="thumbnail" style="display: flex; flex-wrap: wrap; margin:0 0 0 45px;" > <!-- 썸네일 -->
+						<%
+							for(int i = 1; i <= 20; i++){
+						%>
+						<div style="width: 9%; margin:0 1px 1px 0;">
+							<img style="width: 100%; margin: 0px" src="../resources/img/car/ex_car<%=i%>.jpg">
+		                </div>
+						<% 
+						}
+						%>
 						</div><br/><br/>	<!-- end of 썸네일 -->
+					</div><!-- 이미지 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
 							<div class="course__details__feature" style="width:500px; margin:0 100px 30px 0;">
 								<h5>기본 정보</h5><hr style="margin:20px 0 10px 0;">
 								<table class="detail-info-table" style="font-size:13px; width:500px; height:200px; ">
 									<tbody>
-										<c:forEach var="mycategory" items="${category}">
+										<c:forEach var="sales" items="${sales}">	<!-- 여기 확인!!! -->
 											<tr style="padding:0px; margin:0px;">
-												<th scope="col">차량번호</th>
-												<td>358주9077</td>
+												<th scope="col">차량 번호</th>
+												<td>${sales.carNumber}</td>
 												<th scope="col">주행거리</th>
-												<td>8,727km</td>
+												<td>${sales.km}</td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">연식</th>
-												<td>2020.07(21년형)</td>
+												<td>${sales.carYear}</td>
 												<th scope="col">연료</th>
-												<td>가솔린</td>
+												<td>${sales.carFuel}</td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">변속기</th>
-												<td>자동</td>
+												<td>${car.carGear}</td>
 												<th scope="col">배기량</th>
-												<td>3,470 cc(380마력)</td>
+												<td>${car.cc}</td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">색상</th>
-												<td>검정색</td>
+												<td>${sales.carColor}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -120,26 +126,28 @@
 								&nbsp;&nbsp;&nbsp;보험처리 <b style="color:#f3bd00; font-size:13px;">2</b>회</span><hr style="margin:10px 0;">
 								<table class="detail-info-table" style="font-size:13px; width:600px; height:200px; ">
 									<tbody>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">차량번호/소유자변경</th>
-											<td>0회 / 1회</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">자동차보험 특수사고</th>
-											<td>전손: 1 / 침수전손 : 0 / 침수분손 : 0 / 도난: 0</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">보험사고(내차피해)</th>
-											<td>1회(0원)</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">보험사고(타차가해)</th>
-											<td>1회(0원)</td>
-										</tr>
-										<tr style="padding:0px; margin:0px;">
-											<th scope="col">보험이력 공개일</th>
-											<td>2020-12-25</td>
-										</tr>
+										<c:forEach var="sales" items="${sales}">	<!-- accident -->
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">차량번호/소유자변경</th>
+												<td>0회 / 1회</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">자동차보험 특수사고</th>
+												<td>전손: 1 / 침수전손 : 0 / 침수분손 : 0 / 도난: 0</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">보험사고(내차피해)</th>
+												<td>1회(0원)</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">보험사고(타차가해)</th>
+												<td>1회(0원)</td>
+											</tr>
+											<tr style="padding:0px; margin:0px;">
+												<th scope="col">보험이력 공개일</th>
+												<td>2020-12-25</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 								</div>	
@@ -317,22 +325,25 @@
 							<div class="salesContext">
 								<div class="col-lg-12">
 									<blockquote class="generic-blockquote"  style="width:1000px;">
-										차량 설명글 부분
+										<c:forEach var="sales" items="${sales}">
+											${sales.salesContext}
+										</c:forEach>
 									</blockquote>
 								</div>
 							</div>
 						</div>	<!-- end of 차량 설명글 -->
-					</div>
+					
 				</div>	<!-- end of 왼쪽부분 -->
 				<div class="col-lg-5">	<!-- start of 오른쪽 위 -->
 	            	<div class="course__details__sidebar">
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
-	                        <div class="carNameInfo"><h4 style="text-align:center">제네시스 더 올 뉴 G80 3.5 T-GDi AWD</h4></div>
-	                        <div class="carInfo"><h6 style="text-align:center">20년 07월 (21년형) | 8,727 km | 가솔린</h6></div>
+	                	<c:forEach var="sales" items="${sales}">
+	                        <div class="carNameInfo"><h4 style="text-align:center">${sales.title}</h4></div>
+	                        <div class="carInfo"><h6 style="text-align:center">${sales.carYear} | ${sales.km} | ${sales.carFuel}</h6></div>
 	                        <span><b class="salesPrice" style="color:#dca73a">
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5640</b>만원</span><br/><br/>
+	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.salesPrice}</b>만원</span><br/><br/>
 	                        <div class="carInfo1">
 		                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -356,17 +367,20 @@
 								신차대비
 	                            </span>
 	                        </div><br/>	<!-- end of 차 정보 -->
+	                    </c:forEach>
 	                    </div><br/>
 	                    <div class="rightSideTop2" style="border:1px solid #9d9d9d;"><br/>	<!-- 판매자 정보 -->
 	                        <div class="salesManInfo">
 	                        	<h4 style="color:#dca73a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;판매자 정보</h4>
 	                        	<div class="salesPerson" style="display:flex;">
+	                        	<c:forEach var="sales" items="${sales}">
 				           			<img src="../resources/assets/img/logo/testimonial.png" alt="" style="width:110px; height:110px; margin:10px 30px 20px 50px;">
 				           			<div class="salesMan"><br/><br/>
-				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;홍길동(abcd1234)<br/>
-					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;010-0000-0000
+				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.m_name}(${sales.m_id})<br/>
+					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.tel}
 				                	</div>
-				           		</div>
+				                </c:forEach>
+				           		</div> 
 				            </div>
 	                    </div>	<!-- end of 판매자 정보 -->
 				        <div class="favorite" style="font-size:13px; display:flex; margin:5px 0 0 0;">
