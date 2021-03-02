@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 
 @Repository("CategoryDAO")
 public class CategoryDAOImpl implements CategoryDAO{
@@ -53,14 +54,26 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> sellselect() {
+	public List<HashMap<String, Object>> sellselect(HeartVO vo) {
 		System.out.println("===>  CategoryMapper sellselect 호출");
-		return mybatis.selectList("categoryMap.sellselect");
+		return mybatis.selectList("categoryMap.sellselect",vo);
 	}
 
 	@Override
-	public List<HashMap<String, Object>> category_productselect(String category) {
+	public List<HashMap<String, Object>> category_productselect(HeartVO vo) {
 		System.out.println("===>  CategoryMapper category_productselect 호출");
-		return mybatis.selectList("categoryMap.category_productselect", category);
+		return mybatis.selectList("categoryMap.category_productselect", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> model_productselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper model_productselect 호출");
+		return mybatis.selectList("categoryMap.model_productselect", vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> grade_productselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper grade_productselect 호출");
+		return mybatis.selectList("categoryMap.grade_productselect", vo);
 	}
 }

@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.CategoryService;
+import com.carproject.service.HeartService;
 import com.carproject.service.MemberService;
 
 
@@ -26,7 +28,9 @@ public class UserController {
 	private CategoryService categoryService;
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private HeartService heartService;
+
 	String[] alloption = {"선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", 
 			"LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트", "하이빔어시스트", 
 			"압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", 
@@ -74,9 +78,15 @@ public class UserController {
 	 * 처음 판매리스트 들어 갈때
 	 */
 	@RequestMapping("all/product_list.do")
-	public void product_list(Model model) {
+	public void product_list(Model model, HttpSession session) {
+		HeartVO vo = new HeartVO();
+		if(session.getAttribute("info") != null) {
+			MemberVO info = (MemberVO)session.getAttribute("info");
+			vo.setM_id(info.getM_id());
+		}
+		vo.setSell_id(1);
 		List<HashMap<String, Object>> category = categoryService.categoryselect();
-		List<HashMap<String, Object>> sell = categoryService.sellselect();
+		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
 		
 		
 		for(int i=0;i<sell.size();i++) {
@@ -100,6 +110,8 @@ public class UserController {
 			}
 			sell.get(i).put("resultoption", resultoption);
 		}
+		
+		
 		
 		model.addAttribute("category",category);
 		model.addAttribute("sell",sell);
@@ -168,10 +180,21 @@ public class UserController {
 		return country;
 	}
 	
+	
+	/*
+	 * 카테고리 선택시 상품 가져올때
+	 */
 	@RequestMapping("all/category_product.do")
 	@ResponseBody
-	public List<HashMap<String, Object>> category_product(String category) {
-		List<HashMap<String, Object>> list = categoryService.category_productselect(category);
+	public List<HashMap<String, Object>> category_product(String id,String category) {
+		HeartVO vo = new HeartVO();
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setSell_id(1);
+		vo.setDate(category);
+		List<HashMap<String, Object>> list = categoryService.category_productselect(vo);
+		
 		for(int i=0;i<list.size();i++) {
 			StringBuffer resultoption = new StringBuffer();
 			StringBuffer temp = new StringBuffer();
@@ -195,5 +218,61 @@ public class UserController {
 		}
 		
 		return list;
+	}
+	
+	@RequestMapping("all/model_product.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> model_product(String id,String car_num) {
+		HeartVO vo = new HeartVO();
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setSell_id(1);
+		vo.setDate(car_num);
+		List<HashMap<String, Object>> list = categoryService.model_productselect(vo);
+		
+		for(int i=0;i<list.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)list.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			list.get(i).put("resultoption", resultoption);
+		}
+		
+		return list;
+	}
+	
+	
+	
+	@RequestMapping("all/heart_on.do")
+	@ResponseBody
+	public void heart_on(String id, String sell_id) {
+		HeartVO vo = new HeartVO();
+		vo.setM_id(id);
+		vo.setSell_id(Integer.parseInt(sell_id));
+		heartService.insertHeart(vo);
+	}
+	
+	@RequestMapping("all/heart_off.do")
+	@ResponseBody
+	public void heart_off(String id, String sell_id) {
+		HeartVO vo = new HeartVO();
+		vo.setM_id(id);
+		vo.setSell_id(Integer.parseInt(sell_id));
+		heartService.deleteHeart(vo);
 	}
 }

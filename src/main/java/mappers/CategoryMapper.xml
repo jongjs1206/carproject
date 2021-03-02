@@ -59,20 +59,48 @@
 	inner join sell s on s.g_id = g.g_id group by jejosa) t2 on t1.jejosa = t2.jejosa
 </select>
 
-<select id="sellselect" resultType="hashmap">
-	<![CDATA[ select * from 
-	(select @rownum:=@rownum+1 as rnum,sell_id, w_date, price, image, title, option from sell,(select @rownum:=0) as r order by w_date desc) t 
-	where rnum<=15]]>
+<select id="sellselect" resultType="hashmap" parameterType="heart">
+SELECT t2.*,ht FROM 
+(SELECT * FROM 
+(select <![CDATA[@rownum:=@rownum+1 as rnum]]>,sell_id, w_date, price, image, title, option FROM sell ,
+(select <![CDATA[@rownum:=0]]>) as r 
+order by w_date desc) t
+where  <![CDATA[rnum<=]]> #{sell_id}+14 and <![CDATA[rnum]]> >= #{sell_id}
+) t2 LEFT JOIN (SELECT '1' as ht,sell_id FROM heart WHERE m_id=#{m_id}) h on t2.sell_id=h.sell_id 
+ORDER by <![CDATA[rnum]]>
 </select>
 
-<select id="category_productselect" resultType="hashmap" parameterType="String">
-	<![CDATA[ select * from (select @rownum:=@rownum+1 as rnum]]>  
+<select id="category_productselect" resultType="hashmap" parameterType="heart">
+	SELECT t2.*,ht FROM (select * from (select <![CDATA[@rownum:=@rownum+1 as rnum]]> 
 	, sell_id, w_date, price, image, title, option option from    
 	(select sell_id, w_date, price, image, title, option from   
-	(select * from category where jejosa=#{jejosa})   
+	(select * from category where jejosa=#{date})   
 	 c inner join detail d on c.car_num = d.car_num   
 	 inner join grade g on g.d_id=d.d_id inner join sell s on s.g_id = g.g_id) t,    
-	 <![CDATA[(select @rownum:=0) as r  order by w_date desc) t2 where rnum<=15]]>  
+	 (select <![CDATA[@rownum:=0]]>) as r  order by w_date desc) t2 where <![CDATA[rnum<=]]> #{sell_id}+14 and <![CDATA[rnum]]> >= #{sell_id}) t2
+	  LEFT JOIN (SELECT '1' as ht,sell_id FROM heart WHERE m_id=#{m_id}) h on t2.sell_id=h.sell_id ORDER by <![CDATA[rnum]]>
+</select>
+
+<select id="model_productselect" resultType="hashmap" parameterType="heart">
+	SELECT t2.*,ht FROM (select * from (select <![CDATA[@rownum:=@rownum+1 as rnum]]> 
+	, sell_id, w_date, price, image, title, option from    
+	(select sell_id, w_date, price, image, title, option from   
+	(select * from category where car_num=#{date})   
+	 c inner join detail d on c.car_num = d.car_num   
+	 inner join grade g on g.d_id=d.d_id inner join sell s on s.g_id = g.g_id) t,    
+	 (select <![CDATA[@rownum:=0]]>) as r  order by w_date desc) t2 where <![CDATA[rnum<=]]> #{sell_id}+14 and <![CDATA[rnum]]> >= #{sell_id}) t2
+	  LEFT JOIN (SELECT '1' as ht,sell_id FROM heart WHERE m_id=#{m_id}) h on t2.sell_id=h.sell_id ORDER by <![CDATA[rnum]]>
+</select>
+
+<select id="grade_productselect" resultType="hashmap" parameterType="heart">
+	SELECT t2.*,ht FROM (select * from (select <![CDATA[@rownum:=@rownum+1 as rnum]]> 
+	, sell_id, w_date, price, image, title, option from    
+	(select sell_id, w_date, price, image, title, option from   
+	(select * from category where car_num=#{date})   
+	 c inner join detail d on c.car_num = d.car_num   
+	 inner join grade g on g.d_id=d.d_id inner join sell s on s.g_id = g.g_id) t,    
+	 (select <![CDATA[@rownum:=0]]>) as r  order by w_date desc) t2 where <![CDATA[rnum<=]]> #{sell_id}+14 and <![CDATA[rnum]]> >= #{sell_id}) t2
+	  LEFT JOIN (SELECT '1' as ht,sell_id FROM heart WHERE m_id=#{m_id}) h on t2.sell_id=h.sell_id ORDER by <![CDATA[rnum]]>
 </select>
 
 </mapper>
