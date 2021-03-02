@@ -200,10 +200,8 @@
 										
 										<i class="fas fa-heart wish"></i>
 										<input type="hidden" class='heart_on_off' value="off"/>
-										
-										
+										<input type="hidden" class='sell_id' value="${product_sell.sell_id}"/>									
 									</div>
-									<input type="hidden" class='car_id' value="${product_sell.sell_id}"/>
 								</div>
 							</div>
 						</div>

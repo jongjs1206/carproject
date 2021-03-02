@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.CategoryService;
+import com.carproject.service.HeartService;
 import com.carproject.service.MemberService;
 
 @Controller
@@ -24,7 +26,9 @@ public class UserController {
 	private CategoryService categoryService;
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private HeartService heartService;
+
 	String[] alloption = {"선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", 
 			"LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트", "하이빔어시스트", 
 			"압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", 
@@ -192,5 +196,14 @@ public class UserController {
 		}
 		
 		return list;
+	}
+	
+	@RequestMapping("all/heart_on.do")
+	@ResponseBody
+	public void heart_on(String id, String sell_id) {
+		HeartVO vo = new HeartVO();
+		vo.setM_id(id);
+		vo.setSell_id(Integer.parseInt(sell_id));
+		heartService.insertHeart(vo);
 	}
 }

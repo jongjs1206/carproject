@@ -278,6 +278,24 @@ $(function() {
 				}else{
 					$(this).next().val('on');
 					$(this).addClass('color_pink');
+										
+			$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/heart_on.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"sell_id":$(this).next().next().val()},
+			success: function(){
+				
+        	},
+			error : function(err){ console.log(err)}  //실패했을때
+		});
 				}
 			}
 	});
