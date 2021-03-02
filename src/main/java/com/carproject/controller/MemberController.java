@@ -107,29 +107,41 @@ public class MemberController {
 	@Autowired
 	private MailSendService mailservice;
 	
-	@Autowired
-	BCryptPasswordEncoder pwdEncoder;
-	
-	
-	// 이메일 인증번호 확인
+	//이메일 인증번호 보내기
 	@RequestMapping(value="/all/mailCheck.do",  produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String mailCheck(MemberVO vo, HttpSession session, @RequestParam("confirmNum") String confirmNum) {
-
-		//랜덤문자
+	public String mailCheck(MemberVO vo, HttpSession session, @RequestParam("email") String email) {
+		//랜덤문자 생성
 		String tempPass =mailservice.makeTempPass();
+		
 		//세션에서 랜덤문자 가져옴
 		String tempPassSession = (String)session.getAttribute("tempPass");
-		System.out.println("/"+tempPassSession);
+		
 		//세션에 랜덤문자 기존의 랜덤문자가 없으면 새로 생성
 		if(tempPassSession==null) {
 			session.setAttribute("tempPass", tempPass);
 			tempPassSession=(String)session.getAttribute("tempPass");
-		}
+		} 
+			//세션에 있는 랜덤문자 보냄
+			System.out.println("++++email++++"+email);
+			mailservice.leaveMailSend(tempPassSession, email);
+			return "이메일을 확인해주세요.";
 		
-		return "";
-
 	}
 	
 
+	//이메일 인증번호 확인
+	@RequestMapping(value="/all/certNumChk.do",  produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String certNumChk(MemberVO vo, HttpSession session,
+			@RequestParam("certCode") String certCode) {
+	
+		if(certCode.equals((String)session.getAttribute("tempPass"))) {
+			return "인증 ";
+		}else {
+			return "이메일 인증 실패";
+		}
+	}
+	
+	
 }

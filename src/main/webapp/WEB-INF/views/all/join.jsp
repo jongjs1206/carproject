@@ -194,18 +194,34 @@
 							<span>이메일</span>
 						</div>
 						<div class="cmm-input-area">
-							<span class="inp-t" style="width: 140px;">
-							<input
+							<span class="inp-t" style="width: 140px;"> <input
 								type="text" id="email1" name="email1" title="이메일 주소"
 								tk_security="true"></span> <span class="form-t">@</span> <span
-								class="inp-t" style="width: 140px;">
-								<input type="text"
-								id="email2" name="email2" title="직접입력 이메일"></span>
-							  <input type="hidden" id="email" name="email">
+								class="inp-t" style="width: 140px;"> <input type="text"
+								id="email2" name="email2" title="직접입력 이메일"></span> <input
+								type="hidden" id="email" name="email">
+							<button type="button" class="joinBtns more-btn1" id="btnMailSend">
+								<span>인증번호 전송</span>
+							</button>
 							<div class="form-txt">
 								<span class="ft-red" id="emailAlert"></span>
 							</div>
+							<div id="confirmNumDiv" style="display: none">
+								<div class="inp-t inp-time w400">
+									<input type="text" title="인증번호 입력" name="certCode"
+										id="certCode" maxlength="10" autocomplete="off" 										placeholder="인증번호 입력">
+									<div class="t-txt" id="timer" style="display: block;"></div>
+								</div>
+								<button type="button" class="joinBtns more-btn1" id="certNumChk">
+									<span>인증번호 확인</span>
+								</button><br/>
+								<div class="form-txt">
+									<span class="ft-red" id="certAlert"></span>
+								</div>
+							</div>
 						</div>
+
+
 					</div>
 					<div class="cmm-basic-info">
 						<div class="cmm-tit">
@@ -216,23 +232,6 @@
 								<span class="inp-t w400"><input type="text"
 									title="휴대전화번호" id="tel" name="tel" autocomplete="off" maxlength="11"
 									placeholder="휴대폰번호 입력" tk_security="true"></span>
-								<button type="button" class="joinBtns more-btn1" id="btnSmsSend">
-									<span>인증번호 전송</span>
-								</button>
-							</div>
-							<div>
-								<div class="inp-t inp-time w400">
-									<input type="text" title="인증번호 입력" name="certCode"
-										id="certCode" maxlength="6" autocomplete="off" readonly=""
-										placeholder="인증번호 입력" >
-									<div class="t-txt" id="timer" style="display: block;"></div>
-								</div>
-								<button type="button" class="joinBtns more-btn1" id="certNumChk">
-									<span>인증번호 확인</span>
-								</button>
-								<div class="form-txt">
-									<span class="ft-red" id="certAlert"></span>
-								</div>
 							</div>
 						</div>
 

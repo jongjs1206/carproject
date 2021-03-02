@@ -8,8 +8,11 @@ $(function() {
 	var m_pwConfirm = $('#m_pwConfirm');			
 	var m_name = $('#m_name');
 	var gender = $('#gender');
+	
 	var email1 = $('#email1');
 	var email2 = $('#email2');
+	
+	
 	var birth = $('#birth');
 	var tel = $('#tel');
 	var w_date = $('#w_date');
@@ -17,6 +20,7 @@ $(function() {
 	var idPassCheck= false;
 	var pwPassCheck = false;
 	var joinPassCheck = false;
+	var emailPassCheck = false;
 	
 	var Length = 0; 
 	var engCheck = /[a-z]/; 
@@ -176,21 +180,92 @@ if(idPassCheck){
 		});
 		
 		
+
 		
 		
+//메일 인증번호 보내기
+$('#btnMailSend').click(function(){
+
+	var email = email1.val()+'@'+email2.val()
+
+	if(email1.val()=='' || email2.val()==''){
+	alert('이메일을 입력 해 주세요.')
+	}else{
+	
+	alert(email+' \n 인증번호가 발송 되었습니다  \n 이메일을 확인 해 주세요.')
+		//인증번호칸 보이기
+	$('#confirmNumDiv').show();	
+
+
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../all/mailCheck.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+	 	
+	 	data : {'email' :  email
+	 			
+	 	},
+	 	
+	 	success : function(result){
+			
+
+	 	},
+	 	
+	 	error : function(err){
+	 		console.log(err);
+	 	}
+	 	
+	 })  
+}//end of else
+
+})//end of MailSender
+
+
 		
-		
-$('#btnSmsSend').click(function(){
+//메일 인증번호 확인
+$('#certNumChk').click(function(){
 
+//유효성 체크 통과 시, 중복 체크
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../all/certNumChk.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+	 	
+	 	data : {'certCode' : $('#certCode').val()
+	 			
+	 	},
+	 	
+	 	success : function(result){
+	 		if(result=='인증'){
+	 		alert('이메일 인증에 성공하셨습니다');
+	 		emailPassCheck=true;
+	 		
+	 		//이메일칸 readonly
+	 		$("#email1").attr("readonly",true);
+	 		$("#email2").attr("readonly",true);
+	 		
+	 		}else{
+	 		alert(result);
+	 		emailPassCheck=false;
+	 		}
+	 	},
+	 	
+	 	error : function(err){
+	 		console.log(err);
+	 	}
+	 })  
 
-alert("sms")
-
-
-
-
-
-})//end of SMS
-		
+})//end of certNumChk
 
 
 
@@ -222,12 +297,14 @@ $(document).on("click","#joinDiv",function(){
 	}else if(birth.val() == ''){
 	alert("생일을 입력해 주세요.")
 	return
-	}else if(email1.val() == '' || email2.val() == ''){
-	alert("이메일을 입력해 주세요.")
+	}else if(!emailPassCheck){
+	alert("이메일을 인증해 주세요.")
 	return
-	}
-	else{
-	alert("성공")
+//이메일 인증
+	}else if(!emailPassCheck){
+	alert("이메일을 인증해 주세요.")
+	}	else{
+	$('#join').submit()
 	
 	}
 
