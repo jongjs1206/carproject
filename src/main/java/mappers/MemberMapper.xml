@@ -15,7 +15,19 @@
 		SELECT * FROM member
 		WHERE m_id=#{m_id}
 	</select>
+
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member SET
+		gmail =	#{gmail}
+		WHERE id = #{id}
+	</update>
 	
+	<select id="checkByGoogleEmail" parameterType="member" resultType="member">
+		SELECT * FROM member
+		WHERE gmail=#{gmail}
+	</select>
+	
+
 	
 	
 
