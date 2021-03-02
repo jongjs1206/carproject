@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.dao.CategoryDAOImpl;
+import com.carproject.domain.GradeVO;
 
 @Repository("CategoryService")
 public class CategoryServiceImpl implements CategoryService{
@@ -23,6 +24,36 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public List<HashMap<String, Object>> modelselect(String category) {
 		return categoryDAO.modelselect(category);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> detailselect(String car_num) {
+		return categoryDAO.detailselect(car_num);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> gradeselect(String grade) {
+		return categoryDAO.gradeselect(grade);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> grade2select(GradeVO vo) {
+		return categoryDAO.grade2select(vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> countryselect(String abroad) {
+		return categoryDAO.countryselect(abroad);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> sellselect() {
+		return categoryDAO.sellselect();
+	}
+
+	@Override
+	public List<HashMap<String, Object>> category_productselect(String category) {
+		return categoryDAO.category_productselect(category);
 	}
 	
 }
