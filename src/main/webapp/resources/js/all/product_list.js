@@ -269,10 +269,16 @@ $(function() {
 	});
 	
 	$(document).on("click",".fa-heart",function(){
-			if($('.login_on').val()=='ok'){
-				alert('1');
+			if($('.login_on').val()==""){
+				alert('로그인시 찜 기능을 사용할 수 있습니다.');
 			}else{
-				alert('2');
+				if($(this).next().val()=='on'){
+					$(this).next().val('off');
+					$(this).removeClass('color_pink');
+				}else{
+					$(this).next().val('on');
+					$(this).addClass('color_pink');
+				}
 			}
 	});
 	

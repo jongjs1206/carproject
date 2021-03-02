@@ -168,9 +168,9 @@
 		</div>
 	</div>
 
-	<sec:authorize access="isAuthenticated()">
-		<input type="hidden" class='login_on' value='ok'/>										
-	</sec:authorize>
+	
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>										
+	
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
@@ -199,6 +199,7 @@
 										<fmt:formatNumber value="${product_sell.price}" pattern="#,###" />만원</span>
 										
 										<i class="fas fa-heart wish"></i>
+										<input type="hidden" class='heart_on_off' value="off"/>
 										
 										
 									</div>
