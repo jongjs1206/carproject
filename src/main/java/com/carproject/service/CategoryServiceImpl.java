@@ -63,8 +63,8 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> grade_productselect(HeartVO vo) {
-		return categoryDAO.grade_productselect(vo);
+	public List<HashMap<String, Object>> detail_productselect(HeartVO vo) {
+		return categoryDAO.detail_productselect(vo);
 	}
 	
 }

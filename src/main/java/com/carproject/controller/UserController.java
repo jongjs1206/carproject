@@ -51,7 +51,7 @@ public class UserController {
 			"텔레매틱스", "스마트폰미러링"};
 	
 	@RequestMapping("all/log.do")
-	public String login(HttpSession session, @RequestParam(name = "social") String social) {
+	public String login(HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	      
 		String id="";

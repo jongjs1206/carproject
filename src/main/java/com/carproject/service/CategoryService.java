@@ -16,5 +16,5 @@ public interface CategoryService {
 	public List<HashMap<String, Object>> countryselect(String abroad);
 	public List<HashMap<String, Object>> category_productselect(HeartVO vo);
 	public List<HashMap<String, Object>> model_productselect(HeartVO vo);
-	public List<HashMap<String, Object>> grade_productselect(HeartVO vo);
+	public List<HashMap<String, Object>> detail_productselect(HeartVO vo);
 }

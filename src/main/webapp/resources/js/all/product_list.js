@@ -176,12 +176,12 @@ $(function() {
     		options = options+$(this).next().text()+"','";
     	});
     	
-    	alert(options.slice(0,-2));
+    	alert(options.slice(0,-3));
     	
     	$.ajax({
 			type : 'post',
 			async : true,
-			url : '../all/grade_product.do',
+			url : '../all/detail_product.do',
 			beforeSend : function(xhr)
 			{	
 				xhr.setRequestHeader(header, token);
@@ -190,7 +190,7 @@ $(function() {
 			dataType : 'json',
 			data : {"id" : $('.login_on').val(),
 			"car_num" : choose2,
-			"options" : options.slice(0,-2)},
+			"options" : options.slice(0,-3)},
 			success: function(list){
 				car_liston(list);					
         	},

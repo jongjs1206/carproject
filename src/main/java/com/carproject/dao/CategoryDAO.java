@@ -16,5 +16,5 @@ public interface CategoryDAO {
 	List<HashMap<String, Object>> countryselect(String abroad);
 	List<HashMap<String, Object>> category_productselect(HeartVO vo);
 	List<HashMap<String, Object>> model_productselect(HeartVO vo);
-	List<HashMap<String, Object>> grade_productselect(HeartVO vo);
+	List<HashMap<String, Object>> detail_productselect(HeartVO vo);
 }

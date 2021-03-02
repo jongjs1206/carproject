@@ -72,8 +72,8 @@ public class CategoryDAOImpl implements CategoryDAO{
 	}
 
 	@Override
-	public List<HashMap<String, Object>> grade_productselect(HeartVO vo) {
-		System.out.println("===>  CategoryMapper grade_productselect 호출");
-		return mybatis.selectList("categoryMap.grade_productselect", vo);
+	public List<HashMap<String, Object>> detail_productselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper detail_productselect 호출");
+		return mybatis.selectList("categoryMap.detail_productselect", vo);
 	}
 }
