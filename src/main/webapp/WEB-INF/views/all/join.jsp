@@ -69,6 +69,7 @@
 			<section class="content--center-block">
 
 				<form method="post" action="userInsert.do" id="join" role="form">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 
 					<div class="cmm-basic-info">
 
