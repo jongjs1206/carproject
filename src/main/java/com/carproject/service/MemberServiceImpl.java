@@ -50,13 +50,7 @@ public class MemberServiceImpl implements MemberService{
 	  }
 	  
 
-	  /**
-	   * 내 코인 정보를 출력
-	   */
-	  	@Override
-		public List<HashMap<String, Object>> coinView(String m_id) {
-			return memberDAO.coinView(m_id);
-		}	
+	  
 	  	public List<HashMap<String, Object>> allMember()
 		  {   
 		      return memberDAO.allMember();

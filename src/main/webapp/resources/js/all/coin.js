@@ -10,15 +10,21 @@ $(function() {
 		console.log(sum);
 	})
 	
-	// 결제하기 버튼 클릭시
+	// 결제하기 버튼 클릭시 팝업창 쿼리스트링을 통해 코인갯수, 코인 가격을 buycoin.jsp로 넘겨줌
 	$('.buy-coin').click(function(){
-		var sum = parseInt($('input#coin-price').val());
-		alert(sum);
+		var num = parseInt($('input.coin-num').val() || 1);
+		var sum = num * 10000;
+		url = 'buycoin.do?coinnum=' + num + '&coinprice=' + sum;
+		window.open(url, '코인결제', 'width=500, height=500, toolbar=no, scrollbars=no, left=200,top=100');
 	})
+	
+	// 코인 페이지 접속시 코인 정보 가져오기
+	
 	
 	// 코인 충전내역 탭 클릭시
 	var m_id = $('.login_on').val();
-	$("#tab2").click(function(){
+/*	$("#tab2").click(function(){
+		alert('확인');
 		$.ajax({
 			type: 'post',
 			async: true,
@@ -47,5 +53,24 @@ $(function() {
 			}
 		});
 	})
+*/	
+	
+	// 코인 충전내역 탭의 "전체" 버튼 클릭시
+	$('.total-period').click(function(){
+		alert('전체');
+	})
+	
+	// 코인 충전내역 탭의 "1주일" 버튼 클릭시
+	$('.week-period').click(function(){
+		alert('1주일');
+	})
+	
+	// 코인 충전내역 탭의 "1개월" 버튼 클릭시
+	$('.month-period').click(function(){
+		alert('1개월');
+	})
+	
+	
+	
 	
 })

@@ -38,11 +38,7 @@ public class MemberDAOImpl implements MemberDAO{
 		return mybatis.selectOne("MemberMAP.addGoogleEmail", vo);
 	}
 
-	@Override
-	public List<HashMap<String, Object>> coinView(String m_id) {
-		System.out.println("===> MemberMapper coinView 호출");
-		return mybatis.selectList("MemberMAP.coinView", m_id);
-	}
+
 	@Override
 	public List<HashMap<String, Object>> allMember() {
 	    System.out.println("===> MemberMapper checkUniqueId  호출");

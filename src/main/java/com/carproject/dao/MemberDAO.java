@@ -18,8 +18,7 @@ public interface MemberDAO {
 	
 	int addGoogleEmail( MemberVO vo );
 	
-	// 코인내역 확인
-	List<HashMap<String, Object>> coinView(String m_id);
+
 	// 모든 회원 목록을 불러오기 위한 함수
 	List<HashMap<String, Object>> allMember();
 	// 해당 id의 row를 불러오기 위한 함수
