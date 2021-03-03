@@ -24,7 +24,7 @@
 
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- 상단 제목 -->
-        <a class="navbar-brand" href="./admin.jsp">관리자 페이지</a>
+        <a class="navbar-brand" href="./admin.do">관리자 페이지</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         </form>
@@ -39,8 +39,6 @@
                     <!-- 메인페이지 이동 -->
                         <a class="dropdown-item" href="../all/homepage.do">메인 페이지 이동</a> 
                         <div class="dropdown-divider"></div>
-                    <!-- 메인화면 로그인창으로 이동 -->
-                    <a class="dropdown-item" href="#">로그 아웃</a>
                 </div>
             </li>
         </ul>
@@ -66,7 +64,6 @@
                                     <a class="nav-link" href="./userlist.do">회원목록</a>
                                     <a class="nav-link" href="./withdrawal.do">탈퇴회원목록</a> 
                                     <a class="nav-link" href="./blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="./createAdmin.do">관리자생성</a>
                                     <a class="nav-link" href="./adminlist.do">관리자목록</a>  
                                 </nav>
                             </div>

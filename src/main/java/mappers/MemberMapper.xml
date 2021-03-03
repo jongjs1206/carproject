@@ -34,6 +34,75 @@
 		SELECT * FROM coin
 		WHERE m_id=#{m_id}
 	</select>	
+	<!-- ROLE_USER인 모든 데이터를 불러 옴 -->
+	<select id="allMember" resultType="hashmap">
+      SELECT member.*, auth.* FROM member, auth
+      WHERE member.m_id=auth.m_id AND auth.auth='ROLE_USER'
+   	</select>
+   	
+	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터를 모두 불러옴 -->
+   	<select id="pickUserById" parameterType="string" resultType="member">
+		SELECT * FROM member
+		WHERE m_id=#{m_id}
+	</select>
+	
+	<!-- member테이블에서 인자로 전달 받은 id와 일치하는 id의 데이터를 update -->
+	<update id="updateMember" parameterType="member">
+		UPDATE member
+		SET m_name=#{m_name},
+			gender=#{gender},
+			email=#{email},
+			tel=#{tel},
+			birth=#{birth}
+		WHERE m_id=#{m_id}
+		
+	</update>
+	
+	<!-- ROLE_ADMIN인 모든 데이터를 불러옴 -->
+	<select id="allAdmin" resultType="hashmap">
+      SELECT member.*, auth.* FROM member, auth
+      WHERE member.m_id=auth.m_id AND auth.auth='ROLE_ADMIN'
+   	</select>
+   	
+   	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 auth 값을 ROLE_ADMIN으로 update -->
+   	<update id="updateAuthAdmin" parameterType="string">
+		UPDATE auth
+		SET auth='ROLE_ADMIN'
+		WHERE m_id=#{m_id}
+		
+	</update>
+	
+	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 auth 값을 ROLE_USER으로 update -->
+	<update id="updateAuthUser" parameterType="string">
+		UPDATE auth
+		SET auth='ROLE_USER'
+		WHERE m_id=#{m_id}
+		
+	</update>
+	
+	<!-- member 테이블에서 state값이 black인 모든 데이터를 불러옴 -->
+	<select id="allBlacklist" resultType="hashmap">
+      SELECT * FROM member
+      WHERE state='black'
+   	</select>
+   	
+   	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 state 값을 black으로 update -->
+   	<!-- enabled를 0으로 update하여 로그인을 못하도록 함 -->
+   	<update id="setBlacklist" parameterType="string">
+		UPDATE member
+		SET state='black', enabled=0
+		WHERE m_id=#{m_id}
+		
+	</update>
+	
+	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 state 값을 normal으로 update -->
+	<!-- enabled를 1로 update하여 로그인이 가능하도록 함 -->
+	<update id="setNormal" parameterType="string">
+		UPDATE member
+		SET state='normal', enabled=1
+		WHERE m_id=#{m_id}
+		
+	</update>  
 	
 
 	

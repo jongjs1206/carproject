@@ -43,6 +43,54 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===> MemberMapper coinView 호출");
 		return mybatis.selectList("MemberMAP.coinView", m_id);
 	}
+	@Override
+	public List<HashMap<String, Object>> allMember() {
+	    System.out.println("===> MemberMapper checkUniqueId  호출");
+	    return mybatis.selectList("MemberMAP.allMember");
+	}
+	
+	@Override
+	public MemberVO pickUserById(String id) {
+		System.out.println("===> MemberMapper checkUniqueId  호출");
+		return mybatis.selectOne("MemberMAP.pickUserById", id);
+	}
+	
+	@Override
+	public void updateMember(MemberVO vo) {
+		mybatis.update("MemberMAP.updateMember", vo);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> allAdmin() {
+	    System.out.println("===> MemberMapper checkUniqueId  호출");
+	    return mybatis.selectList("MemberMAP.allAdmin");
+	}
+	
+	@Override
+	public void updateAuthAdmin(String id) {
+		mybatis.selectOne("MemberMAP.updateAuthAdmin", id);
+	}
+	
+	@Override
+	public void updateAuthUser(String id) {
+		mybatis.selectOne("MemberMAP.updateAuthUser", id);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> allBlacklist() {
+	    System.out.println("===> MemberMapper checkUniqueId  호출");
+	    return mybatis.selectList("MemberMAP.allBlacklist");
+	}
+	
+	@Override
+	public void setBlacklist(String id) {
+		mybatis.selectOne("MemberMAP.setBlacklist", id);
+	}
+	
+	@Override
+	public void setNormal(String id) {
+		mybatis.selectOne("MemberMAP.setNormal", id);
+	} 
 	
 
 }

@@ -57,7 +57,45 @@ public class MemberServiceImpl implements MemberService{
 		public List<HashMap<String, Object>> coinView(String m_id) {
 			return memberDAO.coinView(m_id);
 		}	
-	
+	  	public List<HashMap<String, Object>> allMember()
+		  {   
+		      return memberDAO.allMember();
+		  }
+		  
+		  public MemberVO pickUserById(String id)
+		  {
+			  return memberDAO.pickUserById(id);
+		  }
+		  
+		  public void updateMember(MemberVO vo) {
+			  memberDAO.updateMember(vo);
+		  }
+		  
+		  public List<HashMap<String, Object>> allAdmin()
+		  {   
+		      return memberDAO.allAdmin();
+		  }
+		  
+		  public void updateAuthAdmin(String id) {
+			  memberDAO.updateAuthAdmin(id);
+		  }
+		  
+		  public void updateAuthUser(String id) {
+			  memberDAO.updateAuthUser(id);
+		  }
+		  
+		  public List<HashMap<String, Object>> allBlacklist()
+		  {   
+		      return memberDAO.allBlacklist();
+		  }
+		  
+		  public void setBlacklist(String id) {
+			  memberDAO.setBlacklist(id);
+		  }
+		  
+		  public void setNormal(String id) {
+			  memberDAO.setNormal(id);
+		  } 
 
 	
 

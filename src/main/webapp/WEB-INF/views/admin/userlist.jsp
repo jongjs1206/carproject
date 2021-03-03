@@ -1,5 +1,8 @@
-%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <!-- 브라우저 최상단 탭 명 -->
@@ -19,7 +22,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- 상단 제목 -->
-            <a class="navbar-brand" href="./admin.jsp">관리자 페이지</a>
+            <a class="navbar-brand" href="./admin.do">관리자 페이지</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             </form>
@@ -33,8 +36,6 @@
                     <!-- 메인페이지 이동 -->
                         <a class="dropdown-item" href="../all/homepage.do">메인 페이지 이동</a> 
                         <div class="dropdown-divider"></div>
-                    <!-- 메인화면 로그인창으로 이동 -->
-                    <a class="dropdown-item" href="#">로그 아웃</a>
                     </div>
                 </li>
             </ul>
@@ -55,7 +56,6 @@
                                     <a class="nav-link" href="./userlist.do">회원목록</a>
                                     <a class="nav-link" href="./withdrawal.do">탈퇴회원목록</a> 
                                     <a class="nav-link" href="./blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="./createAdmin.do">관리자생성</a>
                                     <a class="nav-link" href="./adminlist.do">관리자목록</a>  
                                 </nav>
                             </div>
@@ -121,150 +121,17 @@
                                             </tr> 
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>아이디 1</td>
-                                                <td>이름 1</td>
-                                                <td>성별 1</td> 
-                                                <td>이메일 1</td>
-                                                <td>생년월일 1</td>
-                                                <td>휴대폰번호 1</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='modifyuser.do'" value="수정하기"></td>  
-                                            </tr> 
-                                            <tr>
-                                                <td>아이디 2</td>
-                                                <td>이름 2</td>
-                                                <td>성별 2</td>
-                                                <td>이메일 2</td>
-                                                <td>생년월일 2</td>
-                                                <td>휴대폰번호 2</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 3</td>
-                                                <td>이름 3</td>
-                                                <td>성별 3</td>
-                                                <td>이메일 3</td>
-                                                <td>생년월일 3</td>
-                                                <td>휴대폰번호 3</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 4</td>
-                                                <td>이름 4</td>
-                                                <td>성별 4</td>
-                                                <td>이메일 4</td>
-                                                <td>생년월일 4</td>
-                                                <td>휴대폰번호 4</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 5</td>
-                                                <td>이름 5</td>
-                                                <td>성별 5</td>
-                                                <td>이메일 5</td>
-                                                <td>생년월일 5</td>
-                                                <td>휴대폰번호 5</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 6</td>
-                                                <td>이름 6</td>
-                                                <td>성별 6</td>
-                                                <td>이메일 6</td>
-                                                <td>생년월일 6</td>
-                                                <td>휴대폰번호 6</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 7</td>
-                                                <td>이름 7</td>
-                                                <td>성별 7</td>
-                                                <td>이메일 7</td>
-                                                <td>생년월일 7</td>
-                                                <td>휴대폰번호 7</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 8</td>
-                                                <td>이름 8</td>
-                                                <td>성별 8</td>
-                                                <td>이메일 8</td>
-                                                <td>생년월일 8</td>
-                                                <td>휴대폰번호 8</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 9</td>
-                                                <td>이름 9</td>
-                                                <td>성별 9</td>
-                                                <td>이메일 9</td>
-                                                <td>생년월일 9</td>
-                                                <td>휴대폰번호 9</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 10</td>
-                                                <td>이름 10</td>
-                                                <td>성별 10</td>
-                                                <td>이메일 10</td>
-                                                <td>생년월일 10</td>
-                                                <td>휴대폰번호 10</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 11</td>
-                                                <td>이름 11</td>
-                                                <td>성별 11</td>
-                                                <td>이메일 11</td>
-                                                <td>생년월일 11</td>
-                                                <td>휴대폰번호 11</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 12</td>
-                                                <td>이름 12</td>
-                                                <td>성별 12</td>
-                                                <td>이메일 12</td>
-                                                <td>생년월일 12</td>
-                                                <td>휴대폰번호 12</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 13</td>
-                                                <td>이름 13</td>
-                                                <td>성별 13</td>
-                                                <td>이메일 13</td>
-                                                <td>생년월일 13</td>
-                                                <td>휴대폰번호 13</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 14</td>
-                                                <td>이름 14</td>
-                                                <td>성별 14</td>
-                                                <td>이메일 14</td>
-                                                <td>생년월일 14</td>
-                                                <td>휴대폰번호 14</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 15</td>
-                                                <td>이름 15</td>
-                                                <td>성별 15</td>
-                                                <td>이메일 15</td>
-                                                <td>생년월일 15</td>
-                                                <td>휴대폰번호 15</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디 16</td>
-                                                <td>이름 16</td>
-                                                <td>성별 16</td>
-                                                <td>이메일 16</td>
-                                                <td>생년월일 16</td>
-                                                <td>휴대폰번호 16</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='#'" value="수정하기"></td>
-                                            </tr>
+                                    		<!-- AdminController에서 list에 있는 값을 반복문으로 모두 불러옴 -->
+			                                  <c:forEach var="row" items="${list}">
+			                                  <tr>
+			                                      <td>${row.m_id}</td>
+			                                      <td>${row.m_name}</td>
+			                                      <td>${row.gender}</td>
+			                                      <td>${row.email}</td>
+			                                      <td>${row.birth}</td>
+			                                      <td>${row.tel}</td>
+			                                    <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='modifyuser.do?id=${row.m_id}'" value="수정하기"></td>                                  </tr>    
+			                                  </c:forEach>
                                         </tbody> 
                                     </table>
                                 </div>
@@ -291,4 +158,3 @@
         <script src="../resources/js/admin/datatables-demo.js"></script>
     </body>
 </html>
-
