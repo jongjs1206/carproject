@@ -378,6 +378,77 @@ public class UserController {
 		return list;
 	}
 	
+	@RequestMapping("all/country_all.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> country_all(String id,String page) {
+		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setSell_id(page_re);
+		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
+		
+		
+		for(int i=0;i<sell.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)sell.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		return sell;
+	}
+	@RequestMapping("all/country_one.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> country_one(String id,String country, String page) {
+		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setDate(country);
+		vo.setSell_id(page_re);
+		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
+		
+		
+		for(int i=0;i<sell.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)sell.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		return sell;
+	}
 	@RequestMapping("all/heart_on.do")
 	@ResponseBody
 	public void heart_on(String id, String sell_id) {

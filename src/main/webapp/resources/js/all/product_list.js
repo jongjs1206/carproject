@@ -331,7 +331,7 @@ $(function() {
 		$(".opg_ck2:checked").each(function(i,elements){
     		options3 = options3+$(this).next().text()+"','";
     	});
-    	alert(options3);
+    	
     	if($(".opg_ck2:checked").length == 0){
     		$.ajax({
 			type : 'post',
@@ -421,6 +421,25 @@ $(function() {
         	},
 			error : function(err){ console.log(err)}  //실패했을때
 		});
+		
+		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/country_all.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
+		
 		}else{
 		$.ajax({
 			type : 'post',
@@ -451,6 +470,24 @@ $(function() {
 				}			
         	},
 			error : function(err){ console.log(err)}  //실패했을때
+		});
+		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/country_one.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"country":$(this).text(),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
 		});
 		}
 	});

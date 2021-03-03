@@ -65,7 +65,15 @@ SELECT ht, o.* FROM
 (SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
 (SELECT t.* FROM
 (SELECT * FROM 
-(SELECT s.sell_id,w_date, price, image, title, option FROM category c
+(SELECT s.sell_id,w_date, price, image, title, option FROM 
+<if test="date!=null">
+(SELECT * FROM
+</if>
+category 
+<if test="date!=null">
+WHERE abroad = #{date}) 
+</if>
+c
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
 inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
