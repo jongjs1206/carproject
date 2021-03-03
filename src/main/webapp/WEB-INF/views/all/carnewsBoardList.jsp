@@ -84,23 +84,55 @@
 			        <h3>인기 뉴스</h3>
 			</div>
 			
+			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
+			<a href="../all/carnewsBoardview.do">
+				<div class="fav-news">
+					<span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span>
+					<span>조회수</span>
+					<span>추천수</span>			
+				</div>
+			</a>
+			
+			<a href="#">
+				<div class="fav-news">
+					<span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span>
+					<span>조회수</span>
+					<span>추천수</span>			
+				</div>
+			</a>
+			
+			<a href="#">
+				<div class="fav-news">
+					<span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span>
+					<span>조회수</span>
+					<span>추천수</span>			
+				</div>
+			</a>
+			<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->						
+			
+			<div class="blank" alt="여백공간">
+				<input type="hidden" class="blank"/>
+			</div>
+			
 			<div class="news-info">
 				<span>제목</span>
 				<span>조회수</span>
 				<span>추천수</span>
 			</div>
 			
+			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
 			<div class="blog_details news-container">
-			    <a class="d-inline-block news-thumb" href="#">
+			    <a class="d-inline-block news-thumb" href="../all/carnewsBoardview.do">
 		    		<img src="../resources/img/newsimg.jpg" alt="기사썸네일">
 	    		</a>
-	    		<a class="d-inline-block" href="#">
+	    		<a class="d-inline-block" href="../all/carnewsBoardview.do">
 			        <h2>기사제목 기사제목 기사제목 기사제목</h2>
 			    	<p>기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 기사내용 </p>
 		    	</a>
 		    	<div class="cnt">12</div>
 		    	<div class="cnt">6</div>
 			</div>
+			<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->	
 			
 			<div class="blog_details news-container">
 			    <a class="d-inline-block news-thumb" href="#">
@@ -125,6 +157,7 @@
 		    	<div class="cnt">12</div>
 		    	<div class="cnt">6</div>
 			</div>
+			
             
         </div>
     </section>
@@ -215,9 +248,6 @@
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
 	
-	<!-- Coin page js -->
-	<script type="text/javascript" src="../resources/js/all/coin.js"></script>
-
 
 
 </body>

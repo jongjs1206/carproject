@@ -4,9 +4,26 @@
 	font-family:"dangdang"
 }
 
+div.blank {
+	margin-bottom: 50px;
+}
+
+.fav-news {
+	display: grid;
+	grid-template-columns: 11fr 1fr 2fr;
+	border-bottom: 1px solid gray;
+}
+
+.fav-news > span {
+	cursor: pointer;
+}
+.fav-news:hover {
+	background: #dca73a;
+}
+
 .news-info {
 	display: grid;
-	grid-template-columns: 10fr 1fr 1fr;
+	grid-template-columns: 11fr 1fr 2fr;
 	text-align: center;
 }
 
@@ -36,4 +53,11 @@
 
 .news-search-container > button {
 	height: 50px;
+}
+
+/************************** 뉴스 페이지 **************************/
+
+.news-page-left {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
