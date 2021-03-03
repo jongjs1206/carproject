@@ -7,6 +7,8 @@ $(function() {
 	var choose3;
 	var choose4;
 	
+	var page = $('.page').val();
+	
 	$(document).on("click",".btn_category",function(){
 		choose1 = $(this).children().first().text();
 		$('.btn_category').removeClass('btn-ch');
@@ -61,7 +63,8 @@ $(function() {
 			contentType: "application/x-www-form-urlencoded;charset=utf-8",
 			dataType : 'json',
 			data : {"id" : $('.login_on').val(),
-			"category" : choose1},
+			"category" : choose1,
+			"page": page},
 			success: function(list){
 				car_liston(list);					
         	},
@@ -119,7 +122,8 @@ $(function() {
 			contentType: "application/x-www-form-urlencoded;charset=utf-8",
 			dataType : 'json',
 			data : {"id" : $('.login_on').val(),
-			"car_num" : choose2},
+			"car_num" : choose2,
+			"page": page},
 			success: function(list){
 				car_liston(list);					
         	},
@@ -127,8 +131,15 @@ $(function() {
 		});
 	});
 	
+	var options;
 	$(document).on("click",".op_ck",function(){
 		$('.optgrade').remove();
+		options = "";
+		
+		$(".op_ck:checked").each(function(i,elements){
+    		options = options+$(this).next().text()+"','";
+    	});
+		
 		if($(".op_ck:checked").length == 1){
 			$('.cell-detail').addClass('off');
 			$('.two-detail').addClass('off');
@@ -162,23 +173,7 @@ $(function() {
         	},
 			error : function(err){ console.log(err)}  //실패했을때
 		});
-			
-		}else if($(".op_ck:checked").length == 0){
-			$('.cell-detail').removeClass('off');
-			$('.two-detail').addClass('off');
-		}else{
-			$('.two-detail').removeClass('off');
-		}
-		
-		var options = "";
-		
-		$(".op_ck:checked").each(function(i,elements){
-    		options = options+$(this).next().text()+"','";
-    	});
-    	
-    	alert(options.slice(0,-3));
-    	
-    	$.ajax({
+			$.ajax({
 			type : 'post',
 			async : true,
 			url : '../all/detail_product.do',
@@ -190,17 +185,67 @@ $(function() {
 			dataType : 'json',
 			data : {"id" : $('.login_on').val(),
 			"car_num" : choose2,
-			"options" : options.slice(0,-3)},
+			"options" : options.slice(0,-3),
+			"page": page},
 			success: function(list){
 				car_liston(list);					
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		}else if($(".op_ck:checked").length == 0){
+			$('.cell-detail').removeClass('off');
+			$('.two-detail').addClass('off');
+			$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/model_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
+		}else{
+			$('.two-detail').removeClass('off');
+			
+			$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/detail_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-3),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});	
+		}
 	});
 	
-	
+	var options2;
 	$(document).on("click",".opg_ck1",function(){
 		choose4 = $(this).next().text();
+		options2="";
+		$(".opg_ck1:checked").each(function(i,elements){
+    		options2 = options2+$(this).next().text()+"','";
+    	});
+		
 		if($(this).is(':checked')){
 			$.ajax({
 			type : 'post',
@@ -219,10 +264,10 @@ $(function() {
 				for ( var count = 0; count < list.length ; count++){
 					if(list[count].grade2 != '0'){
 						if(list[count].count==null){
-							$('.optgrade').filter(":contains("+choose4+")").first().append('<dl class="sub-list"><dd class="optdd"><span class="optBoxg2"><i class="fas fa-long-arrow-alt-right"></i><input type="checkbox"><label>'
+							$('.optgrade').filter(":contains("+choose4+")").first().append('<dl class="sub-list"><dd class="optdd"><span class="optBoxg2"><i class="fas fa-long-arrow-alt-right"></i><input class="opg_ck2" type="checkbox"><label>'
 							+list[count].grade2+'</label></span><span class="t2 lv2Cnt_27824">0</span></dd></dl>')
 						}else{
-							$('.optgrade').filter(":contains("+choose4+")").first().append('<dl class="sub-list"><dd class="optdd"><span class="optBoxg2"><i class="fas fa-long-arrow-alt-right"></i><input type="checkbox"><label>'
+							$('.optgrade').filter(":contains("+choose4+")").first().append('<dl class="sub-list"><dd class="optdd"><span class="optBoxg2"><i class="fas fa-long-arrow-alt-right"></i><input class="opg_ck2" type="checkbox"><label>'
 							+list[count].grade2+'</label></span><span class="t2 lv2Cnt_27824">'
 							+list[count].count+'</span></dd></dl>')
 						}
@@ -234,6 +279,102 @@ $(function() {
 		
 		}else{
 			$('.optgrade').filter(":contains("+choose4+")").first().children('.sub-list').remove();
+		}
+		if($(".opg_ck1:checked").length == 0){
+		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/detail_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-3),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});	
+		
+		}else{
+		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/grade1_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-3),
+			"options2" : options2.slice(0,-3),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
+		}	
+	});
+	
+	var options3;
+	$(document).on("click",".opg_ck2",function(){
+		options3="";
+		$(".opg_ck2:checked").each(function(i,elements){
+    		options3 = options3+$(this).next().text()+"','";
+    	});
+    	alert(options3);
+    	if($(".opg_ck2:checked").length == 0){
+    		$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/grade1_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-3),
+			"options2" : options2.slice(0,-3),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
+    	}else{
+    	$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/grade2_product.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"car_num" : choose2,
+			"options" : options.slice(0,-3),
+			"options2" : options2.slice(0,-3),
+			"options3" : options3.slice(0,-3),
+			"page": page},
+			success: function(list){
+				car_liston(list);					
+        	},
+			error : function(err){ console.log(err);}  //실패했을때
+		});
 		}
 	});
 	

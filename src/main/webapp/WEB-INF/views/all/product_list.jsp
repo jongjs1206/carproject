@@ -64,7 +64,7 @@
 
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
-
+	<input type="hidden" class="page" value="1">
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
