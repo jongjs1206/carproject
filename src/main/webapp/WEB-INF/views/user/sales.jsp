@@ -47,6 +47,8 @@
 	
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
+	
 	<!-- slider Area Start-->
     <div class="slider-area">
       <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/assets/img/hero/contact_hero.jpg" >
@@ -63,6 +65,8 @@
       </div>
   </div>	<!-- slider Area End-->
 
+
+
 	<!--================ 판매글 부분 =================-->
    	<section class="blog_area single-post-area section-padding" style="padding:10px; ">
       	<div class="container">
@@ -72,13 +76,17 @@
                         <div class="team__item__text">
                         <form action="#" method='post'>
                         	<table class="table" style="margin:0 0 20px 100px;">
-	                           <tr>
+                        		<tr>
+                        			<th>글 제목</th>
+                        			<td colspan=3><input type="text" class="salesTitle" style="width:800px" value="${sales.title}">
+                        		</tr>
+	                           	<tr>
 	                           		<th>판매자 정보</th>
-	                           		<td width="280px" style="font-size:14px;">이  름 <input type="text" id="name" disabled="disabled" value="홍길동"></td>
-	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" id="id" disabled="disabled" value="abcd1234"></td>
+	                           		<td width="280px" style="font-size:14px;">이  름 <input type="text" id="name" disabled="disabled" value="${sessionScope.info.m_name}"></td>
+	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" id="id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
 	                           		<td width="280px" style="font-size:14px;">핸드폰 번호 
-	                           			<input type="text" id="tel" disabled="disabled" value="010-0000-0000"></td>
-	                           </tr>
+	                           			<input type="text" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
+	                           	</tr>
 	                           <tr>
 	                           		<th>이미지 등록</th>
 	                           		<td width=100>
@@ -97,45 +105,36 @@
 	                           		<th>차량 정보</th>
 	                           		<td colspan=3>
 										<div style="font-size:14px; display: flex; line-height: 33px;">	<!-- 차량번호 -->
-											차량번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+											<span style="margin-right:30px;">차량번호</span> 
 											<input type="text" id="carNumber" class="carNumber" style="line-height:initial;"></div>
 										<hr style="margin:10px 0;">	
-										<div style="font-size:14px; display: flex; line-height: 35px;">
-											차량명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<select class='carBrand' name='carBrand'>
-			                                          	<option value="">제조사</option>
-			                                           	<!-- <option value="현대" style="font-size:13px;">현대</option>
-			                                           	<option value="제네시스">제네시스</option>
-			                                           	<option value="기아">기아</option>
-			                                           	<option value="쉐보레(국산)">쉐보레(국산)</option>
-			                                           	<option value="GM대우">GM대우</option>
-			                                           	<option value="르노삼성">르노삼성</option>
-			                                           	<option value="쌍용">쌍용</option>
-			                                           	<option value="어울림모터스">어울림모터스</option>
-			                                           	<option value="기타 국산차">기타 국산차</option> -->
-			                                    </select>
-											<select class='carModel' name='carModel' > 
-	                                         	<option value="">모델</option>
-	                                        </select>
-	                                        <select class='carDetailModel' name='carDetailModel' >
-	                                          	<option value="세부모델">세부모델</option>
-	                                        </select>
-	                                        <select class='carGrade' name='carGrade' >
-	                                          	<option value="등급">등급</option>
-	                                        </select>
-	                                        <select class='carDetailGrade' name='carDetailGrade' >
-	                                          	<option value="세부등급">세부등급</option>
-	                                        </select>	
-	                                        </div><hr style="margin:10px 0;"><!-- end of 차량명 -->	
+										<div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 차량명 -->
+											<span style="margin-right:40px;">차량명</span>
+											<select class='carBrand' name='carBrand' style="margin-right:15px;">
+												<option value="제조사">제조사</option>
+												<c:forEach var="category" items="${brandList}">
+					                               	<option value="${category.jejosa}">${category.jejosa}</option>
+					                            </c:forEach>
+				                            </select> 
+											<select class='carModel' name='carModel'  style="margin-right:15px;"> 
+												<option value="모델">모델</option>
+		                                    </select>
+		                                    <select class='carDetailModel' name='carDetailModel'  style="margin-right:15px;">
+		                                       	<option value="세부모델">세부모델</option>
+		                                    </select>
+		                                    <select class='carGrade' name='carGrade'  style="margin-right:15px;">
+		                                      	<option value="등급">등급</option>
+		                                    </select>
+		                                    <select class='carDetailGrade' name='carDetailGrade'  style="margin-right:15px;">
+		                                    	<option value="세부등급">세부등급</option>
+		                                    </select>	
+	                                    </div><hr style="margin:10px 0;">	<!-- end of 차량명 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 연식/색상 -->
-                                        	연식&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-                                        	<input type="date" id="carYear" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
-                                        		text-align:center; border-radius: 7px;">
-                                   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   	    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                   	    	색상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        	<select class='carColor' name='carColor' >
+                                        	<span>연식</span>
+                                        	<input type="date" id="carYear" class="carYear" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
+                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;">
+                                   	    	<span>색상</span>
+                                        	<select class='carColor' name='carColor' style="margin-left:25px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="검정색">검정색</option><option value="은색">은색</option><option value="금색">금색</option>
 	                                    		<option value="남색">남색</option><option value="청색">청색</option><option value="진청색">진청색</option>
@@ -144,49 +143,35 @@
 	                                    	</select>
                                         </div><hr style="margin:10px 0;">		<!-- end of 연식/색상 -->
                                         <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 주행거리/배기량 -->
-                                        	주행거리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                                        	<input type="text" id="km" style="line-height:initial;">&nbsp;&nbsp;km
-                                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    		배기량&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="cc" style="line-height:initial;">&nbsp;&nbsp;cc
+                                        	<span>주행거리</span>
+                                        	<input type="text" id="km" style="line-height:initial; margin:0 5px 0 30px;">km
+                                    		<span style="margin-left:115px;">배기량</span>
+                                    		<input type="text" id="cc" style="line-height:initial; margin:0 5px 0 20px;">cc
                                         </div><hr style="margin:10px 0;">	<!-- end of 주행거리/배기량 -->
                                         <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 사고여부/판매가격 -->	
-	                                    	사고여부&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                                    	<span style="margin-right:30px;">사고여부</span>
                                     		<input class="accident" type="radio" id="accident1" value="n" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
                                      		<input class="accident" type="radio" id="accident2" value="n" >&nbsp; 사고
-                                     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                     		판매가격&nbsp;&nbsp;&nbsp;
-                                     		<input type="text" id="salesPrice" style="line-height:initial;">&nbsp;&nbsp;만원 
+                                     		<span style="margin-left:165px;">판매가격</span>&nbsp;&nbsp;&nbsp;
+                                     		<input type="text" id="salesPrice" style="line-height:initial; margin-right:5px;">만원 
                                         </div><hr style="margin:10px 0;">	<!-- end of 사고여부/판매가격 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 변속기/연료 -->	
-                                        	변속기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        	<select class='carGear' name='carGear' >
-                                    		<option value="선택">선택</option>
-                                    		<option value="자동">자동</option>
-                                    		<option value="수동">수동</option>
-                                    		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                                    	연료&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                                    	<select class='carFuel' name='carFuel' >
+                                        	<span>변속기</span>
+                                        	<select class='carGear' name='carGear' style="margin:0 250px 0 40px;">
 	                                    		<option value="선택">선택</option>
-	                                    		<option value="가솔린">가솔린</option>
-	                                    		<option value="디젤">디젤</option>
-	                                    		<option value="LPG">LPG</option>
-	                                    		<option value="가솔린/LPG겸용">가솔린/LPG겸용</option>
-	                                    		<option value="가솔린/CNG겸용">가솔린/CNG겸용</option>
-	                                    		<option value="가솔린 하이브리드">가솔린 하이브리드</option>
-	                                    		<option value="LPG 하이브리드">LPG 하이브리드</option>
-	                                    		<option value="디젤 하이브리드">디젤 하이브리드</option>
-	                                    		<option value="CNG">CNG</option>
-	                                    		<option value="전기">전기</option>
-	                                    		<option value="수소">수소</option>
-	                                    		<option value="기타">기타</option>
+	                                    		<option value="자동">자동</option>
+	                                    		<option value="수동">수동</option>
+                                    		</select>
+	                                    	<span>연료</span>
+	                                    	<select class='carFuel' name='carFuel' style="margin-left:25px;">
+	                                    		<option value="선택">선택</option>
+	                                    		<option value="가솔린">가솔린</option><option value="디젤">디젤</option><option value="LPG">LPG</option>
+	                                    		<option value="가솔린/LPG겸용">가솔린/LPG겸용</option><option value="가솔린/CNG겸용">가솔린/CNG겸용</option>
+	                                    		<option value="가솔린 하이브리드">가솔린 하이브리드</option><option value="LPG 하이브리드">LPG 하이브리드</option>
+	                                    		<option value="디젤 하이브리드">디젤 하이브리드</option><option value="CNG">CNG</option>
+	                                    		<option value="전기">전기</option><option value="수소">수소</option><option value="기타">기타</option>
 	                                    	</select>
-                                        </div>	<!-- end of 변속기/연료 -->					                           		
+                                        </div>	<!-- end of 변속기/연료 -->
 	                           </tr> <!-- end of 차량정보 -->
 	                           <tr><th>차량옵션선택 </th>
 	                           		<td colspan=3>

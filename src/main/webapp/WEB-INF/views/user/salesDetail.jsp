@@ -46,6 +46,7 @@
 	<%@ include file="../side.jsp"%>	<!-- side bar -->
 	
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -150,12 +151,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								</div>	
-							<!-- <div class="course__details__feature" style="width:500px; margin:0 100px 30px 0;">
-								<h5>차량 설명</h5><hr style="margin:20px 0 10px 0;">
-								<div class="salesContext" style="font-size:13px; width:500px; display: flex;">
-								</div>
-							</div>	end of 차량 설명 -->
+							</div>	
 						</div><br/>	<!-- end of  기본 정보-->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
 							<div class="course__details__feature" style="width:500px; margin:0 100px 30px 0;">
@@ -173,7 +169,7 @@
 							</div>	<!-- end of 시세 예측 -->
 						</div><br/>	<!-- end of 시세 정보 / 예측 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6">	<!-- start of 옵션 정보 -->
-							<div class="course__details__feature" style="width:1000px;">
+							<div class="course__details__feature" style="width:1000px;">	<!-- alloption 리스트 쓰면 됨 -->
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 외관 -->
 								&nbsp;&nbsp;&nbsp;외관&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">8</b>개<hr style="margin:10px 0;">
@@ -376,8 +372,8 @@
 	                        	<c:forEach var="sales" items="${sales}">
 				           			<img src="../resources/assets/img/logo/testimonial.png" alt="" style="width:110px; height:110px; margin:10px 30px 20px 50px;">
 				           			<div class="salesMan"><br/><br/>
-				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.m_name}(${sales.m_id})<br/>
-					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.tel}
+				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.info.m_name}(${sessionScope.info.m_id})<br/>
+					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.info.tel}
 				                	</div>
 				                </c:forEach>
 				           		</div> 
