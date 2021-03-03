@@ -28,7 +28,6 @@
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
-	<%@ include file="../side.jsp"%>	<!-- side bar -->
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -58,9 +57,9 @@
 	                           <tr>
 	                           		<th>판매글 정보</th>
 	                           		<td width="385px" style="font-size:14px;">판매글 번호 
-	                           			<input type="text" id="salesNumber" readonly='readonly' value="111111"></td>
+	                           			<input type="text" id="salesNumber" disabled="disabled" value="111111"></td>
 	                           		<td width="385px" style="font-size:14px;">판매자 이름 
-	                           			<input type="text" id="salesName" readonly='readonly' value="홍길동"></td>
+	                           			<input type="text" id="salesName" disabled="disabled" value="홍길동"></td>
 	                           </tr>
 	                           <tr>
 	                           		<th>글 제목</th>
@@ -89,7 +88,7 @@
 	                           		<td colspan=3>
 										<div style="font-size:14px; display: flex; line-height: 33px;">	<!-- 차량번호 -->
 											차량번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-											<input type="text" id="carNumber" readonly='readonly' class="carNumber" style="line-height:initial;"></div>
+											<input type="text" id="carNumber" disabled="disabled" class="carNumber" style="line-height:initial;"></div>
 										<hr style="margin:10px 0;">	
 										<div style="font-size:14px; display: flex; line-height: 35px;">
 											차량명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -137,11 +136,11 @@
                                         </div><hr style="margin:10px 0;">		<!-- end of 연식/색상 -->
                                         <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 주행거리/배기량 -->
                                         	주행거리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                                        		<input type="text" id="km" readonly='readonly' style="line-height:initial;">&nbsp;&nbsp;km
+                                        		<input type="text" id="km" disabled="disabled" style="line-height:initial;">&nbsp;&nbsp;km
                                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     		배기량&nbsp;&nbsp;&nbsp;&nbsp; 
-                                    			<input type="text" id="cc" readonly='readonly' style="line-height:initial;">&nbsp;&nbsp;cc
+                                    			<input type="text" id="cc" disabled="disabled" style="line-height:initial;">&nbsp;&nbsp;cc
                                         </div><hr style="margin:10px 0;">	<!-- end of 주행거리/배기량 -->
                                         <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 사고여부/판매가격 -->	
 	                                    	사고여부&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

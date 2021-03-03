@@ -16,4 +16,9 @@ public interface MemberDAO {
 	
 	MemberVO checkUniqueId( MemberVO vo );
 	
+	int addGoogleEmail( MemberVO vo );
+	
+	// 코인내역 확인
+	List<HashMap<String, Object>> coinView(String m_id);
+	
 }

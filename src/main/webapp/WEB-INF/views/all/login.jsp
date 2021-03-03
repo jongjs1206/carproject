@@ -7,6 +7,11 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+<meta name="google-signin-client_id" content="720645188606-a3u36ofdsi5rp6goo6g3i9emjk0eahrd.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <title>Hotel</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,6 +76,7 @@
                 <div class="Layout_contents__2nVdg Layout_normal__2IFQF">
                     <c:url value="/login" var="loginUrl" />
 					<form:form action='${loginUrl}' method='post'>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                         <div>
                             <div class="">
                                 <div class="AlignBoxInput_uialign_block__3ZoMq">
@@ -99,12 +105,19 @@
                             <div class=" " style="margin-top: 30px;"><button type="submit" class="Button_uibtn__1tGCl Button_uibtn_silver__3Ho2C Button_uibtn_size_h50__cWPtg"> 로그인 </button></div>
                         </div>
                     </form:form>
-                    <div class="LoginMyFindButton_area__245Jy"><a class="LoginMyFindButton_link__fee2S" href="/mycar/all/find_idpw.do">아이디/비밀번호 찾기</a><a class="LoginMyFindButton_link__fee2S" href="../all/join.do">회원가입</a></div>
+                    <div class="LoginMyFindButton_area__245Jy">
+                    	<a class="LoginMyFindButton_link__fee2S" href="#" onClick="window.open('find_idpw.do','아이디/비밀번호 찾기','width=500,height=500,toolbar=no,scrollbars=no,left=200,top=100')">
+                    		아이디/비밀번호 찾기
+                   		</a>
+                   		<a class="LoginMyFindButton_link__fee2S" href="../all/join.do">
+                   			회원가입
+                 		</a>
+                	</div>
                     <div class="LoginSnsButton_tit_area__bRqmB"><strong class="LoginSnsButton_tit__1kT5i">간편하게 시작하기</strong></div>
                     <div class="LoginSnsButton_btn_area__1HZfa">
-                        <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_naver_s__23ZSw " style="vertical-align: bottom; margin: 0px 6px 17px 0px;">네이버</span> 네이버로 시작하기 </button></div>
+                        <div class=" " style="margin-top: 15px;"><button type="button"  class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_naver_s__23ZSw " style="vertical-align: bottom; margin: 0px 6px 17px 0px;">네이버</span> 네이버로 시작하기 </button></div>
                         <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_kakao_s__2oyHe " style="vertical-align: bottom; margin: 0px 6px 16px 0px;">카카오</span> 카카오로 시작하기 </button></div>
-                        <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 </button></div>
+                        <div class=" " style="margin-top: 15px;"><button type="button" onclick="location.href='googleLogin.do' " class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 </button></div>
                     </div>
                     <p class="LoginSnsButton_login_warning__IPZhy">공용 PC에서는 소셜로그인 시 계정 관리에 유의해주세요.</p>
                 </div>

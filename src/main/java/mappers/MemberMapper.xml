@@ -15,7 +15,27 @@
 		SELECT * FROM member
 		WHERE m_id=#{m_id}
 	</select>
+
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member SET
+		gmail =	#{gmail}
+		WHERE id = #{id}
+	</update>
 	
+	<select id="checkByGoogleEmail" parameterType="member" resultType="member">
+		SELECT * FROM member
+		WHERE gmail=#{gmail}
+	</select>
+	
+	<select id="coinView" parameterType="String" resultType="hashmap">
+		<!--
+		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN FROM coin
+		 -->
+		SELECT * FROM coin
+		WHERE m_id=#{m_id}
+	</select>	
+	
+
 	
 	
 

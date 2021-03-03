@@ -8,6 +8,8 @@
 <title>Hotel</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
 
 <link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon"
@@ -69,6 +71,7 @@
 			<section class="content--center-block">
 
 				<form method="post" action="userInsert.do" id="join" role="form">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 
 					<div class="cmm-basic-info">
 
@@ -93,7 +96,8 @@
 							</button>
 							<div class="form-txt">
 								<span class="ft-black" id="idAlert1" style="display: none;"></span>
-								<span class="ft-red" id="idAlert2"></span>
+								<span class="ft-red" id="info"></span>
+								
 							</div>
 						</div>
 					</div>
@@ -111,10 +115,10 @@
 								autocomplete="off" >
 							</span>
 							<div class="form-txt">
-								<span class="ft-red" id="passwordAlert1"></span>
+								<span class="ft-red" id="infoPw"></span>
 								<ul class="ft-list">
 									<li><span class="icon">*</span>비밀번호는 영문자, 특수문자, 숫자 포함 형태의
-										6~20자리로 입력해주세요.</li>
+										8~15자리로 입력해주세요.</li>
 									<li><span class="icon">*</span>아이디를 포함한 문자/숫자는 비밀번호로 사용할 수
 										없습니다.</li>
 									<li><span class="icon">*</span>동일한 문자/숫자 3자리 이상은 입력이
@@ -190,20 +194,34 @@
 							<span>이메일</span>
 						</div>
 						<div class="cmm-input-area">
-							<span class="inp-t" style="width: 140px;"><input
+							<span class="inp-t" style="width: 140px;"> <input
 								type="text" id="email1" name="email1" title="이메일 주소"
 								tk_security="true"></span> <span class="form-t">@</span> <span
-								class="inp-t" style="width: 140px;"><input type="text"
-								id="email2" name="email2" title="직접입력 이메일"></span>
-							  <input type="hidden" id="email" name="email">
-							<button type="button" class="joinBtns more-btn1"
-								id="btnEmailDuplChk">
-								<span>중복확인</span>
+								class="inp-t" style="width: 140px;"> <input type="text"
+								id="email2" name="email2" title="직접입력 이메일"></span> <input
+								type="hidden" id="email" name="email">
+							<button type="button" class="joinBtns more-btn1" id="btnMailSend">
+								<span>인증번호 전송</span>
 							</button>
 							<div class="form-txt">
 								<span class="ft-red" id="emailAlert"></span>
 							</div>
+							<div id="confirmNumDiv" style="display: none">
+								<div class="inp-t inp-time w400">
+									<input type="text" title="인증번호 입력" name="certCode"
+										id="certCode" maxlength="10" autocomplete="off" 										placeholder="인증번호 입력">
+									<div class="t-txt" id="timer" style="display: block;"></div>
+								</div>
+								<button type="button" class="joinBtns more-btn1" id="certNumChk">
+									<span>인증번호 확인</span>
+								</button><br/>
+								<div class="form-txt">
+									<span class="ft-red" id="certAlert"></span>
+								</div>
+							</div>
 						</div>
+
+
 					</div>
 					<div class="cmm-basic-info">
 						<div class="cmm-tit">
@@ -214,23 +232,6 @@
 								<span class="inp-t w400"><input type="text"
 									title="휴대전화번호" id="tel" name="tel" autocomplete="off" maxlength="11"
 									placeholder="휴대폰번호 입력" tk_security="true"></span>
-								<button type="button" class="joinBtns more-btn1" id="btnSend">
-									<span>인증번호 전송</span>
-								</button>
-							</div>
-							<div>
-								<div class="inp-t inp-time w400">
-									<input type="text" title="인증번호 입력" name="certCode"
-										id="certCode" maxlength="6" autocomplete="off" readonly=""
-										placeholder="인증번호 입력" >
-									<div class="t-txt" id="timer" style="display: block;"></div>
-								</div>
-								<button type="button" class="joinBtns more-btn1" id="certNumChk">
-									<span>인증번호 확인</span>
-								</button>
-								<div class="form-txt">
-									<span class="ft-red" id="certAlert"></span>
-								</div>
 							</div>
 						</div>
 

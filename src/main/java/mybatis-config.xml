@@ -17,8 +17,9 @@
 		<typeAlias alias="category" type="com.carproject.domain.CategoryVO" />		
 		<typeAlias alias="grade" type="com.carproject.domain.GradeVO" />		
 		<typeAlias alias="detail" type="com.carproject.domain.DetailVO" />		
-		<typeAlias alias="member" type="com.carproject.domain.MemberVO" />
-		<typeAlias alias="sales" type="com.carproject.domain.SalesVO" />			
+		<typeAlias alias="member" type="com.carproject.domain.MemberVO" />		
+		<typeAlias alias="heart" type="com.carproject.domain.HeartVO" />
+		<typeAlias alias="coin" type="com.carproject.domain.CoinVO"/>		
 	</typeAliases>
 
 

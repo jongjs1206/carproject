@@ -51,6 +51,7 @@ blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, in
     margin: 0;
     padding: 0;
     letter-spacing: -.5px;
+    
 }
 .inp-t > input {
     display: block;
@@ -281,3 +282,9 @@ p {
 }
 
 
+
+.cmm-basic-info{
+	
+	font-family: "dangdang" !important;
+	
+}
