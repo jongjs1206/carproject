@@ -87,7 +87,7 @@ public class UserController {
 		vo.setSell_id(1);
 		List<HashMap<String, Object>> category = categoryService.categoryselect();
 		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
-		
+		int product_count = categoryService.sellcount();
 		
 		for(int i=0;i<sell.size();i++) {
 			StringBuffer resultoption = new StringBuffer();
@@ -115,6 +115,7 @@ public class UserController {
 		
 		model.addAttribute("category",category);
 		model.addAttribute("sell",sell);
+		model.addAttribute("product_count",product_count);
 	}
 	
 	/*

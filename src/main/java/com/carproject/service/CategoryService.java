@@ -20,4 +20,5 @@ public interface CategoryService {
 	public List<HashMap<String, Object>> detail_productselect(HeartVO vo);
 	public List<HashMap<String, Object>> grade1_productselect(MemberVO vo);
 	public List<HashMap<String, Object>> grade2_productselect(MemberVO vo);
+	public int sellcount();
 }

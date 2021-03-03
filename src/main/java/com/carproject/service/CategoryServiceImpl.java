@@ -77,5 +77,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<HashMap<String, Object>> grade2_productselect(MemberVO vo) {
 		return categoryDAO.grade2_productselect(vo);
 	}
+
+	@Override
+	public int sellcount() {
+		return categoryDAO.sellcount();
+	}
 	
 }

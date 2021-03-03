@@ -89,4 +89,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 		System.out.println("===>  CategoryMapper grade2_productselect 호출");
 		return mybatis.selectList("categoryMap.grade2_productselect", vo);
 	}
+
+	@Override
+	public int sellcount() {
+		System.out.println("===>  CategoryMapper sellcount 호출");
+		return mybatis.selectOne("categoryMap.sellcount");
+	}
 }

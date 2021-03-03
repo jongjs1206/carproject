@@ -161,4 +161,9 @@ inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
 where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
+
+<select id="sellcount" resultType="Integer">
+SELECT COUNT(*) AS count FROM sell
+</select>
+
 </mapper>
