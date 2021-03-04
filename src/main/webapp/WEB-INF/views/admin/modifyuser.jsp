@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
-<!-- ∫Í∂ÛøÏ¿˙ √÷ªÛ¥‹ ≈« ∏Ì -->
+<!-- Î∏åÎùºÏö∞Ï†Ä ÏµúÏÉÅÎã® ÌÉ≠ Î™Ö -->
 
 <head>
     <meta charset="utf-8" />
@@ -10,25 +12,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>∞¸∏Æ¿⁄∆‰¿Ã¡ˆ</title>
-    <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css" /> <!-- css∆ƒ¿œ import -->
+    <title>Í¥ÄÎ¶¨ÏûêÌéòÏù¥ÏßÄ</title>
+    <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css" /> <!-- cssÌååÏùº import -->
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
         crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+ 
+		/* ajaxÎ•º ÌÜµÌïú ÎπÑÎ∞ÄÎ≤àÌò∏ ÏàòÏ†ïÏ≤òÎ¶¨ */
+		function updateAuth() {
+		    
+		    var m_id = $("#m_id").val();
+		    var auth = $("#auth").val();
+		    
+		    var param = {"m_id":m_id, "auth":auth}
+		    
+	        $.ajax({
+	            anyne:true,
+	            type:'POST',
+	            data: JSON.stringify(param),
+	            url:"/modifyuser",
+	            dataType: "text",
+	            contentType: "application/json; charset=UTF-8",
+	            success : function(data) {    
+	                alert("Í∂åÌïúÏù¥ Î≥ÄÍ≤ΩÎêòÏóàÏäµÎãàÎã§.");
+	                location.href="/adminlist";
+	            },
+	            error: function(jqXHR, textStatus, errorThrown) {
+	                alert("ERROR : " + textStatus + " : " + errorThrown);
+	            }        
+	        })
+		}
+		    
+		
+	</script>
 </head>
 
-<!-- ∆‰¿Ã¡ˆ ≥ªøÎ ∫Œ∫– -->
+<!-- ÌéòÏù¥ÏßÄ ÎÇ¥Ïö© Î∂ÄÎ∂Ñ -->
 
 <body class="sb-nav-fixed" style="overflow:hidden">
 
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
+		
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- ªÛ¥‹ ¡¶∏Ò -->
-        <a class="navbar-brand" href="./admin.jsp">∞¸∏Æ¿⁄ ∆‰¿Ã¡ˆ</a>
+        <!-- ÏÉÅÎã® Ï†úÎ™© -->
+        <a class="navbar-brand" href="./admin.do">Í¥ÄÎ¶¨Ïûê ÌéòÏù¥ÏßÄ</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         </form>
-        <!-- »∏ø¯ æ∆¿Ãƒ‹ µÂ∑”¥ŸøÓ ∏ﬁ¥∫ -->
+        <!-- ÌöåÏõê ÏïÑÏù¥ÏΩò ÎìúÎ°≠Îã§Ïö¥ Î©îÎâ¥ -->
         <ul class="navbar-nav ml-auto ml-md-0">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button"
@@ -36,70 +71,67 @@
                     <i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 
-                    <!-- ∏ﬁ¿Œ∆‰¿Ã¡ˆ ¿Ãµø -->
-                        <a class="dropdown-item" href="../all/homepage.do">∏ﬁ¿Œ ∆‰¿Ã¡ˆ ¿Ãµø</a> 
+                    <!-- Î©îÏù∏ÌéòÏù¥ÏßÄ Ïù¥Îèô -->
+                        <a class="dropdown-item" href="../all/homepage.do">Î©îÏù∏ ÌéòÏù¥ÏßÄ Ïù¥Îèô</a> 
                         <div class="dropdown-divider"></div>
-                    <!-- ∏ﬁ¿Œ»≠∏È ∑Œ±◊¿Œ√¢¿∏∑Œ ¿Ãµø -->
-                    <a class="dropdown-item" href="#">∑Œ±◊ æ∆øÙ</a>
                 </div>
             </li>
         </ul>
     </nav>
     
-    <!-- ¡¬√¯ ∏ﬁ¥∫ -->
+    <!-- Ï¢åÏ∏° Î©îÎâ¥ -->
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">
-                            <h4>∏ﬁ¥∫</h4>
+                            <h4>Î©îÎâ¥</h4>
                         </div>
                         <a class="nav-link collapsed" href="#" data-toggle="collapse"
                             data-target="#collapseLayouts" aria-expanded="false"
                             aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>»∏ø¯∞¸∏Æ
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ÌöåÏõêÍ¥ÄÎ¶¨
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion" style="">
                             <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./userlist.do">»∏ø¯∏Ò∑œ</a>
-                                    <a class="nav-link" href="./withdrawal.do">≈ª≈»∏ø¯∏Ò∑œ</a> 
-                                    <a class="nav-link" href="./blacklist.do">∫Ì∑¢∏ÆΩ∫∆Æ∏Ò∑œ</a>
-                                    <a class="nav-link" href="./createAdmin.do">∞¸∏Æ¿⁄ª˝º∫</a>
-                                    <a class="nav-link" href="./adminlist.do">∞¸∏Æ¿⁄∏Ò∑œ</a>  
+                                    <a class="nav-link" href="./userlist.do">ÌöåÏõêÎ™©Î°ù</a>
+                                    <a class="nav-link" href="./withdrawal.do">ÌÉàÌá¥ÌöåÏõêÎ™©Î°ù</a> 
+                                    <a class="nav-link" href="./blacklist.do">Î∏îÎûôÎ¶¨Ïä§Ìä∏Î™©Î°ù</a>
+                                    <a class="nav-link" href="./adminlist.do">Í¥ÄÎ¶¨ÏûêÎ™©Î°ù</a>  
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ƒ⁄¿Œ«ˆ»≤
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ÏΩîÏù∏ÌòÑÌô©
                             </a>
                             <div class="collapse" id="collapseone" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailycoin.do">¿œ∫∞ƒ⁄¿Œ√Ê¿¸</a>
-                                    <a class="nav-link" href="./monthlycoin.do">ø˘∫∞ƒ⁄¿Œ√Ê¿¸</a>
+                                    <a class="nav-link" href="./dailycoin.do">ÏùºÎ≥ÑÏΩîÏù∏Ï∂©Ï†Ñ</a>
+                                    <a class="nav-link" href="./monthlycoin.do">ÏõîÎ≥ÑÏΩîÏù∏Ï∂©Ï†Ñ</a>
                                 </nav>
                         </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>πÊπÆ«ˆ»≤
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Î∞©Î¨∏ÌòÑÌô©
                             </a>
                             <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailysales.do">¿œ¿œπÊπÆ«ˆ»≤</a>
-                                    <a class="nav-link" href="./monthlysales.do">ø˘∫∞πÊπÆ√Ê¿¸</a>
+                                    <a class="nav-link" href="./dailysales.do">ÏùºÏùºÎ∞©Î¨∏ÌòÑÌô©</a>
+                                    <a class="nav-link" href="./monthlysales.do">ÏõîÎ≥ÑÎ∞©Î¨∏Ï∂©Ï†Ñ</a>
                             </nav>
                         </div>
 
                         <a class="nav-link collapsed" href="#" data-toggle="collapse"
                             data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>∞‘Ω√±€∞¸∏Æ
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>Í≤åÏãúÍ∏ÄÍ¥ÄÎ¶¨
                         </a>
                         <div class="collapse" id="collapsethree" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion" style="">
                             <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./salesarticlelist.do">∆«∏≈±€</a>
-                                    <a class="nav-link" href="./userinquiry.do">∞Ì∞¥πÆ¿«</a> 
-                                    <a class="nav-link" href="./carnews.do">¿⁄µø¬˜¥∫Ω∫</a>
-                                    <a class="nav-link" href="./purchasereview.do">±∏∏≈»ƒ±‚</a>
+                                    <a class="nav-link" href="./salesarticlelist.do">ÌåêÎß§Í∏Ä</a>
+                                    <a class="nav-link" href="./userinquiry.do">Í≥†Í∞ùÎ¨∏Ïùò</a> 
+                                    <a class="nav-link" href="./carnews.do">ÏûêÎèôÏ∞®Îâ¥Ïä§</a>
+                                    <a class="nav-link" href="./purchasereview.do">Íµ¨Îß§ÌõÑÍ∏∞</a>
                             </nav>
                         </div>
                     </div>
@@ -107,13 +139,14 @@
             </nav>
         </div>
         
-        <!-- ¥ÎΩ√∫∏µÂ ≥ªøÎ -->
+        <!-- ÎåÄÏãúÎ≥¥Îìú ÎÇ¥Ïö© -->
         <div id="layoutSidenav_content">
             <main>
-                <form>
+                <form action="modifyuser.do" method="post">
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <div class="form-group row">
                         
-                        <!-- æ∆¿Ãµ -->                       
+                        <!-- ÏïÑÏù¥Îîî -->                       
                         <div class="form-group col-md-12"></div> 
                         <div class="form-group col-md-12"></div> 
                         <div class="form-group col-md-12"></div> 
@@ -125,86 +158,87 @@
                         
                         <div class="form-group col-md-6">
                             <label for="inputEmail3">ID</label>
-                            <input type="ID" class="form-control" id="inputID" placeholder="ID">
+                            <input type="ID" class="form-control" id="inputID" name="inputId" value=${update.m_id} readonly>
                         </div>
                         
                         <div class="form-group col-md-3"></div>
                         
-                        <!-- º∫∫∞ -->
+                        <!-- ÏÑ±Î≥Ñ -->
                         <div class="form-group col-md-3"></div>                                
                         <div class="form-group col-md-3">
-                            <label for="inputState">º∫∫∞</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>≥≤</option>
-                                <option>ø©</option>
+                            <label for="inputState">ÏÑ±Î≥Ñ</label>
+                            <select id="inputGender" name="inputGender" class="form-control">
+                                <option selected>ÎÇ®</option>
+                                <option>Ïó¨</option>
                             </select>
                         </div>                   
                         
-                        <!-- ¿Ã∏ß -->                             
+                        <!-- Ïù¥Î¶Ñ -->                             
                         <div class="form-group col-md-3">
-                            <label for="inputAddress">¿Ã∏ß</label>
-                            <input type="text" class="form-control" id="inputbirthday" size="40px"
-                                placeholder="»´±Êµø">
+                            <label for="inputAddress">Ïù¥Î¶Ñ</label>
+                            <input type="text" class="form-control" id="inputName" name="inputName" size="40px"
+                                value=${update.m_name}>
                         </div>
                         <div class="form-group col-md-3"></div> 
                                                                                      
-                        <!-- ¿Ã∏ﬁ¿œ -->
+                        <!-- Ïù¥Î©îÏùº -->
                         <div class="form-group col-md-3"></div>                                
                         <div class="form-group col-md-6">
-                            <label for="inputAddress">¿Ã∏ﬁ¿œ</label>
-                            <input type="text" class="form-control" id="inputAddress" size="40px"
-                                placeholder="hong@xxx.com">
+                            <label for="inputAddress">Ïù¥Î©îÏùº</label>
+                            <input type="text" class="form-control" id="inputEmail" name="inputEmail" size="40px"
+                                value=${update.email}>
                         </div>
                         <div class="form-group col-md-3"></div>
                         
                         
-                        <!-- ¿¸»≠π¯»£ -->
+                        <!-- Ï†ÑÌôîÎ≤àÌò∏ -->
                         <div class="form-group col-md-3"></div>                                
                         <div class="form-group col-md-3">
-                            <label for="inputAddress">»ﬁ¥Î∆˘π¯»£</label>
-                            <input type="text" class="form-control" id="inputbirthday" size="40px"
-                                placeholder="010-"> 
+                            <label for="inputAddress">Ìú¥ÎåÄÌè∞Î≤àÌò∏</label>
+                            <input type="text" class="form-control" id="inputPhone" name="inputPhone" size="40px"
+                                value=${update.tel}> 
                             </select>
                         </div>     
                         
-                        <!-- ª˝≥‚ø˘¿œ -->                        
+                        <!-- ÏÉùÎÖÑÏõîÏùº -->                        
                         <div class="form-group col-md-3">
-                            <label for="inputAddress">ª˝≥‚ø˘¿œ</label>
-                            <input type="text" class="form-control" id="inputbirthday" size="40px"
-                                placeholder="951007">
+                            <label for="inputAddress">ÏÉùÎÖÑÏõîÏùº</label>
+                            <input type="text" class="form-control" id="inputBirth" name="inputBirth" size="40px"
+                                value=${update.birth}>
                         </div>
+
                         <div class="form-group col-md-3"></div> 
                         <div class="form-group col-md-12"></div> 
                         
                         <!-- Button -->
-                        <div class="form-group col-md-3"></div>                                 
-                        
+                        <div class="form-group col-md-3"></div>          
                         <div class="form-group col-md-2">     
-                          <input type="button" class="btn btn-primary" onclick="location.href='userlist.do'" value="ºˆ¡§«œ±‚">
+                          <button type="submit" class="btn btn-primary">ÏàòÏ†ïÌïòÍ∏∞</button>
                         </div>   
+                        </form>
                         <div class="form-group col-md-2">  
-                          <input type="button" class="btn btn-primary" onclick="location.href='withdrawal.do'" value="≈ª≈«œ±‚"> 
+                          <input type="button" class="btn btn-primary" onclick="location.href='setAdmin.do?id=${update.m_id}'" value="Í¥ÄÎ¶¨ÏûêÎ∂ÄÏó¨"> 
                         </div> 
                          <div class="form-group col-md-2">   
-                          <input type="button" class="btn btn-primary" onclick="location.href='userlist.do'" value="∫Ì∑¢∏ÆΩ∫∆Æ√ﬂ∞°">
+                          <input type="button" class="btn btn-primary" onclick="location.href='setBlacklist.do?id=${update.m_id}'" value="Î∏îÎûôÎ¶¨Ïä§Ìä∏Ï∂îÍ∞Ä">
                         </div>                                                                     
                     </div>
 
-                </form> 
+                 
             </main>
             
-            <!-- √÷«œ¥‹ footer -->
+            <!-- ÏµúÌïòÎã® footer -->
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; ªÁ¬˜ø¯</div>
+                        <div class="text-muted">Copyright &copy; ÏÇ¨Ï∞®Ïõê</div>
                     </div>
                 </div>
             </footer>
         </div>
     </div>
     
-    <!-- javascript ∆ƒ¿œ import -->
+    <!-- javascript ÌååÏùº import -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>

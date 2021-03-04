@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.carproject.domain.GradeVO;
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.MemberVO;
 
 public interface CategoryDAO {
 	List<HashMap<String, Object>> categoryselect();
@@ -17,4 +18,7 @@ public interface CategoryDAO {
 	List<HashMap<String, Object>> category_productselect(HeartVO vo);
 	List<HashMap<String, Object>> model_productselect(HeartVO vo);
 	List<HashMap<String, Object>> detail_productselect(HeartVO vo);
+	List<HashMap<String, Object>> grade1_productselect(MemberVO vo);
+	List<HashMap<String, Object>> grade2_productselect(MemberVO vo);
+	int sellcount();
 }

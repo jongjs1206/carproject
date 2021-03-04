@@ -87,7 +87,7 @@ public class UserController {
 		vo.setSell_id(1);
 		List<HashMap<String, Object>> category = categoryService.categoryselect();
 		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
-		
+		int product_count = categoryService.sellcount();
 		
 		for(int i=0;i<sell.size();i++) {
 			StringBuffer resultoption = new StringBuffer();
@@ -115,6 +115,7 @@ public class UserController {
 		
 		model.addAttribute("category",category);
 		model.addAttribute("sell",sell);
+		model.addAttribute("product_count",product_count);
 	}
 	
 	/*
@@ -186,12 +187,15 @@ public class UserController {
 	 */
 	@RequestMapping("all/category_product.do")
 	@ResponseBody
-	public List<HashMap<String, Object>> category_product(String id,String category) {
+	public List<HashMap<String, Object>> category_product(String id,String category,String page) {
 		HeartVO vo = new HeartVO();
+		
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		
 		if(id != null) {
 			vo.setM_id(id);
 		}
-		vo.setSell_id(1);
+		vo.setSell_id(page_re);
 		vo.setDate(category);
 		List<HashMap<String, Object>> list = categoryService.category_productselect(vo);
 		
@@ -222,12 +226,14 @@ public class UserController {
 	
 	@RequestMapping("all/model_product.do")
 	@ResponseBody
-	public List<HashMap<String, Object>> model_product(String id,String car_num) {
+	public List<HashMap<String, Object>> model_product(String id,String car_num, String page) {
 		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		
 		if(id != null) {
 			vo.setM_id(id);
 		}
-		vo.setSell_id(1);
+		vo.setSell_id(page_re);
 		vo.setDate(car_num);
 		List<HashMap<String, Object>> list = categoryService.model_productselect(vo);
 		
@@ -258,12 +264,13 @@ public class UserController {
 	
 	@RequestMapping("all/detail_product.do")
 	@ResponseBody
-	public List<HashMap<String, Object>> detail_product(String id,String car_num,String options) {
+	public List<HashMap<String, Object>> detail_product(String id,String car_num,String options,String page) {
 		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
 		if(id != null) {
 			vo.setM_id(id);
 		}
-		vo.setSell_id(1);
+		vo.setSell_id(page_re);
 		vo.setW_id(Integer.parseInt(car_num));
 		vo.setDate(options);
 		List<HashMap<String, Object>> list = categoryService.detail_productselect(vo);
@@ -293,6 +300,156 @@ public class UserController {
 		return list;
 	}
 	
+	@RequestMapping("all/grade1_product.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> grade1_product(String id,String car_num,String options,String options2,String page) {
+		MemberVO vo = new MemberVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setCoin(Integer.toString(page_re));
+		vo.setM_pw(car_num);
+		vo.setAuth(options);
+		vo.setBirth(options2);
+		List<HashMap<String, Object>> list = categoryService.grade1_productselect(vo);
+		
+		for(int i=0;i<list.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)list.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			list.get(i).put("resultoption", resultoption);
+		}
+		
+		return list;
+	}
+	
+	@RequestMapping("all/grade2_product.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> grade2_product(String id,String car_num,String options,String options2,String options3,String page) {
+		MemberVO vo = new MemberVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setCoin(Integer.toString(page_re));
+		vo.setM_pw(car_num);
+		vo.setAuth(options);
+		vo.setBirth(options2);
+		vo.setM_name(options3);
+		List<HashMap<String, Object>> list = categoryService.grade2_productselect(vo);
+		
+		for(int i=0;i<list.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)list.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			list.get(i).put("resultoption", resultoption);
+		}
+		
+		return list;
+	}
+	
+	@RequestMapping("all/country_all.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> country_all(String id,String page) {
+		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setSell_id(page_re);
+		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
+		
+		
+		for(int i=0;i<sell.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)sell.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		return sell;
+	}
+	@RequestMapping("all/country_one.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> country_one(String id,String country, String page) {
+		HeartVO vo = new HeartVO();
+		int page_re = (Integer.parseInt(page)-1)*15+1;
+		if(id != null) {
+			vo.setM_id(id);
+		}
+		vo.setDate(country);
+		vo.setSell_id(page_re);
+		List<HashMap<String, Object>> sell = categoryService.sellselect(vo);
+		
+		
+		for(int i=0;i<sell.size();i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String)sell.get(i).get("option");
+			int count=0;
+			if(option.split("/").length>0) {
+				for(int j=0;j<option.split("/").length;j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for(int k=0;k<temp.length();k++) {
+					if(temp.charAt(k)=='1') {
+						resultoption.append(alloption[k]);
+						if(count==4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		return sell;
+	}
 	@RequestMapping("all/heart_on.do")
 	@ResponseBody
 	public void heart_on(String id, String sell_id) {

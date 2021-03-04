@@ -19,7 +19,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- 상단 제목 -->
-            <a class="navbar-brand" href="./admin.jsp">관리자 페이지</a>
+            <a class="navbar-brand" href="./admin.do">관리자 페이지</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             </form>
@@ -32,10 +32,7 @@
                     
                     <!-- 메인페이지 이동 -->
                         <a class="dropdown-item" href="../all/homepage.do">메인 페이지 이동</a> 
-                        <div class="dropdown-divider"></div>
-                    <!-- 메인화면 로그인창으로 이동 -->
-                    <a class="dropdown-item" href="#">로그 아웃</a>
-                    
+                        <div class="dropdown-divider"></div>                    
                     </div>
                 </li>
             </ul>
@@ -56,7 +53,6 @@
                                     <a class="nav-link" href="./userlist.do">회원목록</a>
                                     <a class="nav-link" href="./withdrawal.do">탈퇴회원목록</a> 
                                     <a class="nav-link" href="./blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="./createAdmin.do">관리자생성</a>
                                     <a class="nav-link" href="./adminlist.do">관리자목록</a>  
                                 </nav>
                             </div>
@@ -96,7 +92,7 @@
             </div>
             
             <!-- 대시보드 내용 -->
-            <div id="layoutSidenav_content">
+            <div id="layoutSidenav_content"> 
                     <div class="container-fluid">
                         <h2 class="mt-4">관리자 목록</h2>
                         <div class="card mb-4">
@@ -117,34 +113,22 @@
                                                 <th>성별</th>
                                                 <th>이메일</th>
                                                 <th>생년월일</th>
+                                                <th>휴대폰번호</th>
                                                 <th>상태</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>아이디1</td>
-                                                <td>이름1</td>
-                                                <td>성별1</td>
-                                                <td>이메일1</td>
-                                                <td>생년월일1</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='adminlist.do'" value="삭제하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디2</td>
-                                                <td>이름2</td>
-                                                <td>성별2</td>
-                                                <td>이메일2</td>
-                                                <td>생년월일2</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='adminlist.do'" value="삭제하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>아이디3</td>
-                                                <td>이름3</td>
-                                                <td>성별3</td> 
-                                                <td>이메일3</td>
-                                                <td>생년월일3</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='adminlist.do'" value="삭제하기"></td>
-                                            </tr>
+                                        <!-- AdminController에서 adminlist에 있는 값을 반복문으로 모두 불러옴 -->
+                                        	<c:forEach var="row" items="${adminlist}">
+			                                	<tr>
+			                                    	<td>${row.m_id}</td>
+			                                    	<td>${row.m_name}</td>
+			                                    	<td>${row.gender}</td>
+			                                    	<td>${row.email}</td>
+			                                    	<td>${row.birth}</td>
+			                                    	<td>${row.tel}</td>
+			                                   		<td align="center"><input type="button" class="btn btn-primary" onclick="location.href='setUser.do?id=${row.m_id}'" value="권한제거"></td>                                  </tr>    
+			                                </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

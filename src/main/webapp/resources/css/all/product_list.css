@@ -274,7 +274,7 @@
 	color: #939393;
 }
 
-.cell-jejo, .cell-mode, .cell-detail,.two-detail {
+.cell-jejo, .cell-mode, .cell-detail, .two-detail {
 	text-align: center;
 	margin-top: 100px;
 	color: #112E41;
@@ -307,22 +307,60 @@ button.btn-ch {
 	font-size: 12px;
 	color: #333333;
 }
-.fa-long-arrow-alt-right{
+
+.fa-long-arrow-alt-right {
 	margin-left: 20px;
 }
-.sub-list{
+
+.sub-list {
 	margin: 0px;
 }
-.fa-heart{
+
+.fa-heart {
 	cursor: pointer;
 }
 
-.color_pink{
+.color_pink {
 	color: pink;
 }
 
-.no_carlist{
+.no_carlist {
 	font-size: 30px;
 	margin-top: 100px;
 	margin-bottom: 300px;
+}
+
+.choice .page-link {
+	color: #112E41;
+	border-bottom: 3px solid #112E41;
+}
+
+.paging {
+	margin-top: 40px;
+	margin-bottom: 80px;
+}
+
+.page-item {
+	font-size: 20px;
+	width: 45px;
+	height: 70px;
+	padding: 0px;
+}
+
+.page-item>a {
+	text-align: center;
+	color: #808080;
+}
+
+.btn_search {
+	color: white;
+	border-radius: 3px;
+	font-weight: bold;
+	margin-bottom: 30px;
+	background-color: #DCA73A;
+	width: 60px;
+	margin-top: 30px;
+	border: none;
+	margin-left: 10px;
+	cursor: pointer;
 }

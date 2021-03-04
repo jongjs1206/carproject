@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Noto+Serif:400,400i,700&display=swap");
+@font-face{
+	src:url("../../Cafe24Dangdanghae/Cafe24Dangdanghae.ttf");
+	font-family:"dangdang"
+}
+
+div.blank {
+	margin-bottom: 50px;
+}
+
+.fav-news {
+	display: grid;
+	grid-template-columns: 11fr 1fr 2fr;
+	border-bottom: 1px solid gray;
+}
+
+.fav-news > span {
+	cursor: pointer;
+}
+.fav-news:hover {
+	background: #dca73a;
+}
+
+.news-info {
+	display: grid;
+	grid-template-columns: 11fr 1fr 2fr;
+	text-align: center;
+}
+
+.news-container {
+	display: grid;
+	grid-template-columns: 1fr 9fr 1fr 1fr;
+}
+
+.news-thumb {
+	margin: 0 30px;
+}
+
+.cnt {
+	margin: 0 20px;
+	text-align: center;
+}
+
+.news-search-container {
+	display: grid;
+	grid-template-columns: 1fr 5fr 2fr;
+}
+
+.news-search-container > input {
+	height: 50px;
+}
+
+.news-search-container > button {
+	height: 50px;
+}
+
+/************************** 뉴스 페이지 **************************/
+
+a.back-to-news-list {
+	cursor: pointer;
+}
+
+.back-to-news-list:hover {
+	font-color: #dca73a;
+	border-bottom: #dca73a;
+}

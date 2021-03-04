@@ -64,7 +64,7 @@
 
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
-
+	<input type="hidden" class="page" value="1">
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
@@ -163,17 +163,18 @@
 		<div style="display: flex; justify-content: flex-end;">
 			<input type='text' placeholder="차명을 입력하세요"
 				style="border: none; border-bottom: 3px solid #DCA73A; margin-top: 30px; margin-bottom: 30px; width: 200px;">
-			<button
-				style="color: white; border-radius: 3px; font-weight: bold; margin-bottom: 30px; background-color: #DCA73A; width: 60px; margin-top: 30px; border: none; margin-left: 10px;">검색</button>
+			<button class = 'btn_search'>검색</button>
 		</div>
 	</div>
 
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>										
-	
+
+		
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
+			<div class='product_count'>등록 <fmt:formatNumber value="${product_count}" pattern="#,###" />대</div>
 			<hr>
 			<div class="row" style="display: flex; justify-content: center;">
 				<c:forEach var="product_sell" items="${sell}">
@@ -221,19 +222,34 @@
 			</div>
 		</div>
 	</section>
+	<c:set var='all_page' value='${(product_count/15)+(1-((product_count/15)%1))%1}'></c:set>
+	<c:set var='start' value='2'></c:set>
+	<c:set var='end' value='10'></c:set>
+	<c:if test="${all_page<end}">
+		<c:set var='end' value='${all_page}'></c:set>
+	</c:if>
 	<!-- Room End -->
-
-	<nav class="blog-pagination justify-content-center d-flex"
-		style="position: relative; bottom: 100px;">
+	<nav class="paging" style="display: flex; justify-content: center;">
 		<ul class="pagination">
-			<li class="page-item"><a href="#" class="page-link"
-				aria-label="Previous"> <i class="ti-angle-left"></i>
+			<li class="page-item start_page"><a href="#" class="page-link"
+				aria-label="Previous"> <i class="fas fa-angle-double-left"></i>
 			</a></li>
-			<li class="page-item"><a href="#" class="page-link">1</a></li>
-			<li class="page-item active"><a href="#" class="page-link">2</a>
-			</li>
-			<li class="page-item"><a href="#" class="page-link"
-				aria-label="Next"> <i class="ti-angle-right"></i>
+			<li class="page-item prev_page"><a href="#" class="page-link"
+				aria-label="Previous"> <i class="fas fa-angle-left"></i>
+			</a></li>
+		</ul>
+		<ul class="pagination">
+			<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>
+			<c:forEach var='temp' begin='${start}' end='${end}'>
+					<li class="page-item page_choice"><a href="#" class="page-link">${temp}</a></li>
+			</c:forEach>
+		</ul>
+		<ul class="pagination">
+			<li class="page-item next_page"><a href="#" class="page-link"
+				aria-label="Next"> <i class="fas fa-angle-right"></i>
+			</a></li>
+			<li class="page-item end_page"><a href="#" class="page-link"
+				aria-label="Previous"> <i class="fas fa-angle-double-right"></i>
 			</a></li>
 		</ul>
 	</nav>

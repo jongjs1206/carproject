@@ -20,6 +20,7 @@
 		<typeAlias alias="member" type="com.carproject.domain.MemberVO" />		
 		<typeAlias alias="heart" type="com.carproject.domain.HeartVO" />
 		<typeAlias alias="auth" type="com.carproject.domain.AuthVO" />		
+		<typeAlias alias="coin" type="com.carproject.domain.CoinVO"/>		
 	</typeAliases>
 
 

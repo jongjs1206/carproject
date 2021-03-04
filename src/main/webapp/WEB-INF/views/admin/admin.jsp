@@ -34,8 +34,6 @@
                     <!-- 메인페이지 이동 -->
                     <a class="dropdown-item" href="../all/homepage.do">메인 페이지 이동</a> 
                     <div class="dropdown-divider"></div>
-                    <!-- 메인화면 로그인창으로 이동 -->
-                    <a class="dropdown-item" href="#">로그 아웃</a>
                     </div>
                 </li>
             </ul>
@@ -56,7 +54,6 @@
                                     <a class="nav-link" href="userlist.do">회원목록</a>
                                     <a class="nav-link" href="withdrawal.do">탈퇴회원목록</a>
                                     <a class="nav-link" href="blacklist.do">블랙리스트목록</a> 
-                                    <a class="nav-link" href="createAdmin.do">관리자생성</a>
                                     <a class="nav-link" href="adminlist.do">관리자목록</a> 
                                 </nav>
                             </div>

@@ -65,7 +65,15 @@ SELECT ht, o.* FROM
 (SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
 (SELECT t.* FROM
 (SELECT * FROM 
-(SELECT s.sell_id,w_date, price, image, title, option FROM category c
+(SELECT s.sell_id,w_date, price, image, title, option FROM 
+<if test="date!=null">
+(SELECT * FROM
+</if>
+category 
+<if test="date!=null">
+WHERE abroad = #{date}) 
+</if>
+c
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
 inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
@@ -120,6 +128,42 @@ inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
+</select>
+
+<select id="grade1_productselect" resultType="hashmap" parameterType="heart">
+SELECT ht, o.* FROM 
+(SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
+(SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
+(SELECT t.* FROM
+(SELECT * FROM 
+(SELECT s.sell_id,w_date, price, image, title, option FROM 
+(SELECT s1.d_id,s2.g_id,s2.grade1,s2.grade2 FROM (SELECT * FROM detail WHERE car_num=#{m_pw}) s1 
+LEFT JOIN grade s2 ON s1.d_id=s2.d_id 
+WHERE detail IN ('${auth}') and s2.grade1 IN ('${birth}')) g
+inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t, 
+(select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
+where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
+left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
+</select>
+
+<select id="grade2_productselect" resultType="hashmap" parameterType="heart">
+SELECT ht, o.* FROM 
+(SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
+(SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
+(SELECT t.* FROM
+(SELECT * FROM 
+(SELECT s.sell_id,w_date, price, image, title, option FROM 
+(SELECT s1.d_id,s2.g_id,s2.grade1,s2.grade2 FROM (SELECT * FROM detail WHERE car_num=#{m_pw}) s1 
+LEFT JOIN grade s2 ON s1.d_id=s2.d_id 
+WHERE detail IN ('${auth}') and s2.grade1 IN ('${birth}') and s2.grade2 IN ('${m_name}')) g
+inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t, 
+(select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
+where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
+left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
+</select>
+
+<select id="sellcount" resultType="Integer">
+SELECT COUNT(*) AS count FROM sell
 </select>
 
 </mapper>
