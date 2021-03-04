@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -176,7 +175,7 @@
 		<div class="container">
 			<div class='product_count'>등록 <fmt:formatNumber value="${product_count}" pattern="#,###" />대</div>
 			<hr>
-			<div class="row" style="display: flex; justify-content: center;">
+			<div class="row" style="display: flex;">
 				<c:forEach var="product_sell" items="${sell}">
 					<div class="col-xl-4 col-lg-6 col-md-6 product_all">
 						<!-- Single Room -->
@@ -238,7 +237,7 @@
 				aria-label="Previous"> <i class="fas fa-angle-left"></i>
 			</a></li>
 		</ul>
-		<ul class="pagination">
+		<ul class="pagination page_number">
 			<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>
 			<c:forEach var='temp' begin='${start}' end='${end}'>
 					<li class="page-item page_choice"><a href="#" class="page-link">${temp}</a></li>

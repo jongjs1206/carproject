@@ -59,7 +59,8 @@ $(function() {
 			
 			var salesContext = $('.salesContext').val();
 		});
-	};
+	});
 	
 	
 })
+
