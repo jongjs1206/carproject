@@ -60,8 +60,7 @@
 			비밀번호를 찾고자 하는 아이디를 입력해 주세요. <br/><br/>
 			<input type="text" name="m_id" id="m_id" placeholder="아이디" class=""/><br/><br/>
 			<input type="button" id='pwsubmit' value="확인" class=""/><br/><br/>
-			아이디가 기억나지 않으세요?<br/>
-			<a href="#">아이디 찾기 바로가기▶</a> 
+			
 		</p>
 	</section>	
 </div>

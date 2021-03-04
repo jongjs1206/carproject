@@ -31,9 +31,8 @@
 <link rel="stylesheet" href="../resources/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" href="../resources/css/all/homepage.css"
-	type="text/css">
-<link rel="stylesheet" href="../resources/css/all/jso.css" type="text/css">		
+<link rel="stylesheet" href="../resources/css/all/coin.css" type="text/css">	
+
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </script>
@@ -50,7 +49,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 
-<script type="text/javascript" src="../resources/js/all/homepage.js"></script>
 
 </head>
 <body>
@@ -60,6 +58,8 @@
 	
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
+	
+	<main>
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
@@ -85,13 +85,32 @@
 			<img src="../resources/img/bitcoinlogo.png" width="170" height="176">
 		</div>
 		<div class="coin-item">
-			<h1>
-			<span>${sessionScope.info.m_name} 님 현재 </span>
-			<span class="gold-font">
-				${sessionScope.info.coin} 코인
-			</span>
-			<span> 보유중입니다.</span>
+			<h1 class="coin-item-broad">
+				<span>${sessionScope.info.m_name} 님 현재 </span>
+				<span class="gold-font">
+					${sessionScope.info.coin} 코인
+				</span>
+				<span> 보유중입니다.</span>
 			</h1>
+			
+			<h1 class="coin-item-middle">
+				<span>${sessionScope.info.m_name} 님 현재</span>
+				<span class="gold-font">
+					${sessionScope.info.coin} 코인
+				</span><br/>
+				<span> 보유중입니다.</span><br/>
+			</h1>			
+			
+			<h1 class="coin-item-narrow">
+				<span>${sessionScope.info.m_name} 님<br/>
+						현재</span>
+				<span class="gold-font">
+					${sessionScope.info.coin} 코인
+				</span><br/>
+				<span> 보유중입니다.</span><br/>
+			</h1>
+			
+			
 			<h4>
 				1코인당 1건의 판매글을 작성할 수 있습니다. <br/>
 				글을 등록한 순간부터 2주동안 게시됩니다.  <br/>
@@ -145,11 +164,16 @@
 					<span class="">충전한 코인</span>
 					<span class="">결제금액</span>
 				</div>
-				<div class="coin-list">
-					<span>
-						
-
-					</span>
+				<div class="">
+					<c:forEach var="mycoin" items="${coinlist}">
+						<div>
+							<span>${mycoin.coin}</span><hr/>
+							<!-- 
+							<span>${mycoin.day}${mycoin.coin}</span>
+							<span>${mycoin.price}</span>
+							 -->
+						</div>
+					</c:forEach>
 				</div>
 			</p>
 		</section>
@@ -161,7 +185,7 @@
 		<input type="hidden" class="blank"/>
 	</div>
 
-	
+	</main>
 	
 	<%@ include file="../footer.jsp"%>
 
