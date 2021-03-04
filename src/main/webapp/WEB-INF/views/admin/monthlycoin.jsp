@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <!-- 브라우저 최상단 탭 명 -->
@@ -112,56 +112,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>2021년 1월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 2월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 3월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 4월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 5월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 6월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 7월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 8월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 9월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 10월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 11월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2021년 12월</td>
-                                                <td>100000</td>
-                                            </tr>
-                                            
-                                            
+                                        <c:forEach var="coin" items="${coinList}">
+                                        	<tr>
+                                        		<td>${coin.day}</td>
+                                        		<td>${coin.price}</td>
+                                        	</tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

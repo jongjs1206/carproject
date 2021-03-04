@@ -22,4 +22,16 @@ public class CoinQnaServiceImpl implements CoinQnaService{
 	public List<HashMap<String, Object>> coinView(String m_id) {
 		return coinqnaDAO.coinView(m_id);
 	}
+	
+	@Override	
+	public List<CoinVO> allCoinList()
+	{   
+		return coinqnaDAO.allCoinList(); 
+	}
+
+	@Override
+	public List<CoinVO> monthlyCoinList() {
+		return coinqnaDAO.monthlyCoinList();
+	}
+	
 }

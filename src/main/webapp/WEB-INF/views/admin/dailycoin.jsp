@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <!-- 브라우저 최상단 탭 명 -->
@@ -112,12 +112,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        
-                                        	<c:forEach var="row" items="${dailycoin}">
+                                        	<c:forEach var="coin" items="${coinList}">
                                         		<tr>
-                                        			<td>${row.day}</td>
-			                                    	<td>${row.price}</td>                     
-                                        	</c:forEach> 
+                                        			<td>${coin.day}</td>
+			                                    	<td>${coin.price}</td>
+			                                    </tr>     
+                                        	</c:forEach>  
                                         	 
                                         </tbody>
                                     </table>
