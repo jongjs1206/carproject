@@ -158,6 +158,7 @@ if(idPassCheck){
 	 		
 	 		if(result=='성공'){
 	 		alert("사용하실 수 있는 아이디 입니다.");
+	 		$('#info').text("아이디 중복확인이 완료되었습니다.");
 	 		joinPassCheck=true;
 	 	
 	 		}else{
@@ -246,13 +247,14 @@ $('#certNumChk').click(function(){
 	 	},
 	 	
 	 	success : function(result){
+	 	
 	 		if(result=='인증'){
 	 		alert('이메일 인증에 성공하셨습니다');
 	 		emailPassCheck=true;
 	 		
 	 		//이메일칸 readonly
-	 		$("#email1").attr("readonly",true);
-	 		$("#email2").attr("readonly",true);
+	 		$("#email1").prop("readonly",true);
+	 		$("#email2").prop("readonly",true);
 	 		
 	 		}else{
 	 		alert(result);
@@ -274,6 +276,8 @@ $('#certNumChk').click(function(){
 
 //회원가입 버튼 클릭 시
 $(document).on("click","#joinDiv",function(){
+
+
 
 //id
 	if(!joinPassCheck){

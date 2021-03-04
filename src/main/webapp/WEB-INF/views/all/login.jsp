@@ -75,7 +75,7 @@
 			</div>
                 <div class="Layout_contents__2nVdg Layout_normal__2IFQF">
                     <c:url value="/login" var="loginUrl" />
-					<form:form action='${loginUrl}' method='post'>
+					<form:form action='${loginUrl}' method='post' id='login'>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                         <div>
                             <div class="">

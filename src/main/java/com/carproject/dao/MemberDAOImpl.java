@@ -31,12 +31,20 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===> MemberMapper checkUniqueId 호출");
 		return mybatis.selectOne("MemberMAP.checkUniqueId", vo);
 	}
-	
+
 	@Override
-	public int addGoogleEmail(MemberVO vo) {
-		System.out.println("===> MemberMapper addGoogleEmail 호출");
-		return mybatis.selectOne("MemberMAP.addGoogleEmail", vo);
+	public MemberVO selectByEmail(MemberVO vo) {
+		System.out.println("===> MemberMapper selectByEmail 호출");
+		return mybatis.selectOne("MemberMAP.selectByEmail", vo);
 	}
+
+	@Override
+	public int addGoogle(MemberVO vo) {
+		System.out.println("===>  MemberMapper addGoogle() 호출");
+		return mybatis.insert("MemberMAP.addGoogle", vo);
+	}
+	
+
 
 
 	

@@ -16,6 +16,8 @@ public interface MemberDAO {
 	
 	MemberVO checkUniqueId( MemberVO vo );
 	
-	int addGoogleEmail( MemberVO vo );
+	MemberVO selectByEmail( MemberVO vo );
+	
+	int addGoogle(MemberVO vo);
 	
 }

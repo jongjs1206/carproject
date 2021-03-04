@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.service.AuthService;
 import com.carproject.service.MailSendService;
 import com.carproject.service.MemberService;
 import com.carproject.service.SnsLoginService;
@@ -27,18 +30,25 @@ import com.google.gson.JsonParser;
 public class MemberController {
 	@Autowired
 	private MemberService memberservice;
-	
-//	@Autowired
-//	BCryptPasswordEncoder pwdEncoder;
+	@Autowired
+	private AuthService authService;
+	@Autowired
+	SnsLoginService snsLoginService;
 	
 	
 
     
 // 회원 가입
 	@RequestMapping(value="/all/userInsert.do")
-	public String userInsert(MemberVO vo) {
+	public String userInsert(MemberVO vo, @RequestParam("email1") String email1, @RequestParam("email2") String email2) {
+		String eamil = email1+"@"+email2;
+		vo.setEmail(eamil);
 		//삽입
 		memberservice.userInsert(vo);
+		//권한
+		AuthVO authVo = new AuthVO();
+		authVo.setM_id(vo.getM_id());
+		authService.insertAuth(authVo);
 
 		
 		return "redirect:/all/login.do";
@@ -62,44 +72,45 @@ public class MemberController {
 
 //sns로그인
 	
-	@Autowired
-	SnsLoginService snsLoginService;
-	
+
+	//구글 아이디
 	@RequestMapping(value="/all/googleLogin.do")
 	public String googleLogin(MemberVO vo, HttpSession session) {
-		
 		MemberVO info = (MemberVO) session.getAttribute("info");
-		
-		
-		
-		
 		return "redirect:"+snsLoginService.googleRedirect();
 	}
-	
-	
-	@Value("#{config['google.url']}")
-	private String googleUrl;
-	@Value("#{config['google.client-id']}")
-	private String googleId;
-	@Value("#{config['google.clientsecret']}")
-	private String googleSecret;
-	@Value("#{config['google.redirect']}")
-	private String redirect;
-	
-	
-	//접근 코드받기
+
+	//가입자인지 확인 
 	@RequestMapping(value = "/all/googleToken.do")
-    public String googleToken(
+    public String googleToken(Model model,
             @RequestParam(name = "code") String code) {
 		
 		String googleLoginInfo = snsLoginService.getToken(code);
-		String GoogleEmail = snsLoginService.getGoogleEmail(googleLoginInfo);
+		String googleEmail = snsLoginService.getGoogleInfo(googleLoginInfo, "email");
+		String googleName = snsLoginService.getGoogleInfo(googleLoginInfo, "name");
 
 		MemberVO vo = new MemberVO();
-		vo.setGmail(GoogleEmail);
-
-		return "redirect:/all/login.do";
-    
+		vo.setEmail(googleEmail);
+		vo.setM_name(googleName);
+//		System.out.println("****************************");
+//		System.out.println(googleEmail);
+//		System.out.println(googleName);
+		
+		MemberVO member = memberservice.selectByEmail(vo);
+		//기존 가입자 이메일이 같은데 구글 로그인이 없는 경우 =>연동
+			if(member != null && member.getGoogle()==null) {
+				member.setGoogle(googleEmail);;
+				memberservice.addGoogle(member);
+				model.addAttribute("member",member);
+				return "redirect:/all/login.do";
+		}
+		
+		//구글로그인이 이미 있거나 기존 가입자가 아닐 경우 =>새로가입
+		if(member == null || member.getGoogle() != null) {
+			return "redirect:/all/login.do";
+		}
+		return "redirect:/all/login_social.do/error";
+		
 }
 	
 	
@@ -112,19 +123,11 @@ public class MemberController {
 	@ResponseBody
 	public String mailCheck(MemberVO vo, HttpSession session, @RequestParam("email") String email) {
 		//랜덤문자 생성
-		String tempPass =mailservice.makeTempPass();
-		
-		//세션에서 랜덤문자 가져옴
-		String tempPassSession = (String)session.getAttribute("tempPass");
-		
-		//세션에 랜덤문자 기존의 랜덤문자가 없으면 새로 생성
-		if(tempPassSession==null) {
-			session.setAttribute("tempPass", tempPass);
-			tempPassSession=(String)session.getAttribute("tempPass");
-		} 
-			//세션에 있는 랜덤문자 보냄
-			System.out.println("++++email++++"+email);
-			mailservice.leaveMailSend(tempPassSession, email);
+		String authNumber =mailservice.makeTempPass();
+		//메일
+			System.out.println("++++인증번호+++"+authNumber);
+			mailservice.mailSend(authNumber, email);
+			session.setAttribute("authNumber", authNumber);
 			return "이메일을 확인해주세요.";
 		
 	}
@@ -136,8 +139,8 @@ public class MemberController {
 	public String certNumChk(MemberVO vo, HttpSession session,
 			@RequestParam("certCode") String certCode) {
 	
-		if(certCode.equals((String)session.getAttribute("tempPass"))) {
-			return "인증 ";
+		if(certCode.equals((String)session.getAttribute("authNumber"))) {
+			return "인증";
 		}else {
 			return "이메일 인증 실패";
 		}

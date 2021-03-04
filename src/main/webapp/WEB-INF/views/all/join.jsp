@@ -110,7 +110,7 @@
 							<span>비밀번호</span>
 						</div>
 						<div class="cmm-input-area">
-							<span class="inp-t"> <input type="password" title="비밀번호"
+							<span style="font-family: '고딕';" class="inp-t"> <input type="password" title="비밀번호" 
 								maxlength="20" min="6" id="m_pw" name="m_pw" data-enc="on"
 								autocomplete="off" >
 							</span>
@@ -132,8 +132,8 @@
 							<span>비밀번호확인</span>
 						</div>
 						<div class="cmm-input-area">
-							<span class="inp-t"><input type="password" title="비밀번호"
-								id="m_pwConfirm" name="loginPassChk" min="6" maxlength="20"
+							<span style="font-family: '고딕';" class="inp-t"><input type="password" title="비밀번호"
+								id="m_pwConfirm" name="loginPassChk" min="6" maxlength="20" 
 								data-enc="on" autocomplete="off" ></span>
 							<div class="form-txt">
 								<span class="ft-red" id="passwordAlert2"></span>
@@ -231,7 +231,7 @@
 							<div class="mg-b10">
 								<span class="inp-t w400"><input type="text"
 									title="휴대전화번호" id="tel" name="tel" autocomplete="off" maxlength="11"
-									placeholder="휴대폰번호 입력" tk_security="true"></span>
+									placeholder="예)01012345555" tk_security="true"></span>
 							</div>
 						</div>
 

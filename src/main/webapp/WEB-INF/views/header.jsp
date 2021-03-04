@@ -2,10 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="UTF-8">
 <title>header.jsp</title>
@@ -99,6 +98,7 @@
 										<sec:authorize access="isAuthenticated()">
 												<li><a>${sessionScope.info.m_name}<i class="fas fa-user-tie"></i></a>
 											<ul class="submenu">
+												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/sale.do">글쓰기</a></li>
 												<li><a href="../user/coin.do">내 코인</a></li>
 												<li><a><input type="submit" value="로그아웃"></a></li>

@@ -13,8 +13,8 @@ public interface MemberService {
 	
 	public int userInsert(MemberVO vo );
 	public MemberVO checkUniqueId( MemberVO vo);
-	
-	public int addGoogleEmail( MemberVO vo);
+	public MemberVO selectByEmail( MemberVO vo);
+	public int addGoogle(MemberVO vo );
 	
 }
 
