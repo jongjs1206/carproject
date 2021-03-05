@@ -69,7 +69,7 @@
 <div class="container"> 
 	 <div class="box-login">
         <div id="wrap">
-			<div class="noMenuLogo">
+			<div class="loginLogo">
 				<a href="/carproject/all/homepage.do"><img
 					src="../resources/img/logo.png" alt="logo"></a>
 			</div>

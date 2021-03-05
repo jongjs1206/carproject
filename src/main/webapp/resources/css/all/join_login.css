@@ -357,3 +357,16 @@ div.noMenuLogo{
 	padding-top: 10%;
 	padding-bottom: 20%
 }
+div.loginLogo {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loginLogo img{
+	width: auto; height: auto;
+    max-width: 400px;
+    margin: 10% 0 20% 0;
+}

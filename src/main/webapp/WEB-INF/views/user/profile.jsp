@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +53,7 @@
 <link rel="stylesheet" href="../resources/css/all/join_login.css"
 	type="text/css">
 
-<script type="text/javascript" src="../resources/js/all/join.js"></script>
+<script type="text/javascript" src="../resources/js/all/profile.js"></script>
 </head>
 <body>
 
@@ -62,201 +64,186 @@
 
 		<!-- Application Form Section Begin -->
 		<div class="container box-login">
-		
+
 			<div class="noMenuLogo">
-			<h3 id="ProfileEdit"> 내정보 수정</h3>
-<!-- 				<a href="/carproject/all/homepage.do">
-				<img
-					src="../resources/img/logo.png" alt="logo"></a> -->
+				<h3 id="ProfileEdit">내정보 수정</h3>
 			</div>
 
 
 			<section class="content--center-block">
 
-				<form method="post" action="userInsert.do" id="join" role="form">
+				<div class="cmm-basic-info"></div>
+
+				<hr class="cmm-line mg-b40 pad-t20">
+
+
+				<div class="cmm-basic-info">
+					<div class="cmm-tit">
+						<span>프로필 사진</span>
+					</div>
+
+					<div class="cmm-input-area">
+						<div class="col-md-6">
+							<div class="single-gallery-image"
+								style="background: url(../resources/img/${member.photo});">
+								<a href="assets/img/elements/g2.jpg" class="img-pop-up"></a>
+							</div>
+						</div>
+						<input type="file" name="file" id="picFile" accept="image/*"/>
+					
+
+					</div>
+				</div>
+
+				<hr class="cmm-line mg-b40 pad-t20">
+
+				<form:form method="post" action="userUpdate.do" id="modify"
+					role="form">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-
-					<div class="cmm-basic-info"></div>
-
-
-					<hr class="cmm-line mg-b40 pad-t20">
-
 					<div class="cmm-basic-info">
 						<div class="cmm-tit">
-							<span>프로필 사진</span>
+							<span>아이디</span>
 						</div>
-
 						<div class="cmm-input-area">
-							<div class="col-md-6">
-								<div class="single-gallery-image"
-									style="background: url(../resources/img/logo.png);">
-									<a href="assets/img/elements/g2.jpg" class="img-pop-up"></a>
-								</div>
-							</div>
-							<form:form action="uploadPic.do" method="post"
-								enctype="multipart/form-data" id="picForm">
-								<input type="file" name="file" id="picFile">
-							</form:form>
+							<span class="inp-t"> <input type="text" id="m_id"
+								class="readonly" value="${member.m_id}" name="m_id"
+								autocomplete="off" maxlength="20" title="아이디" tk_security="true"
+								readonly>
+							</span>
+							<div class="form-txt">
+								<span class="ft-black" id="idAlert1" style="display: none;"></span>
+								<span class="ft-red" id="info"></span>
 
+							</div>
 						</div>
 					</div>
 
-							<hr class="cmm-line mg-b40 pad-t20">
 
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>아이디</span>
-								</div>
-								<div class="cmm-input-area">
-									<span class="inp-t"> <input type="text" id="m_id" class="readonly"
-										name="m_id" autocomplete="off" maxlength="20" title="아이디"
-										tk_security="true" readonly>
-									</span>
-									<div class="form-txt">
-										<span class="ft-black" id="idAlert1" style="display: none;"></span>
-										<span class="ft-red" id="info"></span>
-
-									</div>
-								</div>
-							</div>
-
-
-
-
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>비밀번호</span>
-								</div>
-								<div class="cmm-input-area">
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>비밀번호</span>
+						</div>
+						<div class="cmm-input-area">
 							<button type="button" class="joinBtns more-btn1"
 								id="btnIdDuplChk" name="btnIdDuplChk">
-								<span>비밀번호 설정</span>
+								<span>비밀번호 다시 설정</span>
 							</button>
-								</div>
-							</div>
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>비밀번호확인</span>
-								</div>
-								<div class="cmm-input-area">
-									<span style="font-family: '고딕';" class="inp-t"><input
-										type="password" title="비밀번호" id="m_pwConfirm"
-										name="loginPassChk" min="6" maxlength="20" data-enc="on"
-										autocomplete="off"></span>
-									<div class="form-txt">
-										<span class="ft-red" id="passwordAlert2"></span>
-									</div>
-								</div>
-							</div>
-							<hr class="cmm-line mg-b40 pad-t20">
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>이름</span>
-								</div>
-								<div class="cmm-input-area">
-									<span class="inp-t"><input type="text" title="이름"
-										id="m_name" name="m_name" maxlength="10" autocomplete="off"
-										tk_security="true"></span>
-									<div class="form-txt">
-										<span class="ft-red" id="nameAlert"></span>
-									</div>
-								</div>
-							</div>
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>성별</span>
-								</div>
-								<div class="cmm-input-area">
-									<div class="ck-wrap mg-t20" id="divGenderArea">
-										<button type="button" id="gender_m" value="남"
-											class="joinBtns gender more-btn1 ck-item">
-											<span>남</span>
-										</button>
-										<button type="button" id="gender_w" value="여"
-											class="joinBtns gender more-btn1 ck-item">
-											<span>여</span>
-										</button>
-										<input type="hidden" id="gender" name="gender">
-									</div>
-									<div class="form-txt">
-										<span class="ft-red" id="genderAlert"></span>
-									</div>
-								</div>
-							</div>
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>생년월일</span>
-								</div>
-								<div class="cmm-input-area">
-									<span class="inp-t"> <input type="text" id="birth"
-										name="birth" maxlength="8" autocomplete="off" title="생년월일"
-										placeholder="예) 19890909" tk_security="true">
-									</span>
-									<div class="form-txt">
-										<span class="ft-red" id="birthDayAlert"></span>
-									</div>
-								</div>
-							</div>
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>이메일</span>
-								</div>
-								<div class="cmm-input-area">
-									<span class="inp-t" style="width: 140px;"> 
-									<input	type="text" id="email1" class='readonly' name="email1" title="이메일 주소"
-										tk_security="true" readonly>
-										</span> <span class="form-t">@</span> <span
-										class="inp-t" style="width: 140px;"> 
-										<input type="text" id="email2" class="readonly" name="email2"  title="직접입력 이메일" readonly></span> <input
-										type="hidden" id="email" name="email">
-									<div class="form-txt">
-										<span class="ft-red" id="emailAlert"></span>
-									</div>
-									<div id="confirmNumDiv" style="display: none">
-										<div class="inp-t inp-time w400">
-											<input type="text" title="인증번호 입력" name="certCode"
-												id="certCode" maxlength="10" autocomplete="off"
-												placeholder="인증번호 입력">
-											<div class="t-txt" id="timer" style="display: block;"></div>
-										</div>
-										<button type="button" class="joinBtns more-btn1"
-											id="certNumChk">
-											<span>인증번호 확인</span>
-										</button>
-										<br />
-										<div class="form-txt">
-											<span class="ft-red" id="certAlert"></span>
-										</div>
-									</div>
-								</div>
+						</div>
+					</div>
 
-
+					<hr class="cmm-line mg-b40 pad-t20">
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>이름</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"><input type="text" title="이름"
+								value="${member.m_name}" id="m_name" name="m_name"
+								maxlength="10" autocomplete="off" tk_security="true"></span>
+							<div class="form-txt">
+								<span class="ft-red" id="nameAlert"></span>
 							</div>
-							<div class="cmm-basic-info">
-								<div class="cmm-tit">
-									<span>휴대폰번호</span>
-								</div>
-								<div class="cmm-input-area">
-									<div class="mg-b10">
-										<span class="inp-t w400"><input type="text"
-											title="휴대전화번호" id="tel" name="tel" autocomplete="off"
-											maxlength="11" placeholder="예)01012345555" tk_security="true"></span>
-									</div>
-								</div>
-
-
+						</div>
+					</div>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>성별</span>
+						</div>
+						<div class="cmm-input-area">
+							<div class="ck-wrap mg-t20" id="divGenderArea">
+								<!-- 남자 선택 -->
+								<c:if test="${member.gender eq '남'}">
+									<button type="button" id="gender_m" value="남"
+										class="joinBtns gender more-btn1 ck-item genderOn">
+										<span>남</span>
+									</button>
+									<button type="button" id="gender_w" value="여"
+										class="joinBtns gender more-btn1 ck-item">
+										<span>여</span>
+									</button>
+									<input type="hidden" id="gender" name="gender">
+									<!-- 여자 선택 -->
+								</c:if>
+								<c:if test="${member.gender eq '여'}">
+									<button type="button" id="gender_m" value="남"
+										class="joinBtns gender more-btn1 ck-item">
+										<span>남</span>
+									</button>
+									<button type="button" id="gender_w" value="여"
+										class="joinBtns gender more-btn1 ck-item genderOn">
+										<span>여</span>
+									</button>
+									<input type="hidden" id="gender" name="gender">
+								</c:if>
 							</div>
 
-							<hr class="cmm-line mg-b30 pad-t10">
-							<div class="joinBtnDiv">
-								<a id="joinDiv" class="btn border-btn"><span>수 정</span></a>
+							<div class="form-txt">
+								<span class="ft-red" id="genderAlert"></span>
 							</div>
-				</form>
+						</div>
+					</div>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>생년월일</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t"> <input type="text" id="birth"
+								name="birth" maxlength="8" autocomplete="off" title="생년월일"
+								value="${member.birth}" placeholder="예) 19890909"
+								tk_security="true">
+							</span>
+							<div class="form-txt">
+								<span class="ft-red" id="birthDayAlert"></span>
+							</div>
+						</div>
+					</div>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>이메일</span>
+						</div>
+						<div class="cmm-input-area">
+							<span class="inp-t" style="width: 140px;"> <input
+								type="text" id="email1" class='readonly' name="email1"
+								title="이메일 주소" value="${email[0]}" tk_security="true" readonly>
+							</span> <span class="form-t">@</span> <span class="inp-t"
+								style="width: 140px;"> <input type="text" id="email2"
+								class="readonly" name="email2" title="직접입력 이메일"
+								value="${email[1]}" readonly></span> <input type="hidden"
+								id="email" name="email">
+							<div class="form-txt">
+								<span class="ft-red" id="emailAlert"></span>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="cmm-basic-info">
+						<div class="cmm-tit">
+							<span>휴대폰번호</span>
+						</div>
+						<div class="cmm-input-area">
+							<div class="mg-b10">
+								<span class="inp-t w400"><input type="text"
+									title="휴대전화번호" id="tel" name="tel" autocomplete="off"
+									value="${member.tel }" maxlength="11"
+									placeholder="예)01012345555" tk_security="true"></span>
+							</div>
+						</div>
+
+
+					</div>
+
+					<hr class="cmm-line mg-b30 pad-t10">
+					<div class="joinBtnDiv">
+						<a id="modifyBtn" class="btn border-btn"><span>수 정</span></a>
+					</div>
+				</form:form>
 
 				<!--end of container  -->
 			</section>
 		</div>
+
 	</main>
 
 	<%@ include file="../footer.jsp"%>

@@ -290,7 +290,7 @@ $(document).on("click","#joinDiv",function(){
 	alert("비밀번호를 확인해 주세요.")
 	return
 	}
-//이름, 성별, 생년월일, 이메일
+//이름, 성별, 생년월일, 이메일, 폰번호
 	else if(gender.val() == ''){
 	alert("성별을 선택해 주세요.")
 	return
@@ -300,6 +300,9 @@ $(document).on("click","#joinDiv",function(){
 	return
 	}else if(birth.val() == ''){
 	alert("생일을 입력해 주세요.")
+	return
+	}else if(tel.val() == ''){
+	alert("휴대폰 번호를 입력해 주세요.")
 	return
 	}else if(!emailPassCheck){
 	alert("이메일을 인증해 주세요.")

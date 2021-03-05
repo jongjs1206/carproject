@@ -37,7 +37,8 @@ public class SnsLoginService {
 //google login redirect url
   public String googleRedirect() {
   
-    String googleRedirect = googleUrl+"?scope=email&access_type=offline&response_type=code&client_id="+googleId+"&redirect_uri="+redirect;
+    String googleRedirect = googleUrl+"?scope=email+profile&access_type=offline&response_type=code&client_id="+googleId+"&redirect_uri="+redirect;
+
   
 	  return googleRedirect;
   }
@@ -90,7 +91,7 @@ public String getToken(String code) {
 }
 
 // id token에서 email 정보 추출
-public String getGoogleEmail(String googleLoginInfo) {
+public String getGoogleInfo(String googleLoginInfo, String key) {
 	
 	JsonParser Parser = new JsonParser();
 	JsonObject jsonObj = (JsonObject) Parser.parse(googleLoginInfo);
@@ -100,8 +101,8 @@ public String getGoogleEmail(String googleLoginInfo) {
 
     byte[] payload = Base64.decodeBase64(load[1]);
     JsonObject jsonPayload =  (JsonObject) Parser.parse(new String(payload));
-	
-	return jsonPayload.get("email").getAsString();
+    
+	return jsonPayload.get(key).getAsString();
 }
 
 }
