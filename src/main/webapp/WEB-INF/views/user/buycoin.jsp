@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="../resources/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-	
+<link rel="stylesheet" href="../resources/css/all/coin.css">	
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </script>
@@ -50,28 +50,28 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 
-<script type="text/javascript" src="../resources/js/all/homepage.js"></script>
 
 </head>
 <body>
 
+	<main>
+	
+		<div class="user-select">
+			<span>
+				코인 수량
+			</span>
+			<span>
+				<input type="text" id="coin-num" class="coin-num" value="<%= num %>"/>
+			</span>
+			<span>
+				결제 금액
+			</span>	
+			<span>
+				<input type="text" id="coin-price" class="coin-num" value="<%= sum %>"/>
+			</span>
+		</div>
 
-<div class="user-select">
-	<span>
-		코인 수량
-	</span>
-	<span>
-		<input type="text" id="coin-num" class="coin-num" value="<%= num %>"/>
-	</span>
-	<span>
-		결제 금액
-	</span>	
-	<span>
-		<input type="text" id="coin-price" class="coin-num" value="<%= sum %>"/>
-	</span>
-</div>
-
-
+	</main>
 
 	<!-- JS here -->
 
@@ -114,6 +114,6 @@
 	<!-- Coin page js -->
 	<script type="text/javascript" src="../resources/js/all/coin.js"></script>
 
-
+	
 </body>
 </html>

@@ -8,8 +8,9 @@ $(function() {
 	var choose4;
 	
 	var page = $('.page').val();
-	
-	var point;
+	var point=0;
+	var page_count;
+	var page_count_t1;
 	
 	$(document).on("click",".btn_category",function(){
 		choose1 = $(this).children().first().text();
@@ -72,6 +73,22 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		
+		var temp = $(this).children().last().text();
+		page_count = Math.floor(temp/15);
+		if(temp%15==0)
+			page_count -= 1;
+		$('.page_choice').remove();
+		$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+		if(page_count>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
 	});
 	
 	$(document).on("click",".btn_model",function(){
@@ -131,6 +148,22 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		var temp = $(this).children().last().text();
+		page_count = Math.floor(temp/15);
+		if(temp%15==0)
+			page_count -= 1;
+		page_count_t1 = page_count;
+		$('.page_choice').remove();
+		$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+		if(page_count>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
 	});
 	
 	var options;
@@ -138,9 +171,18 @@ $(function() {
 		$('.optgrade').remove();
 		options = "";
 		
+		var temp = 0;
+		
+		
+		
 		$(".op_ck:checked").each(function(i,elements){
     		options = options+$(this).next().text()+"','";
+    		temp = Number(temp)+Number($(this).parent().next().text());
     	});
+    	
+    	page_count = Math.floor(temp/15);
+		if(temp%15==0)
+			page_count -= 1;
 		
 		if($(".op_ck:checked").length == 1){
 			$('.cell-detail').addClass('off');
@@ -194,6 +236,19 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		
+		$('.page_choice').remove();
+		$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+		if(page_count>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
+		
 		}else if($(".op_ck:checked").length == 0){
 			$('.cell-detail').removeClass('off');
 			$('.two-detail').addClass('off');
@@ -216,6 +271,15 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		if(page_count_t1>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count_t1;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
 		}else{
 			$('.two-detail').removeClass('off');
 			point=3;
@@ -238,16 +302,48 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});	
+		$('.page_choice').remove();
+		$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+		if(page_count>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
 		}
 	});
 	
 	var options2;
 	$(document).on("click",".opg_ck1",function(){
 		choose4 = $(this).next().text();
+		var temp = 0;
 		options2="";
 		$(".opg_ck1:checked").each(function(i,elements){
     		options2 = options2+$(this).next().text()+"','";
+    		
+    		temp = Number(temp) + Number($(this).parent().next().text());
+    	
     	});
+    	
+    	var numlist = [];
+    	$(".opg_ck2:checked").each(function(i,elements){
+    		temp = Number(temp)+Number($(this).parent().next().text());
+    		var ck=0;
+    		for(var i=0;i<numlist.length;i++){
+    			if(numlist[i]==$(this).parent().parent().parent().parent().children().first().text()){
+    				ck=1;
+    			}
+    			
+    		}
+    		if(ck==0){
+    			temp = Number(temp) - Number($(this).parent().parent().parent().parent().children().first().next().text());
+    		}
+    		numlist[numlist.length]=$(this).parent().parent().parent().parent().children().first().text();
+    	});
+    	
 		
 		if($(this).is(':checked')){
 			$.ajax({
@@ -327,6 +423,23 @@ $(function() {
         	},
 			error : function(err){ console.log(err);}  //실패했을때
 		});
+		
+		page_count = Math.floor(temp/15);
+		if(temp%15==0)
+			page_count -= 1;
+		page_count_t1 = page_count;
+		$('.page_choice').remove();
+		$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+		if(page_count>8){
+			for(var i=0;i<9;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}else{
+			for(var i=0;i<page_count;i++){
+				$('.page_number').append('<li class="page-item page_choice"><a href="#" class="page-link">'+(i+2)+'</a></li>');
+			}
+		}
+		
 		}	
 	});
 	

@@ -100,7 +100,7 @@
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/sale.do">글쓰기</a></li>
-												<li><a href="../user/coin.do">내 코인</a></li>
+												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
 												<li><a><input type="submit" value="로그아웃"></a></li>
 											</ul></li>
 										</sec:authorize>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CoinMap">
+
+	<select id="allCoinList" parameterType="String" resultType="coin" >
+		SELECT * FROM coin
+	</select>
+
+	<select id="monthlyCoin" parameterType="string" resultType="coin">
+	SELECT A.*
+      FROM (SELECT DATE_FORMAT(DAY, '%Y년 %m월') AS day
+                 , SUM(PRICE)                   AS price
+              FROM coin
+           ) A
+    GROUP BY A.DAY
+	</select>
+</mapper>

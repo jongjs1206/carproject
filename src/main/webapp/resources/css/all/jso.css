@@ -50,9 +50,9 @@ label {
 	border: 1px solid transparent;
 }
 
-label:hober{
-	color: #2e9cdf;
-	cursor: pointer;
+label:hover{
+	color: #dca73a !important;
+	cursor: pointer !important;
 }
 
 /* input 클릭시, label 스타일 */
@@ -62,6 +62,10 @@ input:checked + label {
 	border: 1px solid #ddd;
 	border-top: 2px solid #112E41;
 	border-bottom: 1px solid #fff;
+}
+
+input:checked + label:hover {
+	color: #fff ! important;
 }
 
 #tab1:checked ~ #content1, #tab2:checked ~ #content2 {
@@ -112,114 +116,13 @@ input[type=button] {
 	flex-direction:column;
 	margin: 50px 50px;
 }
-.coin-main {
-	min-width:60%;
-	max-width:60%;
-	padding:50px;
-	margin :0  auto;
-	background:#fff;
-	border-radius: 10px;
-}
 
-label.coin-tab {
-	display: inline-block;
-	margin: 0 0 -1px;
-	padding: 15px 25px;
-	font-weight: 600;
-	text-align: center;
-	color: #bbb;
-	border: 1px solid transparent;
-}
-
-label.coin-tab:hover{
-	color: #dca73a;
-	cursor: pointer;
-}
-/* input 클릭시, label 스타일 */
-input:checked + label.coin-tab {
-	color: #555;
-	background: #DCA73A;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	border-top: 2px solid #112E41;
-	border-bottom: 1px solid #fff;
-}
-
-#tab1.coin-tab:checked ~ #content1.container, #tab2.coin-tab:checked ~ #content2.container {
-	display: block;
-}
-
-input[type=text].coin-num {
-	height: 50px;
-	width: 80px;
-	border: solid 1px #696968;
-	border-radius: 10px;
-	text-align: center;
-}
-
-input[type=text]#coin-price {
-	height: 50px;
-	width: 200px;
-	border: #000;
-	text-align: right;
-}
-
-input[type=button].buy-coin {
-	height: 50px;
-	width: 150px;
-	background: #dca73a;
-	border: solid 1px #fff;
-	border-radius: 30px;
-	cursor: pointer;
-}
-
-span.coin-num {
-	font-size: 30px;
-}
-
-div.buy-coin-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;	
-	flex-basis: 30%;
-	backgound: yellow;
-}
-
-div.coin-list {
-	display: flex;
-	flex-direction: row;
-	flex-basis: 30%;
-	justify-content: space-around;
-	text-align: center;
-/*	border-bottom: 2px solid #dca73a; */
-}
-
-div.coin-list-bottom {
-	display: flex;
-	flex-direction: row;
-	flex-basis: 20%;
-	justify-content: space-evenly;
-	border-bottom: 2px solid #dca73a;
-}
 
 div.blank {
 	margin-bottom: 300px;
 }
 
-div.coin-search {
-	display: flex;
-	justify-content: space-evenly;
-	flex-basis: 20%;
-	margin-bottom: 40px;
-}
 
-div.coin-search > span {
-	width: 80px;
-	text-align: center;
-	border: 1px solid #dca73a;
-	border-radius: 40px;
-	cursor: pointer;
-}
 
 /*****************************************/
 
@@ -237,9 +140,8 @@ div.coin-search > span {
 	.car-news-all {
 	disaply: flex;
 	justify-content: center;
-/*	background: yellow; */
 	margin: 0 150px;
-}
+	}
 }
 
 .fav-news-title {
