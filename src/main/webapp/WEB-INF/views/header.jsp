@@ -99,7 +99,7 @@
 												<li><a>${sessionScope.info.m_name}<i class="fas fa-user-tie"></i></a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
-												<li><a href="../user/sale.do">글쓰기</a></li>
+												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
 												<li><a><input type="submit" value="로그아웃"></a></li>
 											</ul></li>

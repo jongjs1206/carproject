@@ -1,0 +1,186 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Noto+Serif:400,400i,700&display=swap");
+@font-face{
+	src:url("../../Cafe24Dangdanghae/Cafe24Dangdanghae.ttf");
+	font-family:"dangdang"
+}
+
+
+/*
+작성자 : 문희주
+내용 : 내 판매차 관리 관련 css
+
+*/
+
+
+
+div.blank {
+	margin-bottom: 50px;
+}
+
+.fav-news {
+	display: grid;
+	grid-template-columns: 11fr 1fr 2fr;
+	border-bottom: 1px solid gray;
+}
+
+.fav-news > span {
+	cursor: pointer;
+}
+.fav-news:hover {
+	background: #dca73a;
+}
+
+.sale-info {
+    display: grid;
+    grid-template-columns: 10fr 1fr 1fr;
+    text-align: center;
+    padding-right: 15px;
+}
+
+.news-container {
+	display: grid;
+	grid-template-columns: 1fr 9fr 1fr 1fr;
+	border-radius: 20px;
+}
+
+.news-thumb {
+	margin: 0 30px;
+}
+
+div.cnt {
+	margin: 0 20px;
+	text-align: center;
+}
+
+.news-search-container {
+	display: grid;
+	grid-template-columns: 1fr 5fr 2fr;
+}
+
+.news-search-container > input {
+	height: 50px;
+}
+
+.news-search-container > button {
+	height: 50px;
+}
+
+/************************** 뉴스 페이지 **************************/
+
+a.back-to-news-list {
+	cursor: pointer;
+}
+
+.back-to-news-list:hover {
+	font-color: #dca73a;
+	border-bottom: #dca73a;
+}
+
+.car-estimate span {
+    color: #336fc9;
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.deleteBtn{
+	cursor: pointer;
+	text-align: center;
+}
+
+span.status {
+    padding: 0 10px;
+    margin-right: 6px;
+    line-height: 20px;
+    border: 1px solid #222;
+    border-radius: 11px;
+    color: #222;
+}
+
+div.saleHeader{
+	display:flex;
+	justify-content: flex-end;
+	margin: 5% 0;
+}
+
+div.statusBtn > a{
+	padding: 0 10px;
+	margin: 10px;
+	color: #dca73a !important;
+	border: 1px solid #dca73a;
+    border-radius: 20px;
+}
+
+
+div.statusBtn > a.on{
+	background-color: #dca73a  !important;
+	color: white !important;
+}
+
+a:hover {
+	cursor: pointer;
+}
+
+input#search {
+
+    min-height: 35px;
+    min-width: 200px;
+}
+
+div.divSearch{
+	margin-left: 20px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px)
+.gj-textbox-md {
+    width: 80%;
+}
+/* .gj-textbox-md {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,.42);
+    display: block;
+    font-family: "Helvetica","Arial",sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 4px 0px;
+    margin: 0;
+    width: 100%;
+    background: 0 0;
+    color: rgba(0,0,0,.87);
+    padding-left: 44px;
+    border: 1px solid #dca73a;
+    width: 177px;
+    height: 55px;
+    border-radius: 5px;
+} */
+
+div.datePicker{
+ display: flex;
+ margin-right: 10px;
+}
+
+div.datePicker div.single-select-box input{
+	max-height: 35px;
+    max-width: 200px;
+}
+
+.gj-datepicker-md [role="right-icon"] {
+
+    top: 5px !important;
+
+}
+
+div.datePicker > div{
+	margin: 5px;
+}
+
+nav.blog-pagination {
+    margin-bottom: 150px;
+}
+
+
+
+
+
+
+
