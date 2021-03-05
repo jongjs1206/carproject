@@ -115,7 +115,7 @@ $(function() {
 		$.ajax({
 			type : 'post',
 			async : true,
-			url : '../all/salesDetail.do',
+			url : '../all/detail.do',
 			beforeSend : function(xhr)
 			{	
 				xhr.setRequestHeader(header, token);
