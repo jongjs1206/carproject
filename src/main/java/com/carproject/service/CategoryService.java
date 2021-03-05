@@ -20,5 +20,8 @@ public interface CategoryService {
 	public List<HashMap<String, Object>> detail_productselect(HeartVO vo);
 	public List<HashMap<String, Object>> grade1_productselect(MemberVO vo);
 	public List<HashMap<String, Object>> grade2_productselect(MemberVO vo);
+	public List<HashMap<String, Object>> searchselect(HeartVO vo);
 	public int sellcount();
+	public int country_count(String country);
+	public int search_count(String search);
 }

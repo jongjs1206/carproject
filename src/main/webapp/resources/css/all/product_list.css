@@ -364,3 +364,12 @@ button.btn-ch {
 	margin-left: 10px;
 	cursor: pointer;
 }
+
+@media screen and (max-width:991px){
+	.wrap-finder-maker{
+		display: block;
+	}
+	.area-maker,.area-model,.area-detail,.area-grade{
+		width: 100%;
+	}
+}

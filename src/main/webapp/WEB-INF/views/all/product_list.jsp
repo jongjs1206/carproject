@@ -160,7 +160,7 @@
 	</div>
 	<div class="container">
 		<div style="display: flex; justify-content: flex-end;">
-			<input type='text' placeholder="차명을 입력하세요"
+			<input class='searh_text' type='text' placeholder="차명을 입력하세요"
 				style="border: none; border-bottom: 3px solid #DCA73A; margin-top: 30px; margin-bottom: 30px; width: 200px;">
 			<button class = 'btn_search'>검색</button>
 		</div>
@@ -173,7 +173,10 @@
 	<!-- Room Start -->
 	<section class="room-area">
 		<div class="container">
+			<div style="display: flex; justify-content: space-between;">
 			<div class='product_count'>등록 <fmt:formatNumber value="${product_count}" pattern="#,###" />대</div>
+			<div class='search_result off'></div>
+			</div>
 			<hr>
 			<div class="row" style="display: flex;">
 				<c:forEach var="product_sell" items="${sell}">
