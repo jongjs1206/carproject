@@ -17,6 +17,13 @@
 <script src="https://kit.fontawesome.com/c11219882f.js"
 	crossorigin="anonymous"></script>
 </head>
+<script type="text/javascript">
+$(function() {
+	$('.btn_submit').click(function(){
+		$('.form_out').submit();
+	})
+})
+</script>
 <body>
 	<!-- Preloader Start -->
     <div id="preloader-active">
@@ -47,7 +54,7 @@
 						</div>
 												
 						<div class="col-xl-10 col-lg-10">
-						<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+						<form:form class='form_out' action="${pageContext.request.contextPath}/logout" method="POST">
 							<!-- main-menu -->
 							<div class="main-menu f-right d-none d-lg-block">
 								<nav>
@@ -79,31 +86,30 @@
 												<li><a href="../user/mem.do">mem.do</a></li>
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
-											
 										<li>
                                         	<a href="#" onclick="window.open('../all/chat.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=670, left=0, top=0, scrollbars=yes');return false">
                                         	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
                                         </li>
 										<li style="width: 40px;"></li>
 
-										<sec:authorize access="isAnonymous()">
+										<c:if test="${sessionScope.info.m_id eq null}">
 											<li><a href="../all/login.do" class="btn more-btn1"
 												id="login-color-menu"> Login <i class="ti-angle-right"></i>
 											</a></li>
 											<li><a href="../all/join.do" class="btn more-btn1"
 												id="login-color-menu"> 회원가입 <i class="ti-angle-right"></i>
 											</a></li>
-										</sec:authorize>
+										</c:if>
 
-										<sec:authorize access="isAuthenticated()">
+										<c:if test="${sessionScope.info.m_id ne null}">
 												<li><a>${sessionScope.info.m_name}<i class="fas fa-user-tie"></i></a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
-												<li><a><input type="submit" value="로그아웃"></a></li>
+												<li><a style="cursor: pointer;" class='btn_submit'>로그아웃</a></li>
 											</ul></li>
-										</sec:authorize>
+										</c:if>
 									</ul>
 								</nav>
 							</div>
@@ -120,6 +126,24 @@
 		</div>
 		<!-- Header End -->
 	</header>
+	<!-- All JS Custom Plugins Link Here here -->
+	<script src="./../resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
+	<!-- Jquery, Popper, Bootstrap -->
+	<script src="./../resources/assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="./../resources/assets/js/popper.min.js"></script>
+	<script src="./../resources/assets/js/bootstrap.min.js"></script>
+	<!-- Jquery Mobile Menu -->
+	<script src="./../resources/assets/js/jquery.slicknav.min.js"></script>
+
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script src="./../resources/assets/js/owl.carousel.min.js"></script>
+	<script src="./../resources/assets/js/slick.min.js"></script>
+	<!-- Date Picker -->
+	<script src="./../resources/assets/js/gijgo.min.js"></script>
+	<!-- One Page, Animated-HeadLin -->
+	<script src="./../resources/assets/js/wow.min.js"></script>
+	<script src="./../resources/assets/js/animated.headline.js"></script>
+	<script src="./../resources/assets/js/jquery.magnific-popup.js"></script>
 </body>
 </html>

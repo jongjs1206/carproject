@@ -7,12 +7,12 @@
 <link rel="icon" href="resources/images/etc/favicon.png">
 <title>title</title>
 <script type="text/javascript">
-	window.self.location = "all/homepage.do";
+	alert('로그아웃 되었습니다.');
+	window.self.location = "../all/homepage.do";
 </script>
 </head>
 
 <body>
-	
 	
 </body>
 </html>

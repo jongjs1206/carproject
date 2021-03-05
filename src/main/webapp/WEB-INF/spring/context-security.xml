@@ -15,13 +15,13 @@
 		 authentication-failure-url="/all/login.do?error"
 		  username-parameter="m_id" password-parameter="m_pw" />
 		  
-		<logout logout-url="/logout" logout-success-url="/all/out.do"/>
+		<logout logout-url="/logout" logout-success-url="/all/out.do" invalidate-session="true"/>
 		<access-denied-handler error-page="/all/noaccess.do" />
 		
 		<csrf disabled="false" /> 
 		
 		
-		<session-management invalid-session-url="/all/login.do"> 
+		<session-management invalid-session-url="/all/logout.do"> 
 		    <concurrency-control 
 		    					max-sessions="1" 
 		                         expired-url="/all/homepage.do"   

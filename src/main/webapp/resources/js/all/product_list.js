@@ -115,7 +115,7 @@ $(function() {
 		$.ajax({
 			type : 'post',
 			async : true,
-			url : '../all/detail.do',
+			url : '../all/salesDetail.do',
 			beforeSend : function(xhr)
 			{	
 				xhr.setRequestHeader(header, token);
@@ -1126,8 +1126,8 @@ $(function() {
 					$(".product_all:eq("+ (14-count) +")").addClass('off');
 				}
 				for ( var count = 0; count < list.length ; count++){					
-					$(".go_detail1:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
-					$(".go_detail2:eq("+count+")").attr("href", "../all/detail.do?num="+list[count].sell_id);
+					$(".go_detail1:eq("+count+")").attr("href", "../all/salesDetail.do?num="+list[count].sell_id);
+					$(".go_detail2:eq("+count+")").attr("href", "../all/salesDetail.do?num="+list[count].sell_id);
 					$(".car_image:eq("+count+")").attr("src", list[count].image+'img1.png');
 					$(".go_detail2:eq("+count+")").text(list[count].title);
 					if(list[count].resultoption=='')

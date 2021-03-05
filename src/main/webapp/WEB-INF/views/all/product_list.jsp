@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Hotel</title>
+<title>사차원</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -54,6 +54,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 
 <script type="text/javascript" src="../resources/js/all/product_list.js"></script>
+<script type="text/javascript" src="../resources/js/all/jquery.cookie.js"></script>
 </head>
 <body>
 
@@ -184,13 +185,13 @@
 						<!-- Single Room -->
 						<div class="single-room mb-50">
 							<div class="room-img">
-								<a class='go_detail1' href="../all/detail.do?num=${product_sell.sell_id}"><img class="car_image" style="height: 277px;"
+								<a class='go_detail1' href="../all/salesDetail.do?num=${product_sell.sell_id}"><img class="car_image" style="height: 277px;"
 									src="${product_sell.image}img1.png"
 									alt=""></a>
 							</div>
 							<div class="room-caption" style="height: 220px;">
 								<h3 style="height: 50px;">
-									<a class='go_detail2' href="../all/detail.do?num=${product_sell.sell_id}">${product_sell.title}</a>
+									<a class='go_detail2' href="../all/salesDetail.do?num=${product_sell.sell_id}">${product_sell.title}</a>
 								</h3>
 								<div class="per-night">
 								<span><span class='car_opt'>${product_sell.resultoption}</span></span>

@@ -292,9 +292,6 @@ button.btn-ch {
 	background-color: #e6e6fa;
 }
 
-.off {
-	display: none;
-}
 
 .optBox>input, .optBoxg1>input, .optBoxg2>input {
 	position: relative;
