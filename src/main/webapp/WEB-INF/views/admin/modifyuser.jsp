@@ -140,7 +140,7 @@
         </div>
         
         <!-- 대시보드 내용 -->
-        <div id="layoutSidenav_content">
+        <div id="layoutSidenav_content" style="margin-right: 50px; margin-top: 100px;">
             <main>
                 <form action="modifyuser.do" method="post">
                 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -164,29 +164,43 @@
                         <div class="form-group col-md-3"></div>
                         
                         <!-- 성별 -->
-                        <div class="form-group col-md-3"></div>                                
-                        <div class="form-group col-md-3">
-                            <label for="inputState">성별</label>
-                            <select id="inputGender" name="inputGender" class="form-control">
-                                <option selected>남</option>
-                                <option>여</option>
-                            </select>
-                        </div>                   
-                        
+                        <div class="form-group col-md-3"></div>
                         <!-- 이름 -->                             
                         <div class="form-group col-md-3">
                             <label for="inputAddress">이름</label>
                             <input type="text" class="form-control" id="inputName" name="inputName" size="40px"
-                                value=${update.m_name}>
+                                value='${update.m_name}'>
                         </div>
+                                                        
+                        <div class="form-group col-md-3">
+                            <label for="inputState">성별</label>
+                            <select id="inputGender" name="inputGender" class="form-control">
+                                <c:if test="${update.gender eq '남'}">
+	                                <option selected>남</option>
+    	                            <option>여</option>
+                                </c:if>
+                                <c:if test="${update.gender eq '여'}">
+	                                <option>남</option>
+    	                            <option selected>여</option>
+                                </c:if>
+                            </select>
+                        </div>                   
+                        
+                        
                         <div class="form-group col-md-3"></div> 
                                                                                      
                         <!-- 이메일 -->
                         <div class="form-group col-md-3"></div>                                
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="inputAddress">이메일</label>
                             <input type="text" class="form-control" id="inputEmail" name="inputEmail" size="40px"
                                 value=${update.email}>
+                        </div>
+                        <!-- 코인 -->
+                        <div class="form-group col-md-3">
+                            <label for="inputAddress">코인</label>
+                            <input type="text" class="form-control" id="inputCoin" name="inputCoin" size="40px"
+                                value='${update.coin}'>
                         </div>
                         <div class="form-group col-md-3"></div>
                         
@@ -212,14 +226,13 @@
                         
                         <!-- Button -->
                         <div class="form-group col-md-3"></div>          
-                        <div class="form-group col-md-2">     
+                        <div class="form-group col-md-4">     
                           <button type="submit" class="btn btn-primary">수정하기</button>
+                          <a class="btn btn-primary" href='../admin/userlist.do'>취소하기</button></a>
                         </div>   
                         </form>
-                        <div class="form-group col-md-2">  
+                         <div class="form-group col-md-4">   
                           <input type="button" class="btn btn-primary" onclick="location.href='setAdmin.do?id=${update.m_id}'" value="관리자부여"> 
-                        </div> 
-                         <div class="form-group col-md-2">   
                           <input type="button" class="btn btn-primary" onclick="location.href='setBlacklist.do?id=${update.m_id}'" value="블랙리스트추가">
                         </div>                                                                     
                     </div>
@@ -242,12 +255,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../resources/js/admin/chart-area-demo.js"></script>
-    <script src="../resources/js/admin/chart-bar-demo.js"></script>
-    <script src="../resources/js/admin/chart-area-demo.js"></script>
-    <script src="../resources/js/admin/chart-bar-demo.js"></script>
+    
 </body>
 
 </html>

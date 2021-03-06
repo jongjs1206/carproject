@@ -117,6 +117,7 @@
                                                 <th>이메일</th>
                                                 <th>생년월일</th>
                                                 <th>휴대폰번호</th>
+                                                <th>코인</th>
                                                 <th>상태</th>  
                                             </tr> 
                                         </thead>
@@ -130,7 +131,8 @@
 			                                      <td>${row.email}</td>
 			                                      <td>${row.birth}</td>
 			                                      <td>${row.tel}</td>
-			                                    <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='modifyuser.do?id=${row.m_id}'" value="수정하기"></td>                                  </tr>    
+			                                      <td>${row.coin}</td>
+			                                    <td align="center"><a href='../admin/modifyuser.do?id=${row.m_id}'><input type="button" class="btn btn-primary" value="수정하기"></a></td>                                  </tr>    
 			                                  </c:forEach>
                                         </tbody> 
                                     </table>

@@ -68,7 +68,7 @@ $(function() {
 									<ul id="navigation">
 										<li><a href="../all/product_list.do">매장</a></li>
 										<li><a class='sell_header' style="cursor: pointer;">내 차 팔기</a></li>
-										<li><a href="../all/carnewsBoardList.do">자동차 뉴스</a></li>
+										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
 										<li><a href="../user/reviewDetail.do">구매후기</a></li>
 											
 										<li><a href="#">Q&A</a>
