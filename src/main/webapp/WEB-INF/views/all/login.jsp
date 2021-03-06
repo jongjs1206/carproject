@@ -57,6 +57,7 @@
 	type="text/css">
 
 <script type="text/javascript" src="../resources/js/all/join.js"></script>
+<script type="text/javascript" src="../resources/js/all/find_idpw.js"></script>
 </head>
 <body>
 
@@ -106,7 +107,7 @@
                         </div>
                     </form:form>
                     <div class="LoginMyFindButton_area__245Jy">
-                    	<a class="LoginMyFindButton_link__fee2S" href="#" onClick="window.open('find_idpw.do','아이디/비밀번호 찾기','width=500,height=500,toolbar=no,scrollbars=no,left=200,top=100')">
+                    	<a class="LoginMyFindButton_link__fee2S" href="#" id="popup_idpw">
                     		아이디/비밀번호 찾기
                    		</a>
                    		<a class="LoginMyFindButton_link__fee2S" href="../all/join.do">

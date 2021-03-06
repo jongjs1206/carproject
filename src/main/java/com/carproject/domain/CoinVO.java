@@ -1,10 +1,10 @@
 package com.carproject.domain;
 
 public class CoinVO {
-	private String m_id;
-	private String day;
-	private int price;
-	private int coin;
+	private String m_id;   /* 아이디 */
+	private String day;    /* 충전 날짜 */
+	private int price;     /* 결제 금액 */
+	private int coin;      /* 코인 수량 */
 	
 	public String getM_id() {
 		return m_id;

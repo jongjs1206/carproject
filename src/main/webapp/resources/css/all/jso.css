@@ -16,13 +16,17 @@ body {
 }
 
 p {
-	margin: 0 0 20px;
+/*	margin: 0 0 20px; */
 	line-height: 1.5;
+	min-width:450px !important;
+	max-width:450px !important;
 }
 
 .main {
-	min-width:320px;
-	max-width:400px;
+	min-width:550px;
+	max-width:550px;
+	min-height:400px;
+	max-height:400px;
 	padding:50px;
 	margin :0 auto;
 	background:#fff;
@@ -89,10 +93,10 @@ input:checked + label:hover {
 }
 
 input[type=text] {
-	height: 20px;
+/*	height: 20px; */
 	padding: 10px 20px;
 	width: 80%;
-	border: solid 1px #696968;
+	border: solid 1px lightgray;
 }
 
 input[type=button] {
@@ -115,6 +119,31 @@ input[type=button] {
 	justify-content: space-around;
 	flex-direction:column;
 	margin: 50px 50px;
+}
+
+.margin-left {
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+.my-btn {
+    background: #dca73a;
+    border: medium none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    padding: 15px 30px;
+    text-align: center;
+    text-transform: capitalize;
+    touch-action: manipulation;
+    transition: all 0.3s ease 0s;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 
@@ -211,3 +240,5 @@ div#coin-box {
 	border: 1px solid gray;
 	border-radius: 10px;
 }
+
+
