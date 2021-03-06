@@ -52,9 +52,7 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-
-<script type="text/javascript" src="../resources/js/all/product_list.js"></script>
-<script type="text/javascript" src="../resources/js/all/jquery.cookie.js"></script>
+<script type="text/javascript" src="../resources/js/user/my_heart.js"></script>
 </head>
 <body>
 
@@ -68,13 +66,13 @@
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
-			data-background="../resources/img/top1.jpg">
+			data-background="../resources/img/top2.jpg">
 			<div class="container">
 				<div class="row ">
 					<div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
 						<div class="hero-caption">
-							<span>전체</span>
-							<h2>자동차 매장</h2>
+							<span>마이페이지</span>
+							<h2>찜 목록</h2>
 						</div>
 					</div>
 				</div>
@@ -85,102 +83,23 @@
 
 
 
-	<!-- 세부검색 -->
-	<div class="container maker_margin">
-		<div class='country'>
-			<span class='downline'>전체</span>| <span>국산차</span>| <span>수입차</span>
-		</div>
-		<div class="wrap-finder-maker">
-			<!-- 제조사 -->
-			<div class="area-maker">
-				<h4>제조사</h4>
-				<div class="list-comm js-tabs">
-					<dl class="group-list abroad_table">
-						<c:forEach var="mycategory" items="${category}">
-							<c:if test="${null eq mycategory.count}">
-								<dd class="category_list">
-									<button type="button" class="btn_category">
-										<span>${mycategory.jejosa}</span> <span class="t2 mkCnt_21">0</span>
-									</button>
-								</dd>
-							</c:if>
-							<c:if test="${null ne mycategory.count}">
-								<dd class="category_list">
-									<button type="button" class="btn_category">
-										<span>${mycategory.jejosa}</span> <span class="t2 mkCnt_21">${mycategory.count}</span>
-									</button>
-								</dd>
-							</c:if>
-						</c:forEach>
-					</dl>
-				</div>
-			</div>
-
-			<!-- 모델 -->
-			<div class="area-model">
-				<h4>모델</h4>
-				<div class="list-comm js-tabs">
-					<dl class="group-list model_table">
-						<div class="cell-jejo">
-							<span>제조사를 <br>선택하세요.
-							</span>
-						</div>
-					</dl>
-				</div>
-			</div>
-			<!-- 세부모델 -->
-			<div class="area-detail">
-				<h4>세부모델</h4>
-				<div class="list-comm">
-					<dl class="group-list detail_table">
-						<div class="cell-mode">
-							<span>모델을 <br>선택하세요.
-							</span>
-						</div>
-					</dl>
-				</div>
-			</div>
-			<!-- 등급 -->
-			<div class="area-grade">
-				<h4>등급</h4>
-				<div class="list-comm">
-					<dl class="group-list grade_table">
-						<div class="cell-detail">
-							<span>세부모델을 <br>선택하세요.
-							</span>
-						</div>
-						<div class="two-detail off">
-							<span>세부모델을 2개 이상 선택하시면 <br>등급은 선택하실 수 없습니다.
-							</span>
-						</div>
-					</dl>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
-	<div class="container">
-		<div style="display: flex; justify-content: flex-end;">
-			<input class='searh_text' type='text' placeholder="차명을 입력하세요"
-				style="border: none; border-bottom: 3px solid #DCA73A; margin-top: 30px; margin-bottom: 30px; width: 200px;">
-			<button class = 'btn_search'>검색</button>
-		</div>
-	</div>
+	
+	
 
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>										
 
 		
 	<!-- Room Start -->
-	<section class="room-area">
+	<section class="room-area" style="margin-top: 50px;">
 		<div class="container">
 			<div style="display: flex; justify-content: space-between;">
-			<div class='product_count'>등록 <fmt:formatNumber value="${product_count}" pattern="#,###" />대</div>
+			<div class='product_count'><fmt:formatNumber value="${heartcount}" pattern="#,###" />대 찜</div>
 			<div class='search_result off'></div>
 			</div>
 			<hr>
 			<div class="row" style="display: flex;">
-				<c:forEach var="product_sell" items="${sell}">
+				<c:forEach var="product_sell" items="${heartlist}">
 					<div class="col-xl-4 col-lg-6 col-md-6 product_all">
 						<!-- Single Room -->
 						<div class="single-room mb-50">
@@ -202,16 +121,10 @@
 									<div style="margin-top: 5px;">
 										<span class='car_price' style="font-size: 26px;">
 										<fmt:formatNumber value="${product_sell.price}" pattern="#,###" />만원</span>
-										<c:choose>
-										<c:when test="${product_sell.ht eq '1'}">
+										
 											<i class="fas fa-heart wish color_pink"></i>									
 											<input type="hidden" class='heart_on_off' value="on"/>
-										</c:when>
-										<c:otherwise>
-											<i class="fas fa-heart wish"></i>	
-											<input type="hidden" class='heart_on_off' value="off"/>
-										</c:otherwise>
-										</c:choose>
+										
 										<input type="hidden" class='sell_id' value="${product_sell.sell_id}"/>									
 									</div>
 								</div>
@@ -219,13 +132,20 @@
 						</div>
 					</div>
 				</c:forEach>
-				<div class='no_carlist off'>
-					등록된 차량이 없습니다.
-				</div>
+				<c:if test="${heartcount eq '0'}">
+					<div class='no_carlist'>
+						찜한 차량이 없습니다.
+					</div>
+				</c:if>
+				<c:if test="${heartcount ne '0'}">
+					<div class='no_carlist off'>
+						찜한 차량이 없습니다.
+					</div>
+				</c:if>
 			</div>
 		</div>
 	</section>
-	<c:set var='all_page' value='${(product_count/15)+(1-((product_count/15)%1))%1}'></c:set>
+	<c:set var='all_page' value='${(heartcount/15)+(1-((heartcount/15)%1))%1}'></c:set>
 	<c:set var='start' value='2'></c:set>
 	<c:set var='end' value='10'></c:set>
 	<c:if test="${all_page<end}">

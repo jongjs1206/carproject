@@ -21,6 +21,8 @@ public interface CategoryDAO {
 	List<HashMap<String, Object>> grade1_productselect(MemberVO vo);
 	List<HashMap<String, Object>> grade2_productselect(MemberVO vo);
 	List<HashMap<String, Object>> searchselect(HeartVO vo);
+	List<HashMap<String, Object>> heartlistselect(HeartVO vo);
+	int heartlistcount(HeartVO vo);
 	int sellcount();
 	int country_count(String country);	
 	int search_count(String search);	

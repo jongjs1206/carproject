@@ -362,6 +362,10 @@ button.btn-ch {
 	cursor: pointer;
 }
 
+.no_carlist{
+	padding-left: 40%;
+}
+
 @media screen and (max-width:991px){
 	.wrap-finder-maker{
 		display: block;

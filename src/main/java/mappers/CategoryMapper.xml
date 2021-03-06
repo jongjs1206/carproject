@@ -181,4 +181,18 @@ inner join sell s on s.g_id = g.g_id where abroad=#{country}
 SELECT COUNT(*) AS COUNT FROM sell WHERE title LIKE '%${value}%' ORDER BY w_date
 </select>
 
+<select id="heartlistselect" resultType="hashmap" parameterType="heart">
+SELECT * FROM 
+(SELECT * FROM heart WHERE m_id=#{m_id}) h 
+INNER JOIN sell s ON h.sell_id=s.sell_id 
+ORDER BY w_date DESC LIMIT ${sell_id},15
+</select>
+
+<select id="heartlistcount" resultType="Integer" parameterType="heart">
+SELECT COUNT(*) as count FROM 
+(SELECT * FROM heart WHERE m_id=#{m_id}) h 
+INNER JOIN sell s ON h.sell_id=s.sell_id 
+ORDER BY w_date
+</select>
+
 </mapper>
