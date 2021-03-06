@@ -9,7 +9,10 @@
 	</insert>
 
 	<insert id="deleteHeart" parameterType="heart">
-		delete from heart where m_id = #{m_id} and sell_id = #{sell_id}
+		delete from heart where m_id = #{m_id}  
+		<if test="sell_id!=0">
+		 	and sell_id = #{sell_id}
+		</if>
 	</insert>
 
 	<select id="selectHeart" resultType="heart" parameterType="String">

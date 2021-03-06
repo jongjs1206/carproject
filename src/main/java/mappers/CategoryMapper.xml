@@ -130,7 +130,7 @@ where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
-<select id="grade1_productselect" resultType="hashmap" parameterType="heart">
+<select id="grade1_productselect" resultType="hashmap" parameterType="member">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
 (SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
@@ -146,7 +146,7 @@ where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
-<select id="grade2_productselect" resultType="hashmap" parameterType="heart">
+<select id="grade2_productselect" resultType="hashmap" parameterType="member">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
 (SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
@@ -162,8 +162,37 @@ where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<select id="searchselect" resultType="hashmap" parameterType="heart">
+SELECT * FROM sell s 
+left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on s.sell_id=h.sell_id
+WHERE title LIKE '%${date}%' ORDER BY w_date desc LIMIT ${sell_id},15
+</select>
 <select id="sellcount" resultType="Integer">
 SELECT COUNT(*) AS count FROM sell
+</select>
+
+<select id="country_count" resultType="Integer" parameterType="String">
+select COUNT(*) AS COUNT from category c 
+inner join detail d on c.car_num=d.car_num inner join grade g on g.d_id=d.d_id 
+inner join sell s on s.g_id = g.g_id where abroad=#{country}
+</select>
+
+<select id="search_count" resultType="Integer" parameterType="String">
+SELECT COUNT(*) AS COUNT FROM sell WHERE title LIKE '%${value}%' ORDER BY w_date
+</select>
+
+<select id="heartlistselect" resultType="hashmap" parameterType="heart">
+SELECT * FROM 
+(SELECT * FROM heart WHERE m_id=#{m_id}) h 
+INNER JOIN sell s ON h.sell_id=s.sell_id 
+ORDER BY w_date DESC LIMIT ${sell_id},15
+</select>
+
+<select id="heartlistcount" resultType="Integer" parameterType="heart">
+SELECT COUNT(*) as count FROM 
+(SELECT * FROM heart WHERE m_id=#{m_id}) h 
+INNER JOIN sell s ON h.sell_id=s.sell_id 
+ORDER BY w_date
 </select>
 
 </mapper>

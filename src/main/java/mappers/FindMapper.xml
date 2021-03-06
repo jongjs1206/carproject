@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FindMap">
+
+	<!-- ID 찾기 -->
+	<select id="findId" parameterType="member" resultType="String">
+		SELECT m_id FROM member
+		WHERE m_name = #{m_name} AND tel = #{tel};
+	</select>
+	
+	<!-- PW 찾기 :: 1단계 -->
+	<select id="confirmInfo" parameterType="member" resultType="Integer">
+		SELECT count(*) FROM member
+		WHERE m_id = #{m_id} AND email = #{email};
+	</select>
+	
+	<!-- PW 찾기 :: 2단계 -->
+	<select id="findPw" parameterType="member" resultType="member">
+		SELECT * FROM member
+		WHERE m_id = #{m_id} AND email = #{email};
+	</select>
+	
+	<!-- PW 수정 -->
+	<update id="updatePw" parameterType="member">
+		UPDATE member SET
+		m_pw = #{m_pw}
+		WHERE m_id = #{m_id}
+	</update>
+
+</mapper>

@@ -9,7 +9,6 @@
 	-webkit-font-smoothing: antialiased;
 	position: relative;
 	width: 130px;
-	margin-bottom: 5px;
 	background: #FAFAFA;
 	border: 1px solid #DCDCDC;
 	border-radius: 8px;
@@ -17,7 +16,9 @@
 	z-index: 10;
 	
 }
-
+.side-vehicle__container{
+	border-top: 1px solid #DCDCDC;
+}
 .side-vehicle__head-text {
 	word-break: keep-all;
 	-webkit-font-smoothing: antialiased;
@@ -28,7 +29,7 @@
 	font-weight: bolder;
 	display: block;
 	padding: 9px 0;
-	border-bottom: 1px solid #DCDCDC;
+	
 	text-align: center;
 }
 

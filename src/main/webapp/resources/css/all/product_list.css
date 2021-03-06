@@ -292,9 +292,6 @@ button.btn-ch {
 	background-color: #e6e6fa;
 }
 
-.off {
-	display: none;
-}
 
 .optBox>input, .optBoxg1>input, .optBoxg2>input {
 	position: relative;
@@ -363,4 +360,17 @@ button.btn-ch {
 	border: none;
 	margin-left: 10px;
 	cursor: pointer;
+}
+
+.no_carlist{
+	padding-left: 40%;
+}
+
+@media screen and (max-width:991px){
+	.wrap-finder-maker{
+		display: block;
+	}
+	.area-maker,.area-model,.area-detail,.area-grade{
+		width: 100%;
+	}
 }

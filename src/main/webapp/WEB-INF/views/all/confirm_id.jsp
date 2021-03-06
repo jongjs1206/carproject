@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 비밀번호 찿기</title>
-
+<title> 아이디 확인 </title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,18 +15,16 @@
 	href="../resources/assets/img/favicon.ico">
 
 <!-- CSS here -->
+<link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../resources/assets/css/style.css">
 <link rel="stylesheet" href="../resources/assets/css/themify-icons.css">
-<link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/css/all/jso.css" type="text/css">
-<!-- JS here -->	
+<link rel="stylesheet" href="../resources/css/all/find_idpw.css" type="text/css"/>
+<!-- JS here -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="../resources/js/all/find_idpw.js"></script>	
-	
-
 
 </head>
 <body>
@@ -49,45 +48,36 @@
 <!--################################### 상단 설명란 ###################################-->
 <div class="label-container">
 	<div class=""><b>등록된 내 회원정보로 찾을 수 있습니다.</b></div>
-</div>
+</div>    
+    
 
-<!--################################### 탭 메뉴 ###################################-->
+<!-- FindController의 FindId 결과에 따라 화면 출력 -->
 <div class="main">
-
-	<input id="tab1" type="radio" name="tabs" class="input" checked>
-	<label for="tab1" >아이디 찾기</label>
 	
-	<input id="tab2" type="radio" name="tabs" class="input">
-	<label for="tab2">비밀번호 찾기</label>
-
-	<!--################################### 첫번째 탭 ###################################-->
-	<!-- 확인 버튼 id : idsubmit / find_idpw.js 에서 버튼 작동 --> 
-    <!-- >>>> 사용자입력값 가지고 CoinQnaController로 이동하여 ID값 반환 -->
-    <!-- >>>> confirm_id.jsp로 페이지 전환 -->
-	<section id="content1" class="container">
-		<p>
-			<span class="margin-left">회원 가입된 이름과 휴대폰번호를 입력해 주세요.</span><br/><br/><br/>
-			<input type="text" name="m_name" id="m_name" placeholder="이름"/ class="margin-left"><br/><br/>
-			<input type="text" name="tel" id="tel" placeholder="예) 01012345678" class="margin-left"/><br/><br/>
-			<a href="#" id='idsubmit' class="my-btn margin-left btn more-btn1">확인<i class="ti-angle-right"></i> </a>
-
-		</p>
-	</section>
-	
-	<!--################################### 두번째 탭 ###################################-->
-	<!-- 확인 버튼 id : pwsubmit / find_idpw.js 에서 버튼 작동 --> 
-    <!-- >>>> 사용자입력값 가지고 CoinQnaController로 이동하여 임시비밀번호 메일 전송 -->
-    <!-- >>>> confirm_id.jsp로 페이지 전환 -->
-	<section id="content2">
-		<p>
-			회원 가입된 아이디와 이메일을 입력해 주세요. <br/>
-			가입시 등록한 이메일로 새 비밀번호 변경을 위한 인증번호가 발송됩니다.  <br/><br/>
-			<input type="text" name="m_id" id="m_id" placeholder="아이디" class=""/><br/><br/>
-			<input type="text" name="user_email" id="user_email" placeholder="예) gildong@gmail.com" class=""/><br/><br/>
-			<a href="#" id='pwsubmit'  class="my-btn view-btn1 btn more-btn1">다음<i class="ti-angle-right"></i> </a>
+	<c:choose>
+		<c:when test="${empty m_id}">
+			회원정보가 일치하지 않습니다.<br/><hr/>
+			<a href="../all/find_idpw.do" class="my-btn view-btn1 btn more-btn1">
+				<i class="ti-angle-left"></i>뒤로 가기
+			</a>
+		</c:when>
+		<c:otherwise>
 		
-		</p>
-	</section>	
+			ID 찾기 결과 확인
+			
+			<hr/>
+			<span class="idbox">${m_id}</span>
+			<hr/>
+			
+			<span class="btnbox">
+				<a href="#" id="back_to_login" class="my-btn view-btn1 btn more-btn1"> 
+					로그인하기<i class="ti-angle-right"></i> </a> 
+				<a href="#" id="go_to_find_pw" class="my-btn view-btn1 btn more-btn1"> 
+					비밀번호 찾기<i class="ti-angle-right"></i> </a>
+			</span>
+		</c:otherwise>
+	</c:choose>
+		
 </div>
 
 
@@ -128,6 +118,6 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
-
+	
 </body>
 </html>

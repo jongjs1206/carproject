@@ -95,4 +95,34 @@ public class CategoryDAOImpl implements CategoryDAO{
 		System.out.println("===>  CategoryMapper sellcount 호출");
 		return mybatis.selectOne("categoryMap.sellcount");
 	}
+
+	@Override
+	public int country_count(String country) {
+		System.out.println("===>  CategoryMapper country_count 호출");
+		return mybatis.selectOne("categoryMap.country_count",country);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> searchselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper searchselect 호출");
+		return mybatis.selectList("categoryMap.searchselect",vo);
+	}
+
+	@Override
+	public int search_count(String search) {
+		System.out.println("===>  CategoryMapper search_count 호출");
+		return mybatis.selectOne("categoryMap.search_count", search);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> heartlistselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper heartlistselect 호출");
+		return mybatis.selectList("categoryMap.heartlistselect", vo);
+	}
+
+	@Override
+	public int heartlistcount(HeartVO vo) {
+		System.out.println("===>  CategoryMapper heartlistcount 호출");
+		return mybatis.selectOne("categoryMap.heartlistcount", vo);
+	}
 }
