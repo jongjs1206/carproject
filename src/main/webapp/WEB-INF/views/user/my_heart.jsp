@@ -95,7 +95,9 @@
 		<div class="container">
 			<div style="display: flex; justify-content: space-between;">
 			<div class='product_count'><fmt:formatNumber value="${heartcount}" pattern="#,###" />대 찜</div>
-			<div class='search_result off'></div>
+			<div class='delete_heart' style='background-color: #dca73a; color:white; 
+			padding: 5px 10px 5px 10px; cursor:pointer; border-radius: 5px;'>
+			전체 삭제</div>
 			</div>
 			<hr>
 			<div class="row" style="display: flex;">

@@ -35,6 +35,36 @@ $(function() {
 		}
 	})
 	
+	$('.delete_heart').click(function(){
+		if($('.product_count').text().slice(0,-3)%15==0){
+			alert('삭제할 목록이 없습니다.');
+		}else{
+			var result = confirm('전체 삭제 하시겠습니까?');
+			if(result){
+				$.ajax({
+					type : 'post',
+					async : true,
+					url : '../user/heart_all.do',
+					beforeSend : function(xhr)
+					{	
+						xhr.setRequestHeader(header, token);
+					},
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					dataType : 'json',
+					data : {"id" : $('.login_on').val()},
+					success: function(){
+		        	},
+					error : function(err){ console.log(err)}  //실패했을때
+				});
+				$('.product_count').text("0대 찜"); 
+				$('.page_choice').remove(); 
+				$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+				$('.no_carlist').removeClass('off');
+				$('.product_all').addClass('off');
+			}
+		}
+	})
+	
 	$(document).on("click",".page_choice",function(){
 		var t = $(this).text();
 		button_page(t);

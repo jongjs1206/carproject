@@ -517,6 +517,14 @@ public class UserController {
 		vo.setSell_id(Integer.parseInt(sell_id));
 		heartService.deleteHeart(vo);
 	}
+	
+	@RequestMapping("user/heart_all.do")
+	@ResponseBody
+	public void heart_all(String id) {
+		HeartVO vo = new HeartVO();
+		vo.setM_id(id);
+		heartService.deleteHeart(vo);
+	}
 
 	@RequestMapping("user/my_heart.do")
 	public void my_heart(String page, Model model, HttpSession session) {
