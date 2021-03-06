@@ -42,7 +42,11 @@ search();
 //상태 클래스 toggle
  window.statusOn = function(obj) {
   $(obj).toggleClass( 'on' );
+  if($(obj).hasClass("on")){
+   search();
+  }
 }
+
 
 
 

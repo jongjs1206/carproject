@@ -48,7 +48,7 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-<script type="text/javascript" src="../resources/js/all/my_sales.js"></script>
+<script type="text/javascript" src="../resources/js/user/my_sales.js"></script>
 
 </head>
 <body>
