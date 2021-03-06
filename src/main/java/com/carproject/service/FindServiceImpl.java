@@ -1,6 +1,7 @@
 package com.carproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.carproject.dao.FindDAO;
@@ -11,6 +12,9 @@ public class FindServiceImpl implements FindService{
 	
 	@Autowired
 	private FindDAO findDAO;
+	@Autowired
+	BCryptPasswordEncoder pwdEncoder;
+	
 	
 	// ID 찾기
 	@Override
@@ -30,6 +34,10 @@ public class FindServiceImpl implements FindService{
 	
 	// PW 수정
 	public void updatePw(MemberVO vo) {
+		// PW 암호화
+		String psw = pwdEncoder.encode(vo.getM_pw());
+		vo.setM_pw(psw);
+		
 		findDAO.updatePw(vo);
 	}
 
