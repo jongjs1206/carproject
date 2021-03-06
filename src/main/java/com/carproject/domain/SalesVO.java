@@ -17,7 +17,7 @@ public class SalesVO {
 	private String km;				/* 주행거리 */
 	private String cc;				/* 배기량 */
 	private String accident;		/* 사고여부 */
-	private String salesPrice;		/* 판매가격 */
+	private String price;		/* 판매가격 */
 	private String carGear;			/* 변속기 */
 	private String carFuel;			/* 연료 */
 	private String carOption;		/* 옵션선택 */
@@ -26,10 +26,12 @@ public class SalesVO {
 	private String status;			/* 상태 */
 	private String guarantee;		/* 보증(보험) */
 	private String seller;			/* 판매자 */
-	private String wDate;			/* 글 등록 날짜 */ 
+	private String w_date;			/* 글 등록 날짜 */ 
 	private String m_id;				/* 아이디 */
 	
-	private String carImg;			/* 이미지 */
+	private String image;			/* 이미지 */
+
+
 	private String rFname = null;
 	private long rFsize;
 	
@@ -127,12 +129,14 @@ public class SalesVO {
 	public void setAccident(String accident) {
 		this.accident = accident;
 	}
-	public String getSalesPrice() {
-		return salesPrice;
+	public String getPrice() {
+		return price;
 	}
-	public void setSalesPrice(String salesPrice) {
-		this.salesPrice = salesPrice;
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
+
 	public String getCarGear() {
 		return carGear;
 	}
@@ -151,11 +155,11 @@ public class SalesVO {
 	public void setCarOption(String carOption) {
 		this.carOption = carOption;
 	}
-	public String getCarImg() {
-		return carImg;
+	public String getImage() {
+		return image;
 	}
-	public void setCarImg(String carImg) {
-		this.carImg = carImg;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	public String getrFname() {
 		return rFname;
@@ -212,18 +216,20 @@ public class SalesVO {
 	public void setSeller(String seller) {
 		this.seller = seller;
 	}
-	
-	public String getwDate() {
-		return wDate;
+
+	public String getW_date() {
+		return w_date;
 	}
-	public void setwDate(String wDate) {
-		this.wDate = wDate;
+
+	public void setW_date(String w_date) {
+		this.w_date = w_date;
 	}
-	
-	public String getm_id() {
+
+	public String getM_id() {
 		return m_id;
 	}
-	public void setm_id(String m_id) {
+
+	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
 }

@@ -1,3 +1,8 @@
+/*
+	작성자 문희주
+	회원가입
+*/
+
 $(function() {
 
 	var token = $("input[name='_csrf']").val();

@@ -154,14 +154,14 @@ div.divSearch{
     border-radius: 5px;
 } */
 
-div.datePicker{
+div.datePicker > form{
  display: flex;
  margin-right: 10px;
 }
 
-div.datePicker div.single-select-box input{
+div.datePicker form > div.single-select-box input{
 	max-height: 35px;
-    max-width: 200px;
+    max-width: 150px;
 }
 
 .gj-datepicker-md [role="right-icon"] {
@@ -170,12 +170,12 @@ div.datePicker div.single-select-box input{
 
 }
 
-div.datePicker > div{
+div.datePicker > form > div{
 	margin: 5px;
 }
 
 nav.blog-pagination {
-    margin-bottom: 150px;
+    margin-bottom: 200px;
 }
 
 

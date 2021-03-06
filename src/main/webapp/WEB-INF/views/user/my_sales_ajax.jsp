@@ -52,122 +52,11 @@
 
 </head>
 <body>
-
-	<%@ include file="../header.jsp"%>	<!-- header -->
-	<%@ include file="../side.jsp"%>	<!--side menu -->
 	
-	<!-- slider Area Start-->
-    <div class="slider-area">
-      <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/assets/img/hero/contact_hero.jpg" >
-          <div class="container">
-              <div class="row ">
-                  <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
-                      <div class="hero-caption">
-                          <span>내가 쓴 판매글 목록 </span>
-                          <h2>내 판매글</h2>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-	</div>	
-	<!-- slider Area End-->
-	
-	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
-
-	<section class="">       
-		<div class="container">         
-			<form action="#">
-
-			</form>
-		</div>
-	</section>
-    <!--================Blog Area =================-->
-    
-   
-    
-
-    <!--================Blog Area =================-->
-    <section class="blog_area section-padding">
-        <div class="container">
-        
-        
-        
-
-			<!-- tag_status -->
-			<div class="container saleHeader">
-				  
-                    <!-- select in date -->
-                   <div class="datePicker">
-                  <form:form>
-                  <input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				 <div><a id="datepickerReset"> <i class="fas fa-sync-alt"></i></a></div>
-                    <div class="single-select-box mb-30">
-                        <!-- select out date -->
-                        <div class="boking-tittle">                          
-                        </div>
-                        <div class="boking-datepicker">
-                            <input id="datepicker1"  placeholder="01/01/2020" />                             
-                        </div>                      
-                   </div>            
-                      
-                    <!-- Single Select Box -->
-                    <div class="single-select-box mb-30">
-                        <!-- select out date -->
-                        <div class="boking-tittle">
-                         
-                        </div>
-                        <div class="boking-datepicker">
-                            <input id="datepicker2"  placeholder="12/31/2020" />
-                        </div>
-                     
-                   </div>
-                    <div><a id="datepickerBtn"> <i class="fas fa-search"></i></a>
-                    </div>
-                     </form:form>
-                  
-                  </div>                
-				<div class="statusBtn" id="statusBtn">
-			
-				<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">판매중</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">임시저장</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">삭제</a>
-		  </div>
-				<!-- 검색창 -->
-			<div class="divSearch">
-				<form action="" method="post"
-					class="subscribe_form relative mail_part" novalidate="true">
-				<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-					<input type="text" name="search" id="search" placeholder=" 제목 검색 "
-						class=""> <span	class="form-icon"> <a> <i class="fas fa-sync-alt"></i></a>
-					</span>
-				</form>
-			</div>
-</div>
-
-        
-
-
-
-
-			<!-- title -->
-            
-			
-			<div class="sale-info">
-				<span>제목</span>
-				<span>찜</span>
-				<span>삭제 </span>
-			</div>
-			
-			
-			
+ 		
 			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
-		<div id="indexListAjax">
-			<c:forEach items="${sale_list}" var="sale">
+	<div id="indexListAjax">
+		<c:forEach items="${sale_list}" var="sale">
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
 					href="../all/carnewsBoardview.do"> <img
@@ -185,44 +74,12 @@
 						<span>${sale.price} 만원</span>
 					</div>
 				</a>
-				<div class="cnt">12</div>
+				<div class="cnt">100</div>
 		    	<div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div>
 			</div>
-			</c:forEach>
-		</div>
+		</c:forEach>
+	</div>
 			<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->
-
-
-
-		</div> <!-- end of container -->
-    </section>
-
-	<!-- ### 페이징 시작 ### -->
-<!-- 	<nav class="blog-pagination justify-content-center d-flex">
-	    <ul class="pagination">
-	        <li class="page-item">
-	            <a href="#" class="page-link" aria-label="Previous">
-	                <i class="ti-angle-left"></i>
-	            </a>
-	        </li>
-	        <li class="page-item">
-	            <a href="#" class="page-link">1</a>
-	        </li>
-	        <li class="page-item active">
-	            <a href="#" class="page-link">2</a>
-	        </li>
-	        <li class="page-item">
-	            <a href="#" class="page-link" aria-label="Next">
-	                <i class="ti-angle-right"></i>
-	            </a>
-	        </li>
-	    </ul>
-	</nav> -->
-	<!-- ### 페이징 끝 ### -->
-                
-
-
-	<%@ include file="../footer.jsp"%>
 
 	<!-- JS here -->
 

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 
 public interface MemberService {
 	
@@ -15,7 +16,11 @@ public interface MemberService {
 	public MemberVO checkUniqueId( MemberVO vo);
 	public MemberVO selectByEmail( MemberVO vo);
 	public int addGoogle(MemberVO vo );
-	
+	//내가 쓴 판매글 가져오기
+	public List<HashMap<String, Object>> selectAllsale( MemberVO vo);
+	//필터 
+	public List<HashMap<String, Object>> selectMySale( HashMap<String, Object> map);
+	public HashMap<String, Object> saleSearchDefault( HashMap<String, Object> map, MemberVO vo);
 
 	// 모든 회원 목록을 불러오기 위한 함수
 	public List<HashMap<String, Object>> allMember();

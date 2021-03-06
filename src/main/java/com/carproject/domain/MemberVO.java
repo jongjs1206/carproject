@@ -31,6 +31,7 @@ public class MemberVO {
 	private String auth; /* 권한 */	
 	private long picSize; /* 프로필사진용량 */
 	
+
 	
 	//*************************************************
 	MultipartFile file;	// write.jsp에 파일첨부시 name="file"과 동일한 변수명

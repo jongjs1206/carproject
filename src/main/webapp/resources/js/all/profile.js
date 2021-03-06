@@ -1,3 +1,9 @@
+/**
+ * 작성자 문희주
+ * 내 정보 수정
+ */
+ 
+ 
 $(function() {
 
 	var token = $("input[name='_csrf']").val();

@@ -1,6 +1,11 @@
 package com.carproject.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,14 +19,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 import com.carproject.service.AuthService;
 import com.carproject.service.MailSendService;
 import com.carproject.service.MemberService;
+import com.carproject.service.MemberServiceImpl;
 import com.carproject.service.SnsLoginService;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -168,8 +176,6 @@ public class MemberController {
 	}
 	
 	
-	//수정
-	
 	
 	
 	//프로필 외 정보 업로드
@@ -190,6 +196,77 @@ public class MemberController {
 		//session에 다시 저장
 		return "redirect:/all/homepage.do";
 	}
+	
+	
+	
+
+	
+	//내가쓴 판매글
+	//내가 쓴 판매글 모두 가져오기 (첫 로딩)
+	@RequestMapping(value = "/user/my_sales.do")
+	public void my_sales(MemberVO vo, HttpSession session, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id ="";
+		if (principal instanceof UserDetails) {
+		   id = ((UserDetails)principal).getUsername();
+		} else {
+		   id = principal.toString();
+		}
+		vo.setM_id(id);
+		
+		//검색
+		List<HashMap<String, Object>> sale_list = memberservice.selectAllsale(vo);
+		//날짜에서 시간 자르기
+		for(HashMap<String, Object> s : sale_list) {	
+		String date = s.get("w_date").toString();
+		s.put("w_date", date.split(" ")[0]);
+		}
+		model.addAttribute("sale_list", sale_list);
+
+	}
+	
+	
+	
+	//ajax jsp 만들기(필터 걸어서 검색)
+	@RequestMapping(value = "user/my_sales_ajax.do", method= {RequestMethod.POST})
+	//@ResponseBody 지우기
+	public void  searchMySales(MemberVO vo, HttpSession session, Model model,
+			@RequestParam HashMap<String, Object> param
+			) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id ="";
+		if (principal instanceof UserDetails) {
+		   id = ((UserDetails)principal).getUsername();
+		} else {
+		   id = principal.toString();
+		}
+		vo.setM_id(id);
+		MemberVO info = memberservice.checkUniqueId(vo);
+
+		
+		//비어있는 곳 기본 세팅
+		HashMap<String, Object> m = memberservice.saleSearchDefault(param, info);
+		
+		//검색
+		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(m);
+		
+		//날짜에서 시간 자르기
+		for(HashMap<String, Object> s : sale_list) {	
+		String date = s.get("w_date").toString();
+		s.put("w_date", date.split(" ")[0]);
+		}
+		
+		model.addAttribute("sale_list", sale_list);
+
+	
+	}
+	
+	
+	
+
+	
+	
 	
 	
 
