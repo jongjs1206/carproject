@@ -51,7 +51,7 @@
 
 <div class="main">
 
-	<%-- <input type="hidden" disabled="disabled" id="m_id" value="<%= id %>"/> --%>
+	<input type="hidden" disabled="disabled" id="m_id" value="<%= id %>"/>
 	아이디 : <span class="idbox-in-modify"><%= id %></span><hr/>
 	비밀번호는 영문자, 특수문자, 숫자 포함  8~15자리로 입력해주세요.
 	<table>

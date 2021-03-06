@@ -131,15 +131,12 @@ $(function() {
 
 	// modify_pw.jsp 에서 비밀번호 입력 후 수정하기 버튼 클릭시 
 	// >>>> 비밀번호 유효성 체크 후, DB 반영, 팝업창 닫기
-	$(document).on("click", "#update_pw", function(){
-		if ($('#m_pw').val() == ''){
-			alert('새 비밀번호를 입력해주세요.');	
-			$('#m_pw').focus();	
-		}else{
+	$("#update_pw").click(function(){
+	
 			$.ajax({
 				type : 'post',
 				async : true,
-				url : '../all/update_pw.do',
+				url : 'update_pw.do',
 				beforeSend : function(xhr){	
 					xhr.setRequestHeader(header, token);
 				},
@@ -157,7 +154,7 @@ $(function() {
 					console.log(err);
 				}
 			});
-		}
+		
 	});
 	
 	
