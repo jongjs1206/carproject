@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SalesVO {			
-	
 	private int sell_id;			// 판매글 번호
 	private int g_id;				// 등급 번호
 	private String m_id;			// 회원 아이디
@@ -38,6 +37,7 @@ public class SalesVO {
 	
 	private String image;			// 이미지
 	private String rFname = null;	// 업로드 한 이미지 이름(파일선택)
+
 	private long rFsize;
 	
 	private String strOption;		// 가공한 option 값
@@ -68,7 +68,7 @@ public class SalesVO {
 			}
 		}
 	}
-
+	
 	public int getSell_id() {
 		return sell_id;
 	}
@@ -201,20 +201,6 @@ public class SalesVO {
 	public void setSeller(String seller) {
 		this.seller = seller;
 	}
-	
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
-	public String getJejosa() {
-		return jejosa;
-	}
-	public void setJejosa(String jejosa) {
-		this.jejosa = jejosa;
-	}
 
 	public String getModel() {
 		return model;
@@ -258,8 +244,19 @@ public class SalesVO {
 		this.tel = tel;
 	}
 	
-	
-	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getJejosa() {
+		return jejosa;
+	}
+	public void setJejosa(String jejosa) {
+		this.jejosa = jejosa;
+	}
 	
 	public String getImage() {
 		return image;

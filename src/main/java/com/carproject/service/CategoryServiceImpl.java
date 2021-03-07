@@ -97,5 +97,15 @@ public class CategoryServiceImpl implements CategoryService{
 	public int search_count(String search) {
 		return categoryDAO.search_count(search);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> heartlistselect(HeartVO vo) {
+		return categoryDAO.heartlistselect(vo);
+	}
+
+	@Override
+	public int heartlistcount(HeartVO vo) {
+		return categoryDAO.heartlistcount(vo);
+	}
 	
 }

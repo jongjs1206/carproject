@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="MemberMAP">
 
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member
-		(m_id, m_pw, m_name, gender, email, birth, tel, w_date, state, enabled)
+		(m_id, m_pw, m_name, gender, email, birth, tel, w_date, state, enabled, coin)
 		VALUES
-		(#{m_id},#{m_pw},#{m_name},#{gender},#{email},#{birth},#{tel},sysdate(),'normal',1)
+		(#{m_id},#{m_pw},#{m_name},#{gender},#{email},#{birth},#{tel},sysdate(),'normal',1, '0')
 	</insert>
 	
 	<select id="checkUniqueId" parameterType="member" resultType="member">
@@ -104,8 +105,29 @@
 		
 	</update>  
 	
-
 	
 	
-
+	<!-- 내가 쓴 판매글 전체  select-->
+	<select id="selectAllsale" resultType="hashmap">
+      SELECT * FROM sell
+      WHERE m_id=#{m_id}
+   	</select>
+   	<!-- 내가 쓴 판매글 필터 select  select-->
+	<select id="selectMySale" parameterType="hashmap" resultType="hashmap">
+		
+		SELECT * FROM sell 
+		WHERE m_id=#{m_id} AND 
+		<![CDATA[
+		w_date >= str_to_date(#{startDate}, '%m/%d/%Y') AND
+		w_date <= str_to_date(#{endDate}, '%m/%d/%Y')
+		]]>
+		    <if test="statusList != null and statusList != ''">
+		     AND status IN 
+		     <foreach collection="statusList" item="status" separator="," open="(" close=")">
+		      #{status}
+		     </foreach>
+		    </if>
+	</select>
+	
 </mapper>
+

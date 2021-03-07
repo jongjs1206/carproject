@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 
 
 public interface MemberDAO {
@@ -19,6 +20,12 @@ public interface MemberDAO {
 	MemberVO selectByEmail( MemberVO vo );
 	
 	int addGoogle(MemberVO vo);
+	
+	//내 판매글 모두 불러오기
+	List<HashMap<String, Object>> selectAllsale(MemberVO vo);
+	//필터 걸어서 불러오기
+	List<HashMap<String, Object>> selectMySale(HashMap<String, Object> map);
+
 	
 
 	// 모든 회원 목록을 불러오기 위한 함수

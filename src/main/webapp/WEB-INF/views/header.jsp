@@ -22,6 +22,13 @@ $(function() {
 	$('.btn_submit').click(function(){
 		$('.form_out').submit();
 	})
+	$('.sell_header').click(function(){
+		if($('.login-header').val()==''){
+			window.self.location = "../all/login.do";
+		}else{
+			window.self.location = "../user/sales.do";
+		}
+	})
 })
 </script>
 <body>
@@ -37,7 +44,7 @@ $(function() {
         </div>
     </div>
     <!-- Preloader Start -->
-
+	<input type="hidden" class='login-header' value='${sessionScope.info.m_id}'/>
 	<header>
 		<!-- Header Start -->
 		<div class="header-area header-sticky">
@@ -76,6 +83,10 @@ $(function() {
                                         		<li><a href="../all/reviewDetail.do">후기글 확인</a></li>
                                         	</ul>
 										</li>
+										<li><a class='sell_header' style="cursor: pointer;">내 차 팔기</a></li>
+										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
+										<li><a href="../user/reviewDetail.do">구매후기</a></li>
+											
 										<li><a href="#">Q&A</a>
 											<ul class="submenu">
 												<li><a href="#"
@@ -106,6 +117,8 @@ $(function() {
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
+												<li><a href="../user/my_heart.do">내 찜목록</a></li>
+												<li><a href="../user/salesDetail.do">내 글 확인</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
 												<li><a style="cursor: pointer;" class='btn_submit'>로그아웃</a></li>
 											</ul></li>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 
 
 
@@ -44,8 +45,22 @@ public class MemberDAOImpl implements MemberDAO{
 		return mybatis.insert("MemberMAP.addGoogle", vo);
 	}
 	
+	
+	
+	
+	@Override
+	public List<HashMap<String, Object>> selectAllsale(MemberVO vo) {
+		System.out.println("===>  MemberMapper selectAllsale() 호출");
+		return mybatis.selectList("MemberMAP.selectAllsale", vo);
+	} 
+	@Override
+	public List<HashMap<String, Object>> selectMySale(HashMap<String, Object> map) {
+		System.out.println("===>  MemberMapper selectMySale() 호출");
+		return mybatis.selectList("MemberMAP.selectMySale", map);
+	}
 
-
+	
+	
 
 	@Override
 	public List<HashMap<String, Object>> allMember() {
@@ -94,7 +109,11 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void setNormal(String id) {
 		mybatis.selectOne("MemberMAP.setNormal", id);
-	} 
+	}
+
+
+
+
 	
 
 }
