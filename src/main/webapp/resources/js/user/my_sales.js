@@ -44,6 +44,8 @@ search();
   $(obj).toggleClass( 'on' );
   if($(obj).hasClass("on")){
    search();
+  }else{
+  	search();
   }
 }
 
@@ -79,8 +81,6 @@ status = status + ',' + $(this).text()
 	 	
 	 	},				
 	 	success : function(result){
-	 	
-	 	alert("ajax")
 
 	 	var html = jQuery('<div>').html(result);
 			$( '#indexListAjax' ).html(html);

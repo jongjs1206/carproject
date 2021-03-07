@@ -173,10 +173,10 @@ public class MemberController {
 		  
 		m.addAttribute("member", member);
 		m.addAttribute("email",emailSplit);
+		
 	}
 	
-	
-	
+
 	
 	//프로필 외 정보 업로드
 	@RequestMapping(value = "/user/userUpdate.do")
@@ -197,6 +197,37 @@ public class MemberController {
 		return "redirect:/all/homepage.do";
 	}
 	
+	
+	//프로필 사진 업로드
+		@RequestMapping(value = "/user/updatePhoto.do")
+		public String updatePhoto(MemberVO vo, HttpSession session, Model m) throws Exception {
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id ="";
+			if (principal instanceof UserDetails) {
+			   id = ((UserDetails)principal).getUsername();
+			} else {
+			   id = principal.toString();
+			}
+		    vo.setM_id(id);
+			
+			//update
+			memberservice.updatePhoto(vo);
+			
+			MemberVO info = memberservice.checkUniqueId(vo);
+			
+			String projectId = "sachawon";
+			String bucketName = "car_image_for_analysis";
+			String objectName = "profile/" + info.getM_id() + ".jpg";
+			String filePath = "C:\\upload\\" + info.getPhoto();
+			memberservice.insertImg(projectId, bucketName,objectName, filePath);
+			String fileUrl = "https://storage.googleapis.com/car_image_for_analysis/" + objectName;
+			System.out.println("파일주소 : " + fileUrl);
+			
+			return "redirect:/user/profile.do";
+
+			
+		}
 	
 	
 

@@ -52,7 +52,9 @@ public class MemberVO {
 			
 			//***********************************************
 			// 해당 경로로 변경
-			File f = new File("C:\\Users\\moonm\\git\\mycar\\"+photo);
+//			File f = new File("C:\\Users\\moonm\\git\\carproject\\src\\main\\webapp\\resources\\img\\"+photo);
+			File f = new File("C:\\upload\\"+photo);
+
 			try {
 				file.transferTo(f);
 				

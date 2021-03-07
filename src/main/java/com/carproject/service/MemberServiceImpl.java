@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileSystemUtils;
 import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,6 +69,7 @@ public class MemberServiceImpl implements MemberService{
 			
 			 return memberDAO.selectMySale(map);
 		}
+		
 		//내 판매 글 기본 세팅
 		public HashMap<String, Object> saleSearchDefault( HashMap<String, Object> param, MemberVO vo){
 			
@@ -140,6 +142,22 @@ public class MemberServiceImpl implements MemberService{
 		  public void setNormal(String id) {
 			  memberDAO.setNormal(id);
 		  }
+
+		  
+		  //프로필 사진 업로드
+		@Override
+		public int updatePhoto(MemberVO vo) {
+			return memberDAO.updatePhoto(vo);
+		}
+
+		@Override
+		public void insertImg(String projectId, String bucketName, String objectName, String filePath) throws Exception {
+			memberDAO.insertImg(projectId, bucketName, objectName, filePath);
+			System.out.println(projectId);
+			System.out.println(bucketName);
+			System.out.println(objectName);
+			System.out.println(filePath);
+		}
 
 
 	

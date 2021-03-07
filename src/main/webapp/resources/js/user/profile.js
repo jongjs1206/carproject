@@ -6,7 +6,7 @@
  
 $(function() {
 
-	var token = $("input[name='_csrf']").val();
+ 	var token = $("input[name='_csrf']").val();
 	var header = "X-CSRF-TOKEN";
 
 	var m_id = $('#m_id');
@@ -51,16 +51,42 @@ $(function() {
 	}
 	
 	
-//file image
-
-$('#picFile').on('keyup', function(e){
-
-        var get_file = e.target.files;
-        console.log(get_file)
-    
-});
+	
 
 	
+	
+//프로필 사진 로컬경로 통해 미리보기
+
+
+$("#picFile").on('change', function(){
+    readURL(this);
+});
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImg').prop('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+
+}
+
+
+
+
+//프로필 사진 수정
+
+$("#btnPic").on('click', function(){
+	
+	$('#picForm').submit();
+	alert("프로필 사진이 변경 되었습니다.")
+
+ })
+ 
+
 
 
 //성별 체크

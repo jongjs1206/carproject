@@ -46,6 +46,12 @@ public interface MemberDAO {
 	void setBlacklist(String id);
 	// 블랙리스트 해제를 위한 함수
 	void setNormal(String id);
+	
+	
+	//프로필 사진 업데이트
+	
+	int updatePhoto(MemberVO vo);
+	void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
 }
 	 
 

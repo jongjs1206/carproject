@@ -1,6 +1,8 @@
 package com.carproject.dao;
 
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
+
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 
 
@@ -111,6 +118,22 @@ public class MemberDAOImpl implements MemberDAO{
 		mybatis.selectOne("MemberMAP.setNormal", id);
 	}
 
+	@Override
+	public int updatePhoto(MemberVO vo) {
+		System.out.println("===>  MemberMapper updatePhoto() 호출");
+		return mybatis.update("MemberMAP.updatePhoto", vo);
+	}
+
+
+	@Override
+	public void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception{
+		Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+		BlobId blobId = BlobId.of(bucketName, objectName);
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("image/png").build();
+		storage.create(blobInfo, Files.readAllBytes(Paths.get(filePath)));
+		
+		System.out.println("File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);		
+	}
 
 
 

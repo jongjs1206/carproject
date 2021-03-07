@@ -59,6 +59,14 @@
 		
 	</update>
 	
+	<!-- 프로필 사진 update -->
+	
+	<update id="updatePhoto"  parameterType="member">
+		UPDATE member 
+		SET	photo = #{photo}
+		WHERE m_id = #{m_id}
+	</update>
+	
 	<!-- ROLE_ADMIN인 모든 데이터를 불러옴 -->
 	<select id="allAdmin" resultType="hashmap">
       SELECT member.*, auth.* FROM member, auth

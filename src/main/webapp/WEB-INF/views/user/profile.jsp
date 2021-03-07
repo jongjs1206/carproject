@@ -53,7 +53,7 @@
 <link rel="stylesheet" href="../resources/css/all/join_login.css"
 	type="text/css">
 
-<script type="text/javascript" src="../resources/js/all/profile.js"></script>
+<script type="text/javascript" src="../resources/js/user/profile.js"></script>
 </head>
 <body>
 
@@ -76,7 +76,8 @@
 
 				<hr class="cmm-line mg-b40 pad-t20">
 
-
+			<form method="post" action="updatePhoto.do"  enctype="multipart/form-data" id="picForm">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="cmm-basic-info">
 					<div class="cmm-tit">
 						<span>프로필 사진</span>
@@ -84,17 +85,21 @@
 
 					<div class="cmm-input-area">
 						<div class="col-md-6">
-							<div class="single-gallery-image"
-								style="background: url(../resources/img/${member.photo});">
-								<a href="assets/img/elements/g2.jpg" class="img-pop-up"></a>
-							</div>
+						<a href="javascript:void(0);">
+							<img id='preImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${member.m_id}.jpg" alt="profile" class="single-gallery-image"/>
+							</a>
 						</div>
+						
 						<input type="file" name="file" id="picFile" accept="image/*"/>
-					
-
+							<button type="button" class="joinBtns more-btn1"
+								id="btnPic" name="btnPic">
+								<span>변경</span>
+							</button>
 					</div>
 				</div>
-
+			</form>
+			
+			
 				<hr class="cmm-line mg-b40 pad-t20">
 
 				<form:form method="post" action="userUpdate.do" id="modify"
