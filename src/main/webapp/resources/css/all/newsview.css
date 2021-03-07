@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.blog_details{
+	float : right;
+	position: relative;
+	bottom: 30px;
+	
+}
+.news_content .copyAddress{
+	position: absolute;
+	right: 30px;
+	top: 150px;
+}
+.news_content .ipAdd{
+	border: none;
+	background-color: white;
+	color: #929292;
+}
+.news_content p{
+	color:black;
+	margin: 0px;
+	font-family: "고딕";
+}
+.btn-copy{
+	background-color: white;
+	border: none;
+}
+.btn-copy>img{
+	width: 50px;
+}
+.news_content{
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+.fa-thumbs-up{
+	color: black;
+}
+.good_btn{
+	background-color: white;
+	cursor: pointer;
+}
+.color-red{
+	color:red;
+}

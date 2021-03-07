@@ -24,4 +24,26 @@ public class NewsServiceImpl implements NewsService{
 	public int newscount() {
 		return newsDAO.newscount();
 	}
+
+	@Override
+	public List<HashMap<String, Object>> popularity() {
+		return newsDAO.popularity();
+	}
+
+	@Override
+	public HashMap<String, Object> newsview(String num) {
+		return newsDAO.newsview(num);
+	}
+
+	@Override
+	public void goodadd(String news_num) {
+		newsDAO.goodadd(news_num);
+		
+	}
+
+	@Override
+	public void goodsub(String news_num) {
+		newsDAO.goodsub(news_num);
+		
+	}
 }

@@ -24,4 +24,28 @@ public class NewsDAOImpl implements NewsDAO{
 		return mybatis.selectOne("NewsMAP.newscount");
 	}
 
+	@Override
+	public List<HashMap<String, Object>> popularity() {
+		System.out.println("===>  NewsMapper popularity() 호출");
+		return mybatis.selectList("NewsMAP.popularity");
+	}
+
+	@Override
+	public HashMap<String, Object> newsview(String num) {
+		System.out.println("===>  NewsMapper newsview() 호출");
+		return mybatis.selectOne("NewsMAP.newsview",num);
+	}
+
+	@Override
+	public void goodadd(String news_num) {
+		System.out.println("===>  NewsMapper goodadd() 호출");
+		mybatis.update("NewsMAP.goodadd",news_num);
+	}
+
+	@Override
+	public void goodsub(String news_num) {
+		System.out.println("===>  NewsMapper goodsub() 호출");
+		mybatis.update("NewsMAP.goodsub",news_num);
+	}
+
 }

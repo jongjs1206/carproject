@@ -58,14 +58,13 @@
 
 	<%@ include file="../header.jsp"%>
 	<!-- header -->
-	<%@ include file="../side.jsp"%>
-	<!--side menu -->
-
+	
+			
 	<!-- slider Area Start-->
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
-			data-background="../resources/assets/img/hero/contact_hero.jpg">
+			data-background="../resources/img/top3.jpg">
 			<div class="container">
 				<div class="row ">
 					<div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
@@ -88,26 +87,23 @@
 		<div class="container">
 
 			<div class="blog_item_date blog_item_img">
-				<h3>인기 뉴스</h3>
+				<h3 style="padding-left: 70px; padding-bottom: 30px;">인기 뉴스</h3>
 			</div>
-
+			
+			<c:set var='i' value='1'></c:set>
 			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
-			<a href="../all/carnewsBoardview.do">
-				<div class="fav-news">
-					<span>1</span> <span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span> <span>조회수</span>
-					<span>추천수</span>
-				</div>
-			</a> <a href="../all/carnewsBoardview.do">
-				<div class="fav-news">
-					<span>1</span> <span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span> <span>조회수</span>
-					<span>추천수</span>
-				</div>
-			</a> <a href="../all/carnewsBoardview.do">
-				<div class="fav-news">
-					<span>1</span> <span>인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 인기뉴스 제목 </span> <span>조회수</span>
-					<span>추천수</span>
-				</div>
-			</a>
+			<c:forEach var="popularity_news" items="${popularity}">	
+				<a href="../all/carnewsBoardview.do?num=${popularity_news.w_id}">
+					<div class="fav-news">
+						<span>${i}</span>
+						<span>${popularity_news.title}</span>
+						<span>조회수 : ${popularity_news.read_cnt}</span>
+						<span>추천수 : ${popularity_news.love_cnt}</span>
+					</div>
+				</a>
+			<c:set var='i' value='${i+1}'></c:set>
+			</c:forEach>
+			 
 			<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->
 
 			<div class="blank" alt="여백공간">
@@ -125,7 +121,7 @@
 					<a class="d-inline-block news-thumb"
 						href="../all/carnewsBoardview.do?num=${news.w_id}"> <img
 						src="${news.thumb}" alt="기사썸네일">
-					</a> <a class="d-inline-block" href="../all/carnewsBoardview.do">
+					</a> <a class="d-inline-block" href="../all/carnewsBoardview.do?num=${news.w_id}">
 						<h2>${news.title}</h2>
 						<p>${news.headline}</p>
 					</a>
@@ -205,24 +201,24 @@
 	</nav>
 	<!-- ### 페이징 끝 ### -->
 
-	<section class="blog_area section-padding">
-		<div class="container">
-			<form action="#">
-				<div class="form-group">
-					<div class="news-search-container">
-						<select>
-							<option value="title">제목</option>
-							<option value="content">내용</option>
-						</select> <input type="text" class="form-control"
-							placeholder='Search Keyword' onfocus="this.placeholder = ''"
-							onblur="this.placeholder = 'Search Keyword'">
-						<button class="button primary-bg text-white btn_1 boxed-btn"
-							type="submit">검색</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</section>
+<!-- 	<section class="blog_area section-padding"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<form action="#"> -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<div class="news-search-container"> -->
+<!-- 						<select> -->
+<!-- 							<option value="title">제목</option> -->
+<!-- 							<option value="content">내용</option> -->
+<!-- 						</select> <input type="text" class="form-control" -->
+<!-- 							placeholder='Search Keyword' onfocus="this.placeholder = ''" -->
+<!-- 							onblur="this.placeholder = 'Search Keyword'"> -->
+<!-- 						<button class="button primary-bg text-white btn_1 boxed-btn" -->
+<!-- 							type="submit">검색</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</form> -->
+<!-- 		</div> -->
+<!-- 	</section> -->
 	<!--================Blog Area =================-->
 
 
