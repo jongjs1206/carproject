@@ -161,11 +161,11 @@
     }
 
 
-/* 6. Nice Selectorp  */
-  var nice_Select = $('select');
+/* 6. Nice Selectorp  */		/* 은별 수정 */
+ /* var nice_Select = $('select');
     if(nice_Select.length){
       nice_Select.niceSelect();
-    }
+    }	*/
 
 /* 7.  Custom Sticky Menu  */
     $(window).on('scroll', function () {

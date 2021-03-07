@@ -6,67 +6,92 @@
 <!-- 글 등록 -->
 <insert id="salesInsert" parameterType="sales">
 	INSERT INTO sell 
-	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
-		vehicle_num, fuel, gear, status, baeki, guarantee, seller) 
+	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content
+	, vehicle_num, fuel, gear, status, baeki, guarantee, seller) 
 	VALUES 
-	(sell_sell_id_sq.NEXTVAL, #{m_id}, #{title}, #{wDate}, #{carYear}, #{km}, #{carColor}, #{accident}, 
-		#{salesPrice}, #{carImg}, #{carOption}, #{salesContext}, #{carNumber}, 
-		#{carFuel}, #{carGear}, #{status}, #{cc}, #{guarantee}, #{seller})
+	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}
+	, #{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}
+	,#{fuel}, #{gear}, #{status}, #{baeki}, #{guarantee}, #{seller})
 </insert>
+
+<!-- 글 상세페이지(확인) -->
+<select id="salesCheck" parameterType="long" resultType="sales">
+	<![CDATA[
+		SELECT s.m_id, s.title, s.old, s.mile, s.color, s.accident, s.price, s.image, s.option, s.content, s.vehicle_num, 
+			s.baeki, s.guarantee, s.fuel, s.gear, m.m_id, m.m_name, m.tel
+		FROM sell s 
+		INNER JOIN (SELECT * FROM member ) m  ON m.m_id = s.m_id 
+		where s.sell_id = #{num};
+	]]>
+</select>
 
 <!-- 글 수정 -->
 <update id="salesModify" parameterType="sales">
 	<![CDATA[ 
 		UPDATE sell 
-		SET title=#{title}, old=#{carYear}, mile=#{km}, color=#{carColor}, accident=#{accident}, price=#{salesPrice},
-			image=#{carImg}, option=#{carOption}, content=#{salesContext}, vehicle_num=#{carNumber}, fuel=#{carFuel},
-			gear=#{carGear}, baeki=#{cc}
-		WHERE sell_id=#{salesNumber}
+		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
+				image=#{image}, option=#{option}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
+				gear=#{carGear}, baeki=#{baeki}
+		WHERE sell_id=#{sell_id}
 	]]>
 </update>
-
-<!-- 상품 수정 아이템 불러오기(글 상세페이지) -->
-<select id="salesCheck" parameterType="sales" resultType="sales">
-	<![CDATA[
-		SELECT * FROM sell
-		WHERE sell_id=#{salesNumber}
-	]]>
-</select>
 
 <!-- 글 삭제 -->
 <delete id="salesDelete" parameterType="sales">
 	<![CDATA[
 		DELETE FROM sell
-		WHERE sell_id=#{salesNumber}
+		WHERE sell_id=#{sell_id}
 	]]>
 </delete>
 
+<!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- 등록하기 버튼 : 글 등록-->
+<insert id="uploadBtn" parameterType="sales">
+	INSERT INTO sell 
+	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
+		vehicle_num, fuel, gear, status, baeki, seller) 
+	VALUES 
+	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
+		#{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}, 
+		#{fuel}, #{gear}, #{status}, #{baeki}, #{m_id})
+</insert>
 
+<!-- 수정하기 버튼(링크) -->
+<update id="modifyBtn" parameterType="sales">
+	<![CDATA[ 
+		UPDATE sell 
+		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
+				image=#{image}, option=#{option}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
+				gear=#{gear}, baeki=#{baeki}
+		WHERE sell_id=#{sell_id}
+	]]>
+</update>
+
+<!-- ///////////////////////////////////////////////// -->
 <!-- 차랑명 데이터들 가져오기 -->
-
-<!-- 제조사 가져오기 -->
+<!-- 제조사 -->
 <select id="brandList" resultType="hashmap" parameterType="String">
 	SELECT jejosa FROM category GROUP BY jejosa;
 </select>
 
-<!-- 모델 가져오기 -->
-<select id="model" resultType="hashmap" parameterType="String">
-	SELECT * FROM category WHERE jejosa=#{carBrand};
+<!-- 모델 -->
+<select id="model" resultType="hashmap" parameterType="sales">
+	SELECT model FROM category WHERE jejosa=#{jejosa};  
 </select>
 
-<!-- 세부모델 가져오기 -->
-<select id="detailmodel" resultType="hashmap" parameterType="String">
-	SELECT d.detail FROM detail d INNER JOIN (SELECT * FROM category where model = #{carModel}) c ON d.car_num = c.car_num;
+<!-- 세부모델 -->
+<select id="detailmodel" resultType="hashmap" parameterType="sales">
+	SELECT detail FROM detail d INNER JOIN (SELECT * FROM category WHERE jejosa=#{jejosa} AND model=#{model}) c ON d.car_num = c.car_num;
 </select>
 
-<!-- 등급 가져오기 -->
-<select id="grade" resultType="hashmap" parameterType="String">
-	
+<!-- 등급 -->
+<select id="grade" resultType="hashmap" parameterType="sales">
+	SELECT distinct grade1 FROM grade g INNER JOIN (SELECT * FROM detail WHERE detail=#{detail}) d ON d.d_id = g.d_id;
 </select>
 
-<!-- 세부등급 가져오기 -->
-<select id="detailgrade" resultType="hashmap" parameterType="grade">
-	
+<!-- 세부등급 -->
+<select id="detailgrade" resultType="hashmap" parameterType="sales">
+	SELECT distinct grade2 FROM grade g INNER JOIN (SELECT * FROM detail WHERE detail=#{detail}) d ON d.d_id = g.d_id;
 </select>
 
 </mapper>

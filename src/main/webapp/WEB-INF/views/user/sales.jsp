@@ -11,7 +11,7 @@
 	<title>내차 팔기 - 판매글 등록</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="../resources/assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="../resources/assets/img/favicon.ico">
 	
 	<!-- CSS Style -->
 	<link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
@@ -45,15 +45,13 @@
 	<%@ include file="../header.jsp"%>	<!-- header -->
 	<%@ include file="../side.jsp"%>	<!-- side bar -->
 	
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
       <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/assets/img/hero/contact_hero.jpg" >
           <div class="container">
-              <div class="row ">
+              <div class="row">
                   <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                       <div class="hero-caption">
                           <span>내 차 팔기</span>
@@ -72,18 +70,20 @@
                 <div class="col-lg-16">
                     <div class="salesform">
                         <div class="team__item__text">
-                        <form action="#" method='post' class="salesForm">
-                        	<table class="table" style="margin:0 0 20px 100px;">
+                        <form action="uploadSales.do" id="salesForm" method='post' class="salesForm">
+                        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+                        	<input type="hidden" name="strOption" id="strOption" />
+                        	<table class="table" style="margin:0 0 20px 60px; ">
                         		<tr>
                         			<th>글 제목</th>
-                        			<td colspan=3><input type="text" class="" style="width:800px" value="${sales.title}">
+                        			<td colspan=3><input type="text" id="title" name="title" style="width:750px" value="" placeholder="차종 선택시 자동완성됩니다.">
                         		</tr>
 	                           	<tr>
 	                           		<th>판매자 정보</th>
-	                           		<td width="280px" style="font-size:14px;">이  름 <input type="text" id="name" disabled="disabled" value="${sessionScope.info.m_name}"></td>
-	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" id="id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
+	                           		<td width="280px" style="font-size:14px;">이  름 <input type="text" name="m_name" id="m_name" disabled="disabled" value="${sessionScope.info.m_name}"></td>
+	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" name="m_id" id="m_id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
 	                           		<td width="280px" style="font-size:14px;">핸드폰 번호 
-	                           			<input type="text" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
+	                           			<input type="text" name="tel" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
 	                           	</tr>
 	                           <tr>
 	                           		<th>이미지 등록</th>
@@ -97,42 +97,43 @@
 		                                %>
 	                           		</td>
 	                           		<td colspan=2 style="font-size:14px;">
-										<input type="file" maxlength="100" size="100" name='file' multiple='multiple'></td>
+										<input type="file" maxlength="100" size="100" name='image' multiple='multiple'> 
+									</td> 
 	                           </tr>
 	                           <tr>
 	                           		<th>차량 정보</th>
 	                           		<td colspan=3>
 										<div style="font-size:14px; display: flex; line-height: 33px;">	<!-- 차량번호 -->
 											<span style="margin-right:30px;">차량번호</span> 
-											<input type="text" id="carNumber" class="carNumber" style="line-height:initial;"></div>
+											<input type="text" name="vehicle_num" id="carNumber" class="carNumber" style="line-height:initial;"></div>
 										<hr style="margin:10px 0;">	
-										<div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 차량명 -->
+										<div style="font-size:14px; line-height: 35px;">	<!-- 차량명 -->
 											<span style="margin-right:40px;">차량명</span>
-											<select class='carBrand' id="carBrand" name='carBrand' style="margin-right:15px;">
-												<option value="제조사">제조사</option>
+											<select class='carBrand' name="jejosa" id="carBrand" name='carBrand' style="margin:0 15px 10px 0; height:35px;">	<!-- 제조사 -->
+												<option value="제조사">제조사</option>	
 												<c:forEach var="brand" items="${brandList}">
 					                               	<option value="${brand.jejosa}">${brand.jejosa}</option>
 					                            </c:forEach>
-				                            </select> 
-											<select class='carModel' id="carModel" name='carModel' style="margin-right:15px;"> 
+				                            </select><br/> 
+											<select class='carModel' name="model" id="carModel" style="margin:0 15px 10px 80px; height:35px;">	<!-- 모델 --> 
 												<option value="모델">모델</option>
 		                                    </select>
-		                                    <select class='carDetailModel' name='carDetailModel' style="margin-right:15px;">
+		                                    <select class='carDetailModel' name="detail" id="carDetailModel" style="margin-right:15px; height:35px;">	<!-- 세부모델 -->
 		                                       	<option value="세부모델">세부모델</option>
-		                                    </select>
-		                                    <select class='carGrade' name='carGrade' style="margin-right:15px;">
+		                                    </select><br/>
+		                                    <select class='carGrade' id='carGrade' name='grade1' style="margin-right:15px; margin-left:80px; height:35px;">	<!-- 등급 -->
 		                                      	<option value="등급">등급</option>
 		                                    </select>
-		                                    <select class='carDetailGrade' name='carDetailGrade' style="margin-right:15px;">
+		                                    <select class='carDetailGrade' id='carDetailGrade' name='grade2' style="margin-right:15px; height:35px;">	<!-- 세부등급 -->
 		                                    	<option value="세부등급">세부등급</option>
 		                                    </select>	
 	                                    </div><hr style="margin:10px 0;">	<!-- end of 차량명 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 연식/색상 -->
                                         	<span>연식</span>
-                                        	<input type="date" id="carYear" class="carYear" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
-                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;">
+                                        	<input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
+                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;"> 
                                    	    	<span>색상</span>
-                                        	<select class='carColor' name='carColor' style="margin-left:25px;">
+                                        	<select class='carColor' name='color' style="margin-left:25px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="검정색">검정색</option><option value="은색">은색</option><option value="금색">금색</option>
 	                                    		<option value="남색">남색</option><option value="청색">청색</option><option value="진청색">진청색</option>
@@ -140,28 +141,28 @@
 	                                    		<option value="기타색상">기타색상</option>
 	                                    	</select>
                                         </div><hr style="margin:10px 0;">		<!-- end of 연식/색상 -->
-                                        <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 주행거리/배기량 -->
+                                        <div style="font-size:14px; display: flex; line-height: 32px;">		<!-- 주행거리/배기량 -->
                                         	<span>주행거리</span>
-                                        	<input type="text" id="km" style="line-height:initial; margin:0 5px 0 30px;">km
+                                        	<input type="text" id="km" name="mile" style="line-height:initial; margin:0 5px 0 30px;">km
                                     		<span style="margin-left:115px;">배기량</span>
-                                    		<input type="text" id="cc" style="line-height:initial; margin:0 5px 0 20px;">cc
+                                    		<input type="text" id="cc" name="baeki" style="line-height:initial; margin:0 5px 0 20px;">cc
                                         </div><hr style="margin:10px 0;">	<!-- end of 주행거리/배기량 -->
-                                        <div style="font-size:14px; display: flex; line-height: 32px;">	<!-- 사고여부/판매가격 -->	
+                                        <div style="font-size:14px; display: flex; line-height: 32px;">		<!-- 사고여부/판매가격 -->	
 	                                    	<span style="margin-right:30px;">사고여부</span>
-                                    		<input class="accident" type="radio" id="accident1" value="n" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
-                                     		<input class="accident" type="radio" id="accident2" value="n" >&nbsp; 사고
+                                    		<input class="accident" name="accident" type="radio" id="accident1" value="no" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
+                                     		<input class="accident" name="accident" type="radio" id="accident2" value="yes" >&nbsp; 사고
                                      		<span style="margin-left:165px;">판매가격</span>&nbsp;&nbsp;&nbsp;
-                                     		<input type="text" id="salesPrice" class="salesPrice" style="line-height:initial; margin-right:5px;">만원 
+                                     		<input type="text" name="price" id="salesPrice" class="salesPrice" style="line-height:initial; margin-right:5px;">만원 
                                         </div><hr style="margin:10px 0;">	<!-- end of 사고여부/판매가격 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 변속기/연료 -->	
                                         	<span>변속기</span>
-                                        	<select class='carGear' name='carGear' style="margin:0 250px 0 40px;">
+                                        	<select class='carGear' id="carGear" name='gear' style="margin:0 250px 0 40px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="자동">자동</option>
 	                                    		<option value="수동">수동</option>
                                     		</select>
 	                                    	<span>연료</span>
-	                                    	<select class='carFuel' name='carFuel' style="margin-left:25px;">
+	                                    	<select class='carFuel' id='carFuel' name="fuel" style="margin-left:25px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="가솔린">가솔린</option><option value="디젤">디젤</option><option value="LPG">LPG</option>
 	                                    		<option value="가솔린/LPG겸용">가솔린/LPG겸용</option><option value="가솔린/CNG겸용">가솔린/CNG겸용</option>
@@ -187,111 +188,110 @@
 													style="text-align:center; font-size:14px; padding:5px; font-weight: initial;">멀티미디어</th>
 											</tr>
 											<tr style="font-size:12px; font-weight: lighter;">
-												<td class="checkOption">	<!-- 외관 -->
-													<li><input type="checkbox" id="options_38" name="options[]" > 선루프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 파노라마선루프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 알루미늄휠</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동사이드미러</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > HID램프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > LED헤드램프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 어댑티드헤드램프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > LED리어램프</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 데이라이트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 하이빔어시스트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 압축도어</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 자동슬라이딩도어</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동사이드스탭</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 루프랙</li>
+												<td class="outside">	<!-- 외관 -->
+													<li><input type="checkbox" id="options_1" name="option" > 선루프</li>
+													<li><input type="checkbox" id="options_2" name="option" > 파노라마선루프</li>
+													<li><input type="checkbox" id="options_3" name="option" > 알루미늄휠</li>
+													<li><input type="checkbox" id="options_4" name="option" > 전동사이드미러</li>
+													<li><input type="checkbox" id="options_5" name="option" > HID램프</li>
+													<li><input type="checkbox" id="options_6" name="option" > LED헤드램프</li>
+													<li><input type="checkbox" id="options_7" name="option" > 어댑티드헤드램프</li>
+													<li><input type="checkbox" id="options_8" name="option" > LED리어램프</li>
+													<li><input type="checkbox" id="options_9" name="option" > 데이라이트</li>
+													<li><input type="checkbox" id="options_10" name="option" > 하이빔어시스트</li>
+													<li><input type="checkbox" id="options_11" name="option" > 압축도어</li>
+													<li><input type="checkbox" id="options_12" name="option" > 자동슬라이딩도어</li>
+													<li><input type="checkbox" id="options_13" name="option" > 전동사이드스탭</li>
+													<li><input type="checkbox" id="options_14" name="option" > 루프랙</li>
 												</td>
-												<td class="checkOption">	<!-- 내장 -->
-													<li><input type="checkbox" id="options_38" name="options[]" > 가죽시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동시트(운전석)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동시트(동승석)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 열선시트(앞좌석)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 열선시트(뒷좌석)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 통풍시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 메모리시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 폴딩시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 마사지시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 워크인시트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 요추받침</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 하이패스룸미러</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > ECM룸미러</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 뒷자석에어벤트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 패들쉬프트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동햇빛가리개</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 엠비언트라이트</li>
+												<td class="inside">	<!-- 내장 -->
+													<li><input type="checkbox" id="options_15" name="option" > 가죽시트</li>
+													<li><input type="checkbox" id="options_16" name="option" > 전동시트(운전석)</li>
+													<li><input type="checkbox" id="options_17" name="option" > 전동시트(동승석)</li>
+													<li><input type="checkbox" id="options_18" name="option" > 열선시트(앞좌석)</li>
+													<li><input type="checkbox" id="options_19" name="option" > 열선시트(뒷좌석)</li>
+													<li><input type="checkbox" id="options_20" name="option" > 통풍시트</li>
+													<li><input type="checkbox" id="options_21" name="option" > 메모리시트</li>
+													<li><input type="checkbox" id="options_22" name="option" > 폴딩시트</li>
+													<li><input type="checkbox" id="options_23" name="option" > 마사지시트</li>
+													<li><input type="checkbox" id="options_24" name="option" > 워크인시트</li>
+													<li><input type="checkbox" id="options_25" name="option" > 요추받침</li>
+													<li><input type="checkbox" id="options_26" name="option" > 하이패스룸미러</li>
+													<li><input type="checkbox" id="options_27" name="option" > ECM룸미러</li>
+													<li><input type="checkbox" id="options_28" name="option" > 뒷자석에어벤트</li>
+													<li><input type="checkbox" id="options_29" name="option" > 패들쉬프트</li>
+													<li><input type="checkbox" id="options_30" name="option" > 전동햇빛가리개</li>
+													<li><input type="checkbox" id="options_31" name="option" > 엠비언트라이트</li>
 												</td>
-												<td class="checkOption">	<!-- 안전 -->
-													<li><input type="checkbox" id="options_38" name="options[]" > 동승석에어백</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 측면에어백</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 커튼에어백</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 무릎에어백</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 승객감지에어백</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 브레이크잠금방지(ABS)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 차체자세제어장치(ESC)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 후방센서</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전방센서</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 후방카메라</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전방카메라</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 어라운드뷰</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 타이어공기압감지(TPMS)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 차선이탈경보(LDWS)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 자동긴급제동</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전자제어서스펜션(ECS)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 후측방경보</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 미끄럼방지(TCS)</li>
+												<td class="safe">	<!-- 안전 -->
+													<li><input type="checkbox" id="options_32" name="option" > 동승석에어백</li>
+													<li><input type="checkbox" id="options_33" name="option" > 측면에어백</li>
+													<li><input type="checkbox" id="options_34" name="option" > 커튼에어백</li>
+													<li><input type="checkbox" id="options_35" name="option" > 무릎에어백</li>
+													<li><input type="checkbox" id="options_36" name="option" > 승객감지에어백</li>
+													<li><input type="checkbox" id="options_37" name="option" > 브레이크잠금방지(ABS)</li>
+													<li><input type="checkbox" id="options_38" name="option" > 차체자세제어장치(ESC)</li>
+													<li><input type="checkbox" id="options_39" name="option" > 후방센서</li>
+													<li><input type="checkbox" id="options_40" name="option" > 전방센서</li>
+													<li><input type="checkbox" id="options_41" name="option" > 후방카메라</li>
+													<li><input type="checkbox" id="options_42" name="option" > 전방카메라</li>
+													<li><input type="checkbox" id="options_43" name="option" > 어라운드뷰</li>
+													<li><input type="checkbox" id="options_44" name="option" > 타이어공기압감지(TPMS)</li>
+													<li><input type="checkbox" id="options_45" name="option" > 차선이탈경보(LDWS)</li>
+													<li><input type="checkbox" id="options_46" name="option" > 자동긴급제동</li>
+													<li><input type="checkbox" id="options_47" name="option" > 전자제어서스펜션(ECS)</li>
+													<li><input type="checkbox" id="options_48" name="option" > 후측방경보</li>
+													<li><input type="checkbox" id="options_49" name="option" > 미끄럼방지(TCS)</li>
 												</td>
-												<td class="checkOption">	<!-- 편의 -->
-													<li><input type="checkbox" id="options_38" name="options[]" > 스마트키</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 열선핸들</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 리모컨핸들</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 자동에어컨</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 좌우독립에어컨</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 오토라이트</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 크루즈컨트롤</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 스마트크루즈컨트롤</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 스탑앤고</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전동트렁크</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 스마트트렁크</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 전자주차브레이크(EPB)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 경사로밀림방지</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 헤드업디스플레이(HUD)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 무선충전</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 자동주차</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 냉장고</li>
+												<td class="comfort">	<!-- 편의 -->
+													<li><input type="checkbox" id="options_50" name="option" > 스마트키</li>
+													<li><input type="checkbox" id="options_51" name="option" > 열선핸들</li>
+													<li><input type="checkbox" id="options_52" name="option" > 리모컨핸들</li>
+													<li><input type="checkbox" id="options_53" name="option" > 자동에어컨</li>
+													<li><input type="checkbox" id="options_54" name="option" > 좌우독립에어컨</li>
+													<li><input type="checkbox" id="options_55" name="option" > 오토라이트</li>
+													<li><input type="checkbox" id="options_56" name="option" > 크루즈컨트롤</li>
+													<li><input type="checkbox" id="options_57" name="option" > 스마트크루즈컨트롤</li>
+													<li><input type="checkbox" id="options_58" name="option" > 스탑앤고</li>
+													<li><input type="checkbox" id="options_59" name="option" > 전동트렁크</li>
+													<li><input type="checkbox" id="options_60" name="option" > 스마트트렁크</li>
+													<li><input type="checkbox" id="options_61" name="option" > 전자주차브레이크(EPB)</li>
+													<li><input type="checkbox" id="options_62" name="option" > 경사로밀림방지</li>
+													<li><input type="checkbox" id="options_63" name="option" > 헤드업디스플레이(HUD)</li>
+													<li><input type="checkbox" id="options_64" name="option" > 무선충전</li>
+													<li><input type="checkbox" id="options_65" name="option" > 자동주차</li>
+													<li><input type="checkbox" id="options_66" name="option" > 냉장고</li>
 												</td>
-												<td class="checkOption">	<!-- 멀티미디어 -->
-													<li><input type="checkbox" id="options_38" name="options[]" > 네비게이션(순정)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 네비게이션(비순정)</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > USB</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > AUX</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 블루투스</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > MP3</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > DMB</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > CD플레이어</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > AV시스템</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 뒷좌석TV</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 텔레매틱스</li>
-													<li><input type="checkbox" id="options_38" name="options[]" > 스마트폰미러링</li>
+												<td class="multimedia">	<!-- 멀티미디어 -->
+													<li><input type="checkbox" id="options_67" name="option" > 네비게이션(순정)</li>
+													<li><input type="checkbox" id="options_68" name="option" > 네비게이션(비순정)</li>
+													<li><input type="checkbox" id="options_69" name="option" > USB</li>
+													<li><input type="checkbox" id="options_70" name="option" > AUX</li>
+													<li><input type="checkbox" id="options_71" name="option" > 블루투스</li>
+													<li><input type="checkbox" id="options_72" name="option" > MP3</li>
+													<li><input type="checkbox" id="options_73" name="option" > DMB</li>
+													<li><input type="checkbox" id="options_74" name="option" > CD플레이어</li>
+													<li><input type="checkbox" id="options_75" name="option" > AV시스템</li>
+													<li><input type="checkbox" id="options_76" name="option" > 뒷좌석TV</li>
+													<li><input type="checkbox" id="options_77" name="option" > 텔레매틱스</li>
+													<li><input type="checkbox" id="options_78" name="option" > 스마트폰미러링</li>
 												</td>
 											</tr>
 		                           		</table>	<!-- end of option_table -->
 	                           		</td>
 	                           </tr>
 	                           <tr><th>설명글</th>
-                                   <td colspan=3><textarea id="salesContext" class="salesContext" cols=100 rows=10 placeholder="내용을 입력하세요."></textarea></td>
+                                   <td colspan=3><textarea id="salesContext" name="content" class="salesContext" cols=100 rows=10 placeholder="내용을 입력하세요."></textarea></td>
                                </tr>
 		                	</table>
-		                	<div class="updateBtn" style="margin:50px 0;">	<!-- 등록하기 버튼 -->
-		                		<a href="../all/salesDetail.do"><span style="margin-left:600px;">등록하기</span></a>
+		                	<div class="uploadBtn" style="margin:50px 0;">	
+		                		<a id="enrollCar"><span style="margin-left:600px;">등록하기</span></a>
 		                	</div>
 		                	<!-- <div class="col-lg-16 text-center">	버튼은 안먹힘!!!!!!!!!!!!!!
-			                	<a href="../all/salesDetail.do">
-			                	<button type="submit" class="updateBtn" 
+			                	<button type="submit" class="updateBtn" id="submit_button"
 				                	style="border-radius: 12px; background-color:#dca73a; border:0; color:white; text-align:center; 
 				                	width:100px; height:50px; margin:20px 0 30px 200px;">
-			                	등록하기</button></a>
+			                	등록하기</button>
 		                	</div> -->
                         </form>
                     	</div>

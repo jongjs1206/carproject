@@ -153,7 +153,7 @@ a:hover,
 
 a,
 button {
-  color: #1696e7;
+  color: #dca73a; /* 수정 */
   outline: medium none; }
 
 button:focus, input:focus, input:focus, textarea, textarea:focus {
@@ -2580,7 +2580,7 @@ label {
 .h1-testimonial-active button.slick-arrow {
   position: absolute;
   top: 50%;
-  left: -133px;
+  left: -50px;	/* 수정 -133 -> -50*/
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -2610,19 +2610,19 @@ label {
 
 .h1-testimonial-active button.slick-next {
   left: auto;
-  right: -133px; }
+  right: -50px; }	/* 수정 -133 -> -50*/
   @media only screen and (min-width: 576px) and (max-width: 767px) {
     .h1-testimonial-active button.slick-next {
       right: -45px; } }
 
 .h1-testimonial-active:hover button.slick-prev {
-  left: -120px; }
+  left: -70px; }	/* 수정 -120 -> -70*/
   @media only screen and (min-width: 576px) and (max-width: 767px) {
     .h1-testimonial-active:hover button.slick-prev {
       left: 0; } }
 
 .h1-testimonial-active:hover button.slick-next {
-  right: -120px; }
+  right: -70px; }	/* 수정 -120 -> -70*/
   @media only screen and (min-width: 576px) and (max-width: 767px) {
     .h1-testimonial-active:hover button.slick-next {
       right: 0; } }

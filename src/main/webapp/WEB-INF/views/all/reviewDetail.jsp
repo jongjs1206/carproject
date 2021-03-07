@@ -9,7 +9,7 @@
 	<title>후기글 확인</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="../resources/assets/img/favicon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="../resources/assets/img/favicon.ico">
 	
 	<!-- CSS Style -->
 	<link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
@@ -24,7 +24,17 @@
 	<link rel="stylesheet" href="../resources/assets/css/nice-select_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/style_eb.css">
 	<link rel="stylesheet" href="../resources/assets/css/responsive.css">
-</head>
+	
+	<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+	crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"
+	integrity="sha512-JO6JyFPJupQKZf7icgZkHwuq/rAQxH7COqvEd4WdK52AtHPedwHog05T69pIelI69jVN/zZbW6TuHfH2mS8j/Q=="
+	crossorigin="anonymous"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 </head>
 <body>
 
@@ -263,7 +273,7 @@
 							<h3 class="mb-30">후기</h3>
 							<div class="reviewContext">
 								<div class="col-lg-12" >
-									<blockquote class="generic-blockquote" style="width:1000px;">
+									<blockquote class="generic-blockquote" id="reviewText" style="width:1000px;">
 										후기 내용~~~~
 									</blockquote>
 								</div>
@@ -271,13 +281,16 @@
 						</div>	<!-- end of 후기글 -->
 				</div>	<!-- end of 왼쪽부분 -->
 			</div>	<!-- end of row -->
-			<div class="col-lg-16 text-center">
+			<div class="reviewModifyBtn" style="margin:50px 0;">	<!-- 수정하기 버튼 -->
+		    	<a href="../user/review.do"><span style="margin-left:500px;">수정하기</span></a>
+		    </div>
+			<!-- <div class="col-lg-16 text-center">
 				<a href="#">
 			    <button type="submit" class="modifyBtn" 
 					style="border-radius: 12px; background-color:#dca73a; border:0; color:white; text-align:center; 
 				    width:100px; height:50px; margin:20px 0 30px;">
 			        수정하기</button></a>
-			</div>
+			</div> -->
 		</div>
 		</form>
 	</section>	<!--================ 후기글 end =================-->
