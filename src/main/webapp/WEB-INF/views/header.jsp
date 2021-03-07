@@ -67,25 +67,9 @@ $(function() {
 								<nav>
 									<ul id="navigation">
 										<li><a href="../all/product_list.do">매장</a></li>
-										<li><a href="#">내 차 팔기</a>
-											<ul class="submenu">
-												<li><a href="../user/sales.do">글쓰기</a></li>
-												<!-- <li><a href="../all/salesDetail.do">내 글 확인</a></li> -->
-											</ul></li>
-										<li><a href="../user/coinInfo.do">자동차 뉴스</a>
-											<ul class="submenu">
-												<li><a href="../all/carnewsBoardList.do">뉴스목록</a></li>
-												<li><a href="../all/carnewsBoardview.do">뉴스페이지</a></li>
-											</ul></li>
-										<li><a href="#">구매후기</a>
-											<ul class="submenu">
-                                        		<li><a href="../user/review.do">후기글 쓰기</a></li>
-                                        		<li><a href="../all/reviewDetail.do">후기글 확인</a></li>
-                                        	</ul>
-										</li>
 										<li><a class='sell_header' style="cursor: pointer;">내 차 팔기</a></li>
 										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
-										<li><a href="../user/reviewDetail.do">구매후기</a></li>
+										<li><a href="../all/reviewDetail.do">구매후기</a></li>
 											
 										<li><a href="#">Q&A</a>
 											<ul class="submenu">
