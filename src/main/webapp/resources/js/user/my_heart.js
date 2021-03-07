@@ -24,14 +24,20 @@ $(function() {
 			});
 			
 			setTimeout(function(){
-				if($('.product_count').text().slice(0,-3)%15==1){
-					$('.page').val($('.page').val()-1);
+				if($('.product_count').text().slice(0,-3)!=1){
+					if($('.product_count').text().slice(0,-3)%15==1){
+						$('.page').val($('.page').val()-1);
+					}
+					$('.product_count').text(uncomma($('.product_count').text().slice(0,-3))-1+"대 찜");	        	
+					button_page($('.page').val());
+				}else{
+					$('.product_count').text("0대 찜"); 
+					$('.page_choice').remove(); 
+					$('.page_number').append('<li class="page-item choice page_choice"><a href="#" class="page-link">1</a></li>');
+					$('.no_carlist').removeClass('off');
+					$('.product_all').addClass('off');
 				}
-				$('.product_count').text(uncomma($('.product_count').text().slice(0,-3))-1+"대 찜");	        	
-				button_page($('.page').val());
    			}, 500);
-		}else{
-			
 		}
 	})
 	
