@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +33,7 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="../resources/css/all/news.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/all/newsview.css">
 
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -46,104 +50,77 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-	
+<script type="text/javascript" src="../resources/js/all/news.js"></script>
 </head>
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
-	<%@ include file="../side.jsp"%>	<!--side menu -->
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
 
+	<!-- slider Area Start-->
+	<div class="slider-area">
+		<div
+			class="single-slider hero-overly slider-height2 d-flex align-items-center"
+			data-background="../resources/img/top3.jpg">
+			<div class="container">
+				<div class="row ">
+					<div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
+						<div class="hero-caption">
+							<span>자동차 관련 최신 기사를 제공합니다. </span>
+							<h2>자동차 뉴스</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- slider Area End-->
+	<input type="hidden" class='news_num'  value='${news_num}'/>
    <!--================Blog Area =================-->
    <section class="blog_area single-post-area section-padding">
-      <div class="container">
-
-
-		<a href="../all/carnewsBoardList.do" class="blog_details blog-info-link back-to-news-list">
-			목록보기
-		</a>
-	
+      <div class="container" style="display:flex; justify-content: center;">
          <div class="row">
             <div class="col-12 posts-list">
+            <div>
+				<a href="../all/carnewsBoardList.do?page=1" class="blog_details">목록보기</a>
+			</div>
                <div class="single-post">
-                  <div class="feature-img">
-                     <img class="img-fluid" src="assets/img/blog/single_blog_1.png" alt="">
-                  </div>
-                  <div class="blog_details">
-                     <h2>기사제목 기사제목 기사제목</h2>
-                     <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="fa fa-user"></i> 언론사명?? </a></li>
-                        <li><a href="#"><i class="fa fa-comments"></i> 댓글 수 </a></li>
-                     </ul>
-                     <p class="excert">
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower
-                     </p>
-                     <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower to actually sit through a
-                        self-imposed MCSE training. who has the willpower to actually
-                     </p>
-                     <div class="quote-wrapper">
-                        <div class="quotes">
-                           MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                           should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                           a fraction of the camp price. However, who has the willpower to actually sit through a
-                           self-imposed MCSE training.
+                  <div>
+	                  <div>
+						<hr/>
+						<div style="display: flex; justify-content: space-between;">
+		                     <h2 class='news_title'>${newsview.title}</h2>
+		                     <div>${fn:substring(newsview.w_date, 0, 16)}
+		                     <br>좋아요
+		                     <button class='good_btn'><i class="far fa-thumbs-up">
+							 <input class='good_me' type="hidden" value='off'/>
+		                     <span class='love_cnt'>${newsview.love_cnt}</span></i></button></div>
+						</div>
+	                    <hr/>
+	                     <div class='news_content'>
+		                     ${newsview.content}
+	                     </div>
+	                  </div>
+
+				<div class="comment-form">
+                  <h4>Leave a Reply</h4>
+                  <form class="form-contact comment_form" action="#" id="replyForm">
+                     <div class="row">
+                        <div class="col-12">
+                           <div class="form-group">
+                              <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                                 placeholder="코멘트를 남겨주세요."></textarea>
+                           </div>
                         </div>
-
                      </div>
-                     <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower
-                     </p>
-                     <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower to actually sit through a
-                        self-imposed MCSE training. who has the willpower to actually
-                     </p>
-                  </div>
-               </div>
-               
-               <!-- 추천 수 -->
-               <div class="navigation-top">
-                  <div class="d-sm-flex justify-content-between text-center">
-                     <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> 추천수</p>
-                     <div class="col-sm-4 text-center my-2 my-sm-0">
-                        <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+                     <div class="form-group">
+                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">등록하기</button>
                      </div>
-
-                  </div>
+                  </form>
                </div>
-               <!-- 추천 수 -->
-               
-          
-            <div class="row">
-               <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                  <div class="detials">
-                     <p>이전 글</p>
-                     <a href="#">
-                        <h4>기사제목</h4>
-                     </a>
-                  </div>
-               </div>
-               
-               <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                  <div class="detials">
-                     <p>다음 글</p>
-                     <a href="#">
-                        <h4>기사제목</h4>
-                     </a>
-                  </div>
-               </div>
-            </div>
-         
-
                
                
                <!-- 댓글 -->
@@ -178,22 +155,7 @@
                   </div>
                   <!-- 여기에 DB 내용 가져오기 ↑↑↑↑↑ -->
  
-               <div class="comment-form">
-                  <h4>Leave a Reply</h4>
-                  <form class="form-contact comment_form" action="#" id="replyForm">
-                     <div class="row">
-                        <div class="col-12">
-                           <div class="form-group">
-                              <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
-                                 placeholder="코멘트를 남겨주세요."></textarea>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">등록하기</button>
-                     </div>
-                  </form>
-               </div>
+               
             </div>
 
          </div>

@@ -877,21 +877,25 @@ $(function() {
 	
 	
 	$(document).on("click",".page_choice",function(){
+		$('.fa-heart').removeClass('color_pink');
 		var t = $(this).text();
 		button_page(t);
 	});
 	
 	$(document).on("click",".start_page",function(){
+		$('.fa-heart').removeClass('color_pink');
 		button_page(1);
 	});
 	
 	$(document).on("click",".prev_page",function(){
+		$('.fa-heart').removeClass('color_pink');
 		var t = $('.choice').text();
 		if(t!=1)
 			button_page(Number(t)-Number(1));
 	});
 	
 	$(document).on("click",".next_page",function(){
+		$('.fa-heart').removeClass('color_pink');
 		var temp=$('.product_count').text().slice(3,-1);
 		var page_count = Math.floor(uncomma(temp)/15)+1;
 		if(uncomma(temp)%15==0)
@@ -902,6 +906,7 @@ $(function() {
 	});
 	
 	$(document).on("click",".end_page",function(){
+		$('.fa-heart').removeClass('color_pink');
 		var temp=$('.product_count').text().slice(3,-1);
 		var page_count = Math.floor(Number(uncomma(temp))/Number(15))+1;
 		if(uncomma(temp)%15==0)

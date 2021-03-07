@@ -11,4 +11,20 @@
 	SELECT count(*) as count FROM news;
 </select>
 
+<select id="popularity" resultType="hashmap">
+	SELECT * FROM news ORDER BY love_cnt DESC,read_cnt DESC LIMIT 0,5
+</select>
+
+<select id="newsview" resultType="hashmap" parameterType="String">
+	SELECT * FROM news WHERE w_id=#{value}
+</select>
+
+<update id="goodadd" parameterType="String">
+	update news SET love_cnt=love_cnt+1 WHERE w_id=#{value}
+</update>
+
+<update id="goodsub" parameterType="String">
+	update news SET love_cnt=love_cnt-1 WHERE w_id=#{value}
+</update>
+
 </mapper>
