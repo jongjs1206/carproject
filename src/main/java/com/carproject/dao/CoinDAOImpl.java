@@ -21,6 +21,11 @@ public class CoinDAOImpl implements CoinDAO{
 		System.out.println("===> CoinMapper coinView 호출");
 		return mybatis.selectList("CoinMap.coinView", m_id);
 	}
+	@Override
+	public Integer onlyCoin(String m_id) {
+		System.out.println("===> CoinMapper onlyCoin 호출");
+		return mybatis.selectOne("CoinMap.onlyCoin", m_id);
+	}
 	
 	
 	// 관리자

@@ -20,6 +20,10 @@ public class CoinServiceImpl implements CoinService{
 	public List<HashMap<String, Object>> coinView(String m_id) {
 		return coinDAO.coinView(m_id);
 	}
+	@Override
+	public Integer onlyCoin(String m_id) {
+		return coinDAO.onlyCoin(m_id);
+	}
 	
 	
 	// 관리자

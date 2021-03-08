@@ -9,7 +9,7 @@ public interface CoinService {
 		
 	// 내 코인 충전 내역 확인
 	public List<HashMap<String, Object>> coinView(String m_id);	
-	
+	public Integer onlyCoin(String m_id);
 	
 	// 관리자
 	// 코인 충전량 불러오기 위한 함수

@@ -3,11 +3,23 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CoinMap">
 
-	<select id="coinView" parameterType="String" resultType="hashmap">
-		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN FROM coin
+	<!-- 내 코인 잔여량 확인 -->
+	<select id="onlyCoin" parameterType="String" resultType="Integer">
+		SELECT SUM(coin) AS SUNCOIN
+		FROM coin 
 		WHERE m_id=#{m_id}
+	</select>
+
+	<!-- 내 코인 충전 내역 확인 -->
+	<select id="coinView" parameterType="String" resultType="hashmap">
+		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN 
+		FROM coin
+		WHERE m_id=#{m_id} AND coin > 0
+		ORDER BY DAY DESC
 	</select>	
 
+
+	<!-- 관리자 - 코인현황 목록 가져오기 -->
 	<select id="allCoinList" parameterType="String" resultType="coin" >
 		SELECT * FROM coin
 	</select>
@@ -20,4 +32,6 @@
            ) A
     GROUP BY A.DAY
 	</select>
+	
+	
 </mapper>

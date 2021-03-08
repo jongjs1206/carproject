@@ -9,6 +9,7 @@ public interface CoinDAO {
 
 	// 내 코인 충전 내역 확인
 	List<HashMap<String, Object>> coinView(String m_id);
+	Integer onlyCoin(String m_id);
 
 	
 	// 관리자
