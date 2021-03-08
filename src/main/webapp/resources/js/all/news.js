@@ -85,6 +85,22 @@ $(function() {
 					error : function(err){ console.log(err)}  //실패했을때
 				});
 				$('.form-control').val('');
+				$.ajax({
+					type : 'post',
+					async : true,
+					url : '../all/review_select.do',
+					beforeSend : function(xhr)
+					{	
+						xhr.setRequestHeader(header, token);
+					},
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					dataType : 'json',
+					data : {"id" : $('.login_on').val(),
+					"w_id":$('.news_num').val()},
+					success: function(){				
+		        	},
+					error : function(err){ console.log(err)}  //실패했을때
+				});
 			}
 		}
 	})
