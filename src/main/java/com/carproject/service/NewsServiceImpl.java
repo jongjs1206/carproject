@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.carproject.dao.NewsDAO;
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.ReplyVO;
 
 @Service("newsService")
 public class NewsServiceImpl implements NewsService{
@@ -65,5 +66,15 @@ public class NewsServiceImpl implements NewsService{
 	public void viewadd(String num) {
 		newsDAO.viewadd(num);
 		
+	}
+
+	@Override
+	public void replyinsert(ReplyVO vo) {
+		newsDAO.replyinsert(vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectreply(ReplyVO vo) {
+		return newsDAO.selectreply(vo);
 	}
 }

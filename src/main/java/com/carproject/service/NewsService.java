@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.ReplyVO;
 
 public interface NewsService {
 	public List<HashMap<String, Object>> news_list(String page);
@@ -16,4 +17,6 @@ public interface NewsService {
 	public void gooddelete(HeartVO vo);
 	public void viewadd(String num);
 	public String goodselect(HeartVO vo);
+	public void replyinsert(ReplyVO vo);
+	public List<HashMap<String, Object>> selectreply(ReplyVO vo);
 }

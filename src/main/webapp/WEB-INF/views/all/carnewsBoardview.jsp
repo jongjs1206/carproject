@@ -119,7 +119,7 @@
                         <div class="col-12">
                            <div class="form-group">
                               <textarea
-                              style="font-size: 20px;" class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                              class="form-control w-100" name="content" id="content" cols="30" rows="9"
                                  placeholder="코멘트를 남겨주세요."></textarea>
                            </div>
                         </div>
@@ -133,38 +133,29 @@
                
                <!-- 댓글 -->
                <div class="comments-area">
-                  <h4>댓글 수</h4>
-
 				<!-- 여기에 DB 내용 가져오기 ↓↓↓↓↓ -->           
                   <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="thumb">
-                              <img src="assets/img/comment/comment_2.png" alt="">
-                           </div>
-                           <div class="desc">
-                              <p id="comment" class="comment">
-                                 댓글 댓글 댓글 댓글 댓글 댓글 
-                              </p>
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <h5>
-                                       <a href="#">작성자</a>
-                                    </h5>
-                                    <p class="date">작성 날짜 </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                  	<c:forEach var="reply_on" items="${reply}">
+                  		<div class='reply_list'>
+                  			<i class="fas fa-user-circle"></i> 
+                  			<div class='reply_name_content'>
+                  				<div>
+                  					${reply_on.m_name} 
+                  					<span style="color:#909092; margin-left: 10px;">${fn:substring(reply_on.w_date, 0, 16)}</span>
+                  					<c:if test="${sessionScope.info.m_id eq reply_on.writer}">
+                  						<a style=" cursor:pointer; margin-left: 10px;">수정</a>
+                  						<a style=" cursor:pointer; margin-left: 10px;">삭제</a>
+                  					</c:if>
+                  					<input type="hidden" value='${reply_on.r_id}'/> 
+                  				</div>
+                  				<div>
+                  					${reply_on.content}
+                  				</div>
+                  			</div>
+                  		</div>
+                  	</c:forEach>
                   </div>
-                  <!-- 여기에 DB 내용 가져오기 ↑↑↑↑↑ -->
-            </div>
-         </div>
-      </div>
+                </div>
    </section>
    <!--================ Blog Area end =================-->
 

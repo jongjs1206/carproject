@@ -4,7 +4,9 @@
 <mapper namespace="NewsMAP">
 
 <select id="news_list" resultType="hashmap" parameterType="String">
-	SELECT * FROM news ORDER BY w_date DESC LIMIT ${value},15
+	SELECT r.count, n.* FROM news n left JOIN 
+(SELECT COUNT(*) AS COUNT ,w_id FROM reply GROUP by w_id) r
+ON n.w_id=r.w_id ORDER BY w_date DESC LIMIT ${value},15
 </select>
 
 <select id="newscount" resultType="Integer">
@@ -12,7 +14,9 @@
 </select>
 
 <select id="popularity" resultType="hashmap">
-	SELECT * FROM news ORDER BY love_cnt DESC,read_cnt DESC LIMIT 0,5
+	SELECT r.count, n.* FROM news n left JOIN 
+(SELECT COUNT(*) AS COUNT ,w_id FROM reply GROUP by w_id) r
+ON n.w_id=r.w_id ORDER BY love_cnt DESC,read_cnt DESC LIMIT 0,5
 </select>
 
 <select id="newsview" resultType="hashmap" parameterType="String">
@@ -42,5 +46,17 @@
 <update id="viewadd" parameterType="String">
 	update news SET read_cnt=read_cnt+1 WHERE w_id=#{value}
 </update>
+
+<insert id="replyinsert" parameterType="reply">
+	INSERT INTO reply 
+	VALUES(nextval(reply_r_id_sq),#{w_id},#{content},#{writer},sysdate())
+</insert>
+
+<select id="selectreply" resultType="hashmap" parameterType="String">
+	SELECT m_name,n.* FROM member m 
+inner JOIN (SELECT r_id,content,writer,w_date FROM reply WHERE w_id=#{w_id}) n
+ON m.m_id=n.writer ORDER BY w_date DESC LIMIT ${r_id},15
+</select>
+
 
 </mapper>

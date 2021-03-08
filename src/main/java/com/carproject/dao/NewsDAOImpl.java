@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.ReplyVO;
 
 @Repository("newsDAO")
 public class NewsDAOImpl implements NewsDAO{
@@ -72,6 +73,18 @@ public class NewsDAOImpl implements NewsDAO{
 	public void viewadd(String num) {
 		System.out.println("===>  NewsMapper viewadd() 호출");
 		mybatis.update("NewsMAP.viewadd",num);
+	}
+
+	@Override
+	public void replyinsert(ReplyVO vo) {
+		System.out.println("===>  NewsMapper replyinsert() 호출");
+		mybatis.insert("NewsMAP.replyinsert",vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectreply(ReplyVO vo) {
+		System.out.println("===>  NewsMapper selectreply() 호출");
+		return mybatis.selectList("NewsMAP.selectreply",vo);
 	}
 
 }

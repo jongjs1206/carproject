@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.ReplyVO;
 import com.carproject.service.NewsService;
 
 @Controller
@@ -47,12 +48,18 @@ public class NewsController {
 		HashMap<String, Object> newsview =  newsservice.newsview(num);
 		newsservice.viewadd(num);
 		
+		ReplyVO rvo = new ReplyVO();
+		rvo.setW_id(Integer.parseInt(num));
+		rvo.setR_id(0);
+		List<HashMap<String, Object>> reply = newsservice.selectreply(rvo);
+		
 		model.addAttribute("newsview", newsview);
 		model.addAttribute("news_num", num);
 
 		if(heart_id!=null){
 			model.addAttribute("heart_ok", "1");
 		}
+		model.addAttribute("reply", reply);
 	}
 	
 	@RequestMapping("all/good_news.do")
@@ -78,8 +85,10 @@ public class NewsController {
 	@RequestMapping("all/review_insert.do")
 	@ResponseBody
 	public void review_insert(String id, String w_id, String content) {
-		System.out.println(id);
-		System.out.println(w_id);
-		System.out.println(content);
+		ReplyVO vo = new ReplyVO();
+		vo.setWriter(id);
+		vo.setW_id(Integer.parseInt(w_id));
+		vo.setContent(content);
+		newsservice.replyinsert(vo);
 	}
 }

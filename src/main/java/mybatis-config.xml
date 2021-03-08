@@ -23,6 +23,7 @@
 		<typeAlias alias="coin" type="com.carproject.domain.CoinVO"/>
 		<typeAlias alias="sales" type="com.carproject.domain.SalesVO"/>			
 		<typeAlias alias="news" type="com.carproject.domain.NewsVO"/>			
+		<typeAlias alias="reply" type="com.carproject.domain.ReplyVO"/>			
 	</typeAliases>
 
 

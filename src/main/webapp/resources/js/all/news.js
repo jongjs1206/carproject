@@ -80,13 +80,18 @@ $(function() {
 					data : {"id" : $('.login_on').val(),
 					"w_id":$('.news_num').val(),
 					"content":$('.form-control').val()},
-					success: function(){
-												
+					success: function(){				
 		        	},
 					error : function(err){ console.log(err)}  //실패했을때
 				});
+				$('.form-control').val('');
 			}
 		}
 	})
-	
+	$(window).scroll(function() {// 스크롤 이벤트가 발생할 때마다 인식
+    if ( $(window).scrollTop() == $(document).height() - $(window).height() ) {// 스크롤이 끝에 닿는걸 인식
+      alert(1);
+    }
+	});//end of 무한스크롤
+
 }); //end of function
