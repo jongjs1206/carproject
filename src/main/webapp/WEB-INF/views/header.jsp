@@ -82,7 +82,7 @@ $(function() {
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
 										<li>
-                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=670, left=0, top=0, scrollbars=yes');return false">
+                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
                                         	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
                                         </li>
 										<li style="width: 40px;"></li>

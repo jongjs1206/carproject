@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.carproject.domain.HeartVO;
+
 @Repository("newsDAO")
 public class NewsDAOImpl implements NewsDAO{
 	@Autowired
@@ -46,6 +48,30 @@ public class NewsDAOImpl implements NewsDAO{
 	public void goodsub(String news_num) {
 		System.out.println("===>  NewsMapper goodsub() 호출");
 		mybatis.update("NewsMAP.goodsub",news_num);
+	}
+
+	@Override
+	public void goodinsert(HeartVO vo) {
+		System.out.println("===>  NewsMapper goodinsert() 호출");
+		mybatis.insert("NewsMAP.goodinsert",vo);
+	}
+
+	@Override
+	public void gooddelete(HeartVO vo) {
+		System.out.println("===>  NewsMapper gooddelete() 호출");
+		mybatis.delete("NewsMAP.gooddelete",vo);
+	}
+
+	@Override
+	public String goodselect(HeartVO vo) {
+		System.out.println("===>  NewsMapper goodselect() 호출");
+		return mybatis.selectOne("NewsMAP.goodselect",vo);
+	}
+
+	@Override
+	public void viewadd(String num) {
+		System.out.println("===>  NewsMapper viewadd() 호출");
+		mybatis.update("NewsMAP.viewadd",num);
 	}
 
 }

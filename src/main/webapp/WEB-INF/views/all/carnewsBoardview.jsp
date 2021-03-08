@@ -95,8 +95,15 @@
 		                     <h2 class='news_title'>${newsview.title}</h2>
 		                     <div>${fn:substring(newsview.w_date, 0, 16)}
 		                     <br>좋아요
-		                     <button class='good_btn'><i class="far fa-thumbs-up">
-							 <input class='good_me' type="hidden" value='off'/>
+		                     <c:if test="${heart_ok eq null}">
+		                     	<button class='good_btn'><i class="far fa-thumbs-up">
+								<input class='good_me' type="hidden" value='off'/>
+		                     </c:if>
+		                     <c:if test="${heart_ok ne null}">
+		                     	<button class='good_btn'><i class="far fa-thumbs-up color-red">
+								<input class='good_me' type="hidden" value='on'/>
+		                     </c:if>
+		                     
 		                     <span class='love_cnt'>${newsview.love_cnt}</span></i></button></div>
 						</div>
 	                    <hr/>

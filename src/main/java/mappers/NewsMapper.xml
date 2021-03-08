@@ -27,4 +27,20 @@
 	update news SET love_cnt=love_cnt-1 WHERE w_id=#{value}
 </update>
 
+<insert id="goodinsert" parameterType="heart">
+	INSERT INTO newsheart VALUES(#{m_id},#{w_id})
+</insert>
+
+<delete id="gooddelete" parameterType="heart">
+	delete FROM newsheart where m_id=#{m_id} and w_id=#{w_id}
+</delete>
+
+<select id="goodselect" resultType="String" parameterType="heart">
+	SELECT w_id FROM newsheart where m_id=#{m_id} and w_id=#{w_id}
+</select>
+
+<update id="viewadd" parameterType="String">
+	update news SET read_cnt=read_cnt+1 WHERE w_id=#{value}
+</update>
+
 </mapper>
