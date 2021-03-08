@@ -114,19 +114,20 @@
 
 				<div class="comment-form">
                   <h4>Leave a Reply</h4>
-                  <form class="form-contact comment_form" action="#" id="replyForm">
+                  
                      <div class="row">
                         <div class="col-12">
                            <div class="form-group">
-                              <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                              <textarea
+                              style="font-size: 20px;" class="form-control w-100" name="content" id="content" cols="30" rows="9"
                                  placeholder="코멘트를 남겨주세요."></textarea>
                            </div>
                         </div>
                      </div>
                      <div class="form-group">
-                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">등록하기</button>
+                        <button class="button button-contactForm btn_1 boxed-btn">등록하기</button>
                      </div>
-                  </form>
+           
                </div>
                
                
@@ -161,10 +162,7 @@
                      </div>
                   </div>
                   <!-- 여기에 DB 내용 가져오기 ↑↑↑↑↑ -->
- 
-               
             </div>
-
          </div>
       </div>
    </section>

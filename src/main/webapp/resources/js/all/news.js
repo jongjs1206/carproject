@@ -53,4 +53,40 @@ $(function() {
 			}	
 		}
 	})
+	
+	$('.form-control').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 사용 가능한 서비스 입니다.');
+			$('.form-control').blur();
+		}
+	})
+	$('.boxed-btn').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 사용 가능한 서비스 입니다.');
+		}else{
+			if($('.form-control').val()==''){
+				alert('댓글을 입력해 주세요.');
+			}else{
+				$.ajax({
+					type : 'post',
+					async : true,
+					url : '../all/review_insert.do',
+					beforeSend : function(xhr)
+					{	
+						xhr.setRequestHeader(header, token);
+					},
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					dataType : 'json',
+					data : {"id" : $('.login_on').val(),
+					"w_id":$('.news_num').val(),
+					"content":$('.form-control').val()},
+					success: function(){
+												
+		        	},
+					error : function(err){ console.log(err)}  //실패했을때
+				});
+			}
+		}
+	})
+	
 }); //end of function

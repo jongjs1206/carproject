@@ -74,4 +74,12 @@ public class NewsController {
 		newsservice.goodsub(news_num);
 		newsservice.gooddelete(vo);
 	}
+	
+	@RequestMapping("all/review_insert.do")
+	@ResponseBody
+	public void review_insert(String id, String w_id, String content) {
+		System.out.println(id);
+		System.out.println(w_id);
+		System.out.println(content);
+	}
 }
