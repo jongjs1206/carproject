@@ -59,10 +59,10 @@
 		<c:forEach items="${sale_list}" var="sale">
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
-					href="../all/carnewsBoardview.do"> <img
+					href="../all/salesDetail.do?num=${sale.sell_id}"> <img
 					src="../resources/img/newsimg.jpg" alt="썸네일">
 				</a> 
-				<a class="" href="../all/carnewsBoardview.do">
+				<a class="" href="../all/salesDetail.do?num=${sale.sell_id}">
 					<div>
 						<span class="date">${sale.w_date}</span> 
 						<span class="status">${sale.status}</span>

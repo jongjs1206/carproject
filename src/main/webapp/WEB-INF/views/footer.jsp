@@ -16,7 +16,8 @@
                <div class="row d-flex justify-content-between">
 					<!-- logo -->
 					<div class="footer-logo">
-					  <a style="font-size: 35px; color: #dca73a; letter-spacing: 15px;">사차원</a>
+					  <a style="font-size: 35px; color: #dca73a; letter-spacing: 15px;">
+					  <img src="../resources/img/logo_footer2.png" style="width: 200px"/></a>
 					</div>		
 					<div>
 						<p>(주) 스마트에프앤디  서울특별시 광진구 자양로116</p>
