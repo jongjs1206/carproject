@@ -76,6 +76,7 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 	
 	
+	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void uploadBtn(SalesVO vo) {										// 등록하기 버튼
@@ -90,6 +91,11 @@ public class SalesDAOImpl implements SalesDAO {
 		mybatis.update("salesMap.modifyBtn", vo);
 	}
 	
+	@Override
+	public void deleteBtn(SalesVO vo) {
+		System.out.println("===> salesMap deleteBtn() 호출");					// 삭제하기 버튼
+		mybatis.update("salesMap.deleteBtn", vo);
+	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override

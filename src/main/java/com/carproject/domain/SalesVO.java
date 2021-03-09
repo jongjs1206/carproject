@@ -2,6 +2,8 @@ package com.carproject.domain;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,31 +38,38 @@ public class SalesVO {
 	private String grade2;			// 세부 등급
 	
 	private String image;			// 이미지
-	private String rFname = null;	// 업로드 한 이미지 이름(파일선택)
+	private String rFname; 			/* 업로드 사진 */
 
 	private long rFsize;
 	
 	private String strOption;		// 가공한 option 값
-	private long num;
+	private long num;				// 상세페이지에 불러올 sell_id 값
 	
 	/* 이미지 업로드 */
-	MultipartFile file;
+	//*************************************************
+	MultipartFile file;	// write.jsp에 파일첨부시 name="file"과 동일한 변수명
+	
 	public MultipartFile getFile() {
 		return file;
 	}
-
 	public void setFile(MultipartFile file) {
 		this.file = file;
+		
+		Date now = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyMMddhhmmss");
+		
+		// 업로드 파일 접근
 		if(! file.isEmpty()){
-			this.rFname = file.getOriginalFilename();
+			this.rFname = format.format(now)+ file.getOriginalFilename();
 			this.rFsize = file.getSize();
 			
 			//***********************************************
-			// 경로 자기꺼로
-			File f = new File("C:\\Users\\kosmo_28\\git\\carproject4\\src\\main\\webapp\\resources\\upload\\"+rFname);		
-			
+			// 해당 경로로 변경
+			File f = new File("C:\\upload\\"+rFname);
+
 			try {
 				file.transferTo(f);
+				
 			} catch (IllegalStateException e) {				
 				e.printStackTrace();
 			} catch (IOException e) {
