@@ -9,10 +9,10 @@ $(function(){
 	var header = "X-CSRF-TOKEN";
 	
 	//날짜
-	var startDate = $('#datepicker1')
-	var endDate = $('#datepicker2')
-
-
+	var startDate = $("#datepicker1")
+	var endDate = $("#datepicker2")
+	
+	
 
 
 //날짜 리셋 버튼

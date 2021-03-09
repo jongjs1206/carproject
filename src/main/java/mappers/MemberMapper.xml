@@ -136,8 +136,7 @@
 		     </foreach>
 		    </if>
 		<![CDATA[
-		AND
-		ORDER BY str_to_date(w_date, '%Y-%m-%d') DESC
+		ORDER BY str_to_date(w_date, '%y-%m-%d') DESC
 		]]>
 	</select>
 	
