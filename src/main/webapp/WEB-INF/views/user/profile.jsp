@@ -86,7 +86,7 @@
 					<div class="cmm-input-area">
 						<div class="col-md-6">
 						<a href="javascript:void(0);">
-							<img id='preImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${member.m_id}.jpg" alt="profile" class="single-gallery-image"/>
+							<img id='preImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${member.m_id}.jpg" alt="profile" class="single-gallery-image" style=""%>/>
 							</a>
 						</div>
 						
@@ -231,7 +231,7 @@
 							<div class="mg-b10">
 								<span class="inp-t w400"><input type="text"
 									title="휴대전화번호" id="tel" name="tel" autocomplete="off"
-									value="${member.tel }" maxlength="11"
+									value="${member.tel }" maxlength="13"
 									placeholder="예)01012345555" tk_security="true"></span>
 							</div>
 						</div>

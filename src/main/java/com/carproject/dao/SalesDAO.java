@@ -25,4 +25,11 @@ public interface SalesDAO {
 	public void deleteBtn(SalesVO vo);		// 삭제하기 버튼
 	
 	public SalesVO salesDetail(Long num);	// 상세페이지
+	
+	
+	
+	
+	public List<SalesVO> selectSalesAll(); //전체 판매글
 }
+
+

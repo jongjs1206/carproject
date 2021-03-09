@@ -1,5 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     <!-- 브라우저 최상단 탭 명 -->
@@ -102,45 +103,39 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                <input type="datepicker">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
                                         <!-- 예시 데이터 삽입 -->
                                         <thead>
                                      
-                                            <tr>
-                                                <th>판매자 아이디</th>
-                                                <th>이미지 파일</th>
-                                                <th>차량정보</th>
-                                                <th>차량옵션</th>
-                                                <th>설명글</th>
-                                                <th>상태</th>  
+                                            <tr>                                                
+                                                <th>ㅁ</th>
+                                                <td>썸네일</td>
+                                                <th>판매자</th>
+                                                <th>판매차량</th>
+                                                <th>날짜(등록/게시)</th>
+                                                <th>상태</th>
+                                                <th></th>  
                                             </tr> 
                                         </thead>
+                                        
+                                        
                                         <tbody>
+                                        	<c:forEach items="${salesList}" var="sale">
+                                        
                                             <tr>
-                                                <td>판매자 아이디1</td>
-                                                <td>이미지 파일1</td>
-                                                <td>차량정보1</td>
-                                                <td>차량옵션1</td>
-                                                <td>설명글1</td>
+                                            	<th><input type="checkbox"></th>
+                                                <td>img</td>
+                                                <td>${sale.m_id}</td>
+                                                <td>${sale.title}</td>
+                                                <td>${sale.w_date}</td>
+                                                <td>${sale.status}</td>
                                                 <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="수정하기"></td>  
                                             </tr> 
-                                            <tr>
-                                                <td>판매자 아이디2</td>
-                                                <td>이미지 파일2</td>
-                                                <td>차량정보2</td>
-                                                <td>차량옵션2</td>
-                                                <td>설명글2</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="수정하기"></td>  
-                                            </tr>
-                                            <tr>
-                                                <td>판매자 아이디3</td>
-                                                <td>이미지 파일3</td>
-                                                <td>차량정보3</td>
-                                                <td>차량옵션3</td>
-                                                <td>설명글3</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="수정하기"></td>  
-                                            </tr>
+                                           
+                                            </c:forEach>
+                                            
                                         </tbody> 
                                     </table>
                                 </div>

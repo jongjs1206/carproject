@@ -131,8 +131,8 @@
 				<div class="statusBtn" id="statusBtn">
 			
 				<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">판매중</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">임시저장</a>
+				<a href="javascript:void(0);" onclick="statusOn(this)">게시중</a>
+				<a href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">삭제</a>
 		  </div>

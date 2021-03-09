@@ -102,4 +102,15 @@
 </select>
 
 
+
+<!-- 전체 판매리스트 가져오기 -->
+<select id="selectSalesAll" resultType="sales">
+	SELECT * FROM sell
+	<![CDATA[
+	AND
+	ORDER BY str_to_date(w_date, '%Y-%m-%d') DESC
+	]]>
+</select>
+
+
 </mapper>

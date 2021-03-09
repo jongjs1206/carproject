@@ -103,4 +103,13 @@ public class SalesDAOImpl implements SalesDAO {
 		SalesVO sales  = mybatis.selectOne("salesMap.salesCheck", num);
 		return sales;
 	}
+
+	
+	
+	//전체 판매글
+	@Override
+	public List<SalesVO> selectSalesAll() {
+		List<SalesVO> salesList  = mybatis.selectList("salesMap.selectSalesAll");
+		return salesList;
+	}
 }

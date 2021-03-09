@@ -81,7 +81,7 @@
                              </a>
                              <div class="collapse" id="collapsethree" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="salesarticlelist.do">판매글</a>
+                                    <a class="nav-link" href="salesList.do">판매글</a>
                                     <a class="nav-link" href="userinquiry.do">고객문의</a>
                                     <a class="nav-link" href="carnews.do">자동차뉴스</a>
                                     <a class="nav-link" href="purchasereview.do">구매후기</a>

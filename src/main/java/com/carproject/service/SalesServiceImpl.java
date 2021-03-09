@@ -85,6 +85,13 @@ public class SalesServiceImpl implements SalesService {
 	public SalesVO salesDetail(Long num) {		// 상세페이지
 		return salesDAO.salesDetail(num);
 	}
+
+	
+	//전체 판매글 가져오기
+	@Override
+	public List<SalesVO> selectSalesAll() {
+		return salesDAO.selectSalesAll();
+	}
 }
 
 

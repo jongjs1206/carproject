@@ -80,10 +80,12 @@ function readURL(input) {
 //프로필 사진 수정
 
 $("#btnPic").on('click', function(){
-	
+	if($("#picFile").val()){
 	$('#picForm').submit();
 	alert("프로필 사진이 변경 되었습니다.")
-
+}else{
+alert("새 프로필 사진을 등록하세요.")
+}
  })
  
 
