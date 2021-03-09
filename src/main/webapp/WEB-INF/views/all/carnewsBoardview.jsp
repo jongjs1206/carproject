@@ -59,6 +59,7 @@
 		value="${_csrf.token}" />
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
+	<input type="hidden" class='m_name' value='${sessionScope.info.m_name}'/>	
 
 	<!-- slider Area Start-->
 	<div class="slider-area">
@@ -92,7 +93,12 @@
 	                  <div>
 						<hr/>
 						<div style="display: flex; justify-content: space-between;">
-		                     <h2 class='news_title'>${newsview.title}</h2>
+		                     
+		                     <h2 class='news_title'>${newsview.title}
+		                     <c:if test="${reply_count ne null}">
+		                     	(${reply_count})
+		                     </c:if>
+		                     </h2>
 		                     <div>${fn:substring(newsview.w_date, 0, 16)}
 		                     <br>좋아요
 		                     <c:if test="${heart_ok eq null}">
@@ -130,25 +136,29 @@
            
                </div>
                
-               
+               <input type="hidden" class='delete_reply' value='0'/>
                <!-- 댓글 -->
                <div class="comments-area">
 				<!-- 여기에 DB 내용 가져오기 ↓↓↓↓↓ -->           
-                  <div class="comment-list">
+                  <div class="comment-list reply_plus">
                   	<c:forEach var="reply_on" items="${reply}">
                   		<div class='reply_list'>
-                  			<i class="fas fa-user-circle"></i> 
+                  			<c:if test="${reply_on.photo eq null}">
+	                  			<i class="fas fa-user-circle"></i> 
+                  			</c:if>
+                  			<c:if test="${reply_on.photo ne null}">
+	                  			<img style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${reply_on.m_id}.jpg">
+                  			</c:if>
                   			<div class='reply_name_content'>
                   				<div>
                   					${reply_on.m_name} 
                   					<span style="color:#909092; margin-left: 10px;">${fn:substring(reply_on.w_date, 0, 16)}</span>
                   					<c:if test="${sessionScope.info.m_id eq reply_on.writer}">
-                  						<a style=" cursor:pointer; margin-left: 10px;">수정</a>
-                  						<a style=" cursor:pointer; margin-left: 10px;">삭제</a>
+                  						<a class="reply_delete" style=" cursor:pointer; margin-left: 10px;">삭제</a>
                   					</c:if>
                   					<input type="hidden" value='${reply_on.r_id}'/> 
                   				</div>
-                  				<div>
+                  				<div class='context_reply'>
                   					${reply_on.content}
                   				</div>
                   			</div>
@@ -159,9 +169,10 @@
    </section>
    <!--================ Blog Area end =================-->
 
-
-
+	<input type="hidden" class='page' value="1"/>
+	<div class='foot'>
 	<%@ include file="../footer.jsp"%>
+	</div>
 
 	<!-- JS here -->
 

@@ -53,9 +53,22 @@ ON n.w_id=r.w_id ORDER BY love_cnt DESC,read_cnt DESC LIMIT 0,5
 </insert>
 
 <select id="selectreply" resultType="hashmap" parameterType="String">
-	SELECT m_name,n.* FROM member m 
+	SELECT m_name,photo,m_id,n.* FROM member m 
 inner JOIN (SELECT r_id,content,writer,w_date FROM reply WHERE w_id=#{w_id}) n
 ON m.m_id=n.writer ORDER BY w_date DESC LIMIT ${r_id},15
+</select>
+
+<select id="reply_count" resultType="Integer" parameterType="String">
+	SELECT COUNT(*) AS count FROM reply WHERE w_id=#{value}
+</select>
+
+<select id="reply_num" resultType="reply" parameterType="reply">
+SELECT w_id FROM reply WHERE w_id=#{w_id} AND writer=#{writer} AND  
+w_date=(SELECT MAX(w_date) FROM reply WHERE w_id=#{w_id} AND writer=#{writer})
+</select>
+
+<select id="reply_delete" parameterType="String">
+delete from reply where r_id=#{value}
 </select>
 
 

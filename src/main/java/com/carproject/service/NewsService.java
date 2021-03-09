@@ -19,4 +19,7 @@ public interface NewsService {
 	public String goodselect(HeartVO vo);
 	public void replyinsert(ReplyVO vo);
 	public List<HashMap<String, Object>> selectreply(ReplyVO vo);
+	public int reply_count(String num);
+	public ReplyVO reply_num(ReplyVO vo);
+	public void reply_delete(String r_id);
 }

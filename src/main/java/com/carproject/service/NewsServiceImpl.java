@@ -77,4 +77,19 @@ public class NewsServiceImpl implements NewsService{
 	public List<HashMap<String, Object>> selectreply(ReplyVO vo) {
 		return newsDAO.selectreply(vo);
 	}
+
+	@Override
+	public int reply_count(String num) {
+		return newsDAO.reply_count(num);
+	}
+
+	@Override
+	public ReplyVO reply_num(ReplyVO vo) {
+		return newsDAO.reply_num(vo);
+	}
+
+	@Override
+	public void reply_delete(String r_id) {
+		newsDAO.reply_delete(r_id);
+	}
 }
