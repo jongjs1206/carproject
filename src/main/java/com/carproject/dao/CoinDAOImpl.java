@@ -42,8 +42,25 @@ public class CoinDAOImpl implements CoinDAO{
 		mybatis.insert("CoinMap.insertCoin", vo);
 	}
 
-	
-	
+	// 내 코인 충전 내역 확인 - 기간 별 
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod1(HashMap<String, Object> map) {
+		System.out.println("===> CoinMapper coinViewPeriod1 호출");
+		List<HashMap<String, Object>> list = mybatis.selectList("CoinMap.coinViewPeriod1", map);
+		return list;
+	}
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod2(HashMap<String, Object> map) {
+		System.out.println("===> CoinMapper coinViewPeriod2 호출");
+		List<HashMap<String, Object>> list = mybatis.selectList("CoinMap.coinViewPeriod2", map);
+		return list;
+	}
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod3(HashMap<String, Object> map) {
+		System.out.println("===> CoinMapper coinViewPeriod3 호출");
+		List<HashMap<String, Object>> list = mybatis.selectList("CoinMap.coinViewPeriod3", map);
+		return list;
+	}
 	
 	
 	// 관리자

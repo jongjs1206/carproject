@@ -213,7 +213,7 @@ $(function() {
 	<!-- 두번째 탭 -->
 		<section id="content2" class="container">
 			<p>
-<!-- 				<div class="coin-search statusBtn">
+ 				<div class="coin-search statusBtn">
 					기간
 					<span></span>
 						<input Type="radio" name="period" id="total-period" class="input">
@@ -228,8 +228,8 @@ $(function() {
 						<label for="month-period" value="month-period" class="input2"
 							href="javascript:void(0);" onclick="statusOn(this)">1개월</label>
 				</div>
- -->				
-			<!-- 	<br/><br/> -->
+				
+				<br/><br/>
 				
 				
 				<div class="coin-list-title">

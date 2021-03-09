@@ -3,8 +3,6 @@ package com.carproject.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +26,7 @@ public class CoinController {
 	@Autowired
 	private MemberService memberService;
 
-	// 내 코인 충전 내역 확인 - 쿼리스트링으로 m_id 가져와서 DB 정보 출력
+	// 내 코인 충전 내역 확인 - 쿼리스트링으로 m_id 가져와서 DB 정보 출력 (첫 로딩)
 	@RequestMapping(value = "user/coin.do")
 	public void coin(@RequestParam("m_id") String m_id, Model model) {
 		List<HashMap<String, Object>> list = coinService.coinView(m_id);
@@ -49,7 +47,7 @@ public class CoinController {
 		model.addAttribute("coinlist", list);
 		model.addAttribute("onlyCoin", onlyCoin);
 		
-		System.out.println("===>" + m_id + "의 코인리스트 출력 : " + onlyCoin + "개");
+		System.out.println("===> " + m_id + "의 코인리스트 출력 : " + onlyCoin + "개");
 	}
 	
 	// 결제 결과를 DB에 반영 후 페이지 리다이렉트
@@ -75,6 +73,22 @@ public class CoinController {
 		
 		return "redirect:/user/coin.do";
 		
+	}
+	
+	// 기간별 내 코인 충전 내역 - ajax.jsp 만들기 (필터 걸어서 검색)
+	@RequestMapping(value="user/my_coin_ajax.do", method= {RequestMethod.POST})
+	public void my_coin_ajax(@RequestParam HashMap<String, Object> map, Model model) {
+		System.out.println(map.get("period"));
+		if (map.get("period").equals("전체")) {
+			List<HashMap<String, Object>> coinlist = coinService.coinViewPeriod1(map);
+			model.addAttribute("coinlist", coinlist);
+		}else if (map.get("period").equals("1주일")){
+			List<HashMap<String, Object>> coinlist = coinService.coinViewPeriod2(map);
+			model.addAttribute("coinlist", coinlist);
+		}else if (map.get("period").equals("1개월")){
+			List<HashMap<String, Object>> coinlist = coinService.coinViewPeriod3(map);
+			model.addAttribute("coinlist", coinlist);
+		}
 	}
 		
 	

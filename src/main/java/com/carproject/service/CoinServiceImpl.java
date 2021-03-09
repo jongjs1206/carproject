@@ -27,15 +27,30 @@ public class CoinServiceImpl implements CoinService{
 	}
 	
 	// 내 코인 잔여량으로 member 테이블의 coin 수를 업데이트
+	@Override
 	public void updateCoin(MemberVO vo) {
 		coinDAO.updateCoin(vo);
 	}
 	
+	@Override
 	// 결제 결과를 DB에 반영 - coin 테이블
 	public void coinTblUpdate(CoinVO vo) {
 		coinDAO.coinTblUpdate(vo);
 	}
 
+	// 내 코인 충전 내역 - 기간별 확인
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod1(HashMap<String, Object> map) {
+		return coinDAO.coinViewPeriod1(map);
+	}
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod2(HashMap<String, Object> map) {
+		return coinDAO.coinViewPeriod2(map);
+	}
+	@Override
+	public List<HashMap<String, Object>> coinViewPeriod3(HashMap<String, Object> map) {
+		return coinDAO.coinViewPeriod3(map);
+	}
 	
 	
 	// 관리자
