@@ -18,6 +18,11 @@ public interface CoinService {
 	// 결제 결과를 DB에 반영 - coin 테이블
 	public void coinTblUpdate(CoinVO vo);
 
+	// 내 코인 충전 내역 확인 - 기간별
+	public List<HashMap<String, Object>> coinViewPeriod1(HashMap<String, Object> map);
+	public List<HashMap<String, Object>> coinViewPeriod2(HashMap<String, Object> map);
+	public List<HashMap<String, Object>> coinViewPeriod3(HashMap<String, Object> map);
+
 	
 	// 관리자
 	// 코인 충전량 불러오기 위한 함수

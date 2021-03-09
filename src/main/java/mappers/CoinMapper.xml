@@ -29,6 +29,27 @@
 		VALUES ( #{m_id}, now(), #{price}, #{coin} )
 	</insert>
 
+	<!-- 내 코인 충전 내역 - 기간별 확인 -->
+	<select id="coinViewPeriod1" parameterType="hashmap" resultType="hashmap">
+		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN 
+		FROM coin
+		WHERE m_id = #{m_id} ORDER BY DAY DESC;
+	</select>
+	<select id="coinViewPeriod2" parameterType="hashmap" resultType="hashmap">
+		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN 
+		FROM coin
+		WHERE DAY BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK) AND NOW() 
+		AND m_id = #{m_id} ORDER BY DAY DESC;
+	</select>
+	<select id="coinViewPeriod3" parameterType="hashmap" resultType="hashmap">
+		SELECT M_ID, DATE_FORMAT(DAY, '%Y-%m-%d') AS DAY, PRICE, COIN 
+		FROM coin
+		WHERE DAY BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW() 
+		AND m_id = #{m_id} ORDER BY DAY DESC;
+	</select>
+
+
+
 
 	<!-- 관리자 - 코인현황 목록 가져오기 -->
 	<select id="allCoinList" parameterType="String" resultType="coin" >

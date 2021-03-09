@@ -103,8 +103,10 @@ $(function(){
 		var status = '';
 		$('label.on').each(function() {
 			status = $(this).text()
+			
+
 		});
-		
+				
 		$.ajax({
 			type : 'post',
 			async : true,
@@ -113,12 +115,15 @@ $(function(){
 				xhr.setRequestHeader(header, token);
 			},
 			contentType: "application/x-www-form-urlencoded;charset=utf-8",
-	//	 	dataType : 'html',
-		 	data : {"status" : status},
- 			success : function(result) {
- 				console.log(status);
- 				alert('2');;
+			data : {"period" : status,
+					"m_id" : $('.login_on').val()
 			},
+		 	dataType : 'html',
+			success : function(result) {
+				console.log(result);
+			 	var html = jQuery('<div>').html(result);
+				$( '#indexListAjax' ).html(html);
+		 	},			
 			error : function(err) {
 				console.log(err);
 				alert('1');

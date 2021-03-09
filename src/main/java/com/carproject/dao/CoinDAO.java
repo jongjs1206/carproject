@@ -17,6 +17,11 @@ public interface CoinDAO {
 	
 	// 결제 결과를 DB에 반영 - coin 테이블
 	void coinTblUpdate(CoinVO vo);
+	
+	// 내 코인 충전 내역 확인 - 기간 별
+	List<HashMap<String, Object>> coinViewPeriod1(HashMap<String, Object> map);
+	List<HashMap<String, Object>> coinViewPeriod2(HashMap<String, Object> map);
+	List<HashMap<String, Object>> coinViewPeriod3(HashMap<String, Object> map);
 
 	
 	// 관리자
