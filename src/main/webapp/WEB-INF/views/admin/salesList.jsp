@@ -103,7 +103,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <input type="datepicker">
+                                <input type="date"><span>~</span><input type="date">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
                                         <!-- 예시 데이터 삽입 -->
@@ -115,7 +115,15 @@
                                                 <th>판매자</th>
                                                 <th>판매차량</th>
                                                 <th>날짜(등록/게시)</th>
-                                                <th>상태</th>
+                                                <th><select	name="searchStatus" id="searchStatus">
+												<option value="등록대기">등록대기</option>
+												<option value="게시중">게시중</option>
+												<option value="게시종료">게시종료</option>
+												<option value="판매완료">판매완료</option>
+												<option value="삭제">삭제</option>
+												</select> 
+                                                
+                                                </th>
                                                 <th></th>  
                                             </tr> 
                                         </thead>
@@ -131,8 +139,18 @@
                                                 <td>${sale.title}</td>
                                                 <td>${sale.w_date}</td>
                                                 <td>${sale.status}</td>
-                                                <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="수정하기"></td>  
-                                            </tr> 
+                                                <c:set var="status" value="${sale.status}" />
+											<c:choose>
+												<c:when test="${status eq '등록대기'}">
+													<td align="center"><input type="button"
+														class="btn btn-primary"
+														onclick="location.href='editsales.do'" value="게시/반려"></td>
+												</c:when>
+												<c:otherwise>
+													<td align="center"></td>
+												</c:otherwise>
+											</c:choose>
+										</tr> 
                                            
                                             </c:forEach>
                                             
