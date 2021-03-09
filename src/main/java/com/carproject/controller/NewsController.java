@@ -1,5 +1,7 @@
 package com.carproject.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +48,7 @@ public class NewsController {
 		vo.setW_id(Integer.parseInt(num));
 		String heart_id = newsservice.goodselect(vo);
 		HashMap<String, Object> newsview =  newsservice.newsview(num);
+		int reply_count = newsservice.reply_count(num);
 		newsservice.viewadd(num);
 		
 		ReplyVO rvo = new ReplyVO();
@@ -60,6 +63,7 @@ public class NewsController {
 			model.addAttribute("heart_ok", "1");
 		}
 		model.addAttribute("reply", reply);
+		model.addAttribute("reply_count", reply_count);
 	}
 	
 	@RequestMapping("all/good_news.do")
@@ -91,4 +95,35 @@ public class NewsController {
 		vo.setContent(content);
 		newsservice.replyinsert(vo);
 	}
+	
+	@RequestMapping("all/review_add.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> review_add(String w_id, String page) {
+		ReplyVO vo = new ReplyVO();
+		vo.setW_id(Integer.parseInt(w_id));
+		vo.setR_id(Integer.parseInt(page));
+		List<HashMap<String, Object>> reply = newsservice.selectreply(vo);
+		for (int i = 0; i < reply.size(); i++) {
+			Date from = new Date();
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			String re_w_date = fm.format(reply.get(i).get("w_date"));
+			reply.get(i).put("re_w_date", re_w_date);
+		}
+		return reply;
+	}
+	@RequestMapping("all/reply_num.do")
+	@ResponseBody
+	public int reply_num(String id,String w_id) {
+		ReplyVO vo = new ReplyVO();
+		vo.setWriter(id);
+		vo.setW_id(Integer.parseInt(w_id));
+		ReplyVO num = newsservice.reply_num(vo);
+		return num.getW_id();
+	}
+	@RequestMapping("all/reply_delete.do")
+	@ResponseBody
+	public void reply_delete(String r_id) {
+		newsservice.reply_delete(r_id);
+	}
+	
 }

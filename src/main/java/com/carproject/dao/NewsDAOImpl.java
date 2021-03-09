@@ -87,4 +87,21 @@ public class NewsDAOImpl implements NewsDAO{
 		return mybatis.selectList("NewsMAP.selectreply",vo);
 	}
 
+	@Override
+	public int reply_count(String num) {
+		System.out.println("===>  NewsMapper reply_count() 호출");
+		return mybatis.selectOne("NewsMAP.reply_count",num);
+	}
+
+	@Override
+	public ReplyVO reply_num(ReplyVO vo) {
+		System.out.println("===>  NewsMapper reply_num() 호출");
+		return mybatis.selectOne("NewsMAP.reply_num",vo);
+	}
+
+	@Override
+	public void reply_delete(String r_id) {
+		System.out.println("===>  NewsMapper reply_delete() 호출");
+		mybatis.delete("NewsMAP.reply_delete",r_id);
+	}
 }

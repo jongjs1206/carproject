@@ -19,4 +19,7 @@ public interface NewsDAO {
 	String goodselect(HeartVO vo);
 	void replyinsert(ReplyVO vo);
 	List<HashMap<String, Object>> selectreply(ReplyVO vo);
+	int reply_count(String num);
+	ReplyVO reply_num(ReplyVO vo);
+	void reply_delete(String r_id);
 }

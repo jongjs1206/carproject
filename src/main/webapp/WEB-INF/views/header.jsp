@@ -97,7 +97,14 @@ $(function() {
 										</c:if>
 
 										<c:if test="${sessionScope.info.m_id ne null}">
-												<li><a>${sessionScope.info.m_name}<i class="fas fa-user-tie"></i></a>
+											<li><a>
+											<c:if test="${sessionScope.info.photo eq null}">
+												<i class="fas fa-user-tie"></i>
+											</c:if>
+											<c:if test="${sessionScope.info.photo ne null}">
+												<img style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${sessionScope.info.m_id}.jpg">
+											</c:if>
+												${sessionScope.info.m_name}</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>

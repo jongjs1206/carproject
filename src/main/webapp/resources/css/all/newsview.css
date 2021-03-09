@@ -62,3 +62,14 @@
 .reply_content{
 	font-size: 20px;
 }
+.modify_text{
+	border: none;
+	border-bottom:1px solid;
+	width: 500px;
+}
+.modify_btn{
+	background-color: #DCA73A;
+	color : white;
+	padding : 5px 10px 5px 10px;
+	cursor: pointer;
+}
