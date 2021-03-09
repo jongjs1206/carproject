@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.carproject.dao.CoinDAO;
 import com.carproject.domain.CoinVO;
+import com.carproject.domain.MemberVO;
 
 @Service("coinService")
 public class CoinServiceImpl implements CoinService{
@@ -24,6 +25,17 @@ public class CoinServiceImpl implements CoinService{
 	public Integer onlyCoin(String m_id) {
 		return coinDAO.onlyCoin(m_id);
 	}
+	
+	// 내 코인 잔여량으로 member 테이블의 coin 수를 업데이트
+	public void updateCoin(MemberVO vo) {
+		coinDAO.updateCoin(vo);
+	}
+	
+	// 결제 결과를 DB에 반영 - coin 테이블
+	public void coinTblUpdate(CoinVO vo) {
+		coinDAO.coinTblUpdate(vo);
+	}
+
 	
 	
 	// 관리자

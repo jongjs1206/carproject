@@ -55,7 +55,7 @@
 
 <script type="text/javascript">
 $(function() {
-	var IMP = window.IMP; // 생략가능
+/* 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp02909496'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	
 	function pay() {
@@ -84,7 +84,7 @@ $(function() {
 		    }
 		    alert(msg);
 		});
-	}
+	} */
 })
 
 
@@ -127,7 +127,14 @@ $(function() {
 			<h1 class="coin-item-broad">
 				<span>${sessionScope.info.m_name} 님 현재 </span>
 				<span class="gold-font">
-					${onlyCoin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인				
+						</c:otherwise>
+					</c:choose>
 				</span>
 				<span> 보유중입니다.</span>
 			</h1>
@@ -135,7 +142,14 @@ $(function() {
 			<h1 class="coin-item-middle">
 				<span>${sessionScope.info.m_name} 님 현재</span>
 				<span class="gold-font">
-					${onlyCoin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인					
+						</c:otherwise>
+					</c:choose>
 				</span><br/>
 				<span> 보유중입니다.</span><br/>
 			</h1>			
@@ -144,7 +158,14 @@ $(function() {
 				<span>${sessionScope.info.m_name} 님<br/>
 						현재</span>
 				<span class="gold-font">
-					${onlyCoin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인					
+						</c:otherwise>
+					</c:choose>
 				</span><br/>
 				<span> 보유중입니다.</span><br/>
 			</h1>
@@ -192,7 +213,7 @@ $(function() {
 	<!-- 두번째 탭 -->
 		<section id="content2" class="container">
 			<p>
-				<div class="coin-search statusBtn">
+<!-- 				<div class="coin-search statusBtn">
 					기간
 					<span></span>
 						<input Type="radio" name="period" id="total-period" class="input">
@@ -207,8 +228,8 @@ $(function() {
 						<label for="month-period" value="month-period" class="input2"
 							href="javascript:void(0);" onclick="statusOn(this)">1개월</label>
 				</div>
-				
-				<br/><br/>
+ -->				
+			<!-- 	<br/><br/> -->
 				
 				
 				<div class="coin-list-title">

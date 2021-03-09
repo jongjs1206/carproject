@@ -32,7 +32,19 @@ public class CoinController {
 	@RequestMapping(value = "user/coin.do")
 	public void coin(@RequestParam("m_id") String m_id, Model model) {
 		List<HashMap<String, Object>> list = coinService.coinView(m_id);
-		Integer onlyCoin = coinService.onlyCoin(m_id);
+		String onlyCoin = "";
+		if (list.size() > 0) {
+			onlyCoin = coinService.onlyCoin(m_id).toString();			
+		}else {
+			onlyCoin = "0";
+		}
+
+		
+		// 코인 테이블의 코인 합산결과값으로 member 테이블의 coin값을 업데이트하기
+		MemberVO vo = new MemberVO();
+		vo.setM_id(m_id);
+		vo.setCoin(onlyCoin);
+		coinService.updateCoin(vo);
 		
 		model.addAttribute("coinlist", list);
 		model.addAttribute("onlyCoin", onlyCoin);
@@ -40,10 +52,29 @@ public class CoinController {
 		System.out.println("===>" + m_id + "의 코인리스트 출력 : " + onlyCoin + "개");
 	}
 	
-	@RequestMapping("user/cointest.do")
-	public String cointest() {
-		System.out.println("테스트테스트");
-		return "all/homepage";
+	// 결제 결과를 DB에 반영 후 페이지 리다이렉트
+	@RequestMapping("user/payUpdate.do")
+	@ResponseBody
+	public String payUpdate(@RequestParam("num") String num, Model model) {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id ="";
+		if (principal instanceof UserDetails) {
+		   id = ((UserDetails)principal).getUsername();
+		} else {
+		   id = principal.toString();
+		}
+		
+		// coin 테이블의 합산결과가 coin.do 호출시 member 테이블의 coin 값을 업데이트하므로 
+		// coin 테이블만 DB반영함
+		CoinVO cvo = new CoinVO();
+		cvo.setM_id(id);
+		cvo.setCoin(Integer.parseInt(num));
+		cvo.setPrice(Integer.parseInt(num) * 10000);
+		coinService.coinTblUpdate(cvo);
+		
+		return "redirect:/user/coin.do";
+		
 	}
 		
 	

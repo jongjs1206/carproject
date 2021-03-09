@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.CoinVO;
+import com.carproject.domain.MemberVO;
 
 @Repository("coinDAO")
 public class CoinDAOImpl implements CoinDAO{
@@ -26,6 +27,23 @@ public class CoinDAOImpl implements CoinDAO{
 		System.out.println("===> CoinMapper onlyCoin 호출");
 		return mybatis.selectOne("CoinMap.onlyCoin", m_id);
 	}
+	
+	// 내 코인 잔여량으로 member 테이블의 coin 수를 업데이트
+	@Override
+	public void updateCoin(MemberVO vo) {
+		System.out.println("===> CoinMapper updateCoin 호출");
+		mybatis.update("CoinMap.updateCoin", vo);
+	}
+	
+	// 결제 결과를 DB에 반영 - coin 테이블
+	@Override
+	public void coinTblUpdate(CoinVO vo) {
+		System.out.println("===> CoinMapper insertCoin 호출");
+		mybatis.insert("CoinMap.insertCoin", vo);
+	}
+
+	
+	
 	
 	
 	// 관리자
