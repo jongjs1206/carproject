@@ -42,3 +42,34 @@
 .color-red{
 	color:red;
 }
+.form-group>textarea.form-control{
+	height:10px;
+	font-size: 20px;
+}
+.form-group>textarea.form-control::placeholder{
+	font-size: 20px;
+}
+.reply_list{
+	display: flex;
+	margin-bottom: 20px;
+}
+.fa-user-circle{
+	font-size: 40px;
+}
+.reply_name_content{
+	margin-left: 15px;
+}
+.reply_content{
+	font-size: 20px;
+}
+.modify_text{
+	border: none;
+	border-bottom:1px solid;
+	width: 500px;
+}
+.modify_btn{
+	background-color: #DCA73A;
+	color : white;
+	padding : 5px 10px 5px 10px;
+	cursor: pointer;
+}

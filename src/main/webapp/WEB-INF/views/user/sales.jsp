@@ -70,13 +70,13 @@
                 <div class="col-lg-16">
                     <div class="salesform">
                         <div class="team__item__text">
-                        <form action="uploadSales.do" id="salesForm" method='post' class="salesForm">
+                        <form action="uploadSales.do" id="salesForm" method='post' class="salesForm" enctype="multipart/form-data">
                         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
                         	<input type="hidden" name="strOption" id="strOption" />
                         	<table class="table" style="margin:0 0 20px 60px; ">
                         		<tr>
                         			<th>글 제목</th>
-                        			<td colspan=3><input type="text" id="title" name="title" style="width:750px" value="" placeholder="차종 선택시 자동완성됩니다.">
+                        			<td colspan=3><input type="text" id="title" name="title" style="width:750px" readonly="readonly" placeholder="차종 선택시 자동완성됩니다.">
                         		</tr>
 	                           	<tr>
 	                           		<th>판매자 정보</th>
@@ -88,16 +88,10 @@
 	                           <tr>
 	                           		<th>이미지 등록</th>
 	                           		<td width=100>
-	                           			<%
-                                    		for(int i = 1; i <= 20; i++){
-                                    	%>
-                                    		<img src="../resources/img/photos.png" width="50px" height="50px" id="photo<%=i%>">
-	                                   	<%
-		                                   	}
-		                                %>
+	                           			<img src="../resources/img/photos.png" width="50px" height="50px" id="photo">
 	                           		</td>
-	                           		<td colspan=2 style="font-size:14px;">
-										<input type="file" maxlength="100" size="100" name='image' multiple='multiple'> 
+	                           		<td colspan=2 style="font-size:14px;">	<!-- 이미지 미리보기 -->
+										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/>
 									</td> 
 	                           </tr>
 	                           <tr>
@@ -124,6 +118,7 @@
 		                                    <select class='carGrade' id='carGrade' name='grade1' style="margin-right:15px; margin-left:80px; height:35px;">	<!-- 등급 -->
 		                                      	<option value="등급">등급</option>
 		                                    </select>
+		                                    <input type="hidden" id="selectId" name="g_id">		<!-- g_id를 담음 -->
 		                                    <select class='carDetailGrade' id='carDetailGrade' name='grade2' style="margin-right:15px; height:35px;">	<!-- 세부등급 -->
 		                                    	<option value="세부등급">세부등급</option>
 		                                    </select>	
@@ -287,12 +282,6 @@
 		                	<div class="uploadBtn" style="margin:50px 0;">	
 		                		<a id="enrollCar"><span style="margin-left:600px;">등록하기</span></a>
 		                	</div>
-		                	<!-- <div class="col-lg-16 text-center">	버튼은 안먹힘!!!!!!!!!!!!!!
-			                	<button type="submit" class="updateBtn" id="submit_button"
-				                	style="border-radius: 12px; background-color:#dca73a; border:0; color:white; text-align:center; 
-				                	width:100px; height:50px; margin:20px 0 30px 200px;">
-			                	등록하기</button>
-		                	</div> -->
                         </form>
                     	</div>
                     </div>	<!-- end of salesform -->

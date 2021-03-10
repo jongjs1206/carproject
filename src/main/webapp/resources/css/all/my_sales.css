@@ -92,7 +92,7 @@ span.status {
     padding: 0 10px;
     margin-right: 6px;
     line-height: 20px;
-    border: 1px solid #222;
+   /*  border: 1px solid #222; */
     border-radius: 11px;
     color: #222;
 }
@@ -104,10 +104,10 @@ div.saleHeader{
 }
 
 div.statusBtn > a{
-	padding: 0 10px;
+	padding: 10px;
 	margin: 10px;
 	color: #dca73a !important;
-	border: 1px solid #dca73a;
+	/* border: 1px solid #dca73a; */
     border-radius: 20px;
 }
 

@@ -82,7 +82,7 @@ $(function() {
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
 										<li>
-                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'location=no, directories=no, resizable=no, status=no, toolbar=no,menubar=no, width=445, height=670, left=0, top=0, scrollbars=yes');return false">
+                                        	<a href="#" onclick="window.open('../all/chat.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
                                         	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
                                         </li>
 										<li style="width: 40px;"></li>
@@ -97,7 +97,14 @@ $(function() {
 										</c:if>
 
 										<c:if test="${sessionScope.info.m_id ne null}">
-												<li><a>${sessionScope.info.m_name}<i class="fas fa-user-tie"></i></a>
+											<li><a>
+											<c:if test="${sessionScope.info.photo eq null}">
+												<i class="fas fa-user-tie"></i>
+											</c:if>
+											<c:if test="${sessionScope.info.photo ne null}">
+												<img style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${sessionScope.info.m_id}.jpg">
+											</c:if>
+												${sessionScope.info.m_name}</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>

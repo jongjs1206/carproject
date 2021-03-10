@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>I 자동차 뉴스 </title>
+<title>내 판매 리스트</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -130,8 +130,8 @@
                   </div>                
 				<div class="statusBtn" id="statusBtn">
 				<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">판매중</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">임시저장</a>
+				<a href="javascript:void(0);" onclick="statusOn(this)">게시중</a>
+				<a href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">삭제</a>
 		  </div>

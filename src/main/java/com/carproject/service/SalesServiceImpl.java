@@ -62,7 +62,6 @@ public class SalesServiceImpl implements SalesService {
 	public List<HashMap<String, Object>> detailgrade(SalesVO vo){		// 세부등급
 		return salesDAO.detailgrade(vo);
 	}
-	
 		
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -75,11 +74,23 @@ public class SalesServiceImpl implements SalesService {
 		salesDAO.modifyBtn(vo);
 	}
 	
+	@Override
+	public void deleteBtn(SalesVO vo){			// 삭제하기 버튼
+		salesDAO.deleteBtn(vo);
+	}
 	
-	/////////////////////////////////////////////////
+	
+//////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public SalesVO salesDetail(Long num) {		// 상세페이지
 		return salesDAO.salesDetail(num);
+	}
+
+	
+	//전체 판매글 가져오기
+	@Override
+	public List<SalesVO> selectSalesAll() {
+		return salesDAO.selectSalesAll();
 	}
 }
 

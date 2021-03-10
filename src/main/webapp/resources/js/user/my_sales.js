@@ -11,12 +11,12 @@ $(function(){
 
 	
 	//날짜
+
 	var startDate = $('#datepicker1').datepicker({dateFormat: 'yy-mm-dd'});
 	var endDate = $('#datepicker2').datepicker({dateFormat: 'yy-mm-dd'});
 	
 	var btnSearch = $('#btnSearch')
 	var byTitle = $('#byTitle')
-
 
 
 

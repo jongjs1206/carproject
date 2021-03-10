@@ -50,9 +50,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script type="text/javascript" src="../resources/js/user/coin.js"></script>
+
 <script type="text/javascript">
 $(function() {
-	var IMP = window.IMP; // 생략가능
+/* 	var IMP = window.IMP; // 생략가능
 	IMP.init('imp02909496'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	
 	function pay() {
@@ -81,7 +84,7 @@ $(function() {
 		    }
 		    alert(msg);
 		});
-	}
+	} */
 })
 
 
@@ -124,7 +127,14 @@ $(function() {
 			<h1 class="coin-item-broad">
 				<span>${sessionScope.info.m_name} 님 현재 </span>
 				<span class="gold-font">
-					${sessionScope.info.coin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인				
+						</c:otherwise>
+					</c:choose>
 				</span>
 				<span> 보유중입니다.</span>
 			</h1>
@@ -132,7 +142,14 @@ $(function() {
 			<h1 class="coin-item-middle">
 				<span>${sessionScope.info.m_name} 님 현재</span>
 				<span class="gold-font">
-					${sessionScope.info.coin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인					
+						</c:otherwise>
+					</c:choose>
 				</span><br/>
 				<span> 보유중입니다.</span><br/>
 			</h1>			
@@ -141,7 +158,14 @@ $(function() {
 				<span>${sessionScope.info.m_name} 님<br/>
 						현재</span>
 				<span class="gold-font">
-					${sessionScope.info.coin} 코인
+					<c:choose>
+						<c:when test="${empty onlyCoin}">
+							0 코인
+						</c:when>
+						<c:otherwise>
+							${onlyCoin} 코인					
+						</c:otherwise>
+					</c:choose>
 				</span><br/>
 				<span> 보유중입니다.</span><br/>
 			</h1>
@@ -189,37 +213,55 @@ $(function() {
 	<!-- 두번째 탭 -->
 		<section id="content2" class="container">
 			<p>
-				<div class="coin-search">
+ 				<div class="coin-search statusBtn">
 					기간
-					<span class="total-period">전체</span>
-					<span class="week-period">1주일</span>
-					<span class="month-period">1개월</span>
+					<span></span>
+						<input Type="radio" name="period" id="total-period" class="input">
+						<label for="total-period" value="total-period" class="input2"
+						 	href="javascript:void(0);" onclick="statusOn(this)">전체</label>
+					<span></span>
+						<input Type="radio" name="period" id="week-period" class="input">
+						<label for="week-period" value="week-period" class="input2"
+							href="javascript:void(0);" onclick="statusOn(this)">1주일</label>
+					<span></span>
+						<input Type="radio" name="period" id="month-period" class="input">
+						<label for="month-period" value="month-period" class="input2"
+							href="javascript:void(0);" onclick="statusOn(this)">1개월</label>
 				</div>
-				<div class="coin-list-bottom">
+				
+				<br/><br/>
+				
+				
+				<div class="coin-list-title">
 					<span class="">충전날짜</span>
 					<span class="">충전한 코인</span>
 					<span class="">결제금액</span>
 				</div>
-				<div class="">
-					<c:forEach var="mycoin" items="${coinlist}">
-						<div>
-							<span>${mycoin.coin}</span><hr/>
-							<!-- 
-							<span>${mycoin.day}${mycoin.coin}</span>
-							<span>${mycoin.price}</span>
-							 -->
-						</div>
-					</c:forEach>
+				
+				<br/>
+				
+				<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
+				
+				<div id="indexListAjax">
+				<c:forEach var="mycoin" items="${coinlist}">
+					<div class="coin-list-content">
+						<span>${mycoin.DAY}</span>
+						<span>${mycoin.COIN}</span>
+						<span>${mycoin.PRICE}</span>
+					</div><br/>
+				</c:forEach>
 				</div>
+				
+				<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->
+				
 			</p>
-		</section>
-
-		
+		</section>	
 	</div>
+	<!-- 탭 메뉴 끝 -->
 	
-	<div class="blank">
-		<input type="hidden" class="blank"/>
-	</div>
+	
+	<br/><br/><br/><br/><br/><br/>
+
 
 	</main>
 	
@@ -263,8 +305,7 @@ $(function() {
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
 	
-	<!-- Coin page js -->
-	<script type="text/javascript" src="../resources/js/all/coin.js"></script>
+
 
 
 </body>

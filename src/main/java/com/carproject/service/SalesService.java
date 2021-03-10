@@ -22,7 +22,12 @@ public interface SalesService {
 	
 	public void uploadBtn(SalesVO vo);		// 등록하기 버튼
 	public void modifyBtn(SalesVO vo);		// 수정하기 버튼
+	public void deleteBtn(SalesVO vo);		// 삭제하기 버튼
 	
 	public SalesVO salesDetail(Long num);  // 상세화면 
+	
+	//전체 판매글 가져오기
+	public List<SalesVO> selectSalesAll();	
+
 	
 }

@@ -59,6 +59,7 @@
 		value="${_csrf.token}" />
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
+	<input type="hidden" class='m_name' value='${sessionScope.info.m_name}'/>	
 
 	<!-- slider Area Start-->
 	<div class="slider-area">
@@ -92,11 +93,23 @@
 	                  <div>
 						<hr/>
 						<div style="display: flex; justify-content: space-between;">
-		                     <h2 class='news_title'>${newsview.title}</h2>
+		                     
+		                     <h2 class='news_title'>${newsview.title}
+		                     <c:if test="${reply_count ne null}">
+		                     	(${reply_count})
+		                     </c:if>
+		                     </h2>
 		                     <div>${fn:substring(newsview.w_date, 0, 16)}
 		                     <br>좋아요
-		                     <button class='good_btn'><i class="far fa-thumbs-up">
-							 <input class='good_me' type="hidden" value='off'/>
+		                     <c:if test="${heart_ok eq null}">
+		                     	<button class='good_btn'><i class="far fa-thumbs-up">
+								<input class='good_me' type="hidden" value='off'/>
+		                     </c:if>
+		                     <c:if test="${heart_ok ne null}">
+		                     	<button class='good_btn'><i class="far fa-thumbs-up color-red">
+								<input class='good_me' type="hidden" value='on'/>
+		                     </c:if>
+		                     
 		                     <span class='love_cnt'>${newsview.love_cnt}</span></i></button></div>
 						</div>
 	                    <hr/>
@@ -107,65 +120,59 @@
 
 				<div class="comment-form">
                   <h4>Leave a Reply</h4>
-                  <form class="form-contact comment_form" action="#" id="replyForm">
+                  
                      <div class="row">
                         <div class="col-12">
                            <div class="form-group">
-                              <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
+                              <textarea
+                              class="form-control w-100" name="content" id="content" cols="30" rows="9"
                                  placeholder="코멘트를 남겨주세요."></textarea>
                            </div>
                         </div>
                      </div>
                      <div class="form-group">
-                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">등록하기</button>
+                        <button class="button button-contactForm btn_1 boxed-btn">등록하기</button>
                      </div>
-                  </form>
+           
                </div>
                
-               
+               <input type="hidden" class='delete_reply' value='0'/>
                <!-- 댓글 -->
                <div class="comments-area">
-                  <h4>댓글 수</h4>
-
 				<!-- 여기에 DB 내용 가져오기 ↓↓↓↓↓ -->           
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="thumb">
-                              <img src="assets/img/comment/comment_2.png" alt="">
-                           </div>
-                           <div class="desc">
-                              <p id="comment" class="comment">
-                                 댓글 댓글 댓글 댓글 댓글 댓글 
-                              </p>
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <h5>
-                                       <a href="#">작성자</a>
-                                    </h5>
-                                    <p class="date">작성 날짜 </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                  <div class="comment-list reply_plus">
+                  	<c:forEach var="reply_on" items="${reply}">
+                  		<div class='reply_list'>
+                  			<c:if test="${reply_on.photo eq null}">
+	                  			<i class="fas fa-user-circle"></i> 
+                  			</c:if>
+                  			<c:if test="${reply_on.photo ne null}">
+	                  			<img style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${reply_on.m_id}.jpg">
+                  			</c:if>
+                  			<div class='reply_name_content'>
+                  				<div>
+                  					${reply_on.m_name} 
+                  					<span style="color:#909092; margin-left: 10px;">${fn:substring(reply_on.w_date, 0, 16)}</span>
+                  					<c:if test="${sessionScope.info.m_id eq reply_on.writer}">
+                  						<a class="reply_delete" style=" cursor:pointer; margin-left: 10px;">삭제</a>
+                  					</c:if>
+                  					<input type="hidden" value='${reply_on.r_id}'/> 
+                  				</div>
+                  				<div class='context_reply'>
+                  					${reply_on.content}
+                  				</div>
+                  			</div>
+                  		</div>
+                  	</c:forEach>
                   </div>
-                  <!-- 여기에 DB 내용 가져오기 ↑↑↑↑↑ -->
- 
-               
-            </div>
-
-         </div>
-      </div>
+                </div>
    </section>
    <!--================ Blog Area end =================-->
 
-
-
+	<input type="hidden" class='page' value="1"/>
+	<div class='foot'>
 	<%@ include file="../footer.jsp"%>
+	</div>
 
 	<!-- JS here -->
 

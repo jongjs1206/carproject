@@ -134,18 +134,19 @@
 		w_date >= str_to_date(#{startDate}, '%m/%d/%Y') AND
 		w_date <= str_to_date(#{endDate}, '%m/%d/%Y')
 		]]>
-		    <if test="statusList != null and statusList != ''">
-		     AND status IN 
-		     <foreach collection="statusList" item="status" separator="," open="(" close=")">
-		      #{status}
-		     </foreach>
-		    </if>
-		
-	<if test="byTitle != null and byTitle != ''">
-			AND
-			title LIKE CONCAT('%',#{byTitle},'%')
-	</if> 
-	ORDER BY w_date DESC
+	    <if test="statusList != null and statusList != ''">
+	     AND status IN 
+	     <foreach collection="statusList" item="status" separator="," open="(" close=")">
+	      #{status}
+	     </foreach>
+	    </if>
+		<if test="byTitle != null and byTitle != ''">
+				AND
+				title LIKE CONCAT('%',#{byTitle},'%')
+		</if> 
+		<![CDATA[
+		ORDER BY str_to_date(w_date, '%y-%m-%d') DESC
+		]]>
 	</select>
 
 	

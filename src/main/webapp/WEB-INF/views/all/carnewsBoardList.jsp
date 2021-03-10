@@ -96,7 +96,10 @@
 				<a href="../all/carnewsBoardview.do?num=${popularity_news.w_id}">
 					<div class="fav-news">
 						<span>${i}</span>
-						<span>${popularity_news.title}</span>
+						<span>${popularity_news.title} 
+						<c:if test="${popularity_news.count ne null}">
+							(${popularity_news.count})
+						</c:if></span>
 						<span>조회수 : ${popularity_news.read_cnt}</span>
 						<span>추천수 : ${popularity_news.love_cnt}</span>
 					</div>
@@ -122,7 +125,12 @@
 						href="../all/carnewsBoardview.do?num=${news.w_id}"> <img
 						src="${news.thumb}" alt="기사썸네일">
 					</a> <a class="d-inline-block" href="../all/carnewsBoardview.do?num=${news.w_id}">
-						<h2>${news.title}</h2>
+						<h2>${news.title} 
+						
+						<c:if test="${news.count ne null}">
+							(${news.count})
+						</c:if>
+						</h2>
 						<p>${news.headline}</p>
 					</a>
 					<div class="cnt">${news.read_cnt}</div>

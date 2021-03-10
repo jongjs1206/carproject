@@ -150,20 +150,90 @@ $(function() {
 	        	$('.carDetailGrade').children().remove();
 	        	$('.carDetailGrade').append('<option>세부등급</option>');
 	        	for (var count = 0; count < list.length; count++){
-	            	$('.carDetailGrade').append('<option>' + list[count].grade2 + '</option>');
+	            	$('.carDetailGrade').append('<option id=' + list[count].g_id + '>' + list[count].grade2 + '</option>');
+	            	//console.log(list[count].g_id);
 	            }	// end of for문 
-	        },	// success
+	        },	// end of success
 	        error : function(err){console.log(err)}  // 실패했을때
-		});  
-	})
+		});  // end of ajax()
+	}) // end of 세부등급 선택
 	
+	
+	//////////// g_id값
+	$('#carDetailGrade').on('change', function(){
+		//alert($(this).val());
+		var g_id = $('#carDetailGrade option:selected').attr('id');	// 선택한 세부모델의 g_id값
+		//console.log(g_id);
+		$('#selectId').val(g_id);
+	});
+	
+	/////////////////////////////////////////////////////////
+	// 이미지 미리보기 <- 판매글 => 최대 20개까지 불러와야 함
+	$("#picFile").on('change', function(){
+	    readURL(this);
+	});
+
+	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	       var reader = new FileReader();
+	       reader.onload = function (e) {
+	          $('#photo').prop('src', e.target.result);
+	       }
+	       reader.readAsDataURL(input.files[0]);
+	    }
+	}	// end of 이미지 미리보기
 	
 	
 	/////////////////////////////////////////////////////////
+	// 다중 이미지 업로드 및 미리보기
+/*	var sel_files = [];
+	
+	$(document).ready(function(){
+		$('#picFile').on("change", handleImgFileSelect);
+	});
+	
+	function fileUploadAction(){
+		console.log("fileUpload");
+		$("#picFile").trigger('click');
+	}
+	
+	function handleImgFileSelect(e) {
+		// 이미지 정보들 초기화
+		sel_files = [];
+		$("#photo").empty();
+		
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		var index = 0;
+		fileArr.forEach(function(f) {
+			if(!f.type.match("image.*")){
+				alert("이미지 확장자만 가능합니다.");
+				return;
+			}
+			
+			sel_files.push(f);
+			
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var html = "CONTENT";
+				$(".imgs_wrap").append(html);
+				index++;
+			}
+			reader.readAsDataURL(f);
+		});
+	}	// end of 다중 이미지 업로드
+	*/
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////
 	// 등록하기 버튼
 	$(document).on("click","#enrollCar",function(){
 		
-		if (confirm("등록하시겠습니까?")) {
+		if (confirm("등록하시겠습니까?")) {	
+			// 체크옵션 부분
 			var arr_options = document.getElementsByName("option");
 			var result = "";
 			var chk;
@@ -174,29 +244,25 @@ $(function() {
 					result = result + "/"
 				}
 				
-				if ( $("#options_" + i).is(":checked")  ) {
+				if ($("#options_" + i).is(":checked")) {
 					chk = "1"
 				} else {
 					chk = "0"
 				}
 				result = result + chk;
-			}
+			}	// end of for(옵션)
 			
-			console.log('result : ', result);
-			
-			// hidden에 대입 
 			$("#strOption").val(result);
 			
 			$('#salesForm').submit();
-        }
+
+        }	// end of if
 	});		// end of 등록하기 버튼
 	
 	
-	// 수정하기 버튼 클릭 이벤트
-	$('.modifyBtn').click(function(){
-		$('.salesDetailForm').submit(function(){
-			//
-		});
-	});	// end of 수정하기 버튼 
+	// 수정하기 버튼 
+	//$(document).on("click","#enrollCar",function(){
+		
+	//});		// end of 수정하기 버튼
 	
 })	// end of 전체 function()

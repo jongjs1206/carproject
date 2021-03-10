@@ -72,25 +72,19 @@
 				<div class="col-lg-7">
 					<div class="carImg" style="margin:0 0 0 0;">
 						<div class="row justify-content-center"> 	<!-- 차 이미지 -->
-							<button type="button" class="imgprev" style="border-width:0px; background-color:white; margin-right:10px; cursor:pointer;">
-								<i class="fas fa-chevron-left"></i>
-							</button>
-								<img src="../resources/img/car/ex_car1.jpg" alt=""/>
-							<button type="button" class="imgnext" style="border-width:0px; background-color:white; margin-left:10px; cursor:pointer;">
-								<i class="fas fa-chevron-right"></i>
-							</button>
+							<%-- <img src="https://storage.googleapis.com/car_image_for_analysis/salesCarImg/${sales.m_id}.jpg" alt=""/> --%>
 	                	</div>
 						<hr style="margin:10px 0 10px 0;">
 	                    <div class="thumbnail" style="display: flex; flex-wrap: wrap; margin:0 0 0 45px;" > <!-- 썸네일 -->
-						<%
-							for(int i = 1; i <= 20; i++){
-						%>
+						<%-- <%
+						/* 	for(int i = 1; i <= 20; i++){ */
+						%>  --%>
 						<div style="width: 9%; margin:0 1px 1px 0;">
-							<img style="width: 100%; margin: 0px" src="../resources/img/car/ex_car<%=i%>.jpg">
+							<img style="width: 100%; margin: 0px" src="https://storage.googleapis.com/car_image_for_analysis/salesCarImg/.jpg">
 		                </div>
-						<% 
+						<%-- <% 
 							}
-						%>
+						%> --%>
 						</div><br/><br/>	<!-- end of 썸네일 -->
 					</div><!-- 이미지 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
@@ -126,45 +120,38 @@
 							<div class="course__details__feature" style="width:500px; margin:0 100px 30px 0;">
 								<h5>보험 처리 이력</h5><hr style="margin:20px 0 10px 0;">
 								&nbsp;&nbsp;&nbsp;<span style="color:#0c2b4b; font-size:13px;"><i class="fas fa-file-alt fa-2x"></i>
-								&nbsp;&nbsp;&nbsp;보험처리 <b style="color:#f3bd00; font-size:13px;">2</b>회</span><hr style="margin:10px 0;">
+								&nbsp;&nbsp;&nbsp;보험처리 <b style="color:#f3bd00; font-size:13px;"> </b>회</span><hr style="margin:10px 0;">
 								<table class="detail-info-table" style="font-size:13px; width:600px; height:200px; ">
 									<tbody>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">차량번호/소유자변경</th>
-												<td>0회 / 1회</td>
+												<td></td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">자동차보험 특수사고</th>
-												<td>전손: 1 / 침수전손 : 0 / 침수분손 : 0 / 도난: 0</td>
+												<td></td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">보험사고(내차피해)</th>
-												<td>1회(0원)</td>
+												<td></td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">보험사고(타차가해)</th>
-												<td>1회(0원)</td>
+												<td></td>
 											</tr>
 											<tr style="padding:0px; margin:0px;">
 												<th scope="col">보험이력 공개일</th>
-												<td>2020-12-25</td>
+												<td></td>
 											</tr>
 									</tbody>
 								</table>
 							</div>	
 						</div><br/>	<!-- end of  기본 정보-->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
-							<div class="course__details__feature" style="width:500px; margin:0 100px 30px 0;">
-								<h5>시세 정보</h5><hr style="margin:20px 0 10px 0;">
-								<div class="marketPrice" style="font-size:13px; width:500px; height:200px; display: flex;">
-									<div>
-										
-									</div>
-								</div>
-							</div>	<!-- end of 시세 정보 -->
-							<div class="course__details__feature" style="width:500px; height:200px;" >
+							<div class="course__details__feature" style="width:700px; height:200px;" >
 								<h5>시세 예측</h5><hr style="margin:20px 0 10px 0;">
-								<div class="marketPredict" style="font-size:13px; width:500px; height:200px; display: flex;">
+								<div class="marketPredict" style="font-size:13px; width:700px; height:200px; display: flex;">
+										<!-- 시세 예측 내용!!!!!!!!!!!! -->								
 								</div>
 							</div>	<!-- end of 시세 예측 -->
 						</div><br/>	<!-- end of 시세 정보 / 예측 -->
@@ -173,7 +160,7 @@
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 외관 -->
 								&nbsp;&nbsp;&nbsp;외관&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">8</b>개<hr style="margin:10px 0;">
-									<div class="" style="display: flex;">
+									<div class="outside" style="display: flex;">
 										<ul class="optionList" >
 											<li style="font-size:13px; padding:0 100px 8px 40px;">가죽시트</li> 
 											<li style="font-size:13px; padding:0 100px 8px 40px;">전동시트(동승석)</li>
@@ -200,7 +187,7 @@
 								</div><hr style="margin:10px 0;">	<!-- end of 외관 -->
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 내관 -->
 								&nbsp;&nbsp;&nbsp;내관&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">8</b>개<hr style="margin:10px 0;">
-									<div class="" style="display: flex;">
+									<div class="inside" style="display: flex;">
 										<ul class="optionList" >
 											<li style="font-size:13px; padding:0 100px 8px 40px;">가죽시트</li> 
 											<li style="font-size:13px; padding:0 100px 8px 40px;">전동시트(운전석)</li>
@@ -230,7 +217,7 @@
 								</div><hr style="margin:10px 0;">	<!-- end of 내관 -->
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 안전 -->
 									&nbsp;&nbsp;&nbsp;안전&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">14</b>개<hr style="margin:10px 0;">
-									<div class="" style="display: flex;">
+									<div class="safe" style="display: flex;">
 										<ul class="optionList" >
 											<li style="font-size:13px; padding:0 100px 8px 40px;">가죽시트</li> 
 											<li style="font-size:13px; padding:0 100px 8px 40px;">전동시트(운전석)</li>
@@ -261,7 +248,7 @@
 								</div><hr style="margin:10px 0;">	<!-- end of 안전 -->
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 편의 -->
 									&nbsp;&nbsp;&nbsp;편의&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">12</b>개<hr style="margin:10px 0;">
-									<div class="" style="display: flex;">
+									<div class="comfort" style="display: flex;">
 										<ul class="optionList" >
 											<li style="font-size:13px; padding:0 100px 8px 40px;">가죽시트</li> 
 											<li style="font-size:13px; padding:0 100px 8px 40px;">전동시트(운전석)</li>
@@ -291,7 +278,7 @@
 								</div><hr style="margin:10px 0;">	<!-- end of 편의 -->
 								<div class="" style="font-size:14px; list-style-type: none !important; ">	<!-- 멀티미디어 -->
 									&nbsp;&nbsp;&nbsp;멀티미디어&nbsp;&nbsp;&nbsp;<b style="color:#f3bd00">12</b>개<hr style="margin:10px 0;">
-									<div class="" style="display: flex;">
+									<div class="multimedia" style="display: flex;">
 										<ul class="optionList" >
 											<li style="font-size:13px; padding:0 100px 8px 40px;">ECM룸미러</li>
 											<li style="font-size:13px; padding:0 100px 8px 40px;">뒷자석에어벤트</li>
@@ -320,7 +307,7 @@
 							<h3 class="mb-30">차량 설명</h3>
 							<div class="salesContext">
 								<div class="col-lg-12">
-									<blockquote class="generic-blockquote" style="width:1000px; font-weight:lighter;">
+									<blockquote class="generic-blockquote" style="width:1000px; font-size:14px; font-weight:lighter;">
 											${sales.content}
 									</blockquote>
 								</div>
@@ -332,31 +319,17 @@
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
 	                        <div class="carNameInfo"><h4 style="text-align:center">${sales.title}</h4></div>
 	                        <div class="carInfo"><h6 style="text-align:center">${sales.old} | ${sales.mile} | ${sales.fuel}</h6></div>
-	                        <span><b class="salesPrice" style="color:#dca73a">
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sales.price}</b>만원</span><br/><br/>
+	                        <span style="margin:200px;"><b class="salesPrice" style="color:#dca73a">
+	                        ${sales.price}</b>만원</span><br/><br/>
 	                        <div class="carInfo1">
-		                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                        <span style="color:#112e41; font-size:11px; margin-left:170px;">
+		                        <i class="fas fa-tools fa-2x"></i>	<!-- 성능 -->
 		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        <span style="color:#112e41; font-size:11px;"><i class="fas fa-tools fa-2x"></i>	<!-- 성능 -->
 		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		                        <i class="fas fa-file-alt fa-2x"></i>	<!-- 보험이력 -->
-		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                            <b class="percent">91</b><canvas height="40" width="40">	<!-- 신차대비 -->
-								</canvas><br/>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								성능점검
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								보험이력 2건
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;
-								신차대비
+	                            <br/>
+								<span style="margin-left:160px;">성능점검</span>
+								<span style="margin-left:60px;">보험이력 2건</span>
 	                            </span>
 	                        </div><br/>	<!-- end of 차 정보 -->
 	                    </div><br/>
@@ -386,9 +359,10 @@
 	                </div>	<!-- end of 차 / 판매자 정보 -->
 				</div>	<!-- end of 오른쪽 위 -->
 			</div>	<!-- end of row -->
-			<div class="modifyBtn" style="margin:50px 0;">	<!-- 수정하기 버튼 : m_id가 같을 때만 보이게 -->
-		    	<a href="../user/sales.do"><span style="margin-left:500px;">수정하기</span></a>
-		    </div>
+			<div class="modify-delete" style="margin:50px 0;">	<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
+				<a href="../user/sales.do"><span class="modifyBtn" style="margin-left:450px;">수정하기</span></a>
+				<a href="product_list.do"><span class="deleteBtn" style="margin-left:50px;">삭제하기</span></a>
+			</div>
 		</div>
 		</form>
 	</section>

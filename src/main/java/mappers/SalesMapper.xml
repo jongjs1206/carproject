@@ -30,9 +30,9 @@
 	<![CDATA[ 
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
-				image=#{image}, option=#{option}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
+				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
 				gear=#{carGear}, baeki=#{baeki}
-		WHERE sell_id=#{sell_id}
+		WHERE m_id=#{m_id}
 	]]>
 </update>
 
@@ -44,31 +44,38 @@
 	]]>
 </delete>
 
-<!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- 버튼으로 작업 ////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- 등록하기 버튼 : 글 등록-->
 <insert id="uploadBtn" parameterType="sales">
 	INSERT INTO sell 
-	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
+	(sell_id, g_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
 		vehicle_num, fuel, gear, status, baeki, seller) 
 	VALUES 
-	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
+	(nextval(sell_sell_id_sq), #{g_id}, #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
 		#{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}, 
 		#{fuel}, #{gear}, #{status}, #{baeki}, #{m_id})
 </insert>
 
 <!-- 수정하기 버튼(링크) -->
-<update id="modifyBtn" parameterType="sales">
+<update id="modifyBtn" parameterType="sales" >
 	<![CDATA[ 
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
-				image=#{image}, option=#{option}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
-				gear=#{gear}, baeki=#{baeki}
-		WHERE sell_id=#{sell_id}
+				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
+				gear=#{carGear}, baeki=#{baeki}
+		WHERE m_id=#{m_id}
 	]]>
 </update>
 
-<!-- ///////////////////////////////////////////////// -->
-<!-- 차랑명 데이터들 가져오기 -->
+<!-- 삭제하기 버튼 -->
+<delete id="deleteBtn" parameterType="sales">
+	<![CDATA[
+		DELETE FROM sell
+		WHERE m_id=#{m_id}
+	]]>
+</delete>
+
+<!-- 차랑명 데이터 ////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- 제조사 -->
 <select id="brandList" resultType="hashmap" parameterType="String">
 	SELECT jejosa FROM category GROUP BY jejosa;
@@ -91,7 +98,18 @@
 
 <!-- 세부등급 -->
 <select id="detailgrade" resultType="hashmap" parameterType="sales">
-	SELECT distinct grade2 FROM grade g INNER JOIN (SELECT * FROM detail WHERE detail=#{detail}) d ON d.d_id = g.d_id;
+	SELECT distinct grade2, g_id FROM grade g INNER JOIN (SELECT * FROM detail WHERE detail=#{detail}) d ON d.d_id = g.d_id;
 </select>
+
+
+
+<!-- 전체 판매리스트 가져오기 -->
+<select id="selectSalesAll" resultType="sales">
+	SELECT * FROM sell
+	<![CDATA[
+	ORDER BY str_to_date(w_date, '%Y-%m-%d') DESC
+	]]>
+</select>
+
 
 </mapper>
