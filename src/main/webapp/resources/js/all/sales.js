@@ -163,9 +163,63 @@ $(function() {
 	$('#carDetailGrade').on('change', function(){
 		//alert($(this).val());
 		var g_id = $('#carDetailGrade option:selected').attr('id');	// 선택한 세부모델의 g_id값
-		//console.log(g_id);
+		console.log(g_id);
 		$('#selectId').val(g_id);
 	});
+	
+	////////////////////////////////////////////////////////////////////////////////
+	
+	// 사진 업로드하기  -- <form>의 action이 컨트롤러에서 실행됨
+//	$('#google_pic_submit').on('click', function(){
+//		m_id = $('input[name=m_id]').val();
+//		alert(m_id);
+//		$('#google_picForm').submit();
+//		alert('사진이 업로드되었습니다.');	
+//	});
+	
+	
+	
+	
+	// "이미지입력기 불러오기" 버튼 클릭시
+	$('#picnum_submit').on('click', function(){
+		var picnum = $('#picnum').val();
+		
+		$.ajax({
+			type: 'post',
+			async: true,
+			url: '../user/sales_ajax.do',
+			beforeSend : function(xhr) {	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			data: {"picnum" : picnum },
+			dataType: 'script',
+			success: function(result){
+				alert('ajax입니다.')
+	//			console.log(picnum);
+				console.log(result);
+				
+	//			var html = jQuery('<tr>').html(result);
+	//			$('#picListAjax').html(html);
+				
+				
+			},
+			error: function(err){
+				console.log(err);
+				alert('ajax 실패');
+			}
+		
+		});		// end of ajax
+		 
+			
+		
+	
+	});
+	
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////
 	// 이미지 미리보기 <- 판매글 => 최대 20개까지 불러와야 함

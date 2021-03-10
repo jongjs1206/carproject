@@ -34,7 +34,14 @@
 	<!-- ##################################################### -->
 	<!-- 파일업로드 하려면 MultipartResolver를 등록해야 함 -->
 	<beans:bean id="multipartResolver"  
-	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- max upload size in bytes -->
+        <beans:property name="maxUploadSize" value="-1" /> <!-- 제한 없음 -->
+        <beans:property name="maxUploadSizePerFile" value="-1" /> <!-- 제한 없음 -->
+        <!-- max size of file in memory (in bytes) -->
+        <beans:property name="maxInMemorySize" value="-1" /> <!-- 제한 없음 -->	
+        
+	</beans:bean>
 	
 	<!-- ##################################################### -->
 	

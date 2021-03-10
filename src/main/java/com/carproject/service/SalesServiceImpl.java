@@ -64,6 +64,12 @@ public class SalesServiceImpl implements SalesService {
 	}
 		
 	//////////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public int find_sell_id() {				// 신규부여 될 sell_id 
+		return salesDAO.find_sell_id();
+	}
+	
 	@Override
 	public void uploadBtn(SalesVO vo){			// 등록하기 버튼
 		salesDAO.uploadBtn(vo);

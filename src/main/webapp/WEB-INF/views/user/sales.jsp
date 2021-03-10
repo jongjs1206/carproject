@@ -84,16 +84,25 @@
 	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" name="m_id" id="m_id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
 	                           		<td width="280px" style="font-size:14px;">핸드폰 번호 
 	                           			<input type="text" name="tel" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
-	                           	</tr>
+	                           	</tr>                       	
+	                           	
+	                           	<!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
 	                           <tr>
+	                           		
+	                           		<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
 	                           		<th>이미지 등록</th>
 	                           		<td width=100>
 	                           			<img src="../resources/img/photos.png" width="50px" height="50px" id="photo">
 	                           		</td>
 	                           		<td colspan=2 style="font-size:14px;">	<!-- 이미지 미리보기 -->
-										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/>
+										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/><br/>
+										이미지 파일은 7개까지 등록할 수 있습니다.  
+									
 									</td> 
+									
 	                           </tr>
+	                            <!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
+	                          
 	                           <tr>
 	                           		<th>차량 정보</th>
 	                           		<td colspan=3>
