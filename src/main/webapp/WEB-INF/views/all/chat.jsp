@@ -16,17 +16,19 @@
 
 </head>
 <body>
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
+	<input type="hidden" class='login_name' value='${sessionScope.info.m_name}'/>
 	<div class="chat_wrap">
     <div class="header">
         CHAT
     </div>
-    <div class="chat">
+    <div class="chat" style="overflow:auto; height: 450px;">
         <ul>
-            
+           
         </ul>
     </div>
     <div class="input-div">
-        <textarea placeholder="Press Enter for send message."></textarea>
+        <textarea class='msg' placeholder="Press Enter for send message."></textarea>
     </div>
  
     <!-- format -->
