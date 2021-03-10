@@ -14,6 +14,7 @@ public interface MemberService {
 	
 	public int userInsert(MemberVO vo );
 	public MemberVO checkUniqueId( MemberVO vo);
+	public MemberVO selectByGoogle( MemberVO vo);
 	public MemberVO selectByEmail( MemberVO vo);
 	public int addGoogle(MemberVO vo );
 	//내가 쓴 판매글 가져오기
@@ -46,6 +47,8 @@ public interface MemberService {
 	//프로필 사진 업데이트
 	public int updatePhoto(MemberVO vo);
 	public void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
+	
+	
 	
 }
 

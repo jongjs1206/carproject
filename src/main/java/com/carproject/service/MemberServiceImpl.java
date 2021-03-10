@@ -26,6 +26,7 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDAO memberDAO;
 	@Autowired
 	BCryptPasswordEncoder pwdEncoder;
+
 	
 	  
 	  /**
@@ -42,11 +43,16 @@ public class MemberServiceImpl implements MemberService{
 	  * 아이디 중복 체크하는 sql + 로그인 기능 sql
 	  * 회원정보 하나 가져오기
 	  */
-	  public MemberVO checkUniqueId( MemberVO vo)
-	  {	
+	  public MemberVO checkUniqueId( MemberVO vo)	  {	
 		  return memberDAO.checkUniqueId(vo);
 	  }
 
+		@Override
+		public MemberVO selectByGoogle(MemberVO vo) {
+			 return memberDAO.selectByGoogle(vo);
+		}
+	  
+	  
 		@Override
 		public MemberVO selectByEmail(MemberVO vo) {
 
@@ -88,18 +94,14 @@ public class MemberServiceImpl implements MemberService{
 			
 			//status
 			String s = param.get("status").toString();
+			System.out.println("아아아아statusstring"+s);
 			String[] status = s.split(",");
 			param.put("statusList", status);
 			
-
-
 			return param;
 			
 		}
 		
-
-	  
-
 	  
 
 	  
@@ -158,6 +160,9 @@ public class MemberServiceImpl implements MemberService{
 			System.out.println(objectName);
 			System.out.println(filePath);
 		}
+
+		
+		
 
 
 	

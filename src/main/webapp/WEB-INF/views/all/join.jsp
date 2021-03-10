@@ -58,8 +58,6 @@
 	<%@ include file="../header.jsp"%>
 
 	<main class="background_color">
-
-
 		<!-- Application Form Section Begin -->
 		<div class="container box-login">
 			<div class="noMenuLogo">

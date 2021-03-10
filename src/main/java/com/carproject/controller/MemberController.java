@@ -1,6 +1,7 @@
 package com.carproject.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,14 +15,17 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
@@ -74,45 +78,42 @@ public class MemberController {
 
 //sns로그인
 
-	// 구글 아이디
+	// 구글 로그인
 	@RequestMapping(value = "/all/googleLogin.do")
 	public String googleLogin(MemberVO vo, HttpSession session) {
 		MemberVO info = (MemberVO) session.getAttribute("info");
+		
 		return "redirect:" + snsLoginService.googleRedirect();
 	}
+	
 
 	// 가입자인지 확인
 	@RequestMapping(value = "/all/googleToken.do")
-	public String googleToken(Model model, @RequestParam(name = "code") String code) {
+	public void googleToken(Model model, @RequestParam(name = "code") String code) {
 
 		String googleLoginInfo = snsLoginService.getToken(code);
 		String googleEmail = snsLoginService.getGoogleInfo(googleLoginInfo, "email");
 		String googleName = snsLoginService.getGoogleInfo(googleLoginInfo, "name");
 
 		MemberVO vo = new MemberVO();
+		
+		//google과 email 둘다 받아온 이메일 값을 넣음
+		vo.setGoogle(googleEmail);
 		vo.setEmail(googleEmail);
 		vo.setM_name(googleName);
-//		System.out.println("****************************");
-//		System.out.println(googleEmail);
-//		System.out.println(googleName);
+		System.out.println("****************************");
+		System.out.println(googleEmail);
+		System.out.println(googleName);
 
-		MemberVO member = memberservice.selectByEmail(vo);
-		// 기존 가입자 이메일이 같은데 구글 로그인이 없는 경우 =>연동
-		if (member != null && member.getGoogle() == null) {
-			member.setGoogle(googleEmail);
-			;
-			memberservice.addGoogle(member);
-			model.addAttribute("member", member);
-			return "redirect:/all/login.do";
-		}
 
-		// 구글로그인이 이미 있거나 기존 가입자가 아닐 경우 =>새로가입
-		if (member == null || member.getGoogle() != null) {
-			return "redirect:/all/login.do";
-		}
-		return "redirect:/all/login_social.do/error";
 
 	}
+
+	
+	
+	
+	
+	
 
 	@Autowired
 	private MailSendService mailservice;
@@ -258,7 +259,7 @@ public class MemberController {
 	
 	
 	
-	//ajax jsp 만들기(필터 걸어서 검색)
+	//ajax jsp 만들기
 	@RequestMapping(value = "user/my_sales_ajax.do", method= {RequestMethod.POST})
 	//@ResponseBody 지우기
 	public void  searchMySales(MemberVO vo, HttpSession session, Model model,
@@ -292,10 +293,6 @@ public class MemberController {
 
 	
 	}
-	
-	
-	
-
 	
 	
 	

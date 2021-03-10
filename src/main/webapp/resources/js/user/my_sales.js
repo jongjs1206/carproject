@@ -7,10 +7,15 @@ $(function(){
  
  	var token = $("input[name='_csrf']").val();
 	var header = "X-CSRF-TOKEN";
+
+
 	
 	//날짜
-	var startDate = $('#datepicker1')
-	var endDate = $('#datepicker2')
+	var startDate = $('#datepicker1').datepicker({dateFormat: 'yy-mm-dd'});
+	var endDate = $('#datepicker2').datepicker({dateFormat: 'yy-mm-dd'});
+	
+	var btnSearch = $('#btnSearch')
+	var byTitle = $('#byTitle')
 
 
 
@@ -36,17 +41,35 @@ search();
 
 });
 
+//검색 리셋 버튼
+$('#resetSearch').on('click', function(){
+byTitle.val("");
+
+})
+
+//검색 검색 버튼
+$('#btnSearch').on('click', function(){
+search();
+})
+
+//엔터
+byTitle.keydown(function(key) {
+if (key.keyCode == 13) {
+search();
+}
+
+});
+
+
 
 
 
 //상태 클래스 toggle
  window.statusOn = function(obj) {
   $(obj).toggleClass( 'on' );
-  if($(obj).hasClass("on")){
+  
    search();
-  }else{
-  	search();
-  }
+
 }
 
 
@@ -60,10 +83,10 @@ var status = '';
 
 $("a.on").each(function(){
 
-status = status + ',' + $(this).text()
-
+status = status +','+ $(this).text()
 
  })
+ 
 
 	$.ajax({
 		type : 'post',
@@ -77,7 +100,8 @@ status = status + ',' + $(this).text()
 	 	dataType : 'html',
 	 	data : {"startDate" : startDate.val(),
 	 			"endDate": endDate.val(),
-	 			"status" : status
+	 			"status" : status,
+	 			"byTitle" : byTitle.val()
 	 	
 	 	},				
 	 	success : function(result){

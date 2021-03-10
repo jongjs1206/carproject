@@ -99,7 +99,7 @@
 				  
                     <!-- select in date -->
                    <div class="datePicker">
-                  <form:form>
+               
                   <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 				 <div><a id="datepickerReset"> <i class="fas fa-sync-alt"></i></a></div>
@@ -108,7 +108,7 @@
                         <div class="boking-tittle">                          
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker1"  placeholder="01/01/2020" />                             
+                            <input id="datepicker1"  placeholder="mm/dd/yyyy"  data-language='en'/>                             
                         </div>                      
                    </div>            
                       
@@ -119,17 +119,16 @@
                          
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker2"  placeholder="12/31/2020" />
+                            <input id="datepicker2"  placeholder="mm/dd/yyyy" />
                         </div>
                      
                    </div>
                     <div><a id="datepickerBtn"> <i class="fas fa-search"></i></a>
                     </div>
-                     </form:form>
+                
                   
                   </div>                
 				<div class="statusBtn" id="statusBtn">
-			
 				<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">판매중</a>
 				<a href="javascript:void(0);" onclick="statusOn(this)">임시저장</a>
@@ -138,14 +137,13 @@
 		  </div>
 				<!-- 검색창 -->
 			<div class="divSearch">
-				<form action="" method="post"
-					class="subscribe_form relative mail_part" novalidate="true">
+	
 				<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<input type="text" name="search" id="search" placeholder=" 제목 검색 "
-						class=""> <span	class="form-icon"> <a> <i class="fas fa-sync-alt"></i></a>
-					</span>
-				</form>
+					<span id="resetSearch" class="form-icon"> <a> <i class="fas fa-sync-alt"></i></a></span>
+					<input type="text" id="byTitle" name="byTitle" placeholder=" 제목 검색 "/> 						
+						<a id="btnSearch"> <i class="fas fa-search"></i></a>
+			
 			</div>
 </div>
 
@@ -171,7 +169,7 @@
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
 					href="../all/salesDetail.do?num=${sale.sell_id}"> <img
-					src="../resources/img/newsimg.jpg" alt="썸네일">
+					src="${sale.image}img1.png" alt="썸네일" style="width: 250px">
 				</a> 
 				<a class="" href="../all/salesDetail.do?num=${sale.sell_id}">
 					<div>
@@ -245,7 +243,7 @@
 	<script src="./../resources/assets/js/wow.min.js"></script>
 	<script src="./../resources/assets/js/animated.headline.js"></script>
 	<script src="./../resources/assets/js/jquery.magnific-popup.js"></script>
-
+	
 	<!-- Scrollup, nice-select, sticky -->
 	<script src="./../resources/assets/js/jquery.scrollUp.min.js"></script>
 	<script src="./../resources/assets/js/jquery.nice-select.min.js"></script>
@@ -259,11 +257,9 @@
 	<script src="./../resources/assets/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
+
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
-
-	
-
 
 </body>
 </html>

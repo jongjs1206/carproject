@@ -60,7 +60,7 @@
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
 					href="../all/salesDetail.do?num=${sale.sell_id}"> <img
-					src="../resources/img/newsimg.jpg" alt="썸네일">
+					src="${sale.image}img1.png" alt="썸네일">
 				</a> 
 				<a class="" href="../all/salesDetail.do?num=${sale.sell_id}">
 					<div>

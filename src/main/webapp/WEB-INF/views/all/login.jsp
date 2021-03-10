@@ -57,6 +57,9 @@
 	type="text/css">
 
 <script type="text/javascript" src="../resources/js/all/find_idpw.js"></script>
+<script type="text/javascript" src="../resources/js/all/login.js"></script>
+
+
 </head>
 <body>
 
@@ -85,6 +88,7 @@
                                         <div class="InputText_placeholder_text__13dap" role="button">아이디</div>
                                             <div class="InputText_inner_square__38iB2 InputText_normal__1Fp25">
                                             <input type="text" id="m_id" name="m_id" maxlength="20" data-testid="input" inputmode="" value="">
+                                            <span>${user.m_id}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -113,26 +117,32 @@
                    			회원가입
                  		</a>
                 	</div>
-                	<!-- 
+              
                     <div class="LoginSnsButton_tit_area__bRqmB"><strong class="LoginSnsButton_tit__1kT5i">간편하게 시작하기</strong></div>
                     <div class="LoginSnsButton_btn_area__1HZfa">
                         <div class=" " style="margin-top: 15px;"><button type="button"  class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_naver_s__23ZSw " style="vertical-align: bottom; margin: 0px 6px 17px 0px;">네이버</span> 네이버로 시작하기 </button></div>
                         <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_kakao_s__2oyHe " style="vertical-align: bottom; margin: 0px 6px 16px 0px;">카카오</span> 카카오로 시작하기 </button></div>
                     
                         
-                        <div class=" " style="margin-top: 15px;"><button type="button" onclick="location.href='googleLogin.do' " class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 </button></div>
+                        <div class=" " style="margin-top: 15px;"><button type="button" onclick="${google_url}" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 </button></div>
                     </div>
                     <p class="LoginSnsButton_login_warning__IPZhy">공용 PC에서는 소셜로그인 시 계정 관리에 유의해주세요.</p>
                 </div>
-                 -->
+         
                 <div class="Footer_footer_wrap__SixRg"><span class="Footer_copyright__15QJ2">© 사차원</span></div>
             </div>
-           
+          
     
     </div>
 		<!--end of container  -->
     
-</div>	</main>
+</div>	
+
+
+
+
+
+	</main>
 
 	<%@ include file="../footer.jsp"%>
 

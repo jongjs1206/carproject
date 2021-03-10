@@ -16,6 +16,11 @@
 		SELECT * FROM member
 		WHERE m_id=#{m_id}
 	</select>
+
+	<select id="selectByGoogle" parameterType="member"	resultType="member">
+		SELECT * FROM member
+		WHERE google=#{google}
+	</select>
 	
 	<select id="selectByEmail" parameterType="member" resultType="member">
 		SELECT * FROM member
@@ -135,7 +140,14 @@
 		      #{status}
 		     </foreach>
 		    </if>
+		
+	<if test="byTitle != null and byTitle != ''">
+			AND
+			title LIKE CONCAT('%',#{byTitle},'%')
+	</if> 
+	ORDER BY w_date DESC
 	</select>
+
 	
 </mapper>
 

@@ -17,6 +17,8 @@ public interface MemberDAO {
 	
 	MemberVO checkUniqueId( MemberVO vo );
 	
+	MemberVO selectByGoogle( MemberVO vo );
+	
 	MemberVO selectByEmail( MemberVO vo );
 	
 	int addGoogle(MemberVO vo);
@@ -52,6 +54,9 @@ public interface MemberDAO {
 	
 	int updatePhoto(MemberVO vo);
 	void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
+	
+	
+	
 }
 	 
 

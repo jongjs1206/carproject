@@ -41,6 +41,12 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 
 	@Override
+	public MemberVO selectByGoogle(MemberVO vo) {
+		System.out.println("===> MemberMapper selectByGoogle 호출");
+		return mybatis.selectOne("MemberMAP.selectByGoogle", vo);
+	}
+	
+	@Override
 	public MemberVO selectByEmail(MemberVO vo) {
 		System.out.println("===> MemberMapper selectByEmail 호출");
 		return mybatis.selectOne("MemberMAP.selectByEmail", vo);
@@ -135,6 +141,7 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);		
 	}
 
+	
 
 
 	

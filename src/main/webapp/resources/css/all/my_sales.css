@@ -154,12 +154,12 @@ div.divSearch{
     border-radius: 5px;
 } */
 
-div.datePicker > form{
+div.datePicker{
  display: flex;
  margin-right: 10px;
 }
 
-div.datePicker form > div.single-select-box input{
+div.datePicker div.single-select-box input{
 	max-height: 35px;
     max-width: 150px;
 }
@@ -170,7 +170,7 @@ div.datePicker form > div.single-select-box input{
 
 }
 
-div.datePicker > form > div{
+div.datePicker div{
 	margin: 5px;
 }
 
