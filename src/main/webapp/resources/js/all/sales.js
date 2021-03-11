@@ -168,75 +168,60 @@ $(function() {
 	});
 	
 	////////////////////////////////////////////////////////////////////////////////
+
 	
-	// 사진 업로드하기  -- <form>의 action이 컨트롤러에서 실행됨
-//	$('#google_pic_submit').on('click', function(){
-//		m_id = $('input[name=m_id]').val();
-//		alert(m_id);
-//		$('#google_picForm').submit();
-//		alert('사진이 업로드되었습니다.');	
-//	});
-	
-	
-	
-	
-	// "이미지입력기 불러오기" 버튼 클릭시
-	$('#picnum_submit').on('click', function(){
-		var picnum = $('#picnum').val();
-		
-		$.ajax({
-			type: 'post',
-			async: true,
-			url: '../user/sales_ajax.do',
-			beforeSend : function(xhr) {	
-				xhr.setRequestHeader(header, token);
-			},
-			contentType: "application/x-www-form-urlencoded;charset=utf-8",
-			data: {"picnum" : picnum },
-			dataType: 'script',
-			success: function(result){
-				alert('ajax입니다.')
-	//			console.log(picnum);
-				console.log(result);
-				
-	//			var html = jQuery('<tr>').html(result);
-	//			$('#picListAjax').html(html);
-				
-				
-			},
-			error: function(err){
-				console.log(err);
-				alert('ajax 실패');
-			}
-		
-		});		// end of ajax
-		 
-			
-		
-	
-	});
-	
+
 	
 	
 	
 	////////////////////////////////////////////////////////////////////////////////
 	
 	/////////////////////////////////////////////////////////
-	// 이미지 미리보기 <- 판매글 => 최대 20개까지 불러와야 함
+	// 이미지 미리보기 <- 판매글 =>
+	
 	$("#picFile").on('change', function(){
 	    readURL(this);
 	});
 
+	var sel_files = [];
 	function readURL(input) {
-	    if (input.files && input.files[0]) {
-	       var reader = new FileReader();
-	       reader.onload = function (e) {
-	          $('#photo').prop('src', e.target.result);
-	       }
-	       reader.readAsDataURL(input.files[0]);
-	    }
+
+	    	var files = input.files;			// 업로드 되는 사진파일
+    		if (input.files.length >= 7) {		// 최대 6장까지만 업로드 시킴 
+    			alert('사진은 6장까지만 첨부할 수 있습니다.');
+    			$("#phototo").text("");
+    			$("#photo").show();
+	    		return; 
+    		}
+    		
+	    	var filesArr = Array.prototype.slice.call(files);	// 사진 파일을 리스트 안에 각각 담음??? 몰겠음. 	    	
+	    	
+	    	$("#photo").hide();				// 주황색 사진 이미지를 감춤
+	    	
+	    	var allhtml = '';					// 미리보기로 표시될 변수를 초기화 ("파일선택"버튼을 다시 눌렀을 때 초기화되도록)
+	    	$("#phototo").text("");
+	    
+	    	// 사진 외의 파일을 업로드 하지 못하도록 막음
+	    	filesArr.forEach(function(f) {
+	    		if(!f.type.match("image.*")){
+	    			alert("이미지 파일만 업로드 할 수 있습니다.");
+	    			return;
+    			}
+
+				// 리스트에 사진 파일을 넣고 열기
+    			sel_files.push(f);	  
+	       		var reader = new FileReader();	       		
+	       		
+	       		reader.onload = function (e) {
+	       			var img_html = "<img src=\"" + e.target.result + "\" width=\"50px\" height=\"50px\"/>";
+					$("#phototo").append(img_html);
+          		}
+	       		reader.readAsDataURL(f);
+	       });
+	    
 	}	// end of 이미지 미리보기
 	
+
 	
 	/////////////////////////////////////////////////////////
 	// 다중 이미지 업로드 및 미리보기
@@ -286,6 +271,52 @@ $(function() {
 	// 등록하기 버튼
 	$(document).on("click","#enrollCar",function(){
 		
+		console.log();
+
+		// 유효성 검사 
+		if ($('#phototo > img').length == 0) {
+			$('#picFile').focus();
+			alert("사진 등록은 필수 입력사항입니다. ");
+			return 
+		}else if ($('#carNumber').val() == "") {
+			$('#carNumber').focus();
+			alert("차량번호를 입력해주세요");
+			return
+		}else if ($('#carDetailGrade').val() == "세부등급") {
+			$('#carDetailGrade').focus();
+			alert("차종을 선택해주세요");
+			return
+		}else if ($('.carColor').val() == "선택") {
+			$('.carColor').focus();
+			alert('색상을 선택해주세요');
+			return
+		}else if ($('#km').val() == "") {
+			$('#km').focus();
+			alert('주행거리를 입력해주세요');
+			return
+		}else if  ($('#cc').val() == "") {
+			$('#cc').focus();
+			alert('배기량을 입력해주세요');
+			return
+		}else if  ($('#salesPrice').val() == "") {
+			$('#salesPrice').focus();
+			alert('판매가격을 입력해주세요');
+			return
+		}else if  ($('#carGear').val() == "선택") {
+			$('#carGear').focus();
+			alert('변속기를 선택해주세요');
+			return
+		}else if  ($('#carFuel').val() == "선택") {
+			$('#carFuel').focus();
+			alert('연료 종류를 선택해주세요');
+			return
+		}else if  ($('#salesContext').val() == "") {
+			$('#salesContext').focus();
+			alert('내용을 입력해주세요');
+			return
+		}
+		
+		
 		if (confirm("등록하시겠습니까?")) {	
 			// 체크옵션 부분
 			var arr_options = document.getElementsByName("option");
@@ -307,6 +338,7 @@ $(function() {
 			}	// end of for(옵션)
 			
 			$("#strOption").val(result);
+			
 			
 			$('#salesForm').submit();
 

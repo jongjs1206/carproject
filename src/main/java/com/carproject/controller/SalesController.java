@@ -2,8 +2,8 @@ package com.carproject.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.Format;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +43,14 @@ public class SalesController {
 	public void brandList(Model model) {
 		List<HashMap<String, Object>> list = salesService.brandList();
 		model.addAttribute("brandList", list);
+		List<String> array = new ArrayList<String>();
+		int total = 2021-1950;
+		for (int i=0; i<total; i++) {			
+			String year = String.valueOf(2021 - i);
+			array.add(year);
+		}
+		
+		model.addAttribute("arr", array);
 		System.out.println("제조사리스트");
 	}
 	
