@@ -3,17 +3,15 @@ package com.carproject.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
+import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
-import com.carproject.domain.SalesVO;
 
 public interface MemberService {
 	
 	public int userInsert(MemberVO vo );
 	public MemberVO checkUniqueId( MemberVO vo);
+	public String checkAuth(MemberVO vo);				// 관리자 권한을 갖고 있는지 확인 (admin 메뉴 노출 여부)
 	public MemberVO selectByGoogle( MemberVO vo);
 	public MemberVO selectByEmail( MemberVO vo);
 	public int addGoogle(MemberVO vo );

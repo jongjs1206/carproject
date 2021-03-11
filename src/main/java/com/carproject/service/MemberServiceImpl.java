@@ -5,17 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.io.FileSystemUtils;
-import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.carproject.dao.MemberDAO;
+import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
-import com.carproject.domain.SalesVO;
 
 
 
@@ -45,6 +42,10 @@ public class MemberServiceImpl implements MemberService{
 	  */
 	  public MemberVO checkUniqueId( MemberVO vo)	  {	
 		  return memberDAO.checkUniqueId(vo);
+	  }
+	  
+	  public String checkAuth(MemberVO vo) {				// 관리자 권한을 갖고 있는지 확인 (admin 메뉴 노출 여부)
+		  return memberDAO.checkAuth(vo);
 	  }
 
 		@Override

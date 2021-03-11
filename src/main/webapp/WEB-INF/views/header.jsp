@@ -71,7 +71,7 @@ $(function() {
 										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
 										<li><a href="../all/reviewDetail.do">구매후기</a></li>
 											
-										<li><a href="#">Q&A</a>
+<!-- 										<li><a href="#">Q&A</a>
 											<ul class="submenu">
 												<li><a href="#"
 													onClick="window.open('find_idpw.do','아이디/비밀번호 찾기','width=500,height=500,toolbar=no,scrollbars=no,left=200,top=100')">아이디/비밀번호찾기</a>
@@ -81,6 +81,7 @@ $(function() {
 												<li><a href="../user/mem.do">mem.do</a></li>
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
+ -->										
 										<li>
                                         	<a href="#" onclick="window.open('../all/chat.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
                                         	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
@@ -109,8 +110,10 @@ $(function() {
 												<li><a href="../user/profile.do">내정보</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/my_heart.do">내 찜목록</a></li>
-												<li><a href="../user/salesDetail.do">내 글 확인</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
+												<c:if test="${sessionScope.auth == ROLE_ADMIN}">
+													<li><a href="../admin/admin.do">어드민</a></li>
+												</c:if>
 												<li><a style="cursor: pointer;" class='btn_submit'>로그아웃</a></li>
 											</ul></li>
 										</c:if>

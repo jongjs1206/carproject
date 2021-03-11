@@ -16,6 +16,11 @@
 		SELECT * FROM member
 		WHERE m_id=#{m_id}
 	</select>
+	
+	<select id="checkAuth" parameterType="member" resultType="String">
+		SELECT auth FROM auth
+		WHERE m_id=#{m_id}
+	</select>
 
 	<select id="selectByGoogle" parameterType="member"	resultType="member">
 		SELECT * FROM member
