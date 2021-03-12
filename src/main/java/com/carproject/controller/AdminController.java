@@ -161,21 +161,11 @@ public class AdminController {
 	
 	//처음 세팅
 	@RequestMapping(value = "/admin/salesList.do")
-<<<<<<< HEAD
-	public void product_list(Model model, HttpSession session,  
-			@RequestParam HashMap<String, Object> param) {
-=======
 	public void product_list(MemberVO vo, Model model, HttpSession session,
 			@RequestParam("startDate") @Nullable String startDate,
 			@RequestParam("endDate") @Nullable String endDate) {
->>>>>>> branch 'master' of https://github.com/jongjs1206/carproject.git
-		
-<<<<<<< HEAD
-		List<SalesVO> salesList = salesservice.selectSalesAll();
-=======
-		System.out.println("+++++"+startDate);
+
 		List<HashMap<String, Object>> salesList = memberservice.selectAllsale(vo);
->>>>>>> branch 'master' of https://github.com/jongjs1206/carproject.git
 		model.addAttribute("salesList", salesList);
 		
 //		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
