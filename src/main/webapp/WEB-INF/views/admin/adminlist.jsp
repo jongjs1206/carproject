@@ -39,57 +39,7 @@
         </nav>
         
         <!-- 좌측 메뉴 -->
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"><h4>메뉴</h4></div>  
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>회원관리
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./userlist.do">회원목록</a>
-                                    <a class="nav-link" href="./withdrawal.do">탈퇴회원목록</a> 
-                                    <a class="nav-link" href="./blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="./adminlist.do">관리자목록</a>  
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>코인현황
-                            </a>
-                            <div class="collapse" id="collapseone" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailycoin.do">일별코인충전</a>
-                                    <a class="nav-link" href="./monthlycoin.do">월별코인충전</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>방문현황
-                            </a>
-                            <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailysales.do">일일방문현황</a>
-                                    <a class="nav-link" href="./monthlysales.do">월별방문충전</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
-                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>게시글관리
-                             </a>
-                             <div class="collapse" id="collapsethree" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./salesarticlelist.do">판매글</a>
-                                    <a class="nav-link" href="./userinquiry.do">고객문의</a> 
-                                    <a class="nav-link" href="./carnews.do">자동차뉴스</a>
-                                    <a class="nav-link" href="./purchasereview.do">구매후기</a>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+		<%@ include file="./side.jsp"%>
             
             <!-- 대시보드 내용 -->
             <div id="layoutSidenav_content"> 

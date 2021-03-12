@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,9 @@ public class MemberController {
 	private AuthService authService;
 	@Autowired
 	SnsLoginService snsLoginService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPE;
 
 // 회원 가입
 	@RequestMapping(value = "/all/userInsert.do")
@@ -62,7 +66,7 @@ public class MemberController {
 
 		return "redirect:/all/login.do";
 	}
-
+	
 	// 회원가입 시 아이디 중복 확인
 	@RequestMapping(value = "/all/idCheck.do", produces = "application/text;charset=utf-8")
 	@ResponseBody
@@ -104,9 +108,23 @@ public class MemberController {
 		System.out.println("****************************");
 		System.out.println(googleEmail);
 		System.out.println(googleName);
-
-
-
+		
+		// 1. 이미 사차원 회원인 경우
+		// -> 확인절차 없이 바로 로그인 시켜주고 싶음
+		// * google 로그인 세션은 건드릴 수 없음.
+		// 발급해주는 Token, 로그인하려하는(혹은 연동하려하는) 이메일, 사용자 이름 .. etc
+		// 사차원만의 회원정보중, 비교할 수 있는 정보가 있어야 함. : 구글 이메일 여부
+		// 1-1. 구글 이메일이 있다면
+		// List로 리턴을 받던, Object로 리턴을 받던 
+		// 회원인게 증명됨 -> 세션부여 -> 홈으로 이동
+		
+		// $2a$10$VW1CVaBrwfuNISCyd3jr6.QeOxQldFSGvLO7auQZQ9bMADxjwhxOu
+//		if(bcryptPE.matches("1234", "$2a$10$VW1CVaBrwfuNISCyd3jr6.QeOxQldFSGvLO7auQZQ9bMADxjwhxOu")) { // 비번을 raw data랑 db값이랑 일치하는 지만 확인
+//			
+//		}
+		
+		// 사차원 사이트의 세션을 반드시 부여해야됨.
+		
 	}
 
 	
@@ -259,7 +277,7 @@ public class MemberController {
 	
 	
 	
-	//ajax jsp 만들기
+	//내 판매글 ajax jsp 만들기
 	@RequestMapping(value = "user/my_sales_ajax.do", method= {RequestMethod.POST})
 	//@ResponseBody 지우기
 	public void  searchMySales(MemberVO vo, HttpSession session, Model model,
@@ -275,7 +293,7 @@ public class MemberController {
 		}
 		vo.setM_id(id);
 		MemberVO info = memberservice.checkUniqueId(vo);
-
+		
 		
 		//비어있는 곳 기본 세팅
 		HashMap<String, Object> m = memberservice.saleSearchDefault(param, info);

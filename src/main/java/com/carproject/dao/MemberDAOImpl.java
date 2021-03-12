@@ -71,6 +71,11 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===>  MemberMapper selectMySale() 호출");
 		return mybatis.selectList("MemberMAP.selectMySale", map);
 	}
+	@Override
+	public List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map) {
+		System.out.println("===>  MemberMapper selectSale_admin() 호출");
+		return mybatis.selectList("MemberMAP.selectSale_admin", map);
+	}
 
 	
 	

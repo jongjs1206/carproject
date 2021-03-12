@@ -1,6 +1,7 @@
 package com.carproject.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Member;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -156,13 +160,50 @@ public class AdminController {
 	//admin_판매글 관리
 	
 	//처음 세팅
-	@RequestMapping(value = "admin/salesList.do")
-	public void product_list(Model model, HttpSession session) {
+	@RequestMapping(value = "/admin/salesList.do")
+	public void product_list(Model model, HttpSession session,
+			@RequestParam("startDate") @Nullable String startDate,
+			@RequestParam("endDate") @Nullable String endDate) {
 		
+		System.out.println("+++++"+startDate);
 		List<SalesVO> salesList = salesservice.selectSalesAll();
 		model.addAttribute("salesList", salesList);
 
+		
 	}
+	
+	//검색 
+	@RequestMapping(value = "admin/salesList_search.do")
+	public String  searchMySales(HttpSession session, Model model,
+			@RequestParam HashMap<String, String> param
+			) {
+
+		System.out.println("+++++startDate"+param.get("startDate"));
+		
+		/*
+		//검색
+		List<HashMap<String, Object>> sale_list = memberservice.selectSale_admin(param);
+		
+		//날짜에서 시간 자르기
+		for(HashMap<String, Object> s : sale_list) {	
+		String date = s.get("w_date").toString();
+		s.put("w_date", date.split(" ")[0]);
+		}
+		
+		model.addAttribute("salesList", sale_list);
+		*/
+		return "redirect:/admin/salesList.do";
+
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 }

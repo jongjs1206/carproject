@@ -81,26 +81,21 @@ public class MemberServiceImpl implements MemberService{
 			
 			param.put("m_id", vo.getM_id());
 			
-			SimpleDateFormat format = new SimpleDateFormat ( "MM/dd/yyyy");
-			Date time = new Date();
-			String day = format.format(time);
-			
-			if((String)param.get("startDate") ==""){
-				param.put("startDate", "01/01/1990");
-			}
-			if((String)param.get("endDate") ==""){
-				param.put("endDate", day);
-			}
-			
 			//status
 			String s = param.get("status").toString();
-			System.out.println("아아아아statusstring"+s);
 			String[] status = s.split(",");
 			param.put("statusList", status);
 			
 			return param;
 			
 		}
+		
+		@Override
+		public List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map) {
+			 return memberDAO.selectSale_admin(map);
+		}
+
+		
 		
 	  
 
@@ -160,6 +155,8 @@ public class MemberServiceImpl implements MemberService{
 			System.out.println(objectName);
 			System.out.println(filePath);
 		}
+		
+
 
 		
 		

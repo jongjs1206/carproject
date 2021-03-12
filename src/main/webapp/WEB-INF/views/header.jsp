@@ -7,6 +7,19 @@
 <html> 
 <head>
 <meta charset="UTF-8">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z7TDDVV5GC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('config', 'G-Z7TDDVV5GC', {
+      page_title: 'header.jsp',
+      page_location: 'http://localhost:8080/carproject/all/homepage.do',
+      page_path: '/carproject/all/homepage.do'
+});
+
+</script>
+
 <title>header.jsp</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
@@ -14,8 +27,7 @@
 	rel="stylesheet">
 <link rel="stylesheet" href="../resources/css/header.css"
 	type="text/css">
-<script src="https://kit.fontawesome.com/c11219882f.js"
-	crossorigin="anonymous"></script>
+
 </head>
 <script type="text/javascript">
 $(function() {
@@ -31,7 +43,14 @@ $(function() {
 	})
 })
 </script>
+	
+<!-- Load the JavaScript API client and Sign-in library. -->
+<script src="https://apis.google.com/js/client:platform.js"></script>
+	
+
+
 <body>
+
 	<!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -66,7 +85,9 @@ $(function() {
 							<div class="main-menu f-right d-none d-lg-block">
 								<nav>
 									<ul id="navigation">
-										<li><a href="../all/product_list.do">매장</a></li>
+										<li>
+											<a href="../all/product_list.do">매장</a>
+										</li>
 										<li><a class='sell_header' style="cursor: pointer;">내 차 팔기</a></li>
 										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
 										<li><a href="../all/reviewDetail.do">구매후기</a></li>
@@ -131,6 +152,8 @@ $(function() {
 		<!-- Header End -->
 	</header>
 	<!-- All JS Custom Plugins Link Here here -->
+	
+
 	<script src="./../resources/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 
 	<!-- Jquery, Popper, Bootstrap -->
@@ -149,5 +172,8 @@ $(function() {
 	<script src="./../resources/assets/js/wow.min.js"></script>
 	<script src="./../resources/assets/js/animated.headline.js"></script>
 	<script src="./../resources/assets/js/jquery.magnific-popup.js"></script>
+	<script src="https://kit.fontawesome.com/c11219882f.js"
+	crossorigin="anonymous"></script>
+	
 </body>
 </html>

@@ -27,7 +27,8 @@ public interface SalesService {
 	public SalesVO salesDetail(Long num);  // 상세화면 
 	
 	//전체 판매글 가져오기
-	public List<SalesVO> selectSalesAll();	
+	public List<SalesVO> selectSalesAll();
+
 
 	
 }

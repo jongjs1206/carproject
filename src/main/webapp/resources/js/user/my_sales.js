@@ -17,6 +17,29 @@ $(function(){
 	
 	var btnSearch = $('#btnSearch')
 	var byTitle = $('#byTitle')
+	
+	
+ //날짜 함수(yyyy-mm-dd 형식)
+function getTimeStamp() {
+    var d = new Date();
+    var s =
+        leadingZeros(d.getFullYear(), 4) + '-' +
+        leadingZeros(d.getMonth() + 1, 2) + '-' +
+        leadingZeros(d.getDate(), 2);
+    return s;
+}
+
+function leadingZeros(n, digits) {
+    var zero = '';
+    n = n.toString();
+
+    if (n.length < digits) {
+        for (i = 0; i < digits - n.length; i++)
+            zero += '0';
+    }
+    return zero + n;
+}
+ 
 
 
 
@@ -79,14 +102,37 @@ search();
 
 var search = function(){
 
+//날짜 빈칸 처리
+if(startDate.val()==''){
+startDate.val("1990-01-01")
+}
+if(endDate.val()==''){
+var today = getTimeStamp();
+endDate.val(today)
+}
+
+
+//status 클래스 상태에 따라서 쿼리문에 보낼 string 만들기
 var status = '';
 
+
+//status 모두 클래스가 없을때 (선택x) 모두 선택된 것 처럼 보이기
+if($("a.on").length == 0 ){
+
+for (i = 0; i < $('#statusBtn > a').length; i++) {
+status = status +','+  $('#statusBtn > a').text()
+}
+
+//그 외의 경우에는 선택된 클래스의 text만 보내기
+}else{
 $("a.on").each(function(){
-
 status = status +','+ $(this).text()
-
  })
+}
+
+
  
+alert("status")
 
 	$.ajax({
 		type : 'post',

@@ -124,15 +124,20 @@
 	<select id="selectAllsale" resultType="hashmap">
       SELECT * FROM sell
       WHERE m_id=#{m_id}
+      	<![CDATA[
+		ORDER BY w_date DESC
+		]]>
    	</select>
+   	
+   	
    	<!-- 내가 쓴 판매글 필터 select  select-->
 	<select id="selectMySale" parameterType="hashmap" resultType="hashmap">
 		
 		SELECT * FROM sell 
 		WHERE m_id=#{m_id} AND 
 		<![CDATA[
-		w_date >= str_to_date(#{startDate}, '%m/%d/%Y') AND
-		w_date <= str_to_date(#{endDate}, '%m/%d/%Y')
+		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
+		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
 	    <if test="statusList != null and statusList != ''">
 	     AND status IN 
@@ -145,7 +150,29 @@
 				title LIKE CONCAT('%',#{byTitle},'%')
 		</if> 
 		<![CDATA[
-		ORDER BY str_to_date(w_date, '%y-%m-%d') DESC
+		ORDER BY w_date DESC
+		]]>
+	</select>
+	
+	
+	   	<!--admin 판매 리스트 select  select-->
+	<select id="selectSale_admin" parameterType="hashmap" resultType="hashmap">
+		
+		SELECT * FROM sell 
+		WHERE
+		<![CDATA[
+		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
+		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
+		]]>
+	    <if test="status != '상태선택' ">
+	     AND status = #{status}
+	    </if>
+		<if test="byTitle != null and byTitle != ''">
+				AND
+				title LIKE CONCAT('%',#{byTitle},'%')
+		</if> 
+		<![CDATA[
+		ORDER BY w_date DESC
 		]]>
 	</select>
 

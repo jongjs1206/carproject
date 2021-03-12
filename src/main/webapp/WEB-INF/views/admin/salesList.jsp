@@ -40,59 +40,13 @@
         </nav>
         
         <!-- 좌측 메뉴 -->
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"><h4>메뉴</h4></div>  
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>회원관리
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./userlist.do">회원목록</a>
-                                    <a class="nav-link" href="./withdrawal.do">탈퇴회원목록</a> 
-                                    <a class="nav-link" href="./blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="./adminlist.do">관리자목록</a>  
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>코인현황
-                            </a>
-                            <div class="collapse" id="collapseone" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailycoin.do">일별코인충전</a>
-                                    <a class="nav-link" href="./monthlycoin.do">월별코인충전</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>방문현황
-                            </a>
-                            <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailysales.do">일일방문현황</a>
-                                    <a class="nav-link" href="./monthlysales.do">월별방문충전</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
-                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>게시글관리
-                             </a>
-                             <div class="collapse" id="collapsethree" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./salesarticlelist.do">판매글</a>
-                                    <a class="nav-link" href="./userinquiry.do">고객문의</a> 
-                                    <a class="nav-link" href="./carnews.do">자동차뉴스</a>
-                                    <a class="nav-link" href="./purchasereview.do">구매후기</a>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+			<%@ include file="./side.jsp"%>
             
             <!-- 대시보드 내용 -->
+     
+            <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+          
             <div id="layoutSidenav_content">
                     <div class="container-fluid">
                         <h2 class="mt-4">판매글</h2>
@@ -103,19 +57,24 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <input type="date"><span>~</span><input type="date">
+                                <input type="date" id="startDate"><span>~</span><input type="date" id="endDate">
+                                
+                               <div  id="indexListAjax">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
                                         <!-- 예시 데이터 삽입 -->
                                         <thead>
                                      
                                             <tr>                                                
-                                                <th>ㅁ</th>
+                                                <th><input type="button"
+														class="btn btn-primary"
+														onclick="location.href='editsales.do'" value="게시"></th>
                                                 <td>썸네일</td>
                                                 <th>판매자</th>
                                                 <th>판매차량</th>
                                                 <th>날짜(등록/게시)</th>
-                                                <th><select	name="searchStatus" id="searchStatus">
+                                                <th><select name="searchStatus" id="searchStatus">
+												<option value="상태선택">상태선택</option>
 												<option value="등록대기">등록대기</option>
 												<option value="게시중">게시중</option>
 												<option value="게시종료">게시종료</option>
@@ -144,7 +103,7 @@
 												<c:when test="${status eq '등록대기'}">
 													<td align="center"><input type="button"
 														class="btn btn-primary"
-														onclick="location.href='editsales.do'" value="게시/반려"></td>
+														onclick="location.href='editsales.do'" value="반려"></td>
 												</c:when>
 												<c:otherwise>
 													<td align="center"></td>
@@ -159,6 +118,9 @@
                                 </div>
                             </div>
                         </div>
+                       </div>
+
+            
                         
                 <!-- 최하단 footer -->
                 <footer class="py-4 bg-light mt-auto">
@@ -172,11 +134,12 @@
         </div>
         
         <!-- javascript 파일 import -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
+        <script type="text/javascript" src="../resources/js/admin/admin_salesList.js"></script>
     </body>
 </html>

@@ -27,7 +27,7 @@ public interface MemberDAO {
 	List<HashMap<String, Object>> selectAllsale(MemberVO vo);
 	//필터 걸어서 불러오기
 	List<HashMap<String, Object>> selectMySale(HashMap<String, Object> map);
-
+	List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map);
 	
 
 	// 모든 회원 목록을 불러오기 위한 함수

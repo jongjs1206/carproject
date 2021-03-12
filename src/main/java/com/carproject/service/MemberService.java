@@ -22,7 +22,8 @@ public interface MemberService {
 	//필터 
 	public List<HashMap<String, Object>> selectMySale( HashMap<String, Object> map);
 	public HashMap<String, Object> saleSearchDefault( HashMap<String, Object> map, MemberVO vo);
-	
+	//admin 검색
+	public List<HashMap<String, Object>> selectSale_admin( HashMap<String, Object> map);	
 	
 	// 모든 회원 목록을 불러오기 위한 함수
 	public List<HashMap<String, Object>> allMember();
@@ -48,6 +49,7 @@ public interface MemberService {
 	public int updatePhoto(MemberVO vo);
 	public void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
 	
+
 	
 	
 }
