@@ -78,10 +78,34 @@ endDate.val(today)
 var param = "?startDate="+startDate.val()+"&endDate="+endDate.val();
 
 
-location.href="../admin/salesList.do"+param;
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../user/my_sales_ajax.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+	 	dataType : 'html',
+	 	data : {"startDate" : startDate.val(),
+	 			"endDate": endDate.val(),
+	 			"status" : status,
+	 			"byTitle" : byTitle.val()
+	 	
+	 	},				
+	 	success : function(result){
 
-	
-
+	 	var html = jQuery('<div>').html(result);
+			$( '#indexListAjax' ).html(html);
+	 	},
+	 	
+	 	
+	 	error : function(err){
+	 		console.log(err);
+	 	}
+	 	
+	 }) 
 
 }
 
