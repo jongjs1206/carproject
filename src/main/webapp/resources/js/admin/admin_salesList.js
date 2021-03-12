@@ -47,7 +47,6 @@ function leadingZeros(n, digits) {
 
 
 
-
 //날짜 검색 버튼
 startDate.on('change', function(){
 search();
@@ -68,45 +67,51 @@ var search = function(){
 
 //날짜 빈칸 처리
 if(startDate.val()==''){
-startDate.val("1990-01-01")
+startDate.val('1990-01-01')
 }
 if(endDate.val()==''){
 var today = getTimeStamp();
 endDate.val(today)
 }
 
-var param = "?startDate="+startDate.val()+"&endDate="+endDate.val();
+
 
 
 	$.ajax({
 		type : 'post',
 		async : true,
-		url : '../user/my_sales_ajax.do',
+		url : '../admin/salesList_ajax.do',
 		beforeSend : function(xhr)
 		{	
 			xhr.setRequestHeader(header, token);
 		},
 		contentType: "application/x-www-form-urlencoded;charset=utf-8",
-	 	dataType : 'html',
+		dataType : 'html',
 	 	data : {"startDate" : startDate.val(),
 	 			"endDate": endDate.val(),
-	 			"status" : status,
+	 			"status" : searchStatus.val(),
 	 			"byTitle" : byTitle.val()
 	 	
-	 	},				
+	 	},
 	 	success : function(result){
-
-	 	var html = jQuery('<div>').html(result);
-			$( '#indexListAjax' ).html(html);
+	 	alert(result);
+	 	
+	 	
+	 	
 	 	},
 	 	
 	 	
-	 	error : function(err){
-	 		console.log(err);
+    error:function(data, status, opt)
+    {
+        alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+opt);
+	 		
 	 	}
 	 	
 	 }) 
-
+	 
+	 
+	 
+	 
 }
 
 

@@ -86,7 +86,7 @@
 					<div class="cmm-input-area">
 						<div class="col-md-6">
 						<a href="javascript:void(0);">
-							<img id='preImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${member.m_id}.jpg" alt="profile" class="single-gallery-image" style=""%>/>
+							<img id='preImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${member.m_id}.jpg" alt="profile" class="single-gallery-image"/>
 							</a>
 						</div>
 						

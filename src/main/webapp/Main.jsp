@@ -10,9 +10,7 @@
 	window.self.location = "all/homepage.do";
 </script>
 </head>
-
 <body>
-	
-	
+
 </body>
 </html>

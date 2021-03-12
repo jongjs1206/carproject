@@ -39,6 +39,11 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+const googleLogin = function doGoogleLogin() {
+	alert('클릭!');
+	location.href = '/carproject/all/googleLogin.do';
+}
 </script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -124,7 +129,13 @@
                         <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_kakao_s__2oyHe " style="vertical-align: bottom; margin: 0px 6px 16px 0px;">카카오</span> 카카오로 시작하기 </button></div>
                     
                         
-                        <div class=" " style="margin-top: 15px;"><button type="button" onclick="${google_url}" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 </button></div>
+                        <div class=" " style="margin-top: 15px;">
+                        	<!--  <button type="button" onclick="${google_url}" -->
+                        	 <button type="button" onclick="googleLogin();"
+                        	 class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg">
+                        	 	<span class="Icon_uiico__3CpFs Icon_login_sns_google_s__3yoFR " style="vertical-align: bottom; margin: 0px 6px 15px -15px;">구글</span> 구글로 시작하기 
+                        	 </button>
+                        </div>
                     </div>
                     <p class="LoginSnsButton_login_warning__IPZhy">공용 PC에서는 소셜로그인 시 계정 관리에 유의해주세요.</p>
                 </div>

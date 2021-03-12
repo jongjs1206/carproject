@@ -3,17 +3,24 @@ package com.carproject.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.Decoder;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,8 +55,6 @@ public class MemberController {
 	@Autowired
 	SnsLoginService snsLoginService;
 	
-	@Autowired
-	private BCryptPasswordEncoder bcryptPE;
 
 // 회원 가입
 	@RequestMapping(value = "/all/userInsert.do")
@@ -80,6 +85,8 @@ public class MemberController {
 		}
 	}
 
+	
+	
 //sns로그인
 
 	// 구글 로그인
@@ -90,10 +97,15 @@ public class MemberController {
 		return "redirect:" + snsLoginService.googleRedirect();
 	}
 	
-
+	
+	
+	@Autowired
+	@Qualifier("org.springframework.security.authenticationManager")
+	private AuthenticationManager authenticationManager;
+	
 	// 가입자인지 확인
 	@RequestMapping(value = "/all/googleToken.do")
-	public void googleToken(Model model, @RequestParam(name = "code") String code) {
+	public String googleToken(Model model, @RequestParam(name = "code") String code, HttpSession session, HttpServletRequest request) {
 
 		String googleLoginInfo = snsLoginService.getToken(code);
 		String googleEmail = snsLoginService.getGoogleInfo(googleLoginInfo, "email");
@@ -108,6 +120,28 @@ public class MemberController {
 		System.out.println("****************************");
 		System.out.println(googleEmail);
 		System.out.println(googleName);
+
+		
+		MemberVO userinfo = memberservice.selectByEmail(vo);
+		System.out.println("3333"+userinfo.getM_id());
+		System.out.println("+++++"+userinfo.getM_pw());
+		
+//		Authentication authentication  = new UsernamePasswordAuthenticationToken(userinfo, userinfo.getM_pw());
+//		 
+//		SecurityContext securityContext = SecurityContextHolder.getContext();
+//		securityContext.setAuthentication(authentication);
+		
+//		session = request.getSession(true);
+//		session.setAttribute("SPRING_SECURITY_CONTEXT",securityContext);   // 세션에 spring security context 넣음
+		
+//		return "redirect:/all/homepage.do";
+		
+		model.addAttribute("m_id", userinfo.getM_id());
+		model.addAttribute("m_pw", userinfo.getM_pw());
+		
+		
+
+		return "user/sample"; // 데이터 토스
 		
 		// 1. 이미 사차원 회원인 경우
 		// -> 확인절차 없이 바로 로그인 시켜주고 싶음
@@ -118,17 +152,20 @@ public class MemberController {
 		// List로 리턴을 받던, Object로 리턴을 받던 
 		// 회원인게 증명됨 -> 세션부여 -> 홈으로 이동
 		
-		// $2a$10$VW1CVaBrwfuNISCyd3jr6.QeOxQldFSGvLO7auQZQ9bMADxjwhxOu
-//		if(bcryptPE.matches("1234", "$2a$10$VW1CVaBrwfuNISCyd3jr6.QeOxQldFSGvLO7auQZQ9bMADxjwhxOu")) { // 비번을 raw data랑 db값이랑 일치하는 지만 확인
 //			
 //		}
 		
 		// 사차원 사이트의 세션을 반드시 부여해야됨.
-		
+
 	}
 
+	 @RequestMapping("/user/sample")
+	 public void sampleLogin(@RequestParam("m_id") String m_id) {
+		 System.out.println("m_id : " + m_id);
+}
 	
-	
+
+
 	
 	
 	

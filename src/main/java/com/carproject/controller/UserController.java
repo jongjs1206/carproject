@@ -3,19 +3,17 @@ package com.carproject.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
@@ -24,6 +22,8 @@ import com.carproject.domain.MemberVO;
 import com.carproject.service.CategoryService;
 import com.carproject.service.HeartService;
 import com.carproject.service.MemberService;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 @Controller
 public class UserController {
@@ -46,16 +46,16 @@ public class UserController {
 	@RequestMapping("all/log.do")
 	public String login(HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 		String id = "";
 		if (principal instanceof UserDetails) {
 			id = ((UserDetails) principal).getUsername();
 		}
 		MemberVO vo = new MemberVO();
 		vo.setM_id(id);
-
+		
 		MemberVO info = memberService.checkUniqueId(vo);
 
+		System.out.println();
 		session.setAttribute("info", info);
 
 		return "all/homepage";
@@ -72,6 +72,8 @@ public class UserController {
 	 */
 	@RequestMapping("all/product_list.do")
 	public void product_list(Model model, HttpSession session) {
+//		String[] gg = {};
+//		TestGA.testGA(gg);
 		HeartVO vo = new HeartVO();
 		if (session.getAttribute("info") != null) {
 			MemberVO info = (MemberVO) session.getAttribute("info");

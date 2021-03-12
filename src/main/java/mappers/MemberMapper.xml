@@ -49,6 +49,7 @@
 	<select id="allMember" resultType="hashmap">
       SELECT member.*, auth.* FROM member, auth
       WHERE member.m_id=auth.m_id AND auth.auth='ROLE_USER'
+      ORDER BY w_date DESC
    	</select>
    	
 	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터를 모두 불러옴 -->
@@ -130,7 +131,8 @@
       SELECT * FROM sell
       WHERE m_id=#{m_id}
       	<![CDATA[
-		ORDER BY w_date DESC
+      	w_date >= date_add(now(), interval -1 day)
+		ORDER BY w_date DESC		
 		]]>
    	</select>
    	
@@ -180,7 +182,6 @@
 		ORDER BY w_date DESC
 		]]>
 	</select>
-
 	
 </mapper>
 

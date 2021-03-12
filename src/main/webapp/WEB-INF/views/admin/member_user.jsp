@@ -16,6 +16,9 @@
         <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css"/> <!-- css파일 import -->
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+
+
     </head>
 
     <!-- 페이지 내용 부분 -->
@@ -82,7 +85,7 @@
 			                                      <td>${row.birth}</td>
 			                                      <td>${row.tel}</td>
 			                                      <td>${row.coin}</td>
-			                                    <td align="center"><a href='../admin/modifyuser.do?id=${row.m_id}'><input type="button" class="btn btn-primary" value="수정하기"></a></td>                                  </tr>    
+			                                    <td align="center"><span id="stateBtn">${row.state} <i class="fas fa-cog"></i></span></td></tr>    
 			                                  </c:forEach>
                                         </tbody> 
                                     </table>
@@ -102,11 +105,11 @@
         </div>
         
         <!-- javascript 파일 import -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
+        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>	
     </body>
 </html>

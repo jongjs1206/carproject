@@ -108,8 +108,8 @@
                         <div class="boking-tittle">                          
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker1"  placeholder="mm/dd/yyyy"  data-language='en'/>                             
-                        </div>                      
+                            <input id="datepicker1" type="date"  placeholder="" />                             
+                        </div>
                    </div>            
                       
                     <!-- Single Select Box -->
@@ -119,7 +119,7 @@
                          
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker2"  placeholder="mm/dd/yyyy" />
+                            <input id="datepicker2"  type="date" placeholder="" />
                         </div>
                      
                    </div>

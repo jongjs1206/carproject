@@ -55,7 +55,7 @@ public class AdminController {
 	}
 	
 	// 회원 목록 페이지에 매핑 -> member테이블의 데이터를 모두 출력
-	@RequestMapping("admin/userlist.do")
+	@RequestMapping("admin/member_user.do")
 	public void userlist(Model model) {
 		List<HashMap<String, Object>> list = memberservice.allMember();
 		model.addAttribute("list",list);
@@ -161,41 +161,36 @@ public class AdminController {
 	
 	//처음 세팅
 	@RequestMapping(value = "/admin/salesList.do")
-	public void product_list(Model model, HttpSession session,
-			@RequestParam("startDate") @Nullable String startDate,
-			@RequestParam("endDate") @Nullable String endDate) {
+	public void product_list(Model model, HttpSession session,  
+			@RequestParam HashMap<String, Object> param) {
 		
-		System.out.println("+++++"+startDate);
 		List<SalesVO> salesList = salesservice.selectSalesAll();
 		model.addAttribute("salesList", salesList);
-
+		
+//		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
+//		model.addAttribute("salesList", salesList);
 		
 	}
 	
-	//검색 
-	@RequestMapping(value = "admin/salesList_search.do")
-	public String  searchMySales(HttpSession session, Model model,
-			@RequestParam HashMap<String, String> param
+	
+	
+	
+	//검색 ajax
+	@RequestMapping(value = "/admin/salesList_ajax.do", method= {RequestMethod.POST})
+	@ResponseBody
+	public void searchMySales(HttpSession session, Model model
+			, @RequestParam HashMap<String, Object> param
 			) {
-
-		System.out.println("+++++startDate"+param.get("startDate"));
-		
-		/*
 		//검색
-		List<HashMap<String, Object>> sale_list = memberservice.selectSale_admin(param);
-		
-		//날짜에서 시간 자르기
-		for(HashMap<String, Object> s : sale_list) {	
-		String date = s.get("w_date").toString();
-		s.put("w_date", date.split(" ")[0]);
-		}
-		
-		model.addAttribute("salesList", sale_list);
-		*/
-		return "redirect:/admin/salesList.do";
+		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
+		model.addAttribute("salesList", salesList);
+//		List<SalesVO> salesList = salesservice.selectSalesAll();
+//		model.addAttribute("salesList", salesList);
 
 	
 	}
+	
+	
 	
 	
 	
