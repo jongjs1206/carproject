@@ -1,5 +1,8 @@
 package com.carproject.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.MemberService;
 
@@ -29,9 +33,15 @@ public class HomeController {
 		MemberVO vo = new MemberVO();
 		vo.setM_id(id);
 
+		// 회원정보를 세션에 저장
 		MemberVO info = memberService.checkUniqueId(vo);
-
 		session.setAttribute("info", info);
+
+		// 관리자인지 권한정보를 세션에 저장
+		String auth = memberService.checkAuth(vo);
+		session.setAttribute("auth", auth);
+
+
 		return step1+"/"+step2;
 	}
 	

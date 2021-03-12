@@ -78,6 +78,13 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public int find_sell_id() {											// 신규부여 될 sell_id
+		System.out.println("===> salesMap findSellId() 호출");
+		return mybatis.selectOne("salesMap.findSellId");
+	}
+	
 	@Override
 	public void uploadBtn(SalesVO vo) {										// 등록하기 버튼
 		System.out.println("===> salesMap uploadBtn() 호출");

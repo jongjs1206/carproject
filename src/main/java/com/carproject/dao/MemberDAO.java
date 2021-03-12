@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 
@@ -16,6 +17,7 @@ public interface MemberDAO {
 	int memberInsert(MemberVO vo);
 	
 	MemberVO checkUniqueId( MemberVO vo );
+	String checkAuth(MemberVO vo);				// 관리자 권한을 갖고 있는지 확인 (admin 메뉴 노출 여부)
 	
 	MemberVO selectByGoogle( MemberVO vo );
 	

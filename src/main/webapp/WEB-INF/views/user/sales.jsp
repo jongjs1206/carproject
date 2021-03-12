@@ -84,16 +84,24 @@
 	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" name="m_id" id="m_id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
 	                           		<td width="280px" style="font-size:14px;">핸드폰 번호 
 	                           			<input type="text" name="tel" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
-	                           	</tr>
+	                           	</tr>                       	
+	                           	
+	                           	<!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
 	                           <tr>
+	                           		
+	                           		<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
 	                           		<th>이미지 등록</th>
 	                           		<td width=100>
-	                           			<img src="../resources/img/photos.png" width="50px" height="50px" id="photo">
+	                           			<img src="../resources/img/photos.png" width="50px" height="50px" id="photo"><span id="phototo"></span>
 	                           		</td>
 	                           		<td colspan=2 style="font-size:14px;">	<!-- 이미지 미리보기 -->
-										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/>
+										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/><br/>
+										이미지 파일은 6개까지 등록할 수 있습니다.  
 									</td> 
+									
 	                           </tr>
+	                            <!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
+	                          
 	                           <tr>
 	                           		<th>차량 정보</th>
 	                           		<td colspan=3>
@@ -124,11 +132,17 @@
 		                                    </select>	
 	                                    </div><hr style="margin:10px 0;">	<!-- end of 차량명 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 연식/색상 -->
-                                        	<span>연식</span>
-                                        	<input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
-                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;"> 
+                                        	<span style="margin: 0 5px 0 18px;">연식</span>
+                                        	<select id="carYear" class="carYear" name="old" style="margin:0 250px 0 30px;">
+                                        		<option value="연식">연식</option>
+                                        		<c:forEach var="year" items="${arr}">
+                                        			<option value="${year}">${year}</option>
+                                        		</c:forEach>
+                                       		</select>
+<!--                                         	<input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
+                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;">  -->
                                    	    	<span>색상</span>
-                                        	<select class='carColor' name='color' style="margin-left:25px;">
+                                        	<select class='carColor' name='color' style="margin-left:20px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="검정색">검정색</option><option value="은색">은색</option><option value="금색">금색</option>
 	                                    		<option value="남색">남색</option><option value="청색">청색</option><option value="진청색">진청색</option>
@@ -146,7 +160,7 @@
 	                                    	<span style="margin-right:30px;">사고여부</span>
                                     		<input class="accident" name="accident" type="radio" id="accident1" value="no" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
                                      		<input class="accident" name="accident" type="radio" id="accident2" value="yes" >&nbsp; 사고
-                                     		<span style="margin-left:165px;">판매가격</span>&nbsp;&nbsp;&nbsp;
+                                     		<span style="margin:0 5px 0 165px;">판매가격</span>&nbsp;&nbsp;&nbsp;
                                      		<input type="text" name="price" id="salesPrice" class="salesPrice" style="line-height:initial; margin-right:5px;">만원 
                                         </div><hr style="margin:10px 0;">	<!-- end of 사고여부/판매가격 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 변속기/연료 -->	

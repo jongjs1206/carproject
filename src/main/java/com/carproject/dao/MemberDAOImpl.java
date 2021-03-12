@@ -5,15 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.MemberVO;
-import com.carproject.domain.SalesVO;
-
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -38,6 +35,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO checkUniqueId(MemberVO vo) {
 		System.out.println("===> MemberMapper checkUniqueId 호출");
 		return mybatis.selectOne("MemberMAP.checkUniqueId", vo);
+	}
+	
+	public String checkAuth(MemberVO vo) {					// 관리자 권한을 갖고 있는지 확인 (admin 메뉴 노출 여부)
+		System.out.println("===> MemberMapper checkAuth 호출");
+		return mybatis.selectOne("MemberMAP.checkAuth", vo);
 	}
 
 	@Override
