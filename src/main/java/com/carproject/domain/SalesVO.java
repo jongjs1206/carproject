@@ -1,6 +1,9 @@
 package com.carproject.domain;
 
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,47 +44,8 @@ public class SalesVO {
 	
 	private String strOption;		// 가공한 option 값
 	private long num;				// 상세페이지에 불러올 sell_id 값
-
-	/* 이미지 업로드 (multi)*/
-	//*************************************************
 	
-
-	
-	
-	/* 이미지 업로드 */
-	//*************************************************
-/*	MultipartFile file;	// write.jsp에 파일첨부시 name="file"과 동일한 변수명
-	
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
-		
-		Date now = new Date();
-		SimpleDateFormat format = new SimpleDateFormat("yyMMddhhmmss");
-		
-		// 업로드 파일 접근
-		if(! file.isEmpty()){
-			this.rFname = format.format(now)+ file.getOriginalFilename();
-			this.rFsize = file.getSize();
-			
-			//***********************************************
-			// 해당 경로로 변경
-			File f = new File("C:\\upload\\"+rFname);
-
-			try {
-				file.transferTo(f);
-				
-			} catch (IllegalStateException e) {				
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	*/
-	
+	private String[] re_option;		// 옵션값들
 	
 	public int getSell_id() {
 		return sell_id;
@@ -298,6 +262,13 @@ public class SalesVO {
 	}
 	public void setStrOption(String strOption) {
 		this.strOption = strOption;
+	}
+	
+	public String[] getRe_option() {
+		return re_option;
+	}
+	public void setRe_option(String[] re_option) {
+		this.re_option = re_option;
 	}
 	
 	public long getNum() {

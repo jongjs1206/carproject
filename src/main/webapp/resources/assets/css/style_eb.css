@@ -113,6 +113,18 @@
 /*----------------------------------------*/
 /*  01. Theme default CSS
 /*----------------------------------------*/
+
+/* 추가 */
+#carimg {
+	border: 3px solid #d3d3d3;
+}
+
+/* 추가 */
+.thumbnail > div > img:hover {
+	border: 3px solid #dca73a;
+}
+
+
 body {
 	font-family:"dangdang";
 /*  font-family: 'Lato', sans-serif;*/

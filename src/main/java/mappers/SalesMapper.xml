@@ -4,7 +4,7 @@
 <mapper namespace="salesMap">
 
 <!-- 글 등록 -->
-<insert id="salesInsert" parameterType="sales">
+<!-- <insert id="salesInsert" parameterType="sales">
 	INSERT INTO sell 
 	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content
 	, vehicle_num, fuel, gear, status, baeki, guarantee, seller) 
@@ -12,7 +12,7 @@
 	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}
 	, #{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}
 	,#{fuel}, #{gear}, #{status}, #{baeki}, #{guarantee}, #{seller})
-</insert>
+</insert> -->
 
 <!-- 글 상세페이지(확인) -->
 <select id="salesCheck" parameterType="long" resultType="sales">
@@ -31,8 +31,8 @@
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
 				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
-				gear=#{carGear}, baeki=#{baeki}
-		WHERE m_id=#{m_id}
+				gear=#{gear}, baeki=#{baeki}
+		WHERE sell_id=#{sell_id}
 	]]>
 </update>
 
@@ -45,9 +45,9 @@
 </delete>
 
 <!-- 버튼으로 작업 ////////////////////////////////////////////////////////////////////////////////////// -->
-<!-- 글 등록 전 sell_id 알아오기 -->
+<!-- 글 등록을 위한 sell_id 찾아오기 -->
 <select id="findSellId" resultType="Integer">
-	SELECT nextval(sell_sell_id_sq)
+   SELECT nextval(sell_sell_id_sq)
 </select>
 
 <!-- 등록하기 버튼 : 글 등록-->
@@ -56,19 +56,19 @@
 	(sell_id, g_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
 		vehicle_num, fuel, gear, status, baeki, seller) 
 	VALUES 
-	(#{sell_id}, #{g_id}, #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
+	#{sell_id}, #{g_id}, #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
 		#{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}, 
 		#{fuel}, #{gear}, #{status}, #{baeki}, #{m_id})
 </insert>
 
-<!-- 수정하기 버튼(링크) -->
+<!-- 수정하기 버튼 -->
 <update id="modifyBtn" parameterType="sales" >
-	<![CDATA[ 
+	<![CDATA[
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
 				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
-				gear=#{carGear}, baeki=#{baeki}
-		WHERE m_id=#{m_id}
+				gear=#{gear}, baeki=#{baeki}
+		WHERE sell_id=#{sell_id}
 	]]>
 </update>
 
@@ -76,9 +76,10 @@
 <delete id="deleteBtn" parameterType="sales">
 	<![CDATA[
 		DELETE FROM sell
-		WHERE m_id=#{m_id}
+		WHERE sell_id=#{sell_id}
 	]]>
 </delete>
+
 
 <!-- 차랑명 데이터 ////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- 제조사 -->
@@ -106,15 +107,6 @@
 	SELECT distinct grade2, g_id FROM grade g INNER JOIN (SELECT * FROM detail WHERE detail=#{detail}) d ON d.d_id = g.d_id;
 </select>
 
-
-
-<!-- 전체 판매리스트 가져오기 -->
-<select id="selectSalesAll" resultType="sales">
-	SELECT * FROM sell
-	<![CDATA[
-	ORDER BY str_to_date(w_date, '%Y-%m-%d') DESC
-	]]>
-</select>
-
-
+<!-- 차랑명 (제조사, 모델, 세부모델, 등급, 세부등급) -->
+<!-- SELECT c.jejosa, c.model, d.detail, g.grade1, g.grade2 FROM detail d INNER JOIN (SELECT * FROM grade) g ON d.d_id=g.d_id INNER JOIN category c ON d.car_num=c.car_num WHERE g.g_id=${g_id} -->
 </mapper>
