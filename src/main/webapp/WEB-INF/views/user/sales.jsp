@@ -84,24 +84,20 @@
 	                           		<td width="280px" style="font-size:14px;">아 이 디 <input type="text" name="m_id" id="m_id" disabled="disabled" value="${sessionScope.info.m_id}"></td>
 	                           		<td width="280px" style="font-size:14px;">핸드폰 번호 
 	                           			<input type="text" name="tel" id="tel" disabled="disabled" value="${sessionScope.info.tel}"></td>
-	                           	</tr>                       	
-	                           	
-	                           	<!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
+	                           	</tr>
+	                           	 <!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
 	                           <tr>
-	                           		
-	                           		<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
-	                           		<th>이미지 등록</th>
+	                            <input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
+	                           		<th>이미지 등록</th>	<!--  이미지 등록 부분 -->
 	                           		<td width=100>
 	                           			<img src="../resources/img/photos.png" width="50px" height="50px" id="photo"><span id="phototo"></span>
 	                           		</td>
 	                           		<td colspan=2 style="font-size:14px;">	<!-- 이미지 미리보기 -->
-										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/><br/>
-										이미지 파일은 6개까지 등록할 수 있습니다.  
+										<input type="file" name="file" id="picFile" accept="image/*" multiple="multiple"/>
+                              			이미지 파일은 6개까지 등록할 수 있습니다.  
 									</td> 
-									
 	                           </tr>
 	                            <!-- 자동차 사진을 로컬에 저장 후, 구글 클라우드로 업로드// sales.js에서 컨트롤러로 넘겨줌 -->
-	                          
 	                           <tr>
 	                           		<th>차량 정보</th>
 	                           		<td colspan=3>
@@ -111,7 +107,7 @@
 										<hr style="margin:10px 0;">	
 										<div style="font-size:14px; line-height: 35px;">	<!-- 차량명 -->
 											<span style="margin-right:40px;">차량명</span>
-											<select class='carBrand' name="jejosa" id="carBrand" name='carBrand' style="margin:0 15px 10px 0; height:35px;">	<!-- 제조사 -->
+											<select class='carBrand' name="jejosa" id="carBrand" style="margin:0 15px 10px 0; height:35px;">	<!-- 제조사 -->
 												<option value="제조사">제조사</option>	
 												<c:forEach var="brand" items="${brandList}">
 					                               	<option value="${brand.jejosa}">${brand.jejosa}</option>
@@ -132,17 +128,15 @@
 		                                    </select>	
 	                                    </div><hr style="margin:10px 0;">	<!-- end of 차량명 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 연식/색상 -->
-                                        	<span style="margin: 0 5px 0 18px;">연식</span>
-                                        	<select id="carYear" class="carYear" name="old" style="margin:0 250px 0 30px;">
-                                        		<option value="연식">연식</option>
-                                        		<c:forEach var="year" items="${arr}">
-                                        			<option value="${year}">${year}</option>
-                                        		</c:forEach>
-                                       		</select>
-<!--                                         	<input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
+                                        	<span style="margin: 0 5px 0 0px;">연식</span>
+                                        	<select id="carYear" class="carYear" name="old" style="margin:0 230px 0 50px;">
+	                                        	<c:forEach var="year" items="${arr}">
+	                                        		<option value="${year}">${year}</option>
+	                                        	</c:forEach></select>
+                                        	<!-- <input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
                                         		text-align:center; border-radius: 7px; margin:0 150px 0 55px;">  -->
                                    	    	<span>색상</span>
-                                        	<select class='carColor' name='color' style="margin-left:20px;">
+                                        	<select class='carColor' name='color' style="margin-left:25px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="검정색">검정색</option><option value="은색">은색</option><option value="금색">금색</option>
 	                                    		<option value="남색">남색</option><option value="청색">청색</option><option value="진청색">진청색</option>
@@ -160,7 +154,7 @@
 	                                    	<span style="margin-right:30px;">사고여부</span>
                                     		<input class="accident" name="accident" type="radio" id="accident1" value="no" checked="">&nbsp; 무사고&nbsp;&nbsp;&nbsp;&nbsp;
                                      		<input class="accident" name="accident" type="radio" id="accident2" value="yes" >&nbsp; 사고
-                                     		<span style="margin:0 5px 0 165px;">판매가격</span>&nbsp;&nbsp;&nbsp;
+                                     		<span style="margin-left:155px; margin-right:7px;">판매가격</span>&nbsp;&nbsp;&nbsp;
                                      		<input type="text" name="price" id="salesPrice" class="salesPrice" style="line-height:initial; margin-right:5px;">만원 
                                         </div><hr style="margin:10px 0;">	<!-- end of 사고여부/판매가격 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 변속기/연료 -->	
@@ -171,7 +165,7 @@
 	                                    		<option value="수동">수동</option>
                                     		</select>
 	                                    	<span>연료</span>
-	                                    	<select class='carFuel' id='carFuel' name="fuel" style="margin-left:25px;">
+	                                    	<select class='carFuel' id='carFuel' name="fuel" style="margin-left:20px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="가솔린">가솔린</option><option value="디젤">디젤</option><option value="LPG">LPG</option>
 	                                    		<option value="가솔린/LPG겸용">가솔린/LPG겸용</option><option value="가솔린/CNG겸용">가솔린/CNG겸용</option>
@@ -296,6 +290,12 @@
 		                	<div class="uploadBtn" style="margin:50px 0;">	
 		                		<a id="enrollCar"><span style="margin-left:600px;">등록하기</span></a>
 		                	</div>
+		                	<c:if test="${sales.m_id == sessionScope.info.m_id}">	<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
+								<div class="modify-delete" style="margin:50px 0;">	
+									<a href="../user/sales.do" id="modifyCar"><span class="modifyBtn" style="margin-left:450px;">수정하기</span></a>
+									<a href="product_list.do" id="deleteCar"><span class="deleteBtn" style="margin-left:50px;">삭제하기</span></a>
+								</div>
+							</c:if>
                         </form>
                     	</div>
                     </div>	<!-- end of salesform -->

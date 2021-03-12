@@ -78,13 +78,6 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	
 	//////////////////////////////////////////////////////////////////////////////////////
-
-	@Override
-	public int find_sell_id() {											// 신규부여 될 sell_id
-		System.out.println("===> salesMap findSellId() 호출");
-		return mybatis.selectOne("salesMap.findSellId");
-	}
-	
 	@Override
 	public void uploadBtn(SalesVO vo) {										// 등록하기 버튼
 		System.out.println("===> salesMap uploadBtn() 호출");
@@ -93,30 +86,37 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 	
 	@Override
-	public void modifyBtn(SalesVO vo) {										// 수정하기 버튼
+	public int modifyBtn(SalesVO vo) {										// 수정하기 버튼(상세페이지)
 		System.out.println("===> salesMap modifyBtn() 호출");
-		mybatis.update("salesMap.modifyBtn", vo);
+		return mybatis.selectOne("salesMap.modifyBtn");
+	}
+	
+	@Override
+	public void saveModify(SalesVO vo) {									// 수정하기 버튼(글 수정 페이지)
+		System.out.println("===> salesMap saveModify() 호출");
+		System.out.println("글수정" + vo.getM_id()); 
+		mybatis.update("salesMap.modifyBtn");
 	}
 	
 	@Override
 	public void deleteBtn(SalesVO vo) {
 		System.out.println("===> salesMap deleteBtn() 호출");					// 삭제하기 버튼
-		mybatis.update("salesMap.deleteBtn", vo);
+		mybatis.delete("salesMap.deleteBtn", vo);
 	}
+	
+	@Override
+	public int find_sell_id() {                                 			// 신규부여 될 sell_id
+		System.out.println("===> salesMap findSellId() 호출");
+	    return mybatis.selectOne("salesMap.findSellId");
+	}
+
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public SalesVO salesDetail(Long num) {									// 상세페이지
-		SalesVO sales  = mybatis.selectOne("salesMap.salesCheck", num);
+		SalesVO sales = mybatis.selectOne("salesMap.salesCheck", num);
 		return sales;
 	}
-
 	
 	
-	//전체 판매글
-	@Override
-	public List<SalesVO> selectSalesAll() {
-		List<SalesVO> salesList  = mybatis.selectList("salesMap.selectSalesAll");
-		return salesList;
-	}
 }

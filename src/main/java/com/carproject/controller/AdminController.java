@@ -161,12 +161,12 @@ public class AdminController {
 	
 	//처음 세팅
 	@RequestMapping(value = "/admin/salesList.do")
-	public void product_list(Model model, HttpSession session,
+	public void product_list(MemberVO vo, Model model, HttpSession session,
 			@RequestParam("startDate") @Nullable String startDate,
 			@RequestParam("endDate") @Nullable String endDate) {
 		
 		System.out.println("+++++"+startDate);
-		List<SalesVO> salesList = salesservice.selectSalesAll();
+		List<HashMap<String, Object>> salesList = memberservice.selectAllsale(vo);
 		model.addAttribute("salesList", salesList);
 
 		

@@ -1,7 +1,5 @@
 package com.carproject.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap; 
 import java.util.List;
 
@@ -67,20 +65,19 @@ public class SalesServiceImpl implements SalesService {
 	}
 		
 	//////////////////////////////////////////////////////////////////////////////////////
-	
-	@Override
-	public int find_sell_id() {				// 신규부여 될 sell_id 
-		return salesDAO.find_sell_id();
-	}
-	
 	@Override
 	public void uploadBtn(SalesVO vo){			// 등록하기 버튼
 		salesDAO.uploadBtn(vo);
 	}
 	
 	@Override
-	public void modifyBtn(SalesVO vo){			// 수정하기 버튼
-		salesDAO.modifyBtn(vo);
+	public int modifyBtn(SalesVO vo){			// 수정하기 버튼(상세페이지)
+		return salesDAO.modifyBtn(vo);
+	}
+	
+	@Override
+	public void saveModify(SalesVO vo){			// 수정하기 버튼(글 수정 페이지)
+		salesDAO.saveModify(vo);
 	}
 	
 	@Override
@@ -88,24 +85,17 @@ public class SalesServiceImpl implements SalesService {
 		salesDAO.deleteBtn(vo);
 	}
 	
+	 @Override
+	 public int find_sell_id() {            // 신규부여 될 sell_id 
+		 return salesDAO.find_sell_id();
+	 }
+
 	
-//////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public SalesVO salesDetail(Long num) {		// 상세페이지
 		return salesDAO.salesDetail(num);
 	}
-
-	
-	//전체 판매글 가져오기
-	@Override
-	public List<SalesVO> selectSalesAll() {
-		return salesDAO.selectSalesAll();
-	}
-	
-	
-
-	
-	
 	
 }
 

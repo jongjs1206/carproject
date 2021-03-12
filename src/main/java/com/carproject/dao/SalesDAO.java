@@ -20,17 +20,13 @@ public interface SalesDAO {
 	public List<HashMap<String, Object>> grade(SalesVO vo);			// 등급
 	public List<HashMap<String, Object>> detailgrade(SalesVO vo);	// 세부등급
 	
-	public int find_sell_id();				// 신규부여 될 sell_id
+	public int find_sell_id();            // 신규부여 될 sell_id
 	public void uploadBtn(SalesVO vo);		// 등록하기 버튼
-	public void modifyBtn(SalesVO vo);		// 수정하기 버튼
+	public int modifyBtn(SalesVO vo);		// 수정하기 버튼(상세페이지)
+	public void saveModify(SalesVO vo);		// 수정하기 버튼(글 수정 페이지)
 	public void deleteBtn(SalesVO vo);		// 삭제하기 버튼
 	
 	public SalesVO salesDetail(Long num);	// 상세페이지
 	
 	
-	
-	
-	public List<SalesVO> selectSalesAll(); //전체 판매글
 }
-
-
