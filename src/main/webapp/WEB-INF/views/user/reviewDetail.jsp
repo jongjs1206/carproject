@@ -29,7 +29,8 @@
 <body>
 
 	<%@ include file="../header.jsp"%>
-	
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	<!-- slider Area Start-->
     <div class="slider-area">
       <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/assets/img/hero/contact_hero.jpg" >

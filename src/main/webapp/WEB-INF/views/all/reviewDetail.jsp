@@ -37,7 +37,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 </head>
 <body>
-
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>	<!-- header -->
 	<%@ include file="../side.jsp"%>	<!-- side bar -->
 	

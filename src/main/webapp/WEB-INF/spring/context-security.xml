@@ -15,7 +15,7 @@
 		 authentication-failure-url="/all/login.do?error"
 		  username-parameter="m_id" password-parameter="m_pw" />
 		  
-		<logout logout-url="/logout" logout-success-url="/all/out.do" invalidate-session="true"/>
+		<logout logout-url="/logout" logout-success-url="/all/out.do" invalidate-session="false"/>
 		<access-denied-handler error-page="/all/noaccess.do" />
 		
 		<csrf disabled="false" /> 

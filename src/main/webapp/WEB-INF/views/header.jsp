@@ -31,6 +31,9 @@
 </head>
 <script type="text/javascript">
 $(function() {
+	var token = $("input[name='_csrf']").val();
+	var header = "X-CSRF-TOKEN";
+	
 	$('.btn_submit').click(function(){
 		$('.form_out').submit();
 	})
@@ -41,6 +44,30 @@ $(function() {
 			window.self.location = "../user/sales.do";
 		}
 	})
+
+	var webSocket = new WebSocket(
+				"ws://localhost:8080/carproject/carsocket");
+		webSocket.onmessage = function(message) {
+			$.ajax({
+				type : 'post',
+				async : true,
+				url : '../user/selectnow.do',
+				beforeSend : function(xhr)
+				{	
+					xhr.setRequestHeader(header, token);
+				},
+				contentType: "application/x-www-form-urlencoded;charset=utf-8",
+				dataType : 'json',
+				success: function(num){
+					$('.url_black').attr("href","../user/blackbox.do?num="+num);
+					$('.crash').removeClass('off');
+					$('.crash_sub').removeClass('off');
+					$('.crash').text(num);
+					$('.crash_sub').text(num);
+	        	},
+				error : function(err){ console.log(err)}  //실패했을때
+			});
+	};
 })
 </script>
 	
@@ -50,7 +77,6 @@ $(function() {
 
 
 <body>
-
 	<!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -90,7 +116,6 @@ $(function() {
 										</li>
 										<li><a class='sell_header' style="cursor: pointer;">내 차 팔기</a></li>
 										<li><a href="../all/carnewsBoardList.do?page=1">자동차 뉴스</a></li>
-										<li><a href="../all/reviewDetail.do">구매후기</a></li>
 											
 <!-- 										<li><a href="#">Q&A</a>
 											<ul class="submenu">
@@ -126,13 +151,30 @@ $(function() {
 											<c:if test="${sessionScope.info.photo ne null}">
 												<img style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${sessionScope.info.m_id}.jpg">
 											</c:if>
-												${sessionScope.info.m_name}</a>
+												${sessionScope.info.m_name}
+											<c:if test="${sessionScope.crash ne '0'}">
+												<span class='crash'>${sessionScope.crash}</span>
+											</c:if>
+											<c:if test="${sessionScope.crash eq '0'}">
+												<span class='crash off'>${sessionScope.crash}</span>
+											</c:if>
+											</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
+												<li><a href="../user/notelist.do">쪽지</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/my_heart.do">내 찜목록</a></li>
+												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 
+												<c:if test="${sessionScope.crash ne '0'}">
+													<span class='crash_sub' style="color: red">${sessionScope.crash}</span>
+												</c:if>
+												<c:if test="${sessionScope.crash eq '0'}">
+													<span class='crash_sub off' style="color: red">${sessionScope.crash}</span>
+												</c:if>
+												</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
-												<c:if test="${sessionScope.auth == ROLE_ADMIN}">
+												
+												<c:if test='${sessionScope.auth eq "ROLE_ADMIN"}'>
 													<li><a href="../admin/admin.do">어드민</a></li>
 												</c:if>
 												<li><a style="cursor: pointer;" class='btn_submit'>로그아웃</a></li>

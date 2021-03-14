@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+.ck_note {
+	position:relative;
+	top:4px;
+	margin-left: 20px;
+	margin-right: 20px;
+	width : 20px;
+	height: 20px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+	width: 20px;
+}
+
+.send_p {
+	width: 20%;
+}
+
+.note_info {
+	padding-top:20px;
+	vertical-align: middle;
+	width: 90%;
+	display: flex;
+}
+
+.note_day{
+	padding-top:20px;
+	padding-right: 20px;
+}
+
+.note_row:nth-of-type(1){
+	border-top: 1px solid #929292;
+}
+.all_ck{
+	border-radius:10px;
+	border:1px solid;
+	width:50px;
+	background-color: #e8e8e8;
+	margin-right: 20px;
+}
+.all_ck>input{
+	position:relative;
+	top:6px;
+	left:6px;
+}
+.all_ck>i{
+	position:relative;
+	top:3px;
+	left:6px;
+}
+.all_cbox{
+	width : 20px;
+	height: 20px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+}
+.note_row{
+	height:70px;
+	font-size:20px;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	border-bottom: 1px solid #929292;
+}
+.note_title{
+	width:70%;
+	word-break:break-all;
+	overflow: hidden;
+}

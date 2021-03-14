@@ -52,7 +52,7 @@
 
 </head>
 <body>
-
+	
 	<%@ include file="../header.jsp"%>	<!-- header -->
 	<%@ include file="../side.jsp"%>	<!--side menu -->
 	

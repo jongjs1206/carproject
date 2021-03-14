@@ -63,11 +63,12 @@
 	</beans:bean>
 	
 	<!-- 채팅에 필요함 -->
-	<websocket:handlers>
-		<websocket:mapping handler="ChatController" path="/chat" />
-		<websocket:sockjs />
-	</websocket:handlers>
+<!-- 	<websocket:handlers> -->
+<!-- 		<websocket:mapping handler="ChatController" path="/chat" /> -->
+<!-- 		<websocket:sockjs /> -->
+<!-- 	</websocket:handlers> -->
     
-	<beans:bean id="ChatController" class="com.carproject.controller.ChatController"></beans:bean>
+<!-- 	<beans:bean id="ChatController" class="com.carproject.controller.ChatController"></beans:bean> -->
+	
 	
 </beans:beans>

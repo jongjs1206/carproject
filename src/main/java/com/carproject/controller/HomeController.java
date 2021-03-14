@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.MemberService;
+import com.carproject.service.MycarService;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MycarService mycarService;
 	
 	@RequestMapping("{step1}/{step2}.do")
 	public String loginPage(@PathVariable String step1,@PathVariable String step2,HttpSession session) {
@@ -41,6 +45,8 @@ public class HomeController {
 		String auth = memberService.checkAuth(vo);
 		session.setAttribute("auth", auth);
 
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
 
 		return step1+"/"+step2;
 	}

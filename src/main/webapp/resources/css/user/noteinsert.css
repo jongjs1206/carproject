@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+.note_content{
+	margin-top: 30px;
+}
+
+label{
+	font-size: 20px;
+	color: black;
+	width: 30%;
+}
+input{
+	width: 70%;
+	border: 1px solid #929292;
+}
+textarea {
+	margin-top:20px;
+	width: 100%;
+	height: 390px;
+}
+button{
+	cursor:pointer;
+	font-size:20px;
+	color:white;
+	background-color:#dca73a;
+	float:right;
+	border: none;
+	padding: 7px 20px 7px 20px;
+	
+}
