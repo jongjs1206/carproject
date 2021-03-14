@@ -48,11 +48,15 @@ public class AdminController {
 			"USB", "AUX", "블루투스", "MP3", "DMB", "CD플레이어", "AV시스템", "뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
 	
 	
-	@RequestMapping("admin/admin.do")
-	public void product_list(Model model) {
-		System.out.println("hi");
-		
-	}
+//	@RequestMapping("admin/admin.do")
+//	public void product_list(Model model) {
+//		System.out.println("hi");
+//		
+//	}
+	
+	
+	//admin_회원 관리//////////////////////////////////////////////////////////////////////////////////
+	
 	
 	// 회원 목록 페이지에 매핑 -> member테이블의 데이터를 모두 출력
 	@RequestMapping("admin/member_user.do")
@@ -61,13 +65,12 @@ public class AdminController {
 		model.addAttribute("list",list);
 	}
 	
-	// 회원 정보 수정 페이지에 매핑 -> 인자로 전달된 id에 해당하는 row의 데이터 출력
-	@RequestMapping("admin/modifyuser.do")
-	public void updateUser(String id, Model model) {
-		System.out.println(id);
-		MemberVO update = memberservice.pickUserById(id);
-		System.out.println(update.getM_name());
-		model.addAttribute("update", update);
+	// 설정 href누름
+	@RequestMapping("admin/member_status.do")
+	public void memberStatus(@RequestParam("id") String id, Model model) {
+		MemberVO user = memberservice.pickUserById(id);
+		model.addAttribute("user",user);
+		
 	}
 //	
 //	//회원정보 수정 페이지에 매핑 -> input form의 value로 해당 row의 데이터를 update(수정)
@@ -157,7 +160,7 @@ public class AdminController {
 	
 	
 	
-	//admin_판매글 관리
+	//admin_판매글 관리//////////////////////////////////////////////////////////////////////////////////
 	
 	//처음 세팅
 	@RequestMapping(value = "/admin/salesList.do")

@@ -17,7 +17,7 @@
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-
+        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>
 
     </head>
 
@@ -65,6 +65,7 @@
                                      
                                             <tr>
                                                 <th>아이디</th>
+                                                <th>가입일</th>
                                                 <th>이름</th>
                                                 <th>성별</th>
                                                 <th>이메일</th>
@@ -79,13 +80,19 @@
 			                                  <c:forEach var="row" items="${list}">
 			                                  <tr>
 			                                      <td>${row.m_id}</td>
+			                                      <td>${row.w_date}</td>
 			                                      <td>${row.m_name}</td>
 			                                      <td>${row.gender}</td>
 			                                      <td>${row.email}</td>
 			                                      <td>${row.birth}</td>
 			                                      <td>${row.tel}</td>
 			                                      <td>${row.coin}</td>
-			                                    <td align="center"><span id="stateBtn">${row.state} <i class="fas fa-cog"></i></span></td></tr>    
+			                                    <td align="center">
+			                                    <a href="javascript:void(0);" id="${row.m_id}" onclick="showStatus(this)">${row.state} <i class="fas fa-cog"></i>
+			                                    <input type="hidden" value="${row.m_id}">
+			                                  </a>
+			                                  
+			                                    </td></tr>    
 			                                  </c:forEach>
                                         </tbody> 
                                     </table>
@@ -110,6 +117,6 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
-        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>	
+	
     </body>
 </html>
