@@ -37,7 +37,7 @@
 	crossorigin="anonymous"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-	
+	<link rel="stylesheet" href="../resources/assets/css/style.css">
 	<script type="text/javascript" src="../resources/js/all/sales.js"></script>
 </head>
 <body>

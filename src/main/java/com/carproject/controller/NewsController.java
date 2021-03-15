@@ -16,20 +16,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.ReplyVO;
+import com.carproject.service.LetterService;
+import com.carproject.service.MycarService;
 import com.carproject.service.NewsService;
 
 @Controller
 public class NewsController {
 	@Autowired
 	private NewsService newsservice;
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
 	
 	@RequestMapping("all/carnewsBoardList.do")
-	public void news_list(String page, Model model) {
+	public void news_list(String page, Model model,HttpSession session) {
 		int page_re = (Integer.parseInt(page)-1)*15;
 		List<HashMap<String, Object>> newslist = newsservice.news_list(Integer.toString(page_re));
 		List<HashMap<String, Object>> popularity = newsservice.popularity();
 		int newscount = newsservice.newscount();
 		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
 		
 		model.addAttribute("newslist", newslist);
 		model.addAttribute("popularity", popularity);

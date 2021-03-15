@@ -1,25 +1,16 @@
 @charset "UTF-8";
-.fa-user-tie{
+
+.fa-user-tie {
 	font-size: 25px;
 	padding-left: 10px;
 }
-.crash{
-	padding-left:6px;
-	position:absolute;
-	top:30px;
-	left:10px;
-	background-color: pink;
-	border-radius: 50%;
- 	width: 20px;
- 	height: 20px;
+
+.crash {
+	color: red;
+	padding-left: 5px;
 }
-.memo{
-	padding-left:6px;
-	position:absolute;
-	top:28px;
-	left:105px;
-	background-color: #90ee90;
-	border-radius: 50%;
- 	width: 20px;
- 	height: 20px;
+
+.memo {
+	color: #03c75a;
+	padding-left: 5px;
 }

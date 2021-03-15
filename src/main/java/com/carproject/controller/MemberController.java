@@ -39,9 +39,11 @@ import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 import com.carproject.service.AuthService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MailSendService;
 import com.carproject.service.MemberService;
 import com.carproject.service.MemberServiceImpl;
+import com.carproject.service.MycarService;
 import com.carproject.service.SnsLoginService;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -54,7 +56,10 @@ public class MemberController {
 	private AuthService authService;
 	@Autowired
 	SnsLoginService snsLoginService;
-	
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
 
 // 회원 가입
 	@RequestMapping(value = "/all/userInsert.do")
@@ -189,6 +194,12 @@ public class MemberController {
 		} else {
 		   id = principal.toString();
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
+		
 	    MemberVO vo= new MemberVO();
 	    vo.setM_id(id);
 	    MemberVO info = memberservice.checkUniqueId(vo);
@@ -285,6 +296,11 @@ public class MemberController {
 		String date = s.get("w_date").toString();
 		s.put("w_date", date.split(" ")[0]);
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
 		model.addAttribute("sale_list", sale_list);
 
 	}

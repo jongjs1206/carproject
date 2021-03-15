@@ -151,22 +151,28 @@ $(function() {
 											<c:if test="${sessionScope.info.photo ne null}">
 												<img style="width: 35px; height: 35px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${sessionScope.info.m_id}.jpg">
 											</c:if>
-												${sessionScope.info.m_name}
+											
+											${sessionScope.info.m_name}
+											
 											<c:if test="${sessionScope.crash ne '0'}">
-												<span class='crash'>${sessionScope.crash}</span>
+												<span class='crash'>+ ${sessionScope.crash}</span>
 											</c:if>
 											<c:if test="${sessionScope.crash eq '0'}">
-												<span class='crash off'>${sessionScope.crash}</span>
+												<span class='crash off'>+ ${sessionScope.crash}</span>
 											</c:if>
 											
 											<c:if test="${sessionScope.note ne '0'}">
-												<span class='memo'>${sessionScope.note}</span>
+												<span class='memo'>+ ${sessionScope.note}</span>
 											</c:if>
 											
 											</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
-												<li><a href="../user/notelist.do?note=get&page=1">쪽지</a></li>
+												<li><a href="../user/notelist.do?note=get&page=1">쪽지
+												<c:if test="${sessionScope.note ne '0'}">
+													<span class='memo_sub' style="color:#03c75a">${sessionScope.note}</span>
+												</c:if>
+												</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/my_heart.do">내 찜목록</a></li>
 												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 

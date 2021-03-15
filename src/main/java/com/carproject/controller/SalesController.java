@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +26,9 @@ import com.carproject.domain.GradeVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 import com.carproject.service.HeartService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
+import com.carproject.service.MycarService;
 import com.carproject.service.SalesService;
 
 
@@ -34,9 +38,12 @@ public class SalesController {
 	
 	@Autowired
 	private SalesService salesService;	
-	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -50,7 +57,7 @@ public class SalesController {
 	//////////////////////////////////////////////////////////
 	// 제조사
 	@RequestMapping("user/sales.do")
-	public void brandList(Model model) {
+	public void brandList(Model model,HttpSession session) {
 		List<HashMap<String, Object>> list = salesService.brandList();
 		model.addAttribute("brandList", list);
 		
@@ -61,6 +68,12 @@ public class SalesController {
 			String year = String.valueOf(2021 - i);
 			array.add(year);
 		}
+		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
 		
 		model.addAttribute("arr", array);
 		

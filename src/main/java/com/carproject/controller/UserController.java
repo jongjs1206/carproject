@@ -121,6 +121,12 @@ public class UserController {
 			}
 			sell.get(i).put("resultoption", resultoption);
 		}
+		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
 
 		model.addAttribute("category", category);
 		model.addAttribute("sell", sell);
@@ -617,7 +623,12 @@ public class UserController {
 			}
 			heartlist.get(i).put("resultoption", resultoption);
 		}
-
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
+		
 		model.addAttribute("heartlist", heartlist);
 		model.addAttribute("heartcount", heartcount);
 	}
@@ -673,12 +684,18 @@ public class UserController {
 	 * 블랙박스 페이지
 	 */
 	@RequestMapping("user/blackbox.do")
-	public void blackbox(String num,Model model) {
+	public void blackbox(String num,Model model, HttpSession session) {
 		List<MycarVO> list = mycarService.selectblackbox();
 		String re_num="0";
 		if(!(num.equals(""))) {
 			re_num=num;
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
+		
 		model.addAttribute("num", re_num);
 		model.addAttribute("list", list);
 		mycarService.updateblackbox();
@@ -721,6 +738,11 @@ public class UserController {
 			list = letterService.sendselect(vo);
 			note_count=letterService.sendcount(vo);
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String notes = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", notes);
 		
 		model.addAttribute("note", note);
 		model.addAttribute("note_count", note_count);
