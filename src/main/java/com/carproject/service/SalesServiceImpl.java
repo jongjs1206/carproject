@@ -111,13 +111,13 @@ public class SalesServiceImpl implements SalesService {
 
 		String[] command = new String[3];
 		command[0] = "python";
-		command[1] = "C:\\Python\\local_to_google/vision.py";
+		command[1] = "C:\\Python\\sachawon/main.py";
 		command[2] = "gs://car_image_for_analysis/" + sell_id + "/img1.png";
 		try {
 			v_result = execPython(command, sell_id);
 		}catch(Exception e) {
 			e.printStackTrace();
-		}finally {			
+		} finally {			
 			return v_result;
 		}
 	} // 이미지 분석 (1)
@@ -148,7 +148,7 @@ public class SalesServiceImpl implements SalesService {
 			if (Double.parseDouble(final_result) > 0.5) {
 				confirm_result = "True";						// 자동차 사진일 경우 True 를 리턴
 			}
-		}else {
+		} else {
 			confirm_result = "False";							// 자동차 사진이 아닐 경우 False 를 리턴
 		}
 		return confirm_result;

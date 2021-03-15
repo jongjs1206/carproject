@@ -170,8 +170,6 @@ $(function() {
 		var grade = $("#carGrade").val();
 		var detailGrade = $("#carDetailGrade").val();
 		
-		detailModel = detailModel.replace(model, "");
-		
 		if (detailModel.indexOf('(') != -1 && detailGrade.indexOf('(') != -1) {		// 세부등급, 세부모델에 들어가는 괄호 내용 제거
 			var startIndex1 = detailModel.indexOf('(')		// 세부모델
 			var startIndex2 = detailGrade.indexOf('(')		// 세부등급
@@ -184,7 +182,7 @@ $(function() {
 			result = beforeTitle + " " + detailModel
 		}
 		
-	
+		detailModel = detailModel.replace(model, "");
 		
 		var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
 		var result = beforeTitle + " " + detailGrade;
