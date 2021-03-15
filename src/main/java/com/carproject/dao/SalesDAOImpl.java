@@ -118,5 +118,10 @@ public class SalesDAOImpl implements SalesDAO {
 		return sales;
 	}
 	
+	@Override
+	public void insertAnalysis(HashMap<String, String> analysis) {			// 이미지분석 결과를 해당 판매글의 DB에 입력
+		mybatis.update("salesMap.insertAnalysis", analysis);
+	}
+	
 	
 }

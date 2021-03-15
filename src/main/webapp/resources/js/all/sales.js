@@ -64,7 +64,6 @@ $(function() {
 	
 	////////////////////////////////////////////////////// 세부 모델 -> 등급
 	$("#carDetailModel").change(function() {
-		
 		$("#title").val("");
 		
 		var brand = $("#carBrand").val();
@@ -74,6 +73,8 @@ $(function() {
 		var result = "";
 		var beforeTitle = brand + " " + model;
 		
+		detailModel = detailModel.replace(model, "");
+		
 		if (detailModel.indexOf('(') != -1) {
 			var startIndex = detailModel.indexOf('(')
 			var rslt = detailModel.substring(0, startIndex)
@@ -81,6 +82,8 @@ $(function() {
 		} else {
 			result = beforeTitle + " " + detailModel
 		}
+		
+		$("#title").val(result);
 		
 		$.ajax({
 	    	type : 'post',
@@ -104,23 +107,6 @@ $(function() {
 	        },	// success
 	        error : function(err){console.log(err)}  // 실패했을때
 	    }); 
-	    
-	    // 모델 - 세부모델 중복 문자 제거
-		dm0 = rslt.split(" ")[0];	// 띄어쓰기 기준 앞
-		dm1 = rslt.split(" ")[1];	// 띄어쓰기 기준 뒤
-		dm2 = rslt.split(" ")[2];	
-		
-		if(dm2 != "undefined"){
-			if( model == dm0 ) {
-				result = beforeTitle + " " + dm1;
-			} else if ( model != dm0 ) {
-				result = beforeTitle + " " + dm0;
-			}
-		}
-		
-		$("#title").val(result);
-	    
-	    //alert(result);
 	});
 	
 	////////////////////////////////////////////////////// 등급 -> 세부등급
@@ -138,22 +124,14 @@ $(function() {
 			detailModel = rslt
 		}
 		
-		dm0 = rslt.split(" ")[0];	// 띄어쓰기 기준 앞 / rslt : detailModel값
-		dm1 = rslt.split(" ")[1];	// 띄어쓰기 기준 뒤
+		detailModel = detailModel.replace(model, "");
 		
 		var grade = $("#carGrade").val();
 		
-		var beforeTitle = brand + " ";
-		
-		if( model == dm0 ) {
-			result = beforeTitle + model + " " + dm1 + " " + grade;
-		} else if ( model != dm0 ) {
-			result = beforeTitle + model + " " + detailModel + " " + grade;
-		}
+		var beforeTitle = brand + " " + model + " " + detailModel;
+		var result = beforeTitle + " " + grade;
 		
 		$("#title").val(result);
-		
-		//alert(result);
 		
 		$.ajax({
 			type : 'post',
@@ -192,6 +170,8 @@ $(function() {
 		var grade = $("#carGrade").val();
 		var detailGrade = $("#carDetailGrade").val();
 		
+		detailModel = detailModel.replace(model, "");
+		
 		if (detailModel.indexOf('(') != -1 && detailGrade.indexOf('(') != -1) {		// 세부등급, 세부모델에 들어가는 괄호 내용 제거
 			var startIndex1 = detailModel.indexOf('(')		// 세부모델
 			var startIndex2 = detailGrade.indexOf('(')		// 세부등급
@@ -204,17 +184,10 @@ $(function() {
 			result = beforeTitle + " " + detailModel
 		}
 		
-		dm0 = rslt1.split(" ")[0];	// 띄어쓰기 기준 앞 / rslt1 : detailModel값
-		dm1 = rslt1.split(" ")[1];	// 띄어쓰기 기준 뒤
+	
 		
-		var beforeTitle = brand + " ";
-		//var result = beforeTitle + " " + detailGrade;
-		
-		if( model == dm0 ) {
-			result = beforeTitle + model + " " + dm1 + " " + grade + " " + detailGrade;
-		} else if ( model != dm0 ) {
-			result = beforeTitle + model + " " + detailModel + " " + grade + " " + detailGrade;
-		}
+		var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
+		var result = beforeTitle + " " + detailGrade;
 		
 		$("#title").val(result);
 	

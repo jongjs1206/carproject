@@ -38,9 +38,6 @@ public class SalesController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private HeartService heartService;
-	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
 			"통풍시트", "메모리시트", "폴딩시트", "마사지시트", "워크인시트", "요추받침", "하이패스룸미러", "ECM룸미러", "뒷자석에어벤트", "패들쉬프트", "전동햇빛가리개",
@@ -281,6 +278,17 @@ public class SalesController {
 
 		// (8) 글 등록
 		salesService.uploadBtn(svo);
+		
+		// 이미지 분석
+		// (9) 파이썬으로 sell_id 보내기 -> 파이썬에서 검사 -> 결과를 수신
+		String v_result = salesService.pystart(Integer.toString(sell_id));
+		System.out.println("이미지 분석 결과 : " + v_result);
+				
+		HashMap<String, String> analysis = new HashMap<String, String>();
+		analysis.put("sell_id", Integer.toString(sell_id));
+		analysis.put("v_result", v_result);
+		salesService.insertAnalysis(analysis);
+		
 		return "redirect:/all/product_list.do";
 	}
 
@@ -326,8 +334,6 @@ public class SalesController {
 			id = principal.toString();
 		}
 	
-		//svo.setM_id(id);
-		
 		// (2) 글 작성하는 id로 작성자정보 가져오기      
 		mvo.setM_id(id);
 		MemberVO info = memberService.checkUniqueId(mvo);
@@ -341,10 +347,7 @@ public class SalesController {
 		System.out.println("등록할 글 상태 : " + svo.getStatus());
 
 		// (4) 새 글의 sell_id 확인
-	//	int sell_id = salesService.find_sell_id();
-		
 		int sell_id = svo.getSell_id();
-		
 
 		// (5) 로컬에 사진 저장
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");

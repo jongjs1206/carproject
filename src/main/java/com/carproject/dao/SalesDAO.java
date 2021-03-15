@@ -28,5 +28,5 @@ public interface SalesDAO {
 	
 	public SalesVO salesDetail(Long num);	// 상세페이지
 	
-	
+	public void insertAnalysis(HashMap<String, String> analysis);		// 이미지분석 결과를 해당 판매글의 DB에 입력
 }
