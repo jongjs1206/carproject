@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
-<!-- ∫Í∂ÛøÏ¿˙ √÷ªÛ¥‹ ≈« ∏Ì -->
+<!-- Î∏åÎùºÏö∞Ï†Ä ÏµúÏÉÅÎã® ÌÉ≠ Î™Ö -->
 
 <head>
     <meta charset="utf-8" />
@@ -10,204 +12,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>∞¸∏Æ¿⁄∆‰¿Ã¡ˆ</title>
-    <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css" /> <!-- css∆ƒ¿œ import -->
+    <title>Í¥ÄÎ¶¨ÏûêÌéòÏù¥ÏßÄ</title>
+     <!-- cssÌååÏùº import -->
+    <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css" />
+    <link href="../resources/css/admin/admin.css" rel="stylesheet" type="text/css" />
+    
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
+     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
         crossorigin="anonymous"></script>
+        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>    
 </head>
 
-<!-- ∆‰¿Ã¡ˆ ≥ªøÎ ∫Œ∫– -->
-
-<body class="sb-nav-fixed" style="overflow:hidden">
-
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- ªÛ¥‹ ¡¶∏Ò -->
-        <a class="navbar-brand" href="./admin.do">∞¸∏Æ¿⁄ ∆‰¿Ã¡ˆ</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        </form>
-        <!-- »∏ø¯ æ∆¿Ãƒ‹ µÂ∑”¥ŸøÓ ∏ﬁ¥∫ -->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-user fa-fw"></i></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                
-                    <!-- ∏ﬁ¿Œ∆‰¿Ã¡ˆ ¿Ãµø -->
-                        <a class="dropdown-item" href="../all/homepage.do">∏ﬁ¿Œ ∆‰¿Ã¡ˆ ¿Ãµø</a> 
-                        <div class="dropdown-divider"></div>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    
-    <!-- ¡¬√¯ ∏ﬁ¥∫ -->
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <div class="sb-sidenav-menu-heading">
-                            <h4>∏ﬁ¥∫</h4>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                            data-target="#collapseLayouts" aria-expanded="false"
-                            aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>»∏ø¯∞¸∏Æ
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                            data-parent="#sidenavAccordion" style="">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./userlist.do">»∏ø¯∏Ò∑œ</a>
-                                    <a class="nav-link" href="./withdrawal.do">≈ª≈»∏ø¯∏Ò∑œ</a> 
-                                    <a class="nav-link" href="./blacklist.do">∫Ì∑¢∏ÆΩ∫∆Æ∏Ò∑œ</a>
-                                    <a class="nav-link" href="./adminlist.do">∞¸∏Æ¿⁄∏Ò∑œ</a>  
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ƒ⁄¿Œ«ˆ»≤
-                            </a>
-                            <div class="collapse" id="collapseone" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailycoin.do">¿œ∫∞ƒ⁄¿Œ√Ê¿¸</a>
-                                    <a class="nav-link" href="./monthlycoin.do">ø˘∫∞ƒ⁄¿Œ√Ê¿¸</a>
-                                </nav>
-                        </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>πÊπÆ«ˆ»≤
-                            </a>
-                            <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailysales.do">¿œ¿œπÊπÆ«ˆ»≤</a>
-                                    <a class="nav-link" href="./monthlysales.do">ø˘∫∞πÊπÆ√Ê¿¸</a>
-                            </nav>
-                        </div>
-
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                            data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>∞‘Ω√±€∞¸∏Æ
-                        </a>
-                        <div class="collapse" id="collapsethree" aria-labelledby="headingOne"
-                            data-parent="#sidenavAccordion" style="">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./salesarticlelist.do">∆«∏≈±€</a>
-                                    <a class="nav-link" href="./userinquiry.do">∞Ì∞¥πÆ¿«</a> 
-                                    <a class="nav-link" href="./carnews.do">¿⁄µø¬˜¥∫Ω∫</a>
-                                    <a class="nav-link" href="./purchasereview.do">±∏∏≈»ƒ±‚</a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        
-        <!-- ¥ÎΩ√∫∏µÂ ≥ªøÎ -->
+     <!-- ÎåÄÏãúÎ≥¥Îìú ÎÇ¥Ïö© -->
         <div id="layoutSidenav_content">
             <main>
-                <form>
-                    <div class="form-group row">
-                        
-                        <!-- æ∆¿Ãµ -->                       
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        <div class="form-group col-md-3"></div>
+                <form method="post" action="updateUserEtc.do" id="updateUserEtc">
+                  <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+                    <div id="adminStatus" class="form-group row">
+         			<!-- Î≥ÄÏàò -->         			
+         			<c:set var="state" value="${user.state}" />
+         			 <c:set var="auth" value="${auth}" />
+         			 
+         			 
+         			 
+         			 
+                        <!-- ÏïÑÏù¥Îîî -->                       
+                        <div class="form-group col-md-12">
+                         <div class="form-group col-md-12">                        
+                            <img id='profileImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${user.m_id}.jpg" alt="profile" />
+                        </div>    
+
+                         <label for="inputID">ID</label>
+                            <input type="text" class="form-control" id="m_id" name="m_id" readonly="readonly" value="${user.m_id}">
+                        </div>
+   
                         <div class="form-group col-md-6">
-                            <label for="inputEmail3">∆«∏≈¿⁄ ID</label>
-                            <input type="ID" class="form-control" id="inputID" placeholder="ID">
+                            <label for="inputPassword4">Í∞ÄÏûÖÏùº</label>
+                            <input type="text" class="form-control" id="m_name" readonly="readonly" value="${user.w_date}">
                         </div>
-                        <div class="form-group col-md-3"></div>
                         
                         
-                        <!-- ∫Òπ–π¯»£ -->
-                        <div class="form-group col-md-3"></div>
+                         <c:choose>
+                         <c:when test="${auth eq 'ROLE_ADMIN'}">
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">¿ÃπÃ¡ˆ</label>
-                            <input type="password" class="form-control" id="inputPassword" placeholder="¿ÃπÃ¡ˆ"> 
-                        </div>
-                        <div class="form-group col-md-3"></div>
-                         
-                        <!-- ¿Ã∏ß -->
-                        <div class="form-group col-md-3"></div>
-                        <div class="form-group col-md-3">
-                            <label for="inputPassword4">º∫</label>
-                            <input type="º∫" class="form-control" id="lastname"
-                                placeholder="»´">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputPassword4">¿Ã∏ß</label>
-                            <input type="¿Ã∏ß" class="form-control" id="firstname"
-                                placeholder="±Êµø">
-                        </div>
-                        <div class="form-group col-md-3"></div>                                
-                        
-                        
-                        <!-- ¡÷º“ -->
-                        <div class="form-group col-md-3"></div>                                
+                            <label for="inputPassword4">ÏÉÅÌÉúÎ≥ÄÍ≤Ω</label>                                      
+                            <input type="text" class="form-control" id="userStatus" readonly="readonly" value="${auth}">                         
+                        </div>                           
+                         </c:when>
+                         <c:when test="${auth eq 'ROLE_USER'}">
                         <div class="form-group col-md-6">
-                            <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" size="40px"
-                                placeholder="1234 Main St">
+                            <label for="inputPassword4">ÏÉÅÌÉúÎ≥ÄÍ≤Ω</label>                                      
+                            <input type="text" class="form-control" id="userStatus" readonly="readonly" value="${user.state}">                         
+                        </div>                         
+                         </c:when>
+                         </c:choose>
+                    
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Ïù¥Î¶Ñ</label>
+                            <input type="ÏÑ±" class="form-control" id="lastname" readonly="readonly" value="${user.m_name}">
                         </div>
-                        <div class="form-group col-md-3"></div>
-                        
-                        
-                        <!-- ¿¸»≠π¯»£ -->
-                        <div class="form-group col-md-3"></div>                                
-                        <div class="form-group col-md-3">
-                            <label for="inputAddress">»ﬁ¥Î∆˘π¯»£</label>
-                            <input type="text" class="form-control" id="inputbirthday" size="40px"
-                                placeholder="010-"> 
-                            </select>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">ÏÉùÎÖÑÏõîÏùº</label>
+                            <input type="Ïù¥Î¶Ñ" class="form-control" id="firstname" readonly="readonly" value="${user.birth}">
+                        </div>
+                                               
+                                            
+                        <div class="form-group col-md-12">
+                            <label for="inputAddress">Ïù¥Î©îÏùº</label>
+                            <input type="text" class="form-control" id="inputAddress" size="40px" readonly="readonly" value="${user.email}">
+                        </div>
+             
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">Ìú¥ÎåÄÌè∞Î≤àÌò∏</label>
+                            <input type="text" class="form-control" id="inputbirthday" size="40px" readonly="readonly" value="${user.tel}"> 
                         </div>     
                         
-                        <!-- ª˝≥‚ø˘¿œ -->                        
-                        <div class="form-group col-md-3">
-                            <label for="inputAddress">ª˝≥‚ø˘¿œ</label>
-                            <input type="text" class="form-control" id="inputbirthday" size="40px"
-                                placeholder="951007">
+                        <!-- ÏÉùÎÖÑÏõîÏùº -->                        
+                        <div class="form-group col-md-6">
+                            <label for="inputAddress">ÏΩîÏù∏</label>
+                            <input type="text" class="form-control" id="inputbirthday" size="40px" readonly="readonly" value="${user.coin}">
                         </div>
-                        <div class="form-group col-md-3"></div> 
-                        <div class="form-group col-md-12"></div> 
-                        
-                        <!-- Button -->
-                        <div class="form-group col-md-3"></div>                                 
-                        
-                        <div class="form-group col-md-2">
-                          <input type="button" class="btn btn-primary" onclick="location.href='userlist.do'" value="ºˆ¡§«œ±‚">
-                        </div>                                                
-                    </div>
+ 
+                        <div class="form-group col-md-12"></div>                         
+                    
+						<textarea id="etc" name="etc" class="form-group col-md-12" rows="5" cols="">${user.etc}</textarea>  	
+						
+						
+						<div class="form-group col-md-3">
+                          <input type="submit" id="confirm" class="btn btn-primary" value="ÌôïÏù∏">
+                        </div>  				
 
+                        <div class="form-group col-md-3">
+                          <input type="button" class="btn btn-primary" onclick="location.href='userlist.do'" value="Ï™ΩÏßÄ">
+                        </div>   
+                        
+                        <div class="form-group col-md-6">  
+                        
+                        <c:choose>
+                        <c:when test="${auth eq 'ROLE_ADMIN'}">                        
+                        <a href="member_status.do?id=${user.m_id}&stateChange=user"><input type="button" class="btn btn-primary" value="Í¥ÄÎ¶¨Ïûê Ìï¥Ï†ú"></a>
+                        </c:when>
+                        <c:when test="${auth eq 'ROLE_USER'}">
+                        <a href="member_status.do?id=${user.m_id}&stateChange=admin"><input type="button" class="btn btn-primary" value="Í¥ÄÎ¶¨Ïûê Ï†ÑÌôò"></a>
+                        </c:when>                        
+                        </c:choose>
+                        
+                         
+                        
+                        <c:choose>
+                        <c:when test="${state eq 'normal'}">
+                         <a href="member_status.do?id=${user.m_id}&stateChange=black"><input type="button" class="btn btn-primary" value="Î∏îÎûôÎ¶¨Ïä§Ìä∏ Ï†ÑÌôò"></a>
+                        </c:when>
+                        <c:when test="${state eq 'black'}">
+                        <a href="member_status.do?id=${user.m_id}&stateChange=normal"><input type="button" class="btn btn-primary" value="Î∏îÎûôÎ¶¨Ïä§Ìä∏ Ìï¥Ï†ú"></a>
+                        </c:when>
+                        </c:choose>                                  
+                        </div>
+                                           
+                    </div>
+	
                 </form> 
             </main>
-            
-            <!-- √÷«œ¥‹ footer -->
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; ªÁ¬˜ø¯</div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
+</div>
     
-    <!-- javascript ∆ƒ¿œ import -->
+    <!-- javascript ÌååÏùº import -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../resources/js/admin/chart-area-demo.js"></script>
-    <script src="../resources/js/admin/chart-bar-demo.js"></script>
-    <script src="../resources/js/admin/chart-area-demo.js"></script>
-    <script src="../resources/js/admin/chart-bar-demo.js"></script>
 </body>
 
 </html>

@@ -104,7 +104,7 @@ public class MemberController {
 	private AuthenticationManager authenticationManager;
 	
 	// 가입자인지 확인
-	@RequestMapping(value = "/all/googleToken.do")
+	@RequestMapping(value = "all/googleToken.do")
 	public String googleToken(Model model, @RequestParam(name = "code") String code, HttpSession session, HttpServletRequest request) {
 
 		String googleLoginInfo = snsLoginService.getToken(code);
@@ -123,46 +123,23 @@ public class MemberController {
 
 		
 		MemberVO userinfo = memberservice.selectByEmail(vo);
-		System.out.println("3333"+userinfo.getM_id());
-		System.out.println("+++++"+userinfo.getM_pw());
 		
-//		Authentication authentication  = new UsernamePasswordAuthenticationToken(userinfo, userinfo.getM_pw());
-//		 
-//		SecurityContext securityContext = SecurityContextHolder.getContext();
-//		securityContext.setAuthentication(authentication);
 		
-//		session = request.getSession(true);
-//		session.setAttribute("SPRING_SECURITY_CONTEXT",securityContext);   // 세션에 spring security context 넣음
-		
-//		return "redirect:/all/homepage.do";
-		
-		model.addAttribute("m_id", userinfo.getM_id());
-		model.addAttribute("m_pw", userinfo.getM_pw());
+		model.addAttribute("userinfo", userinfo);
+	
 		
 		
 
-		return "user/sample"; // 데이터 토스
-		
-		// 1. 이미 사차원 회원인 경우
-		// -> 확인절차 없이 바로 로그인 시켜주고 싶음
-		// * google 로그인 세션은 건드릴 수 없음.
-		// 발급해주는 Token, 로그인하려하는(혹은 연동하려하는) 이메일, 사용자 이름 .. etc
-		// 사차원만의 회원정보중, 비교할 수 있는 정보가 있어야 함. : 구글 이메일 여부
-		// 1-1. 구글 이메일이 있다면
-		// List로 리턴을 받던, Object로 리턴을 받던 
-		// 회원인게 증명됨 -> 세션부여 -> 홈으로 이동
-		
-//			
-//		}
-		
-		// 사차원 사이트의 세션을 반드시 부여해야됨.
+		return"redirect: login_sns.do"; // 데이터 토스
+
 
 	}
 
-	 @RequestMapping("/user/sample")
-	 public void sampleLogin(@RequestParam("m_id") String m_id) {
-		 System.out.println("m_id : " + m_id);
-}
+//	 @RequestMapping("/all/login_sns.do")
+//	 public void login_sns(@RequestParam("m_id") String m_id, @RequestParam("m_pw") String m_pw) {
+//		 System.out.println("m_id : " + m_id);
+//		 System.out.println("m_pw : " + m_pw);
+//}
 	
 
 
