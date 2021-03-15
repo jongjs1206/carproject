@@ -12,6 +12,7 @@
         <meta name="author" content="" />
         <title>관리자페이지</title>
         <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css"/> <!-- css파일 import -->
+        <link href="../resources/css/admin/admin.css" rel="stylesheet" type="text/css"/>      
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -53,23 +54,20 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                판매 정보
+                                판매 정보 (첫 로딩 시 최근 한달)
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <input type="date" id="startDate"><span>~</span><input type="date" id="endDate">
-                                
-                               <div  id="indexListAjax">
+                                <input type="date" id="startDate"><span><i class="fas fa-wave-square"></i></span><input type="date" id="endDate"><a id="searchDates"><i class="fas fa-search"></i></a>
+                               
+                               <div  id="indexListAjax">                         
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
                                         <!-- 예시 데이터 삽입 -->
                                         <thead>
                                      
-                                            <tr>                                                
-                                                <th>
-                                                <input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="게시">
-												<input type="button" class="btn btn-warning" onclick="location.href='editsales.do'" value="반려">
-												</th>
+                                            <tr>
+                                            	<td>num</td>                                                
                                                 <td>썸네일</td>
                                                 <th>판매자</th>
                                                 <th>판매차량</th>
@@ -91,20 +89,19 @@
                                         
                                         <tbody>
                                         	<c:forEach items="${salesList}" var="sale">
-                                        
-                                            <tr>
-                                            	<th><input type="checkbox" value="${sale.sell_id}"></th>
+                                        		
+                                            <tr>                                      
+                                           		<td>${sale.sell_id}</td>
                                                 <td>img</td>
                                                 <td>${sale.m_id}</td>
-                                                <td>${sale.title}</td>
+                                                <td><a href="../all/salesDetail.do?num=${sale.sell_id}">${sale.title}</a></td>
                                                 <td>${sale.w_date}</td>
                                                 <td>${sale.status}</td>
                                                 <c:set var="status" value="${sale.status}" />
 											<c:choose>
 												<c:when test="${status eq '등록대기'}">
-													<td align="center">
-													<input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="등록">
-													<input type="button" class="btn btn-warning" onclick="location.href='editsales.do'" value="반려">
+													<td align="center">											
+													<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}'" value="등록">									
 													</td>
 												</c:when>
 											<c:otherwise>											

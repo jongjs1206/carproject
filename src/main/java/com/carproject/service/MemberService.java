@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 
 public interface MemberService {
 	
@@ -22,6 +23,8 @@ public interface MemberService {
 	public HashMap<String, Object> saleSearchDefault( HashMap<String, Object> map, MemberVO vo);
 	//admin 검색
 	public List<HashMap<String, Object>> selectSale_admin( HashMap<String, Object> map);	
+	//admin salesList 게시등록
+	public int setPosting(SalesVO vo);
 	
 	// 모든 회원 목록을 불러오기 위한 함수
 	public List<HashMap<String, Object>> allMember();
@@ -51,6 +54,10 @@ public interface MemberService {
 	
 
 	
+	
+	public String today();
+	public String beforeMonth();
+	public String beforeTwoWeeks();
 	
 }
 

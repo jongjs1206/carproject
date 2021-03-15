@@ -120,7 +120,7 @@ pwPassCheck = false;
 		return "비밀번호가 일치하지 않습니다.";
 	}else{
 		pwPassCheck = true;
-		return "비밀번호가 일치 입니다.";
+		return "비밀번호가 일치 합니다.";
 	}
 
 }

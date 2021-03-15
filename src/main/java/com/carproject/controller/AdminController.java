@@ -129,19 +129,22 @@ public class AdminController {
 	@RequestMapping(value = "/admin/salesList.do")
 	public void product_list(MemberVO vo, Model model, HttpSession session,
 			@RequestParam HashMap<String, Object> param)
-//			@RequestParam("startDate") @Nullable String startDate,
-//			@RequestParam("endDate") @Nullable String endDate,
-//			@RequestParam("status") @Nullable String status,
-//			@RequestParam("byTitle") @Nullable String byTitle) 
 	{
-
+		
+		if(param.get("startDate")=="" || param.get("startDate")==null){			
+			param.put("startDate", memberservice.beforeMonth());	
+		}
+		if(param.get("endDate")=="" || param.get("endDate")==null){
+			param.put("endDate", memberservice.today());	
+		}
+		
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
+		int len = salesList.size();
 		model.addAttribute("salesList", salesList);
+		model.addAttribute("len",len);
 		
 		 	
 	}
-	
-	
 	
 	//검색 ajax 데이터 전달 용
 	@RequestMapping(value = "/admin/salesList_ajax.do", method= {RequestMethod.POST})
@@ -156,8 +159,13 @@ public class AdminController {
 	
 	}
 	
+	//admin 등록대기->게시중 [등록버튼]
+	@RequestMapping(value = "/admin/setPosting.do")
+	public String setPosting(HttpSession session, Model model, SalesVO vo	) {
+		memberservice.setPosting(vo);
+	return "redirect: salesList.do ";
 	
-	
+	}
 	
 	
 	

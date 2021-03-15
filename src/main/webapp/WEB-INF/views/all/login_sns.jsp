@@ -1,31 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
 
-<tbody id="ajaxData">
-	<c:forEach items="${salesList}" var="sale">
 
-		<tr>
-			<th><input type="checkbox"></th>
-			<td>img</td>
-			<td>${sale.m_id}</td>
-			<td>${sale.title}</td>
-			<td>${sale.w_date}</td>
-			<td>${sale.status}</td>
-			<c:set var="status" value="${sale.status}" />
-			<c:choose>
-				<c:when test="${status eq '등록대기'}">
-					<td align="center"><input type="button"
-						class="btn btn-primary" onclick="location.href='editsales.do'"
-						value="반려"></td>
-				</c:when>
-				<c:otherwise>
-					<td align="center"></td>
-				</c:otherwise>
-			</c:choose>
-		</tr>
+<title>Hotel</title>
+<script type="text/javascript">
 
-	</c:forEach>
+const m_id = ${userinfo.m_id};
+const m_pw = ${userinfo.m_pw};
 
-</tbody>
+alert(m_id)
+alert(m_pw)
 
+//$('#login').submit();
+
+</script>
+</head>
+<body>
+
+<input type="text" id="m_id" name="m_id" value="${userinfo.m_id}">
+<input type="text" id="m_pw" name="m_pw" value="${userinfo.m_pw}">
+
+
+</body>
+</html>

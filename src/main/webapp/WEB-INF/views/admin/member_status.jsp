@@ -105,9 +105,7 @@
                           <input type="submit" id="confirm" class="btn btn-primary" value="확인">
                         </div>  				
 
-                        <div class="form-group col-md-3">
-                          <input type="button" class="btn btn-primary" onclick="location.href='userlist.do'" value="쪽지">
-                        </div>   
+        
                         
                         <div class="form-group col-md-6">  
                         

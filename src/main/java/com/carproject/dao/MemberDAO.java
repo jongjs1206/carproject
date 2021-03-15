@@ -31,6 +31,9 @@ public interface MemberDAO {
 	List<HashMap<String, Object>> selectMySale(HashMap<String, Object> map);
 	List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map);
 	
+	//admin 게시글 등록
+	int setPosting(SalesVO vo);
+	
 
 	// 모든 회원 목록을 불러오기 위한 함수
 	List<HashMap<String, Object>> allMember();
@@ -58,6 +61,9 @@ public interface MemberDAO {
 	
 	int updatePhoto(MemberVO vo);
 	void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
+	
+	
+	
 	
 	
 	

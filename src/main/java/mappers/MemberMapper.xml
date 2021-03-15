@@ -114,20 +114,18 @@
       WHERE state='black'
    	</select>
    	
-   	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 state 값을 black으로 update -->
-   	<!-- enabled를 0으로 update하여 로그인을 못하도록 함 -->
+   	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 state 값을 black으로 update -->  
    	<update id="setBlacklist" parameterType="string">
 		UPDATE member
-		SET state='black', enabled=0
+		SET state='black'
 		WHERE m_id=#{m_id}
 		
 	</update>
 	
 	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 state 값을 normal으로 update -->
-	<!-- enabled를 1로 update하여 로그인이 가능하도록 함 -->
 	<update id="setNormal" parameterType="string">
 		UPDATE member
-		SET state='normal', enabled=1
+		SET state='normal'
 		WHERE m_id=#{m_id}
 		
 	</update>  
@@ -190,6 +188,17 @@
 		ORDER BY w_date DESC
 		]]>
 	</select>
+	
+	
+		<!-- admin 등록대기->등록 -->
+	<update id="setPosting" parameterType="sales">
+		UPDATE sell
+		SET status='게시중'
+		WHERE sell_id=#{sell_id}
+		
+	</update>
+	
+
 	
 	
 </mapper>

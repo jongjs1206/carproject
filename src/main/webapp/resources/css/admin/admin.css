@@ -17,3 +17,9 @@ img#profileImg{
     width: 200px;
     border-radius: 50%;
 }
+#searchDates{
+	
+	margin: 5px;
+	cursor: pointer;
+	
+}

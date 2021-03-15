@@ -14,7 +14,7 @@ window.showStatus = function(obj) {
 
 	url = 'member_status.do?id='+$(obj).attr("id");
 	alias = $(obj).attr("id");
-	option = 'width=700, height=700, toolbar=no, scrollbars=no, left=200, top=100';
+	option = 'width=800, height=800, toolbar=no, scrollbars=no, left=200, top=100';
 	window.open(url, alias, option);
 	
 }

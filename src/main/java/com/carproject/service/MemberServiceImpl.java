@@ -2,17 +2,19 @@ package com.carproject.service;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.carproject.dao.MemberDAO;
-import com.carproject.domain.AuthVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 
 
 
@@ -96,7 +98,12 @@ public class MemberServiceImpl implements MemberService{
 			 return memberDAO.selectSale_admin(map);
 		}
 
-		
+		//admin 게시글 등록
+
+		@Override
+		public int setPosting(SalesVO vo) {
+		return memberDAO.setPosting(vo);
+		}
 	
 
 	  
@@ -160,14 +167,34 @@ public class MemberServiceImpl implements MemberService{
 			System.out.println(objectName);
 			System.out.println(filePath);
 		}
-		
-
 
 		
+
 		
+		public String today() {
+			  Date today = new Date();
+			    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			    String toDay = date.format(today);
+			    return toDay;
+		}
 
-
-	
+		public String beforeMonth() {
+		    Calendar mon = Calendar.getInstance();
+		    mon.add(Calendar.MONTH , -1);
+		    String beforeMonth = new java.text.SimpleDateFormat("yyyy-MM-dd").format(mon.getTime());		    
+		    return beforeMonth;			
+		}
+		
+		public String beforeTwoWeeks() {
+		    Calendar week = Calendar.getInstance();
+		    week.add(Calendar.DATE , -14);
+		    String beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
+		    return beforeWeek;			
+		}
+		
+		
+		
+		
 
 
 }

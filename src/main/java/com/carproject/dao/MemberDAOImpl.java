@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -78,7 +79,11 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===>  MemberMapper selectSale_admin() 호출");
 		return mybatis.selectList("MemberMAP.selectSale_admin", map);
 	}
-
+	@Override
+	public int setPosting(SalesVO vo) {
+		System.out.println("===>  MemberMAP setPosting() 호출");
+		return mybatis.update("MemberMAP.setPosting", vo);
+	}
 	
 	
 
@@ -154,6 +159,8 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		System.out.println("File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);		
 	}
+
+
 
 
 	
