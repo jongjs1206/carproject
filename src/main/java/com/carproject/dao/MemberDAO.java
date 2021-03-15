@@ -36,6 +36,8 @@ public interface MemberDAO {
 	List<HashMap<String, Object>> allMember();
 	// 해당 id의 row를 불러오기 위한 함수
 	MemberVO pickUserById(String id);
+	//etc update
+	int updateUserEtc(MemberVO vo);
 	// 멤버 테이블의 데이터를 update(수정)하기 위한 함수
 	void updateMember(MemberVO vo);
 	// 관리자 권한을 가진 모든 회원을 불러오기 위한 함수

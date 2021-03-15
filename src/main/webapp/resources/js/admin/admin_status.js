@@ -17,13 +17,17 @@ window.showStatus = function(obj) {
 	option = 'width=700, height=700, toolbar=no, scrollbars=no, left=200, top=100';
 	window.open(url, alias, option);
 	
-  
-
 }
 
+/*
+$('#confirm').click(function(){
+
+$('#adminStatus_form').submit();
+
+location.href='updateUserEtc.do'+$(obj).attr("id");
 
 
-
-
+})
+*/
 
  })//end of function

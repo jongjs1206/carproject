@@ -95,6 +95,13 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public int updateUserEtc(MemberVO vo) {
+		System.out.println("===> MemberMapper  updateUserEtc 호출");
+		return mybatis.update("MemberMAP.updateUserEtc", vo);
+	}
+
+	
+	@Override
 	public void updateMember(MemberVO vo) {
 		mybatis.update("MemberMAP.updateMember", vo);
 	}
@@ -147,6 +154,7 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		System.out.println("File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);		
 	}
+
 
 	
 

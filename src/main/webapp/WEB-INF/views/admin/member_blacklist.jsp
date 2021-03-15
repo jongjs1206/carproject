@@ -59,25 +59,29 @@
                                         
                                             <tr>
                                                 <th>아이디</th>  
-                                                <th>이름</th>
-                                                <th>성별</th>
+                                                <th>이름</th>                                            
                                                 <th>이메일</th>
                                                 <th>생년월일</th>
-                                                <th>휴대폰번호</th>
-                                                <th>상태</th>
+                                                <th>생년월일</th>
+                                                <th>비고</th>
+                                                <th>설정</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                           </thead>
+                                         <tbody>
                                         <!-- AdminController에서 blacklist에 있는 값을 반복문으로 모두 불러옴 -->
                                             <c:forEach var="row" items="${blacklist}">
 			                                	<tr>
 			                                    	<td>${row.m_id}</td>
-			                                    	<td>${row.m_name}</td>
-			                                    	<td>${row.gender}</td>
+			                                    	<td>${row.m_name}</td>			                                    
 			                                    	<td>${row.email}</td>
 			                                    	<td>${row.birth}</td>
 			                                    	<td>${row.tel}</td>
-			                                   		<td align="center"><input type="button" class="btn btn-primary" onclick="location.href='setNormal.do?id=${row.m_id}'" value="블랙리스트 해제"></td>                                  </tr>    
+			                                    	<td>${row.etc}</td>
+			                                   		<td align="center">
+			                                   		<a href="javascript:void(0);" id="${row.m_id}" onclick="showStatus(this)">${row.state} <i class="fas fa-cog"></i>
+			                                    <input type="hidden" value="${row.m_id}">
+			                                  </a>	
+			                                   	 </tr>    
 			                                </c:forEach>     
                                         </tbody>
                                     </table> 
@@ -103,6 +107,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
+        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>
     </body>
 </html>
 

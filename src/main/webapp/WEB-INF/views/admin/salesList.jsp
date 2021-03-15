@@ -66,9 +66,10 @@
                                         <thead>
                                      
                                             <tr>                                                
-                                                <th><input type="button"
-														class="btn btn-primary"
-														onclick="location.href='editsales.do'" value="게시"></th>
+                                                <th>
+                                                <input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="게시">
+												<input type="button" class="btn btn-warning" onclick="location.href='editsales.do'" value="반려">
+												</th>
                                                 <td>썸네일</td>
                                                 <th>판매자</th>
                                                 <th>판매차량</th>
@@ -92,7 +93,7 @@
                                         	<c:forEach items="${salesList}" var="sale">
                                         
                                             <tr>
-                                            	<th><input type="checkbox"></th>
+                                            	<th><input type="checkbox" value="${sale.sell_id}"></th>
                                                 <td>img</td>
                                                 <td>${sale.m_id}</td>
                                                 <td>${sale.title}</td>
@@ -101,14 +102,16 @@
                                                 <c:set var="status" value="${sale.status}" />
 											<c:choose>
 												<c:when test="${status eq '등록대기'}">
-													<td align="center"><input type="button"
-														class="btn btn-primary"
-														onclick="location.href='editsales.do'" value="반려"></td>
+													<td align="center">
+													<input type="button" class="btn btn-primary" onclick="location.href='editsales.do'" value="등록">
+													<input type="button" class="btn btn-warning" onclick="location.href='editsales.do'" value="반려">
+													</td>
 												</c:when>
-												<c:otherwise>
+											<c:otherwise>											
 													<td align="center"></td>
 												</c:otherwise>
 											</c:choose>
+											
 										</tr> 
                                            
                                             </c:forEach>

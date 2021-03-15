@@ -97,8 +97,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 		
-		
-	  
+	
 
 	  
 	  	public List<HashMap<String, Object>> allMember()
@@ -110,6 +109,11 @@ public class MemberServiceImpl implements MemberService{
 		  {
 			  return memberDAO.pickUserById(id);
 		  }
+		  
+		  public int updateUserEtc(MemberVO vo) {
+			 return memberDAO.updateUserEtc(vo);
+		  }
+		  
 		  
 		  public void updateMember(MemberVO vo) {
 			  memberDAO.updateMember(vo);

@@ -83,6 +83,14 @@
       SELECT member.*, auth.* FROM member, auth
       WHERE member.m_id=auth.m_id AND auth.auth='ROLE_ADMIN'
    	</select>
+   	   	
+   	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 auth 값을 ROLE_ADMIN으로 update -->
+   	<update id="updateUserEtc" parameterType="member">
+		UPDATE member
+		SET etc=#{etc}
+		WHERE m_id=#{m_id}
+		
+	</update>
    	
    	<!-- 인자로 전달 받은 id와 일치하는 id의 데이터의 auth 값을 ROLE_ADMIN으로 update -->
    	<update id="updateAuthAdmin" parameterType="string">
@@ -130,10 +138,8 @@
 	<select id="selectAllsale" resultType="hashmap">
       SELECT * FROM sell
       WHERE m_id=#{m_id}
-      	<![CDATA[
-      	w_date >= date_add(now(), interval -1 day)
-		ORDER BY w_date DESC		
-		]]>
+	ORDER BY w_date DESC		
+	
    	</select>
    	
    	
@@ -165,16 +171,18 @@
 	   	<!--admin 판매 리스트 select  select-->
 	<select id="selectSale_admin" parameterType="hashmap" resultType="hashmap">
 		
-		SELECT * FROM sell 
+		SELECT * FROM sell
+		<if test="startDate != null and endDate != null ">
 		WHERE
 		<![CDATA[
 		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
 		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
-	    <if test="status != '상태선택' ">
+		</if>
+	    <if test="status !=null and status != '상태선택' ">
 	     AND status = #{status}
 	    </if>
-		<if test="byTitle != null and byTitle != ''">
+		<if test="byTitle != null and byTitle != '' and byTitle != 'undefined' ">
 				AND
 				title LIKE CONCAT('%',#{byTitle},'%')
 		</if> 
@@ -183,5 +191,5 @@
 		]]>
 	</select>
 	
+	
 </mapper>
-

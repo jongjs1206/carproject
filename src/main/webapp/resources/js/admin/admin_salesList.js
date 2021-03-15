@@ -47,6 +47,11 @@ function leadingZeros(n, digits) {
 
 
 
+
+
+
+
+
 //날짜 검색 버튼
 startDate.on('change', function(){
 search();
@@ -94,8 +99,8 @@ endDate.val(today)
 	 	
 	 	},
 	 	success : function(result){
-	 	alert(result);
 	 	
+	 	location.href="salesList.do?startDate="+startDate.val()+"&endDate="+endDate.val()+"&status="+searchStatus.val()+"&byTitle="+byTitle.val();
 	 	
 	 	
 	 	},

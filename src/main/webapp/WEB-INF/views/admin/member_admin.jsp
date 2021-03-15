@@ -76,8 +76,11 @@
 			                                    	<td>${row.gender}</td>
 			                                    	<td>${row.email}</td>
 			                                    	<td>${row.birth}</td>
-			                                    	<td>${row.tel}</td>
-			                                   		<td align="center"><input type="button" class="btn btn-primary" onclick="location.href='setUser.do?id=${row.m_id}'" value="권한제거"></td>                                  </tr>    
+			                                    	<td>${row.tel}</td>			                               
+			                                   		<td align="center">
+			                                   		<a href="javascript:void(0);" id="${row.m_id}" onclick="showStatus(this)">admin <i class="fas fa-cog"></i>
+			                                    <input type="hidden" value="${row.m_id}">
+			                                  </a>	    
 			                                </c:forEach>
                                         </tbody>
                                     </table>
@@ -103,6 +106,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
+        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>
     </body>
 </html>
 

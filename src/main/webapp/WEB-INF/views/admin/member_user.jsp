@@ -90,8 +90,7 @@
 			                                    <td align="center">
 			                                    <a href="javascript:void(0);" id="${row.m_id}" onclick="showStatus(this)">${row.state} <i class="fas fa-cog"></i>
 			                                    <input type="hidden" value="${row.m_id}">
-			                                  </a>
-			                                  
+			                                  </a>			                                  
 			                                    </td></tr>    
 			                                  </c:forEach>
                                         </tbody> 

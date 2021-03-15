@@ -5,6 +5,7 @@ import java.lang.reflect.Member;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.carproject.service.CategoryService;
 import com.carproject.service.MemberService;
 import com.carproject.service.SalesService;
+import com.google.rpc.context.AttributeContext.Auth;
+
+import ch.qos.logback.core.util.SystemInfo;
+
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
@@ -62,101 +67,59 @@ public class AdminController {
 	@RequestMapping("admin/member_user.do")
 	public void userlist(Model model) {
 		List<HashMap<String, Object>> list = memberservice.allMember();
+
 		model.addAttribute("list",list);
 	}
 	
-	// 설정 href누름
+	// 회원목록에서 설정 누름 -> 새창
 	@RequestMapping("admin/member_status.do")
-	public void memberStatus(@RequestParam("id") String id, Model model) {
-		MemberVO user = memberservice.pickUserById(id);
-		model.addAttribute("user",user);
+	public void memberStatus(@RequestParam("id") String id, @RequestParam("stateChange") @Nullable String stateChange,
+			Model model) {
+
+		//파라미터에 따라서 블랙리스트, 관리자 지정
+		if(stateChange!=null && stateChange.equals("black")) {
+			memberservice.setBlacklist(id);
+		}else if(stateChange!=null && stateChange.equals("normal")) {
+			memberservice.setNormal(id);
+		}else if(stateChange!=null && stateChange.equals("admin")) {
+			memberservice.updateAuthAdmin(id);
+		}else if(stateChange!=null && stateChange.equals("user")) {
+			memberservice.updateAuthUser(id);
+		}
 		
+		MemberVO user = memberservice.pickUserById(id);
+		String auth = memberservice.checkAuth(user);
+		model.addAttribute("user",user);
+		model.addAttribute("auth",auth);
 	}
-//	
-//	//회원정보 수정 페이지에 매핑 -> input form의 value로 해당 row의 데이터를 update(수정)
-//   @RequestMapping(value="admin/modifyuser.do", method=RequestMethod.POST)
-//   public String  updateUserPost(HttpServletRequest request) throws Exception {
-//        System.out.println("RequestMethod.POST");
-//        request.setCharacterEncoding("utf-8");
-//        
-//        MemberVO mv = new MemberVO();
-//
-//        String m_id = new String(request.getParameter("inputId").getBytes("8859_1"), "UTF-8");
-//        String m_name = new String(request.getParameter("inputName").getBytes("8859_1"), "UTF-8");
-//        String email = new String(request.getParameter("inputEmail").getBytes("8859_1"), "UTF-8");
-//        String gender = new String(request.getParameter("inputGender").getBytes("8859_1"), "UTF-8");
-//        String tel = new String(request.getParameter("inputPhone").getBytes("8859_1"), "UTF-8");
-//        String birth = new String(request.getParameter("inputBirth").getBytes("8859_1"), "UTF-8");
-//        
-//        mv.setM_id(m_id);
-//        mv.setM_name(m_name);
-//        mv.setEmail(email);
-//        mv.setGender(gender);
-//        mv.setTel(tel);
-//        mv.setBirth(birth);
-//     
-//        memberservice.updateMember(mv);
-//
-//        return "redirect:userlist.do";
-//   }
-//	
-//   // 관리자목록 페이지에 매핑 -> auth테이블에서 ROLE_ADMIN인 모든 데이터 출력
-//	@RequestMapping("admin/adminlist.do")
-//	public void adminlist(Model model) {
-//		List<HashMap<String, Object>> adminlist = memberservice.allAdmin();
-//		model.addAttribute("adminlist",adminlist);
-//	}
-//	
-//	// setAdmin 페이지는 단순히 값을 전달받는 용도
-//	// -> 인자로 전달 받은 id에 해당하는 row의 데이터에 관리자 권한 부여(ROLE_ADMIN)
-//	@RequestMapping(value="admin/setAdmin.do")
-//	public String updateAuthAdmin(@RequestParam("id") String id, Model model) {
-//		memberservice.updateAuthAdmin(id);
-//		return "redirect:userlist.do";
-//	}
-//	
-//	// setUser 페이지는 단순히 값을 전달받는 용도
-//	// -> 인자로 전달 받은 id에 해당하는 row의 데이터에 관리자 권한 해제(ROLE_USER)
-//	@RequestMapping(value="admin/setUser.do")
-//	public String updateAuthUser(@RequestParam("id") String id, Model model) {
-//		memberservice.updateAuthUser(id);
-//		return "redirect:adminlist.do";
-//	}
-//	
-//	// blacklist 페이지에 매핑 -> member테이블에서 state열의 값이 black인 데이터 모두 출력
-//	@RequestMapping("admin/blacklist.do")
-//	public void blacklist(Model model) {
-//		List<HashMap<String, Object>> blacklist = memberservice.allBlacklist();
-//		model.addAttribute("blacklist",blacklist);
-//	}
-//	
-//	// setBlacklist 페이지는 단순히 값을 전달받는 용도
-//	// -> 인자로 전달 받은 id에 해당하는 row의 데이터의 state 값을 black으로 update
-//	@RequestMapping(value="admin/setBlacklist.do")
-//	public String setBlacklist(@RequestParam("id") String id, Model model) {
-//		memberservice.setBlacklist(id);
-//		return "redirect:blacklist.do";
-//	}
-//	
-//	// setNormal 페이지는 단순히 값을 전달받는 용도
-//	// -> 인자로 전달 받은 id에 해당하는 row의 데이터의 state 값을 normal로 update
-//	@RequestMapping(value="admin/setNormal.do")
-//	public String setNormal(@RequestParam("id") String id, Model model) {
-//		memberservice.setNormal(id);
-//		return "redirect:blacklist.do";
-//	}
 	
 	
+	// 새창에서 확인 누름  (업데이트)
+	@RequestMapping("admin/updateUserEtc.do")
+	public String updateUserEtc(MemberVO vo, Model model) {
+		memberservice.updateUserEtc(vo);
+		model.addAttribute("user",vo);
+		return "redirect: member_status.do?id="+vo.getM_id();
+	}
 	
-	/*
-	 * 작성자 문희주
-	 * admin 페이지
-	 * 
-	*/
-	
-	
+   // 블랙리스트 페이지에 매핑 -> auth테이블에서 ROLE_ADMIN인 모든 데이터 출력
+	@RequestMapping("admin/member_blacklist.do")
+	public void memberBacklist(Model model) {
+		List<HashMap<String, Object>> blacklist = memberservice.allBlacklist();
+		model.addAttribute("blacklist",blacklist);
+	}
 	
 
+   // 관리자목록 페이지에 매핑 -> auth테이블에서 ROLE_ADMIN인 모든 데이터 출력
+	@RequestMapping("admin/member_admin.do")
+	public void memberAdmin(Model model) {
+		List<HashMap<String, Object>> adminlist = memberservice.allAdmin();
+		
+		model.addAttribute("adminlist",adminlist);
+	}
+	
+	
+	
 	
 	
 	
@@ -165,21 +128,22 @@ public class AdminController {
 	//처음 세팅
 	@RequestMapping(value = "/admin/salesList.do")
 	public void product_list(MemberVO vo, Model model, HttpSession session,
-			@RequestParam("startDate") @Nullable String startDate,
-			@RequestParam("endDate") @Nullable String endDate) {
+			@RequestParam HashMap<String, Object> param)
+//			@RequestParam("startDate") @Nullable String startDate,
+//			@RequestParam("endDate") @Nullable String endDate,
+//			@RequestParam("status") @Nullable String status,
+//			@RequestParam("byTitle") @Nullable String byTitle) 
+	{
 
-		List<HashMap<String, Object>> salesList = memberservice.selectAllsale(vo);
+		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
 		model.addAttribute("salesList", salesList);
 		
-//		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
-//		model.addAttribute("salesList", salesList);
-		
+		 	
 	}
 	
 	
 	
-	
-	//검색 ajax
+	//검색 ajax 데이터 전달 용
 	@RequestMapping(value = "/admin/salesList_ajax.do", method= {RequestMethod.POST})
 	@ResponseBody
 	public void searchMySales(HttpSession session, Model model
@@ -188,8 +152,6 @@ public class AdminController {
 		//검색
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
 		model.addAttribute("salesList", salesList);
-//		List<SalesVO> salesList = salesservice.selectSalesAll();
-//		model.addAttribute("salesList", salesList);
 
 	
 	}
