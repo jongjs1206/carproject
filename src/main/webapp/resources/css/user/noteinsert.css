@@ -13,10 +13,32 @@ input{
 	width: 70%;
 	border: 1px solid #929292;
 }
-textarea {
+.content{
 	margin-top:20px;
 	width: 100%;
 	height: 390px;
+}
+.board{
+	margin-top:20px;
+	margin-bottom:20px;
+	width: 100%;
+	height: 370px;
+	border: 1px solid;
+	font-size: 20px;
+	color: black;
+	padding: 5px;
+	word-break:break-all;
+}
+.board2{
+	margin-top:20px;
+	margin-bottom:20px;
+	width: 100%;
+	height: 420px;
+	border: 1px solid;
+	font-size: 20px;
+	color: black;
+	padding: 5px;
+	word-break:break-all;
 }
 button{
 	cursor:pointer;
@@ -27,4 +49,8 @@ button{
 	border: none;
 	padding: 7px 20px 7px 20px;
 	
+}
+span{
+	color:black;
+	font-size: 20px;
 }

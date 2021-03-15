@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -54,7 +55,7 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-
+<script type="text/javascript" src="../resources/js/user/notelist.js"></script>
 </head>
 <body>
 
@@ -64,11 +65,12 @@
 
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
-	<input type="hidden" class="page" value="1">
+	<input type="hidden" class="page" value="${page}">
+	<input type="hidden" class="note" value="${note}">
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
-			data-background="../resources/img/top2.jpg">
+			data-background="../resources/img/top5.jpg">
 			<div class="container">
 				<div class="row ">
 					<div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
@@ -84,15 +86,10 @@
 	<!-- slider Area End-->
 
 
-
-
-
-
-
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
-	
+
 	<!-- Room Start -->
-	<section class="room-area" style="margin-top: 50px;">
+	<section class="room-area" style="margin-top: 100px;">
 		<div class="container">
 			<div style="display: flex; justify-content: space-between;">
 				<div style="display: flex;">
@@ -100,54 +97,68 @@
 						<input type="checkbox" class='all_cbox' /> <i
 							class="fas fa-caret-down"></i>
 					</div>
-					<div class='delete_heart'
+					<div 
 						style='background-color: pink; color: #112E41; padding: 5px 10px 5px 10px; cursor: pointer; border-radius: 5px;'>
 						삭제</div>
+					<a href="../user/notelist.do?note=get&page=1"><div
+							class='get_note downline blue-color'>받은 쪽지</div></a> <a
+						href="../user/notelist.do?note=send&page=1"><div
+							class='send_note gray'>보낸 쪽지</div></a>
 				</div>
-				<a onclick="window.open('../user/noteinsert.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
-				<div class='delete_heart'
-						style='background-color: #dca73a; color: white; padding: 5px 10px 5px 10px; cursor: pointer; border-radius: 5px;'>
-						글 쓰기</div></a>
+				<a
+					onclick="window.open('../user/noteinsert.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
+					<div 
+						style='background-color: #dca73a;  margin-right:30px; color: white; padding: 5px 10px 5px 10px; cursor: pointer; border-radius: 5px;'>
+						글 쓰기</div>
+				</a>
 			</div>
 
 			<div class="row" style="margin-top: 20px;">
-				<div class='note_row'>
-					<div class='note_info'>
-						<input type="checkbox" class='ck_note' />
-						<div class='send_p'>
-							<span>사람이름</span>
+				<c:if test="${note eq 'get'}">
+					<c:forEach var="getlist" items="${list}">
+						<c:if test="${getlist.r_date eq null}">
+							<div class='note_row'>
+						</c:if>
+						<c:if test="${getlist.r_date ne null}">
+							<div class='note_row gray'>
+						</c:if>
+							<div class='note_info'>
+								<input type="checkbox" class='ck_note' />
+								<div class='send_p'>
+									<span>${getlist.m_name} ( ${getlist.m_id} )</span>
+								</div>
+								<div>
+									<a class='note_title get_title'>${getlist.title}</a>
+									<input type="hidden" value='${getlist.l_id}'/>
+								</div>
+							</div>
+							<div class='note_day'>${fn:substring(getlist.w_date, 0, 16)}</div>
 						</div>
-						<div>
-							<a class='note_title'>제목입니다.sdgdsgdsgdsgdsgsdgdsgwegewgbewrgherhsthrstjhtsrhj</a>
+					</c:forEach>
+				</c:if>
+				<c:if test="${note eq 'send'}">
+					<c:forEach var="sendlist" items="${list}">
+						<div class='note_row'>
+							<div class='note_info'>
+								<input type="checkbox" class='ck_note' />
+								<div class='send_p'>
+									<c:if test="${sendlist.m_name ne null}">
+										<span>${sendlist.m_name} ( ${sendlist.to_id} )</span>
+									</c:if>
+									<c:if test="${sendlist.m_name eq null}">
+										<span style="color: hotpink;">전송 에러 ( ${sendlist.to_id} )</span>
+									</c:if>
+								</div>
+								<div>
+									<a class='note_title send_title'>${sendlist.title}</a>
+									<input type="hidden" value='${sendlist.l_id}'/>
+								</div>
+							</div>
+							<div class='note_day'>${fn:substring(sendlist.w_date, 0, 16)}</div>
 						</div>
-					</div>
-					<div class='note_day'>날짜</div>
-				</div>
-				<div class='note_row'>
-					<div class='note_info'>
-						<input type="checkbox" class='ck_note' />
-						<div class='send_p'>
-							<span>사람이름</span>
-						</div>
-						<div>
-							<a>제목입니다.sdgdsgdsgdsgdsgsdgdsgwegewgbewrgherhsthrstjhtsrhj</a>
-						</div>
-					</div>
-					<div class='note_day'>날짜</div>
-				</div>
-				<div class='note_row'>
-					<div class='note_info'>
-						<input type="checkbox" class='ck_note' />
-						<div class='send_p'>
-							<span>사람이름</span>
-						</div>
-						<div>
-							<a>제목입니다.sdgdsgdsgdsgdsgsdgdsgwegewgbewrgherhsthrstjhtsrhj</a>
-						</div>
-					</div>
-					<div class='note_day'>날짜</div>
-				</div>
-
+					</c:forEach>
+				</c:if>
+				
 
 
 				<c:if test="${heartcount eq '0'}">

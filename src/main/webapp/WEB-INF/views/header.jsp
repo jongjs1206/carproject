@@ -161,7 +161,7 @@ $(function() {
 											</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>
-												<li><a href="../user/notelist.do">쪽지</a></li>
+												<li><a href="../user/notelist.do?note=get&page=1">쪽지</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a href="../user/my_heart.do">내 찜목록</a></li>
 												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 

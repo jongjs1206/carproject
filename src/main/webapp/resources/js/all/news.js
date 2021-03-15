@@ -79,7 +79,7 @@ $(function() {
 					dataType : 'json',
 					data : {"id" : $('.login_on').val(),
 					"w_id":$('.news_num').val(),
-					"content":$('.form-control').val()},
+					"content":$('.form-control').val().replace('\n','<br>')},
 					success: function(){				
 		        	},
 					error : function(err){ console.log(err)}  //실패했을때
@@ -98,7 +98,8 @@ $(function() {
 					data : {"id" : $('.login_on').val(),
 					"w_id":$('.news_num').val(),
 					},
-					success: function(num){				
+					success: function(num){
+						if($('.photo').val()==''){
 							$('.reply_plus').prepend('<div class="reply_list">'
                   			+'<i class="fas fa-user-circle"></i>' 
                   			+'<div class="reply_name_content">'
@@ -112,11 +113,32 @@ $(function() {
                   					+'"/>' 
                   				+'</div>'
                   				+'<div class="context_reply">'
-                  					+$('.form-control').val()
+                  					+$('.form-control').val().replace('\n','<br>')
                   				+'</div>'
                   			+'</div>'
                   			+'</div>')				
 						$('.form-control').val('');
+						}else{
+							$('.reply_plus').prepend('<div class="reply_list">'
+                  			+'<img style="width: 40px; height: 40px; border-radius: 70%; overflow: hidden;" src="https://storage.cloud.google.com/car_image_for_analysis/profile/'
+                  			+$('.login_on').val()+'.jpg">'
+                  			+'<div class="reply_name_content">'
+                  				+'<div>'
+                  					+$('.m_name').val()
+                  					+'<span style="color:#909092; margin-left: 10px;">'
+                  					+'방금전'
+                  					+'<a class="reply_delete" style=" cursor:pointer; margin-left: 10px;">삭제</a>'
+                  					+'<input type="hidden" value="'
+                  					+num
+                  					+'"/>' 
+                  				+'</div>'
+                  				+'<div class="context_reply">'
+                  					+$('.form-control').val().replace('\n','<br>')
+                  				+'</div>'
+                  			+'</div>'
+                  			+'</div>')				
+						$('.form-control').val('');
+						}				
 		        	},
 					error : function(err){ console.log(err)}  //실패했을때
 				});

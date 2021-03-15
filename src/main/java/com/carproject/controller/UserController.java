@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.LetterVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.MycarVO;
 import com.carproject.service.CategoryService;
 import com.carproject.service.HeartService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
 import com.carproject.service.MycarService;
 
@@ -32,6 +34,8 @@ public class UserController {
 	private HeartService heartService;
 	@Autowired
 	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -687,5 +691,47 @@ public class UserController {
 		String path = mycarService.selectpath(day);
 		
 		return path;
+	}
+	
+	/*
+	 * 쪽지 보내기 ajax
+	 */
+	@ResponseBody
+	@RequestMapping("user/insertsend.do")
+	public void insertsend(LetterVO vo) {
+		letterService.insertsend(vo);
+	}
+
+	/*
+	 * 쪽지 리스트
+	 */
+	@RequestMapping("user/notelist.do")
+	public void notelist(String note, String page, Model model,HttpSession session) {
+		MemberVO vo = (MemberVO)session.getAttribute("info");
+		String re_page = Integer.toString((Integer.parseInt(page)-1)*15);
+		vo.setGoogle(re_page);
+		List<HashMap<String, Object>> list;
+		if(note.equals("get")) {
+			list = letterService.getselect(vo);
+		}else {
+			list = letterService.sendselect(vo);		
+		}
+		
+		model.addAttribute("note", note);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+	}
+	
+	
+	@RequestMapping("user/note_get_select.do")
+	public void note_get_select(String l_id, Model model) {
+		HashMap<String, Object> letter = letterService.selectgetnote(l_id);
+		model.addAttribute("letter", letter);
+	}
+	
+	@RequestMapping("user/note_send_select.do")
+	public void note_send_select(String l_id, Model model) {
+		HashMap<String, Object> letter = letterService.selectsendnote(l_id);
+		model.addAttribute("letter", letter);
 	}
 }

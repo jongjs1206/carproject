@@ -53,7 +53,7 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-<script type="text/javascript" src="../resources/js/user/noteinsert.js"></script>
+
 </head>
 <body style=" margin: 0px; padding: 0px;"">
 	<input type="hidden" name="${_csrf.parameterName}"
@@ -64,14 +64,19 @@
 	font-size: 33px; text-align: center; color: white;">쪽 지</div>
 	<div class="container note_content">
 		<div>
-			<label>제목</label><input class='title' type="text" />
+			<label>제목</label><span> ${letter.title}</span>
 		</div>
 		<div>
-			<label>받는 아이디</label><input class='you_id' type="text" />
+			<label>받은 사람</label>
+			<c:if test="${letter.m_name eq null}">
+				<span style="color: hotpink">아이디가 틀렸습니다. ( ${letter.to_id} )</span>
+			</c:if>
+			<c:if test="${letter.m_name ne null}">
+				<span>${letter.m_name} ( ${letter.to_id} )</span>
+			</c:if>
 		</div>
-		<textarea class='content'></textarea>
+		<div class='board2'>${letter.content}</div>
 		
-		<button class='btn_send'>보내기</button>
 	</div>
 
 
