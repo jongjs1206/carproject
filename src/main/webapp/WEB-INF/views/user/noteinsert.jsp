@@ -67,13 +67,14 @@
 			<label>제목</label><input class='title' type="text" />
 		</div>
 		<div>
-			<label>받는 아이디</label><input class='you_id' type="text" />
+			<label>받는 아이디</label><input class='you_id' type="text" value='${re}'/>
 		</div>
 		<textarea class='content'></textarea>
 		
 		<button class='btn_send'>보내기</button>
 	</div>
-
+	
+	<div class='no off'></div>
 
 	<!-- JS here -->
 

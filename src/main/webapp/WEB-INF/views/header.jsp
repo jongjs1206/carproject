@@ -158,6 +158,11 @@ $(function() {
 											<c:if test="${sessionScope.crash eq '0'}">
 												<span class='crash off'>${sessionScope.crash}</span>
 											</c:if>
+											
+											<c:if test="${sessionScope.note ne '0'}">
+												<span class='memo'>${sessionScope.note}</span>
+											</c:if>
+											
 											</a>
 											<ul class="submenu">
 												<li><a href="../user/profile.do">내정보</a></li>

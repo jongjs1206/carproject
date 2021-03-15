@@ -1,56 +1,70 @@
 @charset "UTF-8";
 
-.note_content{
+.note_content {
 	margin-top: 30px;
 }
 
-label{
+label {
 	font-size: 20px;
 	color: black;
 	width: 30%;
 }
-input{
+
+input {
 	width: 70%;
 	border: 1px solid #929292;
 }
-.content{
-	margin-top:20px;
+
+.content {
+	margin-top: 20px;
 	width: 100%;
 	height: 390px;
 }
-.board{
-	margin-top:20px;
-	margin-bottom:20px;
+
+.board {
+	margin-top: 20px;
+	margin-bottom: 20px;
 	width: 100%;
 	height: 370px;
 	border: 1px solid;
 	font-size: 20px;
 	color: black;
 	padding: 5px;
-	word-break:break-all;
+	word-break: break-all;
 }
-.board2{
-	margin-top:20px;
-	margin-bottom:20px;
+
+.board2 {
+	margin-top: 20px;
+	margin-bottom: 20px;
 	width: 100%;
 	height: 420px;
 	border: 1px solid;
 	font-size: 20px;
 	color: black;
 	padding: 5px;
-	word-break:break-all;
+	word-break: break-all;
 }
-button{
-	cursor:pointer;
-	font-size:20px;
-	color:white;
-	background-color:#dca73a;
-	float:right;
+
+button {
+	cursor: pointer;
+	font-size: 20px;
+	color: white;
+	background-color: #dca73a;
+	float: right;
 	border: none;
 	padding: 7px 20px 7px 20px;
-	
 }
-span{
-	color:black;
+
+span {
+	color: black;
 	font-size: 20px;
+}
+
+.no{
+	position: absolute;
+	top: 580px;
+	left:20px;
+	font-size: 25px;
+	font-weight: bold;
+	color: hotpink;
 }

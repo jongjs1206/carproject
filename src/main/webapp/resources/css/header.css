@@ -13,3 +13,13 @@
  	width: 20px;
  	height: 20px;
 }
+.memo{
+	padding-left:6px;
+	position:absolute;
+	top:28px;
+	left:105px;
+	background-color: #90ee90;
+	border-radius: 50%;
+ 	width: 20px;
+ 	height: 20px;
+}

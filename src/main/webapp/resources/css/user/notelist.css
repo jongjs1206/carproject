@@ -84,3 +84,26 @@
 .blue-color{
 	color: #212529;
 }
+
+@media screen and (max-width:1200px){
+	.get_note{
+		margin-left: 200px;
+	}
+	.send_p {
+		width: 40%;
+	}
+	.note_title{
+		width:50%;
+	}
+}
+@media screen and (max-width:787px){
+	.get_note{
+		margin-left: 20px;
+	}
+	.send_p {
+		width: 50%;
+	}
+	.note_day{
+		display: none;
+	}
+}

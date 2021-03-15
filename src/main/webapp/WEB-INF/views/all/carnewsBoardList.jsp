@@ -158,6 +158,12 @@
 		<c:set var='end' value='${all_page}'></c:set>
 		<c:set var='start' value='${all_page-9}'></c:set>
 	</c:if>
+	<c:if test="${start<1}">
+		<c:set var='start' value='1'></c:set>
+	</c:if>
+	<c:if test="${end<1}">
+		<c:set var='end' value='1'></c:set>
+	</c:if>
 	<!-- Room End -->
 	<nav class="paging" style="display: flex; justify-content: center;">
 		<ul class="pagination">

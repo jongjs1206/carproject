@@ -45,4 +45,35 @@ public class LetterServiceImpl implements LetterService{
 		return letterDAO.selectsendnote(l_id);
 	}
 
+	@Override
+	public void updatesend(String l_id) {
+		letterDAO.updatesend(l_id);
+	}
+
+	@Override
+	public String getcount(MemberVO vo) {
+		return letterDAO.getcount(vo);
+	}
+
+	@Override
+	public String sendcount(MemberVO vo) {
+		return letterDAO.sendcount(vo);
+	}
+
+	@Override
+	public void noshowget(String l_id) {
+		letterDAO.noshowget(l_id);
+		
+	}
+
+	@Override
+	public void noshowsend(String l_id) {
+		letterDAO.noshowsend(l_id);
+	}
+
+	@Override
+	public String selectnotecount(String id) {
+		return letterDAO.selectnotecount(id);
+	}
+
 }

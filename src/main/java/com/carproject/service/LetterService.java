@@ -12,4 +12,10 @@ public interface LetterService {
 	public List<HashMap<String, Object>> sendselect(MemberVO vo);
 	public HashMap<String, Object> selectgetnote(String l_id);
 	public HashMap<String, Object> selectsendnote(String l_id);
+	public void updatesend(String l_id);
+	public String getcount(MemberVO vo);
+	public String sendcount(MemberVO vo);
+	public void noshowget(String l_id);
+	public void noshowsend(String l_id);
+	public String selectnotecount(String id);
 }

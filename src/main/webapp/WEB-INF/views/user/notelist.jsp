@@ -97,7 +97,7 @@
 						<input type="checkbox" class='all_cbox' /> <i
 							class="fas fa-caret-down"></i>
 					</div>
-					<div 
+					<div class='note_delete'
 						style='background-color: pink; color: #112E41; padding: 5px 10px 5px 10px; cursor: pointer; border-radius: 5px;'>
 						삭제</div>
 					<a href="../user/notelist.do?note=get&page=1"><div
@@ -112,7 +112,7 @@
 						글 쓰기</div>
 				</a>
 			</div>
-
+			
 			<div class="row" style="margin-top: 20px;">
 				<c:if test="${note eq 'get'}">
 					<c:forEach var="getlist" items="${list}">
@@ -159,50 +159,88 @@
 					</c:forEach>
 				</c:if>
 				
-
-
-				<c:if test="${heartcount eq '0'}">
-					<div class='no_carlist'>쪽지가 없습니다.</div>
+				<c:if test="${note_count eq '0'}">
+					<div class='no_carlist' style="margin-left: 20px;">쪽지가 없습니다.</div>
 				</c:if>
-				<c:if test="${heartcount ne '0'}">
-					<div class='no_carlist off'>쪽지가 없습니다.</div>
-				</c:if>
+				
 			</div>
 		</div>
 	</section>
-	<c:set var='all_page'
-		value='${(heartcount/15)+(1-((heartcount/15)%1))%1}'></c:set>
-	<c:set var='start' value='2'></c:set>
-	<c:set var='end' value='10'></c:set>
-	<c:if test="${all_page<end}">
+	
+	<!-- ### 페이징 시작 ### -->
+		
+	<fmt:parseNumber var="all_page" integerOnly= "true" value="${(note_count/15)+(1-((note_count/15)%1))%1}"/>
+	<c:if test="${page<=5}">
+		<c:set var='start' value='1'></c:set>
+		<c:set var='end' value='10'></c:set>
+	</c:if>
+	<c:if test="${page>5}">
+		<c:set var='start' value='${page-4}'></c:set>
+		<c:set var='end' value='${page+5}'></c:set>
+	</c:if>
+	<c:if test="${page+5>all_page}">
 		<c:set var='end' value='${all_page}'></c:set>
+		<c:set var='start' value='${all_page-9}'></c:set>
+	</c:if>
+	<c:if test="${start<1}">
+		<c:set var='start' value='1'></c:set>
+	</c:if>
+	<c:if test="${end<1}">
+		<c:set var='end' value='1'></c:set>
 	</c:if>
 	<!-- Room End -->
 	<nav class="paging" style="display: flex; justify-content: center;">
 		<ul class="pagination">
-			<li class="page-item start_page"><a href="#" class="page-link"
+			<li class="page-item start_page"><a
+				href="../user/notelist.do?note=${note}&page=1" class="page-link"
 				aria-label="Previous"> <i class="fas fa-angle-double-left"></i>
 			</a></li>
-			<li class="page-item prev_page"><a href="#" class="page-link"
-				aria-label="Previous"> <i class="fas fa-angle-left"></i>
-			</a></li>
+			<c:if test="${page eq 1}">
+				<li class="page-item prev_page"><a
+					href="../user/notelist.do?note=${note}&page=1" class="page-link"
+					aria-label="Previous"> <i class="fas fa-angle-left"></i>
+				</a></li>
+			</c:if>
+			<c:if test="${page ne 1}">
+				<li class="page-item prev_page"><a
+					href="../user/notelist.do?note=${note}&page=${page-1}" class="page-link"
+					aria-label="Previous"> <i class="fas fa-angle-left"></i>
+				</a></li>
+			</c:if>
+
 		</ul>
+		
 		<ul class="pagination page_number">
-			<li class="page-item choice page_choice"><a href="#"
-				class="page-link">1</a></li>
 			<c:forEach var='temp' begin='${start}' end='${end}'>
-				<li class="page-item page_choice"><a href="#" class="page-link">${temp}</a></li>
+				<c:if test="${temp eq page}">
+					<li class="page-item choice page_choice"><a
+						href="../user/notelist.do?note=${note}&page=${temp}" class="page-link">${temp}</a></li>
+				</c:if>
+				<c:if test="${temp ne page}">
+					<li class="page-item page_choice"><a
+						href="../user/notelist.do?note=${note}&page=${temp}" class="page-link">${temp}</a></li>
+				</c:if>
 			</c:forEach>
 		</ul>
 		<ul class="pagination">
-			<li class="page-item next_page"><a href="#" class="page-link"
-				aria-label="Next"> <i class="fas fa-angle-right"></i>
-			</a></li>
-			<li class="page-item end_page"><a href="#" class="page-link"
+			<c:if test="${page eq all_page}">
+				<li class="page-item next_page"><a href="../user/notelist.do?note=${note}&page=${all_page}" class="page-link"
+					aria-label="Next"> <i class="fas fa-angle-right"></i>
+				</a></li>
+			</c:if>
+			<c:if test="${page ne all_page}">
+				<li class="page-item next_page"><a href="../user/notelist.do?note=${note}&page=${page+1}" class="page-link"
+					aria-label="Next"> <i class="fas fa-angle-right"></i>
+				</a></li>
+			</c:if>
+
+			<li class="page-item end_page"><a
+				href="../user/notelist.do?note=${note}&page=${all_page}" class="page-link"
 				aria-label="Previous"> <i class="fas fa-angle-double-right"></i>
 			</a></li>
 		</ul>
 	</nav>
+	<!-- ### 페이징 끝 ### -->
 
 
 

@@ -48,4 +48,40 @@ public class LetterDAOImpl implements LetterDAO{
 		System.out.println("===>  LetterMAP selectsendnote() 호출");
 		return mybatis.selectOne("LetterMAP.selectsendnote",l_id);
 	}
+
+	@Override
+	public void updatesend(String l_id) {
+		System.out.println("===>  LetterMAP updatesend() 호출");
+		mybatis.update("LetterMAP.updatesend",l_id);
+	}
+
+	@Override
+	public String getcount(MemberVO vo) {
+		System.out.println("===>  LetterMAP getcount() 호출");
+		return mybatis.selectOne("LetterMAP.getcount",vo);
+	}
+
+	@Override
+	public String sendcount(MemberVO vo) {
+		System.out.println("===>  LetterMAP sendcount() 호출");
+		return mybatis.selectOne("LetterMAP.sendcount",vo);
+	}
+
+	@Override
+	public void noshowget(String l_id) {
+		System.out.println("===>  LetterMAP noshowget() 호출");
+		mybatis.update("LetterMAP.noshowget",l_id);
+	}
+
+	@Override
+	public void noshowsend(String l_id) {
+		System.out.println("===>  LetterMAP noshowsend() 호출");
+		mybatis.update("LetterMAP.noshowsend",l_id);
+	}
+
+	@Override
+	public String selectnotecount(String id) {
+		System.out.println("===>  LetterMAP selectnotecount() 호출");
+		return mybatis.selectOne("LetterMAP.selectnotecount",id);
+	}
 }

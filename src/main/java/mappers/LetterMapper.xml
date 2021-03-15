@@ -11,7 +11,7 @@
 	
 	<select id="getselect" resultType="hashmap" parameterType="member">
 		SELECT m.m_name,l.* FROM member m INNER JOIN letter l ON m.m_id=l.m_id 
-		WHERE l.to_id=#{m_id} AND m_show=1 ORDER BY w_date DESC LIMIT ${google},15
+		WHERE l.to_id=#{m_id} AND to_show=1 ORDER BY w_date DESC LIMIT ${google},15
 	</select>
 	
 	<select id="sendselect" resultType="hashmap" parameterType="member">
@@ -19,13 +19,38 @@
 		WHERE l.m_id=#{m_id} AND m_show=1 ORDER BY w_date DESC LIMIT ${google},15
 	</select>
 	
+	<select id="getcount" resultType="String" parameterType="member">
+		SELECT count(*) FROM letter where to_id=#{m_id} and to_show='1'
+	</select>
+	
+	<select id="sendcount" resultType="String" parameterType="member">
+		SELECT count(*) FROM letter where m_id=#{m_id} and m_show='1'
+	</select>
+	
 	<select id="selectgetnote" resultType="hashmap" parameterType="String">
 		SELECT m.m_name,l.* FROM 
-		(SELECT * FROM letter where l_id=${value}) l INNER JOIN member m ON l.m_id=m.m_id;
+		(SELECT * FROM letter where l_id=${value}) l INNER JOIN member m ON l.m_id=m.m_id
 	</select>
 	
 	<select id="selectsendnote" resultType="hashmap" parameterType="String">
 		SELECT m.m_name,l.* FROM 
-		(SELECT * FROM letter where l_id=${value}) l LEFT JOIN member m ON l.to_id=m.m_id;
+		(SELECT * FROM letter where l_id=${value}) l LEFT JOIN member m ON l.to_id=m.m_id
 	</select>
+	
+	<update id="updatesend" parameterType="String">
+		UPDATE letter SET r_date=sysdate() WHERE l_id=#{value}
+	</update>
+	
+	<update id="noshowget" parameterType="String">
+		UPDATE letter SET to_show='0' WHERE l_id=#{value}
+	</update>
+	
+	<update id="noshowsend" parameterType="String">
+		UPDATE letter SET m_show='0' WHERE l_id=#{value}
+	</update>
+	
+	<select id="selectnotecount" resultType="String" parameterType="String">
+		SELECT COUNT(*) FROM letter WHERE to_id=#{value} AND r_date IS NULL
+	</select>
+	
 </mapper>

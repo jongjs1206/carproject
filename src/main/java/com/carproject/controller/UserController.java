@@ -61,7 +61,6 @@ public class UserController {
 
 		MemberVO info = memberService.checkUniqueId(vo);
 
-		System.out.println();
 		session.setAttribute("info", info);
 
 		// 관리자인지 권한정보를 세션에 저장
@@ -70,6 +69,9 @@ public class UserController {
 
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(id);
+		session.setAttribute("note", note);
 		
 		return "all/homepage";
 	}
@@ -696,8 +698,8 @@ public class UserController {
 	/*
 	 * 쪽지 보내기 ajax
 	 */
-	@ResponseBody
 	@RequestMapping("user/insertsend.do")
+	@ResponseBody
 	public void insertsend(LetterVO vo) {
 		letterService.insertsend(vo);
 	}
@@ -711,27 +713,71 @@ public class UserController {
 		String re_page = Integer.toString((Integer.parseInt(page)-1)*15);
 		vo.setGoogle(re_page);
 		List<HashMap<String, Object>> list;
+		String note_count;
 		if(note.equals("get")) {
 			list = letterService.getselect(vo);
+			note_count=letterService.getcount(vo);
 		}else {
-			list = letterService.sendselect(vo);		
+			list = letterService.sendselect(vo);
+			note_count=letterService.sendcount(vo);
 		}
 		
 		model.addAttribute("note", note);
+		model.addAttribute("note_count", note_count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 	}
 	
-	
+	/*
+	 * 받은쪽지 가져오기
+	 */
 	@RequestMapping("user/note_get_select.do")
 	public void note_get_select(String l_id, Model model) {
 		HashMap<String, Object> letter = letterService.selectgetnote(l_id);
 		model.addAttribute("letter", letter);
 	}
 	
+	/*
+	 * 보낸쪽지 가져오기
+	 */
 	@RequestMapping("user/note_send_select.do")
 	public void note_send_select(String l_id, Model model) {
 		HashMap<String, Object> letter = letterService.selectsendnote(l_id);
 		model.addAttribute("letter", letter);
 	}
+	
+	/*
+	 * 쪽지 보내기
+	 */
+	@RequestMapping("user/noteinsert.do")
+	public void noteinsert(String re, Model model) {		
+		model.addAttribute("re", re);
+	}
+	
+	/*
+	 * 쪽지 봤을 때
+	 */
+	@RequestMapping("user/updatesend.do")
+	@ResponseBody
+	public void updatesend(String l_id) {
+		letterService.updatesend(l_id);
+	}
+	
+	/*
+	 * 쪽지 봤을 때
+	 */
+	@RequestMapping("user/noshowget.do")
+	@ResponseBody
+	public void noshowget(String l_id) {
+		letterService.noshowget(l_id);
+	}
+	/*
+	 * 쪽지 봤을 때
+	 */
+	@RequestMapping("user/noshowsend.do")
+	@ResponseBody
+	public void noshowsend(String l_id) {
+		letterService.noshowsend(l_id);
+	}
+
 }

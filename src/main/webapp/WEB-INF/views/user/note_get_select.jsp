@@ -66,6 +66,7 @@
 		<div>
 			<label>제목</label><span>${letter.title}</span>
 		</div>
+		<input type="hidden" value='${letter.m_id}' class='re'>
 		<div>
 			<label>보낸 사람</label><span>${letter.m_name} ( ${letter.m_id} )</span>
 		</div>
@@ -74,7 +75,11 @@
 		<button class='btn_send'>답글쓰기</button>
 	</div>
 
-
+	<script type="text/javascript">
+		$('.btn_send').click(function(){
+			window.open('../user/noteinsert.do?re='+$('.re').val(), 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
+		})
+	</script>
 	<!-- JS here -->
 
 	<!-- All JS Custom Plugins Link Here here -->
