@@ -31,5 +31,7 @@ public interface SalesService {
 	
 	public SalesVO salesDetail(Long num);  // 상세화면 
 	
+	public String pystart(String sell_id);			// 이미지 분석 
+	public void insertAnalysis(HashMap<String, String> analysis);	// 이미지분석 결과를 해당 판매글의 DB에 입력 
 	
 }

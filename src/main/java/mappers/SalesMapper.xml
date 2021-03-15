@@ -56,10 +56,17 @@
 	(sell_id, g_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content, 
 		vehicle_num, fuel, gear, status, baeki, seller) 
 	VALUES 
-	#{sell_id}, #{g_id}, #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
+	(#{sell_id}, #{g_id}, #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}, 
 		#{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}, 
 		#{fuel}, #{gear}, #{status}, #{baeki}, #{m_id})
 </insert>
+
+<!-- 이미지분석 결과를 해당 판매글의 DB에 입력 -->
+<update id="insertAnalysis" parameterType="hashmap">
+	UPDATE sell SET
+	analysis = #{v_result}
+	WHERE sell_id = #{sell_id}
+</update>
 
 <!-- 수정하기 버튼 -->
 <update id="modifyBtn" parameterType="sales" >

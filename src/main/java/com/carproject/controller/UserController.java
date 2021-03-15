@@ -1,14 +1,11 @@
 package com.carproject.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,12 +15,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.GradeVO;
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.LetterVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.MycarVO;
 import com.carproject.service.CategoryService;
 import com.carproject.service.HeartService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
-
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+import com.carproject.service.MycarService;
 
 @Controller
 public class UserController {
@@ -33,7 +32,11 @@ public class UserController {
 	private MemberService memberService;
 	@Autowired
 	private HeartService heartService;
-
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
+	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
 			"통풍시트", "메모리시트", "폴딩시트", "마사지시트", "워크인시트", "요추받침", "하이패스룸미러", "ECM룸미러", "뒷자석에어벤트", "패들쉬프트", "전동햇빛가리개",
@@ -43,6 +46,9 @@ public class UserController {
 			"스마트트렁크", "전자주차브레이크(EPB)", "경사로밀림방지", "헤드업디스플레이(HUD)", "무선충전", "자동주차", "냉장고", "네비게이션(순정)", "네비게이션(비순정)",
 			"USB", "AUX", "블루투스", "MP3", "DMB", "CD플레이어", "AV시스템", "뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
 
+	/*
+	 * 로그인 세션
+	 */
 	@RequestMapping("all/log.do")
 	public String login(HttpSession session) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -52,19 +58,29 @@ public class UserController {
 		}
 		MemberVO vo = new MemberVO();
 		vo.setM_id(id);
-		
+
 		MemberVO info = memberService.checkUniqueId(vo);
 
 		System.out.println();
 		session.setAttribute("info", info);
 
+		// 관리자인지 권한정보를 세션에 저장
+		String auth = memberService.checkAuth(vo);
+		session.setAttribute("auth", auth);
+
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
 		return "all/homepage";
 	}
-
+	
+	/*
+	 * 로그아웃 세션 지우기
+	 */
 	@RequestMapping("all/out.do")
 	public String out(HttpSession session) {
 		session.invalidate();
-		return "all/login.do";
+		return "all/login";
 	}
 
 	/*
@@ -72,8 +88,6 @@ public class UserController {
 	 */
 	@RequestMapping("all/product_list.do")
 	public void product_list(Model model, HttpSession session) {
-//		String[] gg = {};
-//		TestGA.testGA(gg);
 		HeartVO vo = new HeartVO();
 		if (session.getAttribute("info") != null) {
 			MemberVO info = (MemberVO) session.getAttribute("info");
@@ -216,6 +230,9 @@ public class UserController {
 		return list;
 	}
 
+	/*
+	 * 모델 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/model_product.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> model_product(String id, String car_num, String page) {
@@ -253,7 +270,10 @@ public class UserController {
 
 		return list;
 	}
-
+	
+	/*
+	 * 세부 모델 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/detail_product.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> detail_product(String id, String car_num, String options, String page) {
@@ -291,7 +311,10 @@ public class UserController {
 
 		return list;
 	}
-
+	
+	/*
+	 * 등급 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/grade1_product.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> grade1_product(String id, String car_num, String options, String options2,
@@ -331,7 +354,10 @@ public class UserController {
 
 		return list;
 	}
-
+	
+	/*
+	 * 세부 모델 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/grade2_product.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> grade2_product(String id, String car_num, String options, String options2,
@@ -373,6 +399,9 @@ public class UserController {
 		return list;
 	}
 
+	/*
+	 * 전체 나라 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/country_all.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> country_all(String id, String page) {
@@ -408,6 +437,9 @@ public class UserController {
 		return sell;
 	}
 
+	/*
+	 * 나라 눌렀을 때 ajax
+	 */
 	@RequestMapping("all/country_one.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> country_one(String id, String country, String page) {
@@ -444,6 +476,9 @@ public class UserController {
 		return sell;
 	}
 
+	/*
+	 * 검색 했을 때 ajax
+	 */
 	@RequestMapping("all/search_select.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> search_select(String id, String search, String page) {
@@ -480,20 +515,29 @@ public class UserController {
 		return sell;
 	}
 
+	/*
+	 * 전체 나라 눌렀을 때 갯수 ajax
+	 */
 	@RequestMapping("all/country_all_count.do")
 	@ResponseBody
 	public int country_all_count() {
 		int count_all = categoryService.sellcount();
 		return count_all;
 	}
-
+	
+	/*
+	 * 나라 눌렀을 때 갯수 ajax
+	 */
 	@RequestMapping("all/country_one_count.do")
 	@ResponseBody
 	public int country_one_count(String country) {
 		int count_one = categoryService.country_count(country);
 		return count_one;
 	}
-
+	
+	/*
+	 * 검색 눌렀을 때 갯수 ajax
+	 */
 	@RequestMapping("all/search_count.do")
 	@ResponseBody
 	public int search_count(String search) {
@@ -501,7 +545,10 @@ public class UserController {
 		int count = categoryService.search_count(search);
 		return count;
 	}
-
+	
+	/*
+	 * 찜했을때 ajax
+	 */
 	@RequestMapping("all/heart_on.do")
 	@ResponseBody
 	public void heart_on(String id, String sell_id) {
@@ -510,7 +557,10 @@ public class UserController {
 		vo.setSell_id(Integer.parseInt(sell_id));
 		heartService.insertHeart(vo);
 	}
-
+	
+	/*
+	 * 찜 취소 했을 때 ajax
+	 */
 	@RequestMapping("all/heart_off.do")
 	@ResponseBody
 	public void heart_off(String id, String sell_id) {
@@ -520,6 +570,9 @@ public class UserController {
 		heartService.deleteHeart(vo);
 	}
 	
+	/*
+	 * 찜 전체 삭제  ajax
+	 */
 	@RequestMapping("user/heart_all.do")
 	@ResponseBody
 	public void heart_all(String id) {
@@ -528,6 +581,9 @@ public class UserController {
 		heartService.deleteHeart(vo);
 	}
 
+	/*
+	 * 나의 찜 들어가기  ajax
+	 */
 	@RequestMapping("user/my_heart.do")
 	public void my_heart(String page, Model model, HttpSession session) {
 		HeartVO vo = new HeartVO();
@@ -559,10 +615,14 @@ public class UserController {
 			}
 			heartlist.get(i).put("resultoption", resultoption);
 		}
-		
+
 		model.addAttribute("heartlist", heartlist);
 		model.addAttribute("heartcount", heartcount);
 	}
+
+	/*
+	 * 삭제시 찜 다시 가져오기  ajax
+	 */
 	@RequestMapping("user/heart_select.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> heart_select(String id, String page) {
@@ -596,4 +656,82 @@ public class UserController {
 		return sell;
 	}
 	
+	/*
+	 * 웹 소켓 충돌 숫자 ajax
+	 */
+	@RequestMapping("user/selectnow.do")
+	@ResponseBody
+	public String selectnow() {
+		String crash = mycarService.selectnow();
+		
+		return crash;
+	}
+	
+	/*
+	 * 블랙박스 페이지
+	 */
+	@RequestMapping("user/blackbox.do")
+	public void blackbox(String num,Model model) {
+		List<MycarVO> list = mycarService.selectblackbox();
+		String re_num="0";
+		if(!(num.equals(""))) {
+			re_num=num;
+		}
+		model.addAttribute("num", re_num);
+		model.addAttribute("list", list);
+		mycarService.updateblackbox();
+	}
+	
+	/*
+	 * 블박 이미지 ajax
+	 */
+	@ResponseBody
+	@RequestMapping("user/select_day_img.do")
+	public String select_day_img(String day) {
+		String path = mycarService.selectpath(day);
+		
+		return path;
+	}
+	
+	/*
+	 * 쪽지 보내기 ajax
+	 */
+	@ResponseBody
+	@RequestMapping("user/insertsend.do")
+	public void insertsend(LetterVO vo) {
+		letterService.insertsend(vo);
+	}
+
+	/*
+	 * 쪽지 리스트
+	 */
+	@RequestMapping("user/notelist.do")
+	public void notelist(String note, String page, Model model,HttpSession session) {
+		MemberVO vo = (MemberVO)session.getAttribute("info");
+		String re_page = Integer.toString((Integer.parseInt(page)-1)*15);
+		vo.setGoogle(re_page);
+		List<HashMap<String, Object>> list;
+		if(note.equals("get")) {
+			list = letterService.getselect(vo);
+		}else {
+			list = letterService.sendselect(vo);		
+		}
+		
+		model.addAttribute("note", note);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page);
+	}
+	
+	
+	@RequestMapping("user/note_get_select.do")
+	public void note_get_select(String l_id, Model model) {
+		HashMap<String, Object> letter = letterService.selectgetnote(l_id);
+		model.addAttribute("letter", letter);
+	}
+	
+	@RequestMapping("user/note_send_select.do")
+	public void note_send_select(String l_id, Model model) {
+		HashMap<String, Object> letter = letterService.selectsendnote(l_id);
+		model.addAttribute("letter", letter);
+	}
 }

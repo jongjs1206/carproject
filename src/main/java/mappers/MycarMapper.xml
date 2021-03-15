@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MycarMAP">
+
+	<select id="selectnow" resultType="String">
+		SELECT COUNT(*) FROM mycar where eyes='N'
+	</select>
+	
+	<select id="selectblackbox" resultType="mycar">
+		SELECT * FROM mycar ORDER BY DAY desc
+	</select>
+	
+	<select id="selectpath" resultType="String" parameterType="String">
+		SELECT img FROM mycar WHERE DAY=#{value}
+	</select>
+	
+	<update id="updateblackbox">
+		UPDATE mycar SET eyes='Y'
+	</update>
+</mapper>

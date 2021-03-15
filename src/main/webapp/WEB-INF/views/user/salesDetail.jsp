@@ -26,7 +26,8 @@
 	<link rel="stylesheet" href="../resources/assets/css/responsive.css">
 </head>
 <body>
-
+<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>
 	
 	<!-- slider Area Start-->

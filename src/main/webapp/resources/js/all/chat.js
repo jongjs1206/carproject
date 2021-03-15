@@ -2,14 +2,14 @@ $(function() {
 
    
         $(document).on('keydown', '.msg', function(e){
-            if(e.keyCode == 13 && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
+            	if(e.keyCode == 13 && !e.shiftKey) {
+                	e.preventDefault();
+               	 	sendMessage();
+            	}
         });
     
 		var webSocket = new WebSocket(
-				"ws://localhost:8080/Websocket/broadsocket");
+				"ws://localhost:8080/carproject/chatsocket");
 		// 콘솔 텍스트 에리어 오브젝트
 		var messageTextArea = $(".chat>ul");
 		

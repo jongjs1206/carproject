@@ -60,6 +60,7 @@
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>	
 	<input type="hidden" class='m_name' value='${sessionScope.info.m_name}'/>	
+	
 
 	<!-- slider Area Start-->
 	<div class="slider-area">

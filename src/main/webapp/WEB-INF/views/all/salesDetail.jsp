@@ -169,10 +169,10 @@
 										</ul>
 										<ul class="optionList" >	
 											<c:if test="${result_option.get(4) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>HID</li>
+												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>HID헤드램프</li>
 											</c:if>
 											<c:if test="${result_option.get(4) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">HID</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">HID헤드램프</li> 
 											</c:if>
 											<c:if test="${result_option.get(5) ne '0'}">
 												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>LED헤드램프</li>
@@ -753,21 +753,20 @@
   	
   	<!-- 챗봇 -->
   	<div id="frogue-container" class="position-right-bottom"
-      data-chatbot="0675806e-3f37-473a-8792-2e438991e332"
+      data-chatbot="4e13c93c-d37f-4fa8-ad40-ce2fc1707a9f"
       data-user="사용자ID"
       data-init-key="value"
       ></div>
 	<!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
 	<script>
-		(function(d, s, id){
-		    var js, fjs = d.getElementsByTagName(s)[0];
-		    if (d.getElementById(id)) {return;}
-		    js = d.createElement(s); js.id = id;
-		    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
-		    fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'frogue-embed'));
+	(function(d, s, id){
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+	    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'frogue-embed'));
 	</script>
-  	
   	
   	<%@ include file="../footer.jsp"%>
 	

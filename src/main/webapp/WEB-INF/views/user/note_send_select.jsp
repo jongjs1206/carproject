@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<% 
-	String num = request.getParameter("coinnum");
-	String sum = request.getParameter("coinprice");
-%>    
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title> 코인 결제 </title>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>사차원</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,7 +33,11 @@
 <link rel="stylesheet" href="../resources/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<link rel="stylesheet" href="../resources/css/all/coin.css">	
+<link rel="stylesheet" href="../resources/css/all/homepage.css"
+	type="text/css">
+<link rel="stylesheet" href="../resources/css/user/noteinsert.css"
+	type="text/css">
+
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </script>
@@ -50,29 +54,31 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 
-
 </head>
-<body>
+<body style=" margin: 0px; padding: 0px;"">
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
-	<main>
-	
-		<div class="user-select">
-			<span>
-				코인 수량
-			</span>
-			<span>
-				<input type="text" id="coin-num" class="coin-num" value="<%= num %>"/>
-			</span>
-			<span>
-				결제 금액
-			</span>	
-			<span>
-				<input type="text" id="coin-price" class="coin-num" value="<%= sum %>"/>
-			</span>
-		</div>
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
 
-	</main>
+	<div style="background-color: #dca73a; width: 100%; height: 50px;
+	font-size: 33px; text-align: center; color: white;">쪽 지</div>
+	<div class="container note_content">
+		<div>
+			<label>제목</label><span> ${letter.title}</span>
+		</div>
+		<div>
+			<label>받은 사람</label>
+			<c:if test="${letter.m_name eq null}">
+				<span style="color: hotpink">아이디가 틀렸습니다. ( ${letter.to_id} )</span>
+			</c:if>
+			<c:if test="${letter.m_name ne null}">
+				<span>${letter.m_name} ( ${letter.to_id} )</span>
+			</c:if>
+		</div>
+		<div class='board2'>${letter.content}</div>
+		
+	</div>
+
 
 	<!-- JS here -->
 
@@ -111,10 +117,6 @@
 	<!-- Jquery Plugins, main Jquery -->
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
-	
-	<!-- Coin page js -->
-	<script type="text/javascript" src="../resources/js/all/coin.js"></script>
 
-	
 </body>
 </html>

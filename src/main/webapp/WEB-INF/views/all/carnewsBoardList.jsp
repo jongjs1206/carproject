@@ -56,6 +56,8 @@
 </head>
 <body>
 
+	<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>
 	<!-- header -->
 	

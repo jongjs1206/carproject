@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LetterMAP">
+
+
+	<insert id="insertsend" parameterType="letter">
+		INSERT INTO letter(l_id,m_id,to_id,title,content,w_date,m_show,to_show)
+		VALUES (nextval(letter_sq),#{m_id},#{to_id},#{title},#{content},sysdate(),'1','1')
+	</insert>
+	
+	<select id="getselect" resultType="hashmap" parameterType="member">
+		SELECT m.m_name,l.* FROM member m INNER JOIN letter l ON m.m_id=l.m_id 
+		WHERE l.to_id=#{m_id} AND m_show=1 ORDER BY w_date DESC LIMIT ${google},15
+	</select>
+	
+	<select id="sendselect" resultType="hashmap" parameterType="member">
+		SELECT m.m_name,l.* FROM member m RIGHT JOIN letter l ON m.m_id=l.to_id 
+		WHERE l.m_id=#{m_id} AND m_show=1 ORDER BY w_date DESC LIMIT ${google},15
+	</select>
+	
+	<select id="selectgetnote" resultType="hashmap" parameterType="String">
+		SELECT m.m_name,l.* FROM 
+		(SELECT * FROM letter where l_id=${value}) l INNER JOIN member m ON l.m_id=m.m_id;
+	</select>
+	
+	<select id="selectsendnote" resultType="hashmap" parameterType="String">
+		SELECT m.m_name,l.* FROM 
+		(SELECT * FROM letter where l_id=${value}) l LEFT JOIN member m ON l.to_id=m.m_id;
+	</select>
+</mapper>

@@ -24,6 +24,8 @@
 		<typeAlias alias="sales" type="com.carproject.domain.SalesVO"/>			
 		<typeAlias alias="news" type="com.carproject.domain.NewsVO"/>			
 		<typeAlias alias="reply" type="com.carproject.domain.ReplyVO"/>			
+		<typeAlias alias="mycar" type="com.carproject.domain.MycarVO"/>			
+		<typeAlias alias="letter" type="com.carproject.domain.LetterVO"/>			
 	</typeAliases>
 
 

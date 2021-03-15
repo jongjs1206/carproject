@@ -51,7 +51,8 @@
 <script type="text/javascript" src="../resources/js/all/homepage.js"></script>
 </head>
 <body>
-
+<input type="hidden" name="${_csrf.parameterName}"
+		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>
 
 	<main>
