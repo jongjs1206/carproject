@@ -70,7 +70,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(id);
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		return "all/homepage";
@@ -122,7 +127,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 
 		model.addAttribute("sell", sell);
@@ -168,7 +178,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 
 		model.addAttribute("category", category);
@@ -669,7 +684,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		model.addAttribute("heartlist", heartlist);
@@ -736,7 +756,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		model.addAttribute("num", re_num);
@@ -784,7 +809,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String notes = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String notes = letterService.selectnotecount(user_id);
 		session.setAttribute("note", notes);
 		
 		model.addAttribute("note", note);
@@ -815,8 +845,9 @@ public class UserController {
 	 * 쪽지 보내기
 	 */
 	@RequestMapping("user/noteinsert.do")
-	public void noteinsert(String re, Model model) {		
+	public void noteinsert(String re,String title, Model model) {		
 		model.addAttribute("re", re);
+		model.addAttribute("title", title);
 	}
 	
 	/*

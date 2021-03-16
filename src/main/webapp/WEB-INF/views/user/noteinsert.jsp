@@ -64,7 +64,7 @@
 	font-size: 33px; text-align: center; color: white;">쪽 지</div>
 	<div class="container note_content">
 		<div>
-			<label>제목</label><input class='title' type="text" />
+			<label>제목</label><input class='title' type="text" value='${title}'/>
 		</div>
 		<div>
 			<label>받는 아이디</label><input class='you_id' type="text" value='${re}'/>

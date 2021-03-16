@@ -18,5 +18,9 @@
 	<select id="selectHeart" resultType="heart" parameterType="String">
 		select * from heart where m_id=#{m_id}
 	</select>
+	
+	<select id="seletheartone" resultType="String" parameterType="heart">
+		SELECT COUNT(*) FROM heart WHERE m_id=#{m_id} AND sell_id=#{sell_id}
+	</select>
 
 </mapper>

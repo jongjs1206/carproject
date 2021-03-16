@@ -426,4 +426,66 @@ $(function() {
    		
 	});	// end of 삭제
 	
+	//찜기능
+	$(document).on("click",".fa-heart",function(){
+			if($('.login_on').val()==""){
+				alert('로그인시 찜 기능을 사용할 수 있습니다.');
+			}else{
+				if($(this).next().val()=='on'){
+					$(this).next().val('off');
+					$(this).removeClass('color_pink');
+					
+					$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/heart_off.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"sell_id":$('#sell_id').val()},
+			success: function(){
+				
+        	},
+				error : function(err){ console.log(err)}  //실패했을때
+				});
+				
+				}else{
+					$(this).next().val('on');
+					$(this).addClass('color_pink');
+										
+			$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/heart_on.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"sell_id":$('#sell_id').val()},
+			success: function(){
+				
+        	},
+				error : function(err){ console.log(err)}  //실패했을때
+				});
+				}
+			}
+	});
+	$('.notego').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 쪽지 기능을 사용할 수 있습니다.');
+		}else{
+			window.open('../user/noteinsert.do?re='
+			+$('.sale_id').val()
+			+'&title='
+			+$('.note_title').val().split(' ')[0]+' 문의', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
+		}
+	})
+	
 })	// end of 전체 function()

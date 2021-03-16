@@ -10,4 +10,5 @@ public interface HeartDAO {
 	void insertHeart(HeartVO vo);
 	void deleteHeart(HeartVO vo);
 	List<HeartVO> selectHeart(String m_id);
+	String seletheartone(HeartVO hvo);
 }

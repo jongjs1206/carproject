@@ -83,26 +83,12 @@ left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_
 </select>
 
 <select id="homesellselect" resultType="hashmap" parameterType="heart">
-SELECT ht, o.* FROM 
-(SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
-(SELECT <![CDATA[@rownum:=@rownum+1 AS rnum]]>,re.* FROM 
-(SELECT t.* FROM
-(SELECT * FROM 
-(SELECT s.sell_id,w_date, price, image, title, option FROM 
-<if test="date!=null">
-(SELECT * FROM
-</if>
-category 
-<if test="date!=null">
-WHERE abroad = #{date}) 
-</if>
-c
+SELECT * FROM category c
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
-(select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
-where <![CDATA[rnum]]> BETWEEN 1 AND 6) o
-left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
+inner join sell s on s.g_id = g.g_id
+left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on s.sell_id=h.sell_id 
+ORDER by w_date DESC LIMIT 0,6;
 </select>
 
 
