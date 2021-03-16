@@ -92,7 +92,7 @@
                                         		
                                             <tr>                                      
                                            		<td>${sale.sell_id}</td>
-                                                <td>img</td>
+                                                <td><img src="${sale.image}img1.png" alt="썸네일" style="width: 70px"></td>
                                                 <td>${sale.m_id}</td>
                                                 <td><a href="../all/salesDetail.do?num=${sale.sell_id}">${sale.title}</a></td>
                                                 <td>${sale.w_date}</td>
@@ -101,7 +101,7 @@
 											<c:choose>
 												<c:when test="${status eq '등록대기'}">
 													<td align="center">											
-													<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}'" value="등록">									
+													<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
 													</td>
 												</c:when>
 											<c:otherwise>											

@@ -25,6 +25,7 @@ public interface MemberService {
 	public List<HashMap<String, Object>> selectSale_admin( HashMap<String, Object> map);	
 	//admin salesList 게시등록
 	public int setPosting(SalesVO vo);
+	public int expiredPosting(SalesVO vo);
 	
 	// 모든 회원 목록을 불러오기 위한 함수
 	public List<HashMap<String, Object>> allMember();
@@ -58,6 +59,5 @@ public interface MemberService {
 	public String today();
 	public String beforeMonth();
 	public String beforeTwoWeeks();
-	
 }
 

@@ -33,7 +33,7 @@ public interface MemberDAO {
 	
 	//admin 게시글 등록
 	int setPosting(SalesVO vo);
-	
+	int expiredPosting(SalesVO vo);
 
 	// 모든 회원 목록을 불러오기 위한 함수
 	List<HashMap<String, Object>> allMember();

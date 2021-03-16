@@ -84,6 +84,11 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===>  MemberMAP setPosting() 호출");
 		return mybatis.update("MemberMAP.setPosting", vo);
 	}
+	@Override
+	public int expiredPosting(SalesVO vo) {
+		System.out.println("===>  MemberMAP expiredPosting() 호출");
+		return mybatis.update("MemberMAP.expiredPosting", vo);
+	}
 	
 	
 

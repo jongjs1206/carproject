@@ -104,6 +104,10 @@ public class MemberServiceImpl implements MemberService{
 		public int setPosting(SalesVO vo) {
 		return memberDAO.setPosting(vo);
 		}
+		@Override
+		public int expiredPosting(SalesVO vo) {
+		return memberDAO.expiredPosting(vo);
+		}
 	
 
 	  

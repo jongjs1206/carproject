@@ -8,16 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z7TDDVV5GC"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K13MM4T6PR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('config', 'G-Z7TDDVV5GC', {
-      page_title: 'header.jsp',
-      page_location: 'http://localhost:8080/carproject/all/homepage.do',
-      page_path: '/carproject/all/homepage.do'
-});
+  gtag('js', new Date());
 
+  gtag('config', 'G-K13MM4T6PR');
 </script>
 
 <title>header.jsp</title>
@@ -70,8 +67,15 @@ $(function() {
 	};
 })
 </script>
-	
-<!-- Load the JavaScript API client and Sign-in library. -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6YD49ED3ZV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6YD49ED3ZV');
+</script>
 <script src="https://apis.google.com/js/client:platform.js"></script>
 	
 
