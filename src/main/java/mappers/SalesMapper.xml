@@ -68,6 +68,23 @@
 	WHERE sell_id = #{sell_id}
 </update>
 
+<!-- 글 등록시 코인 -1 반영 (코인테이블) -->
+<insert id="useCoinC" parameterType="member">
+	INSERT INTO coin
+	(m_id, day, coin)  
+	VALUES
+	(#{m_id}, now(), -1)
+</insert>
+
+<!-- 글 등록시 코인 -1 반영 (멤버테이블) -->
+<update id="useCoinM" parameterType="member">
+	UPDATE member SET
+	coin=coin-1 
+	WHERE m_id=#{m_id}
+</update>
+
+
+
 <!-- 수정하기 버튼 -->
 <update id="modifyBtn" parameterType="sales" >
 	<![CDATA[

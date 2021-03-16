@@ -18,7 +18,7 @@ public class MemberVO {
 	private String birth; /* 생일 */
 	private String tel; /* 전화번호 */
 	private String photo; /* 프로필사진 */
-	private String coin; /* 프로필사진 */
+	private String coin; /* 코인보유량 */
 	private String w_date; /* 가입일 */
 	private String ex_date; /* 탈퇴일 */
 	private String state; /* 상태 */

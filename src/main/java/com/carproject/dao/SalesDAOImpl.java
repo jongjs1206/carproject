@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 
 @Repository("SalesDAO")
@@ -121,6 +122,18 @@ public class SalesDAOImpl implements SalesDAO {
 	@Override
 	public void insertAnalysis(HashMap<String, String> analysis) {			// 이미지분석 결과를 해당 판매글의 DB에 입력
 		mybatis.update("salesMap.insertAnalysis", analysis);
+	}
+	
+	@Override
+	public void useCoinC(MemberVO vo) {						// 글 등록시 코인 -1 반영 (코인테이블)
+		System.out.println("===> salesMap useCoinC 호출");
+		mybatis.insert("salesMap.useCoinC", vo);
+	}
+	
+	@Override
+	public void useCoinM(MemberVO vo) {						// 글 등록시 코인 -1 반영 (멤버테이블)
+		System.out.println("===> salesMap useCoinM 호출");
+		mybatis.update("salesMap.useCoinM", vo);
 	}
 	
 	
