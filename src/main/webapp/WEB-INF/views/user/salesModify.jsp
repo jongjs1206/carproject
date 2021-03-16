@@ -67,7 +67,7 @@
 	<div class="slider-area">
 		<div
 			class="single-slider hero-overly slider-height2 d-flex align-items-center"
-			data-background="../resources/assets/img/hero/contact_hero.jpg">
+			data-background="../resources/img/sales2.jpg">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">

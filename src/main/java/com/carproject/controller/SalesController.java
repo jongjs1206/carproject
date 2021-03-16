@@ -481,6 +481,16 @@ public class SalesController {
 		// (8) 글 수정
 		salesService.salesModify(svo);
 		
+		// 이미지 분석
+		// (9) 파이썬으로 sell_id 보내기 -> 파이썬에서 검사 -> 결과를 수신
+		String v_result = salesService.pystart(Integer.toString(sell_id));
+		System.out.println("이미지 분석 결과 : " + v_result);
+
+		HashMap<String, String> analysis = new HashMap<String, String>();
+		analysis.put("sell_id", Integer.toString(sell_id));
+		analysis.put("v_result", v_result);
+		salesService.insertAnalysis(analysis);
+		
 		System.out.println("수정 글번호" + svo.getSell_id());
 		
 		return "redirect:/user/my_sales.do";	// 수정 후 내 판매글로

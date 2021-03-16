@@ -158,7 +158,7 @@
 			<div class="sale-info">
 				<span>제목</span>
 				<span>찜</span>
-				<span>삭제 </span>
+				<!-- <span>삭제 </span> -->
 			</div>
 			
 			
@@ -184,7 +184,7 @@
 					</div>
 				</a>
 				<div class="cnt">12</div>
-		    	<div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div>
+		    	<!-- <div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div> -->
 			</div>
 			</c:forEach>
 		</div>

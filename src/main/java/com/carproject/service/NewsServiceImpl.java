@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.carproject.dao.NewsDAO;
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.NewsVO;
 import com.carproject.domain.ReplyVO;
 
 @Service("newsService")
@@ -91,5 +92,18 @@ public class NewsServiceImpl implements NewsService{
 	@Override
 	public void reply_delete(String r_id) {
 		newsDAO.reply_delete(r_id);
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	// 관리자 자동차뉴스 리스트 
+	@Override
+	public List<NewsVO> adminNews(NewsVO vo) {
+		return newsDAO.adminNews(vo);
+	}
+
+	// 관리자 자동차뉴스 삭제
+	@Override
+	public void newsDelete(NewsVO vo) {
+		newsDAO.newsDelete(vo);
 	}
 }

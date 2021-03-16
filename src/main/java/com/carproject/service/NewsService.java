@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.NewsVO;
 import com.carproject.domain.ReplyVO;
 
 public interface NewsService {
@@ -22,4 +23,7 @@ public interface NewsService {
 	public int reply_count(String num);
 	public ReplyVO reply_num(ReplyVO vo);
 	public void reply_delete(String r_id);
+	
+	public List<NewsVO> adminNews(NewsVO vo);	// 관리자 자동차뉴스 리스트
+	public void newsDelete(NewsVO vo);			// 관리자 자동차뉴스 삭제
 }

@@ -93,6 +93,7 @@
             
             <!-- 대시보드 내용 -->
             <div id="layoutSidenav_content">
+            <%@ include file="./side.jsp"%>
                     <div class="container-fluid">
                         <h2 class="mt-3">자동차뉴스 목록</h2>
                         <div class="card mb-3">
@@ -103,8 +104,8 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    
                                         <!-- 예시 데이터 삽입 -->
+                                       <c:forEach var="news" items="${adminNews}"> 
                                         <thead>
                                             <tr> 
                                                 <th>뉴스제목</th>
@@ -115,26 +116,16 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>뉴스제목1</td>
-                                                <td>뉴스이미지1</td>
-                                                <td>뉴스내용1</td>
-	                                            <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='withdrawal.do'" value="삭제하기"></td>
+                                                <td>${news.title}</td>
+                                                <td><img src="${news.thumb}"></td>
+                                                <td>${news.headline}</td>
+	                                            <td align="center">
+	                                          	<input type="hidden" name="w_id" id="w_id" value="${news.w_id}"> 
+	                                            	<input type="button" class="btn btn-primary" id="newsDelete" value="삭제하기">
+	                                            </td>
                                             </tr>
-                                            <tr>
-                                                <td>뉴스제목2</td>
-                                                <td>뉴스이미지2</td>
-                                                <td>뉴스내용2</td>
-	                                            <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='withdrawal.do'" value="삭제하기"></td>
-                                            </tr>
-                                            <tr>
-                                                <td>뉴스제목2</td>
-                                                <td>뉴스이미지2</td>
-                                                <td>뉴스내용2</td>
-	                                            <td align="center"><input type="button" class="btn btn-primary" onclick="location.href='withdrawal.do'" value="삭제하기"></td>
-                                            </tr>
-                                            
-                                            
                                         </tbody>
+                                       </c:forEach>
                                     </table> 
                                 </div>
                             </div>
@@ -158,5 +149,6 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/datatables-demo.js"></script>
+        <script type="text/javascript" src="../resources/js/all/news.js"></script>
     </body>
 </html>

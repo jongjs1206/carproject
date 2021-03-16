@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.domain.HeartVO;
+import com.carproject.domain.NewsVO;
 import com.carproject.domain.ReplyVO;
 
 @Repository("newsDAO")
@@ -103,5 +104,20 @@ public class NewsDAOImpl implements NewsDAO{
 	public void reply_delete(String r_id) {
 		System.out.println("===>  NewsMapper reply_delete() 호출");
 		mybatis.delete("NewsMAP.reply_delete",r_id);
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	// 관리자 자동차뉴스 리스트
+	@Override
+	public List<NewsVO> adminNews(NewsVO vo) {
+		System.out.println("===>  NewsMapper adminNews() 호출");
+		return mybatis.selectList("NewsMAP.adminNews", vo);
+	}
+
+	// 관리자 자동차뉴스 삭제
+	@Override
+	public void newsDelete(NewsVO vo) {
+		System.out.println("===>  NewsMapper newsDelete() 호출");
+		mybatis.delete("NewsMAP.newsDelete", vo);
 	}
 }

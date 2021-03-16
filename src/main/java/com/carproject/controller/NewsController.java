@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.NewsVO;
 import com.carproject.domain.ReplyVO;
 import com.carproject.service.LetterService;
 import com.carproject.service.MycarService;
@@ -140,6 +141,25 @@ public class NewsController {
 	@ResponseBody
 	public void reply_delete(String r_id) {
 		newsservice.reply_delete(r_id);
+	}
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	// 관리자 자동차뉴스
+	@RequestMapping("admin/carnews.do")
+	public void adminNews(NewsVO vo, Model model) {
+		model.addAttribute("adminNews", newsservice.adminNews(vo));
+		System.out.println("관리자 자동차뉴스");
+	}
+
+	// 관리자 자동차뉴스 삭제
+	@RequestMapping("admin/newsDelete.do")
+	public String newsDelete(NewsVO vo) {
+		newsservice.newsDelete(vo);
+		System.out.println("관리자 자동차뉴스 삭제");
+
+		return "redirect:/admin/carnews.do";
 	}
 	
 }
