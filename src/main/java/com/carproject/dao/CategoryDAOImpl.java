@@ -125,4 +125,10 @@ public class CategoryDAOImpl implements CategoryDAO{
 		System.out.println("===>  CategoryMapper heartlistcount 호출");
 		return mybatis.selectOne("categoryMap.heartlistcount", vo);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> homesellselect(HeartVO vo) {
+		System.out.println("===>  CategoryMapper homesellselect 호출");
+		return mybatis.selectList("categoryMap.homesellselect", vo);
+	}
 }

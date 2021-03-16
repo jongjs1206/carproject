@@ -84,6 +84,49 @@ public class UserController {
 		session.invalidate();
 		return "all/login";
 	}
+	
+	/*
+	 * 홈페이지
+	 */
+	@RequestMapping("all/homepage.do")
+	public void homepage(Model model, HttpSession session) {
+		HeartVO vo = new HeartVO();
+		if (session.getAttribute("info") != null) {
+			MemberVO info = (MemberVO) session.getAttribute("info");
+			vo.setM_id(info.getM_id());
+		}
+		List<HashMap<String, Object>> sell = categoryService.homesellselect(vo);
+
+		for (int i = 0; i < sell.size(); i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String) sell.get(i).get("option");
+			int count = 0;
+			if (option.split("/").length > 0) {
+				for (int j = 0; j < option.split("/").length; j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for (int k = 0; k < temp.length(); k++) {
+					if (temp.charAt(k) == '1') {
+						resultoption.append(alloption[k]);
+						if (count == 4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		session.setAttribute("note", note);
+
+		model.addAttribute("sell", sell);
+	}
 
 	/*
 	 * 처음 판매리스트 들어 갈때

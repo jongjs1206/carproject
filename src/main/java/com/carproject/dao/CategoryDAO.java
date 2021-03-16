@@ -10,6 +10,7 @@ import com.carproject.domain.MemberVO;
 public interface CategoryDAO {
 	List<HashMap<String, Object>> categoryselect();
 	List<HashMap<String, Object>> sellselect(HeartVO vo);
+	List<HashMap<String, Object>> homesellselect(HeartVO vo);
 	List<HashMap<String, Object>> modelselect(String category);
 	List<HashMap<String, Object>> detailselect(String car_num);
 	List<HashMap<String, Object>> gradeselect(String grade);

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,6 @@
 <link rel="manifest" href="site.webmanifest">
 <link rel="shortcut icon" type="image/x-icon"
 	href="../resources/assets/img/favicon.ico">
-
 <!-- CSS here -->
 <link rel="stylesheet" href="../resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -47,13 +48,18 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-
+<link rel="stylesheet" href="../resources/css/all/product_list.css"
+	type="text/css">
 <script type="text/javascript" src="../resources/js/all/homepage.js"></script>
+<script type="text/javascript" src="../resources/js/all/product_list.js"></script>
 </head>
 <body>
-<input type="hidden" name="${_csrf.parameterName}"
+	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>
+
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
+
 
 	<main style="margin-bottom: 150px;">
 		<!-- slider Area Start-->
@@ -70,7 +76,8 @@
 									<img class='bluecar' alt=""
 										style="width: 80%; position: absolute; z-index: 0; top: 42%; right: -28%;"
 										src="../resources/img/car1.png">
-									<h1 data-animation="fadeInUp" data-delay=".4s">중고차 사이트 사차원!</h1>
+									<h1 data-animation="fadeInUp" data-delay=".4s">중고차 사이트
+										사차원!</h1>
 									<h3 data-animation="fadeInDown" data-delay=".4s">가짜 매물 X</h3>
 								</div>
 							</div>
@@ -88,9 +95,8 @@
 				<div class="row">
 					<div class="col-xl-5 col-lg-6">
 						<div class="customer-img mb-120">
-							<img src="../resources/img/sell.jpg"
-								class="customar-img1" alt=""> <img
-								src="../resources/assets/img/customer/customar2.png"
+							<img src="../resources/img/sell.jpg" class="customar-img1" alt="">
+							<img src="../resources/assets/img/customer/customar2.png"
 								class="customar-img2" alt="">
 							<div class="service-experience heartbeat">
 								<h3>
@@ -106,10 +112,11 @@
 							<div class="caption-details">
 								<p class="pera-dtails">코인을 충전하여 글을 등록할 수 있습니다.</p>
 								<p>
-								글을 등록한 순간부터 2주동안 게시됩니다.
-								<br>1코인에 1건의 글을 등록할 수 있으며 1코인은 10,000원으로 살 수 있습니다.
-								<br>허위 매물 등록시 삭제를 당할 수 있으며 코인은 돌려주지 않습니다.</p>
-								<a href="#" class="btn more-btn1">글 등록 <i
+									글을 등록한 순간부터 2주동안 게시됩니다. <br>1코인에 1건의 글을 등록할 수 있으며 1코인은
+									10,000원으로 살 수 있습니다. <br>허위 매물 등록시 삭제를 당할 수 있으며 코인은 돌려주지
+									않습니다.
+								</p>
+								<a style="color: white;" class="btn more-btn1">글 등록 <i
 									class="ti-angle-right"></i>
 								</a>
 							</div>
@@ -123,132 +130,53 @@
 		<!-- Room Start -->
 		<section class="room-area">
 			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-xl-8">
-						<!--font-back-tittle  -->
-						<div class="font-back-tittle mb-45">
-							<div class="archivment-front">
-								<h3>최신 차량 매물</h3>
+				<div class="row" style="display: flex;">
+					<c:forEach var="product_sell" items="${sell}">
+						<div class="col-xl-4 col-lg-6 col-md-6 product_all">
+							<!-- Single Room -->
+							<div class="single-room mb-50">
+								<div class="room-img">
+									<a class='go_detail1'
+										href="../all/salesDetail.do?num=${product_sell.sell_id}"><img
+										class="car_image" style="height: 277px;"
+										src="${product_sell.image}img1.png" alt=""></a>
+								</div>
+								<div class="room-caption" style="height: 220px;">
+									<h3 style="height: 50px;">
+										<a class='go_detail2'
+											href="../all/salesDetail.do?num=${product_sell.sell_id}">${product_sell.title}</a>
+									</h3>
+									<div class="per-night">
+										<span><span class='car_opt'>${product_sell.resultoption}</span></span>
+
+										<c:if test="${product_sell.resultoption eq ''}">
+											<span><span class='car_opt'>옵션이 등록되지 않음</span></span>
+										</c:if>
+										<div style="margin-top: 5px;">
+											<span class='car_price' style="font-size: 26px;"> <fmt:formatNumber
+													value="${product_sell.price}" pattern="#,###" />만원
+											</span>
+											<c:choose>
+												<c:when test="${product_sell.ht eq '1'}">
+													<i class="fas fa-heart wish color_pink"></i>
+													<input type="hidden" class='heart_on_off' value="on" />
+												</c:when>
+												<c:otherwise>
+													<i class="fas fa-heart wish"></i>
+													<input type="hidden" class='heart_on_off' value="off" />
+												</c:otherwise>
+											</c:choose>
+											<input type="hidden" class='sell_id'
+												value="${product_sell.sell_id}" />
+										</div>
+									</div>
+								</div>
 							</div>
-							<h3 class="archivment-back">최신 차량 매물</h3>
 						</div>
-					</div>
+					</c:forEach>
+
 				</div>
-				<div class="row">
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-lg-6 col-md-6">
-						<!-- Single Room -->
-						<div class="single-room mb-50">
-							<div class="room-img">
-								<a href="rooms.html"><img
-									src="https://img.kbchachacha.com/IMG/carimg/l/img08/img2118/21187172_23828591621904522.jpg" alt=""></a>
-							</div>
-							<div class="room-caption">
-								<h3>
-									<a href="rooms.html">현대 싼타페 TM 디젤 2.2 4WD 프레스티지</a>
-								</h3>
-								<div class="per-night">
-									<span><span>무사고/네비+후방캠/고효율 디젤/인기만점 오프로더/인기만점 오프로더</span></span>
-									<div><span style="font-size: 26px;">3,099만원</span><i class="fas fa-heart"></i></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
+			</div>
 		</section>
 		<!-- Room End -->
 
@@ -262,11 +190,10 @@
 							<div class="dining-caption">
 								<span>news</span>
 								<h3>자동차 뉴스</h3>
-								<p>
-									자동차에 관련된 최신 정보를 모아 놓았습니다.
-								</p>
-								<a href="#" class="btn border-btn">Learn More <i
-									class="ti-angle-right"></i>
+								<p>자동차에 관련된 최신 정보를 모아 놓았습니다.</p>
+
+								<a href="../all/carnewsBoardList.do?page=1"
+									class="btn border-btn">Learn More <i class="ti-angle-right"></i>
 								</a>
 							</div>
 						</div>
@@ -282,10 +209,9 @@
 								<span>prediction</span>
 								<h3>시세 확인 & 예측</h3>
 								<p>
-									과거의 자동차 판매가격을 기준으로 평균 시세를 보여주고<br>
-									미래의 시세를 예측하여 나타내 줍니다.
+									과거의 자동차 판매가격을 기준으로 평균 시세를 보여주고<br> 미래의 시세를 예측하여 나타내 줍니다.
 								</p>
-								
+
 							</div>
 						</div>
 					</div>
@@ -294,13 +220,13 @@
 		</div>
 		<!-- Dining End -->
 
-		
 
-		
 
-		
+
+
+
 	</main>
-	
+
 	<%@ include file="../footer.jsp"%>
 
 	<!-- JS here -->
