@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 import com.carproject.service.HeartService;
@@ -44,6 +45,8 @@ public class SalesController {
 	private MycarService mycarService;
 	@Autowired
 	private LetterService letterService;
+	@Autowired
+	private HeartService heartService;
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -97,7 +100,12 @@ public class SalesController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		model.addAttribute("arr", array);
@@ -159,7 +167,7 @@ public class SalesController {
 	 * 상세페이지 => sell_id값으로 불러옴
 	 */
 	@RequestMapping("all/salesDetail.do")
-	public void salesDetail(@RequestParam("num") Long num, Model model) {	
+	public void salesDetail(@RequestParam("num") Long num, Model model, HttpSession session) {	
 		SalesVO sales  = salesService.salesDetail(num);
 		model.addAttribute("sales", sales);
 		System.out.println(sales.getOption());
@@ -215,7 +223,18 @@ public class SalesController {
 				}
 			}
 		}
+		HeartVO hvo = new HeartVO();
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		hvo.setM_id(user_id);
+		hvo.setSell_id(num.intValue());
+		String heart = heartService.seletheartone(hvo);
 		model.addAttribute("result_option", result_option);
+		model.addAttribute("heart", heart);
 	}
 	
 	

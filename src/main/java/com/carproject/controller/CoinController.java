@@ -47,7 +47,12 @@ public class CoinController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		// 코인 테이블의 코인 합산결과값으로 member 테이블의 coin값을 업데이트하기

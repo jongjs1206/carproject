@@ -38,7 +38,8 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 	<link rel="stylesheet" href="../resources/css/all/homepage.css" type="text/css">
 	<link rel="stylesheet" href="../resources/css/all/product_list.css" type="text/css">
-	
+	<link rel="stylesheet" href="../resources/css/all/salesDetail.css" type="text/css">
+	<link rel="stylesheet" href="../resources/assets/css/style.css">
 	<script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -56,7 +57,7 @@
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
-	<%@ include file="../side.jsp"%>	<!-- side bar -->
+	
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
 	
@@ -685,6 +686,7 @@
 				<div class="col-lg-5">	<!-- start of 오른쪽 위 -->
 	            	<div class="course__details__sidebar">
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
+	                		<input type="hidden" class='note_title' value='${sales.title}'>
 	                        <div class="carNameInfo" style="text-align:center;"><span style="font-size:22px;">${sales.title}</span></div>
 	                        <div class="carInfo"><h6 style="text-align:center">${sales.old} | ${sales.color} | ${sales.fuel}</h6></div>
 	                        <div class="" style="text-align:center;"><span><b class="salesPrice" style="color:#dca73a; margin-right:5px;">
@@ -711,36 +713,43 @@
 				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sales.m_name} (${sales.m_id})</span><br/>
 					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sales.tel}</span>
 				                	</div>
+				                	<input class='sale_id' type="hidden" value="${sales.m_id}">
 				           		</div> 
 				            </div>
 	                    </div>	<!-- end of 판매자 정보 -->
 				        <div class="favorite" style="font-size:14px; display:flex; margin:5px 0 0 0;">
-				        	<div class="icons" style="margin-left:150px;">
-				        		<span style="margin:0 5px 0 5px; font-size:15px;">신고하기</span> 
-				        		<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">
-				        		<span style="margin-left:20px; font-size:15px;">쪽지보내기</span>
-				        		<img src="../resources/img/message-gold.png" style="width:26px; height:30px;">
-				        		<span style="margin-left:20px; font-size:15px;">찜하기</span>
-				        		<span style="margin-left:20px">	<!-- 하트 아이콘 -->
-				        			<c:choose>
-										<c:when test="${product_sell.ht eq '1'}">
-											<i class="fas fa-heart wish color_pink"></i>									
-											<input type="hidden" class='heart_on_off' value="on"/>
-										</c:when>
-										<c:otherwise>
-											<i class="fas fa-heart wish"></i>	
-											<input type="hidden" class='heart_on_off' value="off"/>
-										</c:otherwise>
-									</c:choose>
-								</span>
-				        	</div>	<!-- end of 쪽지보내기 / 찜하기 -->
+				        	<div class="icons" style="margin-left:150px; display:flex;">
+				        		<div class='pointer'>
+				        			<span style="margin:0 5px 0 5px; font-size:15px; position: relative; top:2px;">신고하기</span> 
+				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">
+				        		</div>
+				        		<div class='pointer notego'>
+				        			<span style="margin-left:20px; font-size:15px; position: relative; top:2px;">쪽지보내기</span>
+				        			<img src="../resources/img/message-gold.png" style="width:26px; height:30px;position: relative; top:2px;">
+												
+				        		</div>
+									<div class='pointer' style="position: relative; top:6px;">
+										<span style="margin-left: 20px; font-size: 15px;">찜하기</span> <span
+											style="margin-left: 20px;position: relative; top:-2px;"> <!-- 하트 아이콘 --> <c:choose>
+												<c:when test="${heart eq '1'}">
+													<i class="fas fa-heart wish color_pink"></i>
+													<input type="hidden" class='heart_on_off' value="on" />
+												</c:when>
+												<c:otherwise>
+													<i class="fas fa-heart wish"></i>
+													<input type="hidden" class='heart_on_off' value="off" />
+												</c:otherwise>
+											</c:choose>
+										</span>
+									</div>
+								</div>	<!-- end of 쪽지보내기 / 찜하기 -->
 				        </div>	<!-- end of favorite -->
 	                </div>	<!-- end of 차 / 판매자 정보 -->
 				</div>	<!-- end of 오른쪽 위 -->
 			</div>	<!-- end of row -->
+			<input type="hidden" name="sell_id" id="sell_id" value="<%=sell_id%>">
 			<c:if test="${sales.m_id == sessionScope.info.m_id}">	<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
 				<div class="modify-delete" style="margin:50px 0;">
-				<input type="hidden" name="sell_id" id="sell_id" value="<%=sell_id%>">
 					<a id="modifyCar"><span style="margin-left:450px;">수정하기</span></a>
 					<a id="deleteCar"><span style="margin-left:50px;">삭제하기</span></a>
 				</div>
