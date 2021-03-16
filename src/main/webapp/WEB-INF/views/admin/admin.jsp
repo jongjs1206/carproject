@@ -103,9 +103,15 @@
                                         <i class="fas fa-chart-area mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
+                                    		                                    <c:forEach items="${coinchart}" var="coin">
+		                                    	<tr>
+		                                        	<td>${coin.day}</td>
+		                                           	<td>${coin.price}</td>
+		                                        </tr>
+		                                    </c:forEach>    
                                     <div class="card-body">
                                     	<canvas id="myChart" width="100%" height="40">
-		                                    <c:forEach items="${coinList}" var="coin">
+		                                    <c:forEach items="${coinchart}" var="coin">
 		                                    	<tr>
 		                                        	<td>${coin.day}</td>
 		                                           	<td>${coin.price}</td>
@@ -179,14 +185,14 @@
 			var ctx = document.getElementById('myChart');
 			var data = {
 			    labels: [
-			    	<c:forEach items="${coinList}" var="coin">
+			    	<c:forEach items="${coinchart}" var="coin">
 						${coin.day},
 					</c:forEach> 
 			    	],
 			    datasets: [{
 			        label: '# 일 매출',
 			        data:[
-			        	<c:forEach items="${coinList}" var="coin">
+			        	<c:forEach items="${coinchart}" var="coin">
 			        		${coin.price},
 						</c:forEach> 
 			        ],

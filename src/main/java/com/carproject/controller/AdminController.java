@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.carproject.domain.CoinVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 import com.carproject.service.CategoryService;
@@ -166,9 +166,12 @@ public class AdminController {
 	////////////////////////////////////////////////////////////////////////////
 	// 일별 코인 충전 현황 차트
 	@RequestMapping("admin/admin.do")
-	public void coinchart() {
+	public void coinchart(Model model, CoinVO vo) {
+		List<HashMap<String, Object>> coin = coinservice.allCoinList();
+		model.addAttribute("coinchart", coin);
+		
+		
 		//System.out.println("coin차트요");
-		coinservice.allCoinList();
 	}
 		
 	
