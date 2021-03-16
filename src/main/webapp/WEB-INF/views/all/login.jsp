@@ -12,7 +12,7 @@
 <meta name="google-signin-client_id" content="720645188606-a3u36ofdsi5rp6goo6g3i9emjk0eahrd.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<title>login</title>
+<title>로그인</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

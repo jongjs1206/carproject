@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="icon" href="resources/images/etc/favicon.png">
-<title>title</title>
+<title>접근 권한 경고</title>
 <script type="text/javascript">
 	alert('접근 권한이 없습니다.');
 	window.self.location = "../all/homepage.do";
