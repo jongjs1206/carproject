@@ -13,12 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.carproject.domain.DeclarationVO;
 import com.carproject.domain.GradeVO;
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.LetterVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.MycarVO;
 import com.carproject.service.CategoryService;
+import com.carproject.service.DeclarationService;
 import com.carproject.service.HeartService;
 import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
@@ -36,6 +38,8 @@ public class UserController {
 	private MycarService mycarService;
 	@Autowired
 	private LetterService letterService;
+	@Autowired
+	private DeclarationService declarationService;
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -70,7 +74,12 @@ public class UserController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(id);
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
 		return "all/homepage";
@@ -83,6 +92,54 @@ public class UserController {
 	public String out(HttpSession session) {
 		session.invalidate();
 		return "all/login";
+	}
+	
+	/*
+	 * 홈페이지
+	 */
+	@RequestMapping("all/homepage.do")
+	public void homepage(Model model, HttpSession session) {
+		HeartVO vo = new HeartVO();
+		if (session.getAttribute("info") != null) {
+			MemberVO info = (MemberVO) session.getAttribute("info");
+			vo.setM_id(info.getM_id());
+		}
+		List<HashMap<String, Object>> sell = categoryService.homesellselect(vo);
+
+		for (int i = 0; i < sell.size(); i++) {
+			StringBuffer resultoption = new StringBuffer();
+			StringBuffer temp = new StringBuffer();
+			String option = (String) sell.get(i).get("option");
+			int count = 0;
+			if (option.split("/").length > 0) {
+				for (int j = 0; j < option.split("/").length; j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for (int k = 0; k < temp.length(); k++) {
+					if (temp.charAt(k) == '1') {
+						resultoption.append(alloption[k]);
+						if (count == 4)
+							break;
+						resultoption.append("/");
+						count++;
+					}
+				}
+			}
+			sell.get(i).put("resultoption", resultoption);
+		}
+		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
+
+		model.addAttribute("sell", sell);
 	}
 
 	/*
@@ -121,6 +178,17 @@ public class UserController {
 			}
 			sell.get(i).put("resultoption", resultoption);
 		}
+		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
 
 		model.addAttribute("category", category);
 		model.addAttribute("sell", sell);
@@ -617,7 +685,17 @@ public class UserController {
 			}
 			heartlist.get(i).put("resultoption", resultoption);
 		}
-
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
+		
 		model.addAttribute("heartlist", heartlist);
 		model.addAttribute("heartcount", heartcount);
 	}
@@ -673,12 +751,23 @@ public class UserController {
 	 * 블랙박스 페이지
 	 */
 	@RequestMapping("user/blackbox.do")
-	public void blackbox(String num,Model model) {
+	public void blackbox(String num,Model model, HttpSession session) {
 		List<MycarVO> list = mycarService.selectblackbox();
 		String re_num="0";
 		if(!(num.equals(""))) {
 			re_num=num;
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
+		
 		model.addAttribute("num", re_num);
 		model.addAttribute("list", list);
 		mycarService.updateblackbox();
@@ -721,6 +810,16 @@ public class UserController {
 			list = letterService.sendselect(vo);
 			note_count=letterService.sendcount(vo);
 		}
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String notes = letterService.selectnotecount(user_id);
+		session.setAttribute("note", notes);
 		
 		model.addAttribute("note", note);
 		model.addAttribute("note_count", note_count);
@@ -750,8 +849,9 @@ public class UserController {
 	 * 쪽지 보내기
 	 */
 	@RequestMapping("user/noteinsert.do")
-	public void noteinsert(String re, Model model) {		
+	public void noteinsert(String re,String title, Model model) {		
 		model.addAttribute("re", re);
+		model.addAttribute("title", title);
 	}
 	
 	/*
@@ -780,4 +880,22 @@ public class UserController {
 		letterService.noshowsend(l_id);
 	}
 
+	/*
+	 * 신고하기 페이지
+	 */
+	@RequestMapping("user/declaration.do")
+	public void declaration(String id,String name, Model model) {		
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+	}
+	
+	
+	/*
+	 * 신고 보내기
+	 */
+	@RequestMapping("user/declaration_insert.do")
+	@ResponseBody
+	public void declaration_insert(DeclarationVO vo) {
+		declarationService.declaration_insert(vo);
+	}
 }

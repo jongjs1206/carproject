@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.carproject.domain.GradeVO;
+import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 import com.carproject.service.HeartService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
+import com.carproject.service.MycarService;
 import com.carproject.service.SalesService;
 
 
@@ -34,9 +39,14 @@ public class SalesController {
 	
 	@Autowired
 	private SalesService salesService;	
-	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
+	@Autowired
+	private HeartService heartService;
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -50,7 +60,32 @@ public class SalesController {
 	//////////////////////////////////////////////////////////
 	// 제조사
 	@RequestMapping("user/sales.do")
-	public void brandList(Model model) {
+	public String brandList(Model model,HttpSession session) {
+		
+		// (1) m_id값 가져오기
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = "";
+		if (principal instanceof UserDetails) {
+			id = ((UserDetails)principal).getUsername();
+	    } else {
+	    	id = principal.toString();
+	    }
+
+		// (2) 글 작성하는 id로 작성자정보 가져오기      
+		MemberVO mvo = new MemberVO();
+		mvo.setM_id(id);
+		MemberVO info = memberService.checkUniqueId(mvo);
+		System.out.println("글 작성자 정보 : " + info.getM_name() + "님 ID : " + info.getM_id());
+		
+		// (3) 코인 충전량이 있는지 확인 -- 코인이 없을 경우 코인충전페이지로 이동
+		String coin = info.getCoin();
+		System.out.println("코인검사 : " + coin);
+		String zero = "0";
+		if (coin.equals(zero)) {
+			System.out.println("충전된 코인이 없습니다.");
+			return "redirect:/all/alert.do";
+		}
+		
 		List<HashMap<String, Object>> list = salesService.brandList();
 		model.addAttribute("brandList", list);
 		
@@ -62,9 +97,22 @@ public class SalesController {
 			array.add(year);
 		}
 		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
+		
 		model.addAttribute("arr", array);
 		
 		System.out.println("제조사리스트");
+		
+		return null;
 	}
 	
 	// 모델
@@ -119,7 +167,7 @@ public class SalesController {
 	 * 상세페이지 => sell_id값으로 불러옴
 	 */
 	@RequestMapping("all/salesDetail.do")
-	public void salesDetail(@RequestParam("num") Long num, Model model) {	
+	public void salesDetail(@RequestParam("num") Long num, Model model, HttpSession session) {	
 		SalesVO sales  = salesService.salesDetail(num);
 		model.addAttribute("sales", sales);
 		System.out.println(sales.getOption());
@@ -175,7 +223,18 @@ public class SalesController {
 				}
 			}
 		}
+		HeartVO hvo = new HeartVO();
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		hvo.setM_id(user_id);
+		hvo.setSell_id(num.intValue());
+		String heart = heartService.seletheartone(hvo);
 		model.addAttribute("result_option", result_option);
+		model.addAttribute("heart", heart);
 	}
 	
 	
@@ -288,6 +347,10 @@ public class SalesController {
 		analysis.put("sell_id", Integer.toString(sell_id));
 		analysis.put("v_result", v_result);
 		salesService.insertAnalysis(analysis);
+		
+		// (10) 글 등록시 코인 -1 반영 (코인테이블, 멤버테이블)
+		salesService.useCoinC(info);
+		salesService.useCoinM(info);
 		
 		return "redirect:/all/product_list.do";
 	}
@@ -417,6 +480,16 @@ public class SalesController {
 		
 		// (8) 글 수정
 		salesService.salesModify(svo);
+		
+		// 이미지 분석
+		// (9) 파이썬으로 sell_id 보내기 -> 파이썬에서 검사 -> 결과를 수신
+		String v_result = salesService.pystart(Integer.toString(sell_id));
+		System.out.println("이미지 분석 결과 : " + v_result);
+
+		HashMap<String, String> analysis = new HashMap<String, String>();
+		analysis.put("sell_id", Integer.toString(sell_id));
+		analysis.put("v_result", v_result);
+		salesService.insertAnalysis(analysis);
 		
 		System.out.println("수정 글번호" + svo.getSell_id());
 		

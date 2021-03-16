@@ -10,6 +10,7 @@ import com.carproject.domain.MemberVO;
 public interface CategoryService {
 	public List<HashMap<String, Object>> categoryselect();
 	public List<HashMap<String, Object>> sellselect(HeartVO vo);
+	public List<HashMap<String, Object>> homesellselect(HeartVO vo);
 	public List<HashMap<String, Object>> modelselect(String category);
 	public List<HashMap<String, Object>> detailselect(String car_num);
 	public List<HashMap<String, Object>> gradeselect(String grade);

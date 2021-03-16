@@ -3,6 +3,8 @@ package com.carproject.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.carproject.domain.CoinVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.service.CoinService;
+import com.carproject.service.LetterService;
 import com.carproject.service.MemberService;
+import com.carproject.service.MycarService;
 
 @Controller
 public class CoinController {
@@ -25,10 +29,14 @@ public class CoinController {
 	private CoinService coinService;
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
+	
 	// 내 코인 충전 내역 확인 - 쿼리스트링으로 m_id 가져와서 DB 정보 출력 (첫 로딩)
 	@RequestMapping(value = "user/coin.do")
-	public void coin(@RequestParam("m_id") String m_id, Model model) {
+	public void coin(@RequestParam("m_id") String m_id, Model model,HttpSession session) {
 		List<HashMap<String, Object>> list = coinService.coinView(m_id);
 		String onlyCoin = "";
 		if (list.size() > 0) {
@@ -36,7 +44,16 @@ public class CoinController {
 		}else {
 			onlyCoin = "0";
 		}
-
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
 		
 		// 코인 테이블의 코인 합산결과값으로 member 테이블의 coin값을 업데이트하기
 		MemberVO vo = new MemberVO();

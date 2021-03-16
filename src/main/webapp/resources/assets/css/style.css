@@ -431,6 +431,7 @@ label {
 
 /* scrollUp */
 #scrollUp {
+  visibility:hidden;
   background: #dca73a;
   height: 50px;
   width: 50px;

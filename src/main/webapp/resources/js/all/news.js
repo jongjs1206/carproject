@@ -280,5 +280,23 @@ $(function() {
       		$('.page').val(Number($('.page').val())+Number(1));
    		}
 	});//end of 무한스크롤
+	
+	// 은별
+	//////////////////////////////////////////////////////////////////////
+	// 관리자 자동차뉴스 삭제
+	$(document).on("click", "#newsDelete", function(){
+		//console.log($('#w_id').val());
+		var delConfirm = confirm('삭제하시겠습니까?');
+		 
+		if (delConfirm) {
+     		alert('삭제되었습니다.');
+   		}
+   		else {
+      		alert('삭제가 취소되었습니다.');
+   		}
+   		url = '../admin/newsDelete.do?w_id=' + $('#w_id').val();		
+		window.location.href = url;
+   		
+	});	// end of 삭제	
 
 }); //end of function

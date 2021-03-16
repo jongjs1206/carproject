@@ -37,7 +37,7 @@
 	crossorigin="anonymous"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-	
+	<link rel="stylesheet" href="../resources/assets/css/style.css">
 	<script type="text/javascript" src="../resources/js/all/sales.js"></script>
 </head>
 <body>
@@ -49,7 +49,7 @@
 	
 	<!-- slider Area Start-->
     <div class="slider-area">
-      <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/assets/img/hero/contact_hero.jpg" >
+      <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="../resources/img/sales2.jpg" >
           <div class="container">
               <div class="row">
                   <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
@@ -159,13 +159,13 @@
                                         </div><hr style="margin:10px 0;">	<!-- end of 사고여부/판매가격 -->	
                                         <div style="font-size:14px; display: flex; line-height: 35px;">	<!-- 변속기/연료 -->	
                                         	<span>변속기</span>
-                                        	<select class='carGear' id="carGear" name='gear' style="margin:0 250px 0 40px;">
+                                        	<select class='carGear' id="carGear" name='gear' style="margin:0 240px 0 40px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="자동">자동</option>
 	                                    		<option value="수동">수동</option>
                                     		</select>
 	                                    	<span>연료</span>
-	                                    	<select class='carFuel' id='carFuel' name="fuel" style="margin-left:20px;">
+	                                    	<select class='carFuel' id='carFuel' name="fuel" style="margin-left:30px;">
 	                                    		<option value="선택">선택</option>
 	                                    		<option value="가솔린">가솔린</option><option value="디젤">디젤</option><option value="LPG">LPG</option>
 	                                    		<option value="가솔린/LPG겸용">가솔린/LPG겸용</option><option value="가솔린/CNG겸용">가솔린/CNG겸용</option>
@@ -288,7 +288,7 @@
                                </tr>
 		                	</table>
 		                	<div class="uploadBtn" style="margin:50px 0;">	
-		                		<a id="enrollCar"><span style="margin-left:600px;">등록하기</span></a>
+		                		<a id="enrollCar"><span style="margin-left:550px;">등록하기</span></a>
 		                	</div>
 		                	<c:if test="${sales.m_id == sessionScope.info.m_id}">	<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
 								<div class="modify-delete" style="margin:50px 0;">	

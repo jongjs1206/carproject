@@ -7,7 +7,7 @@ $(function() {
 	$("#carBrand").change(function() {
 		
 		var brand = $("#carBrand").val();
-		$("#title").val(brand);	// 글 제목에 제조사 들어감 
+		$("#title").val(brand);							// 글 제목에 제조사 들어감 
 		
 		$.ajax({	
         	type : 'post',
@@ -73,9 +73,9 @@ $(function() {
 		var result = "";
 		var beforeTitle = brand + " " + model;
 		
-		detailModel = detailModel.replace(model, "");
-		
-		if (detailModel.indexOf('(') != -1) {
+		detailModel = detailModel.replace(model, "");				// 모델명과 세부모델명 중복 처리
+			
+		if (detailModel.indexOf('(') != -1) {						// 글제목에 들어갈 세부모델명 ()값 제거
 			var startIndex = detailModel.indexOf('(')
 			var rslt = detailModel.substring(0, startIndex)
 			result = beforeTitle + " " + rslt
@@ -118,15 +118,15 @@ $(function() {
 		var model = $("#carModel").val();
 		var detailModel = $("#carDetailModel").val();
 		
-		if (detailModel.indexOf('(') != -1) {		// 세부등급에 들어가는 괄호 내용 제거
+		if (detailModel.indexOf('(') != -1) {						// 글제목에 들어갈 세부모델명 ()값 제거
 			var startIndex = detailModel.indexOf('(')
 			var rslt = detailModel.substring(0, startIndex)
 			detailModel = rslt
 		}
 		
-		detailModel = detailModel.replace(model, "");
-		
 		var grade = $("#carGrade").val();
+		
+		detailModel = detailModel.replace(model, "");
 		
 		var beforeTitle = brand + " " + model + " " + detailModel;
 		var result = beforeTitle + " " + grade;
@@ -170,23 +170,26 @@ $(function() {
 		var grade = $("#carGrade").val();
 		var detailGrade = $("#carDetailGrade").val();
 		
-		if (detailModel.indexOf('(') != -1 && detailGrade.indexOf('(') != -1) {		// 세부등급, 세부모델에 들어가는 괄호 내용 제거
+		//var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
+		//var result = beforeTitle + " " + detailGrade;
+		var beforeTitle = brand + " " + model;
+		//var result = beforeTitle + " ";
+		
+		detailModel = detailModel.replace(model, "");
+		
+		if (detailModel.indexOf('(') != -1 && detailGrade.indexOf('(') != -1) {		// 글제목에 들어갈 세부모델, 세부등급 ()값 제거
 			var startIndex1 = detailModel.indexOf('(')		// 세부모델
 			var startIndex2 = detailGrade.indexOf('(')		// 세부등급
 			var rslt1 = detailModel.substring(0, startIndex1)	// 세부모델
 			var rslt2 = detailGrade.substring(0, startIndex2)	// 세부등급
 			detailModel = rslt1		// 세부모델
 			detailGrade = rslt2		// 세부등급
-			result = beforeTitle + " " + rslt1 + " " + rslt2
+			//result = beforeTitle + " " + rslt1 + " " + rslt2
+			result = beforeTitle + " " + rslt1 + " " + grade + " " + rslt2
 		} else {
-			result = beforeTitle + " " + detailModel
+			result = beforeTitle + " " + rslt1 + " " + grade + " " + detailGrade
 		}
-		
-		detailModel = detailModel.replace(model, "");
-		
-		var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
-		var result = beforeTitle + " " + detailGrade;
-		
+
 		$("#title").val(result);
 	
 		var g_id = $('#carDetailGrade option:selected').attr('id');		// 선택한 세부모델의 g_id값
@@ -241,12 +244,8 @@ $(function() {
 	//////////////////////////////////////////////////////
 	// 이미지 & 썸네일 <= 썸네일을 클릭했을 때 대표이미지가 바뀜
 	window.imgClick = function(obj) {
-		// 썸네일 클릭할 때 border 부여
-		//$('.thumbnail > img').css({'border':'3px solid #dca73a'});
-				
 		var addr = $(obj).attr('src');		// 이미지 주소값
 		$('#carimg').attr('src', addr);	
-		//addr.style.border = "3px solid #dca73a";
 	}
 	
 	
@@ -420,10 +419,80 @@ $(function() {
    		else {
       		alert('삭제가 취소되었습니다.');
    		}
-   		//alert($('#sell_id').val());
    		url = '../user/deleteSales.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 수정하기 버튼을 눌렀을 때 타고갈 다음 url
 		window.location.href = url;
    		
 	});	// end of 삭제
+	
+	//찜기능
+	$(document).on("click",".fa-heart",function(){
+			if($('.login_on').val()==""){
+				alert('로그인시 찜 기능을 사용할 수 있습니다.');
+			}else{
+				if($(this).next().val()=='on'){
+					$(this).next().val('off');
+					$(this).removeClass('color_pink');
+					
+					$.ajax({
+			type : 'post',
+			async : true,
+			url : '../all/heart_off.do',
+			beforeSend : function(xhr)
+			{	
+				xhr.setRequestHeader(header, token);
+			},
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			dataType : 'json',
+			data : {"id" : $('.login_on').val(),
+			"sell_id":$('#sell_id').val()},
+			success: function(){
+				
+        	},
+				error : function(err){ console.log(err)}  //실패했을때
+				});
+				
+				}else{
+					$(this).next().val('on');
+					$(this).addClass('color_pink');
+										
+					$.ajax({
+					type : 'post',
+					async : true,
+					url : '../all/heart_on.do',
+					beforeSend : function(xhr)
+					{	
+						xhr.setRequestHeader(header, token);
+					},
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					dataType : 'json',
+					data : {"id" : $('.login_on').val(),
+					"sell_id":$('#sell_id').val()},
+					success: function(){
+						
+		        	},
+						error : function(err){ console.log(err)}  //실패했을때
+					});
+				}
+			}
+	});
+	$('.notego').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 쪽지 기능을 사용할 수 있습니다.');
+		}else{
+			window.open('../user/noteinsert.do?re='
+			+$('.sale_id').val()
+			+'&title='
+			+$('.note_title').val().split(' ')[0]+' 문의', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
+		}
+	})
+	
+	$('.declaration').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 신고 할 수 있습니다.');
+		}else{
+			window.open('../user/declaration.do?id='+
+			$('.sale_id').val()+'&name='+$('.sale_name').val(), 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
+		}
+	})
 	
 })	// end of 전체 function()

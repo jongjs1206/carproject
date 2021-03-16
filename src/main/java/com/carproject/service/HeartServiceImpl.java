@@ -30,4 +30,9 @@ public class HeartServiceImpl implements HeartService{
 		heartDAO.deleteHeart(vo);
 	}
 
+	@Override
+	public String seletheartone(HeartVO hvo) {
+		return heartDAO.seletheartone(hvo);
+	}
+
 }

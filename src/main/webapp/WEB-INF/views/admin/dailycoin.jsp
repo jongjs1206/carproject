@@ -1,89 +1,89 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- ºê¶ó¿ìÀú ÃÖ»ó´Ü ÅÇ ¸í -->
+    <!-- ë¸Œë¼ìš°ì € ìµœìƒë‹¨ íƒ­ ëª… -->
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>°ü¸®ÀÚÆäÀÌÁö</title>
-        <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css"/> <!-- cssÆÄÀÏ import -->
+        <title>ê´€ë¦¬ìžíŽ˜ì´ì§€</title>
+        <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css"/> <!-- cssíŒŒì¼ import -->
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
 
-    <!-- ÆäÀÌÁö ³»¿ë ºÎºÐ -->
+    <!-- íŽ˜ì´ì§€ ë‚´ìš© ë¶€ë¶„ -->
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- »ó´Ü Á¦¸ñ -->
-            <a class="navbar-brand" href="./admin.do">°ü¸®ÀÚ ÆäÀÌÁö</a>
+            <!-- ìƒë‹¨ ì œëª© -->
+            <a class="navbar-brand" href="./admin.do">ê´€ë¦¬ìž íŽ˜ì´ì§€</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"></button>
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             </form>
-            <!-- È¸¿ø ¾ÆÀÌÄÜ µå·Ó´Ù¿î ¸Þ´º -->
+            <!-- íšŒì› ì•„ì´ì½˜ ë“œë¡­ë‹¤ìš´ ë©”ë‰´ -->
             <ul class="navbar-nav ml-auto ml-md-0"> 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     
-                    <!-- ¸ÞÀÎÆäÀÌÁö ÀÌµ¿ -->
-                        <a class="dropdown-item" href="../all/homepage.do">¸ÞÀÎ ÆäÀÌÁö ÀÌµ¿</a> 
+                    <!-- ë©”ì¸íŽ˜ì´ì§€ ì´ë™ -->
+                        <a class="dropdown-item" href="../all/homepage.do">ë©”ì¸ íŽ˜ì´ì§€ ì´ë™</a> 
                         <div class="dropdown-divider"></div></a>
                     </div>
                 </li>
             </ul>
         </nav>
         
-        <!-- ÁÂÃø ¸Þ´º -->
+        <!-- ì¢Œì¸¡ ë©”ë‰´ -->
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading"><h4>¸Þ´º</h4></div>  
+                            <div class="sb-sidenav-menu-heading"><h4>ë©”ë‰´</h4></div>  
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>È¸¿ø°ü¸®
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>íšŒì›ê´€ë¦¬
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./userlist.do">È¸¿ø¸ñ·Ï</a>
-                                    <a class="nav-link" href="./withdrawal.do">Å»ÅðÈ¸¿ø¸ñ·Ï</a> 
-                                    <a class="nav-link" href="./blacklist.do">ºí·¢¸®½ºÆ®¸ñ·Ï</a>
-                                    <a class="nav-link" href="./adminlist.do">°ü¸®ÀÚ¸ñ·Ï</a>  
+                                    <a class="nav-link" href="./userlist.do">íšŒì›ëª©ë¡</a>
+                                    <a class="nav-link" href="./withdrawal.do">íƒˆí‡´íšŒì›ëª©ë¡</a> 
+                                    <a class="nav-link" href="./blacklist.do">ë¸”ëž™ë¦¬ìŠ¤íŠ¸ëª©ë¡</a>
+                                    <a class="nav-link" href="./adminlist.do">ê´€ë¦¬ìžëª©ë¡</a>  
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ÄÚÀÎÇöÈ²
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ì½”ì¸í˜„í™©
                             </a>
                             <div class="collapse" id="collapseone" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailycoin.do">ÀÏº°ÄÚÀÎÃæÀü</a>
-                                    <a class="nav-link" href="./monthlycoin.do">¿ùº°ÄÚÀÎÃæÀü</a>
+                                    <a class="nav-link" href="./dailycoin.do">ì¼ë³„ì½”ì¸ì¶©ì „</a>
+                                    <a class="nav-link" href="./monthlycoin.do">ì›”ë³„ì½”ì¸ì¶©ì „</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>¹æ¹®ÇöÈ²
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ë°©ë¬¸í˜„í™©
                             </a>
                             <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./dailysales.do">ÀÏÀÏ¹æ¹®ÇöÈ²</a>
-                                    <a class="nav-link" href="./monthlysales.do">¿ùº°¹æ¹®ÃæÀü</a>
+                                    <a class="nav-link" href="./dailysales.do">ì¼ì¼ë°©ë¬¸í˜„í™©</a>
+                                    <a class="nav-link" href="./monthlysales.do">ì›”ë³„ë°©ë¬¸ì¶©ì „</a>
                                 </nav>
                             </div>
                             
                              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
-                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>°Ô½Ã±Û°ü¸®
+                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>ê²Œì‹œê¸€ê´€ë¦¬
                              </a>
                              <div class="collapse" id="collapsethree" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="./salesarticlelist.do">ÆÇ¸Å±Û</a>
-                                    <a class="nav-link" href="./userinquiry.do">°í°´¹®ÀÇ</a> 
-                                    <a class="nav-link" href="./carnews.do">ÀÚµ¿Â÷´º½º</a>
-                                    <a class="nav-link" href="./purchasereview.do">±¸¸ÅÈÄ±â</a>
+                                    <a class="nav-link" href="./salesarticlelist.do">íŒë§¤ê¸€</a>
+                                    <a class="nav-link" href="./userinquiry.do">ê³ ê°ë¬¸ì˜</a> 
+                                    <a class="nav-link" href="./carnews.do">ìžë™ì°¨ë‰´ìŠ¤</a>
+                                    <a class="nav-link" href="./purchasereview.do">êµ¬ë§¤í›„ê¸°</a>
                                 </nav>
                             </div>
                         </div>
@@ -91,24 +91,25 @@
                 </nav>
             </div>
             
-            <!-- ´ë½Ãº¸µå ³»¿ë -->
+            <!-- ëŒ€ì‹œë³´ë“œ ë‚´ìš© -->
             <div id="layoutSidenav_content">
+            <%@ include file="./side.jsp"%>
                     <div class="container-fluid">
-                        <h2 class="mt-4">ÀÏº° ÄÚÀÎ ÃæÀü ÇöÈ²</h2>
+                        <h2 class="mt-4">ì¼ë³„ ì½”ì¸ ì¶©ì „ í˜„í™©</h2>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                ÃæÀü ÇöÈ²
+                                ì¶©ì „ í˜„í™©
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     
-                                        <!-- ¿¹½Ã µ¥ÀÌÅÍ »ðÀÔ -->
+                                        <!-- ì˜ˆì‹œ ë°ì´í„° ì‚½ìž… -->
                                         <thead>
                                             <tr>
-                                                <th>³¯Â¥</th>
-                                                <th>ÃæÀü·®</th>
+                                                <th>ë‚ ì§œ</th>
+                                                <th>ì¶©ì „ëŸ‰</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -125,18 +126,18 @@
                             </div>
                         </div>
                         
-                <!-- ÃÖÇÏ´Ü footer -->
+                <!-- ìµœí•˜ë‹¨ footer -->
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; »çÂ÷¿ø</div>
+                            <div class="text-muted">Copyright &copy; ì‚¬ì°¨ì›</div>
                         </div>
                     </div>
                 </footer>
             </div>
         </div>
         
-        <!-- javascript ÆÄÀÏ import -->
+        <!-- javascript íŒŒì¼ import -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

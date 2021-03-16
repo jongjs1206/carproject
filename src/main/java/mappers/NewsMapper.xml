@@ -71,5 +71,16 @@ w_date=(SELECT MAX(w_date) FROM reply WHERE w_id=#{w_id} AND writer=#{writer})
 delete from reply where r_id=#{value}
 </select>
 
+<!-- ////////////////////////////////////////////////////////////////////// -->
+<!-- 관리자 자동차뉴스 리스트 불러오기-->
+<select id="adminNews" resultType="news" parameterType="news">
+	SELECt * FROM news ORDER BY w_date DESC
+</select>
+
+<!-- 관리자 자동차뉴스 삭제 -->
+<delete id="newsDelete" parameterType="news">
+	DELETE FROM news WHERE w_id = #{w_id} 
+</delete>
+
 
 </mapper>

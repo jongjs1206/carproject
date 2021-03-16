@@ -107,5 +107,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public int heartlistcount(HeartVO vo) {
 		return categoryDAO.heartlistcount(vo);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> homesellselect(HeartVO vo) {
+		return categoryDAO.homesellselect(vo);
+	}
 	
 }

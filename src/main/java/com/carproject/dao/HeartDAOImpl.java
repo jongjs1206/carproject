@@ -35,4 +35,10 @@ public class HeartDAOImpl implements HeartDAO{
 		mybatis.delete("HeartMAP.deleteHeart", vo);
 	}
 
+	@Override
+	public String seletheartone(HeartVO hvo) {
+		System.out.println("===>  HeartMapper seletheartone() 호출");
+		return mybatis.selectOne("HeartMAP.seletheartone", hvo);
+	}
+
 }

@@ -35,7 +35,7 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="../resources/css/all/homepage.css"
 	type="text/css">
-<link rel="stylesheet" href="../resources/css/user/noteinsert.css"
+<link rel="stylesheet" href="../resources/css/user/declaration.css"
 	type="text/css">
 
 <script type="text/javascript"
@@ -53,29 +53,40 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
-<script type="text/javascript" src="../resources/js/user/noteinsert.js"></script>
+<script type="text/javascript" src="../resources/js/user/declaration.js"></script>
 </head>
-<body style=" margin: 0px; padding: 0px;"">
+<body style="margin: 0px; padding: 0px;"">
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
 
-	<div style="background-color: #dca73a; width: 100%; height: 50px;
-	font-size: 33px; text-align: center; color: white;">쪽 지</div>
+	<div
+		style="background-color: pink; width: 100%; height: 50px; font-size: 33px; text-align: center;">신
+		고</div>
 	<div class="container note_content">
 		<div>
-			<label>제목</label><input class='title' type="text" value='${title}'/>
+			<label>상대방</label><span class='you_id'>${name} ( ${id} )</span>
 		</div>
-		<div>
-			<label>받는 아이디</label><input class='you_id' type="text" value='${re}'/>
-		</div>
+		<span class='de_con'>신고 내용</span>
 		<textarea class='content'></textarea>
-		
+
 		<button class='btn_send'>보내기</button>
 	</div>
-	
-	<div class='no off'></div>
 
+	<div class='no off'>신고 내용을 입력하지 않았습니다.</div>
+
+	<div class='backblack off'></div>
+	<div class='pop off'>
+		<div class='pop_title'>신고 하시겠습니까?</div>
+		<div style="position: flex;">
+			<a class='pop_yes'>예</a>
+			<a class='pop_no'>아니오</a>
+			<a class='pop_ok off'>확인</a>
+		</div>
+	</div>
+	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
+	<input type="hidden" class='to_id' value='${id}'/>
+	
 	<!-- JS here -->
 
 	<!-- All JS Custom Plugins Link Here here -->

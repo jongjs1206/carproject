@@ -15,21 +15,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carproject.domain.HeartVO;
 import com.carproject.domain.MemberVO;
+import com.carproject.domain.NewsVO;
 import com.carproject.domain.ReplyVO;
+import com.carproject.service.LetterService;
+import com.carproject.service.MycarService;
 import com.carproject.service.NewsService;
 
 @Controller
 public class NewsController {
 	@Autowired
 	private NewsService newsservice;
+	@Autowired
+	private MycarService mycarService;
+	@Autowired
+	private LetterService letterService;
 	
 	@RequestMapping("all/carnewsBoardList.do")
-	public void news_list(String page, Model model) {
+	public void news_list(String page, Model model,HttpSession session) {
 		int page_re = (Integer.parseInt(page)-1)*15;
 		List<HashMap<String, Object>> newslist = newsservice.news_list(Integer.toString(page_re));
 		List<HashMap<String, Object>> popularity = newsservice.popularity();
 		int newscount = newsservice.newscount();
 		
+		String crash = mycarService.selectnow();
+		session.setAttribute("crash", crash);
+		
+		String user_id="";
+		if(session.getAttribute("info")!=null) {
+			user_id=((MemberVO)session.getAttribute("info")).getM_id();
+		}
+		
+		String note = letterService.selectnotecount(user_id);
+		session.setAttribute("note", note);
 		
 		model.addAttribute("newslist", newslist);
 		model.addAttribute("popularity", popularity);
@@ -124,6 +141,25 @@ public class NewsController {
 	@ResponseBody
 	public void reply_delete(String r_id) {
 		newsservice.reply_delete(r_id);
+	}
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////
+	// 관리자 자동차뉴스
+	@RequestMapping("admin/carnews.do")
+	public void adminNews(NewsVO vo, Model model) {
+		model.addAttribute("adminNews", newsservice.adminNews(vo));
+		System.out.println("관리자 자동차뉴스");
+	}
+
+	// 관리자 자동차뉴스 삭제
+	@RequestMapping("admin/newsDelete.do")
+	public String newsDelete(NewsVO vo) {
+		newsservice.newsDelete(vo);
+		System.out.println("관리자 자동차뉴스 삭제");
+
+		return "redirect:/admin/carnews.do";
 	}
 	
 }
