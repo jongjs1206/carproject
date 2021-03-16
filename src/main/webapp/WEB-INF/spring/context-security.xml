@@ -24,7 +24,7 @@
 		<session-management invalid-session-url="/all/logout.do"> 
 		    <concurrency-control 
 		    					max-sessions="1" 
-		                         expired-url="/all/homepage.do"   
+		                         expired-url="/all/logout.do"   
 		                         error-if-maximum-exceeded="false" />
 		</session-management>
 	</http>

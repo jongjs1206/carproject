@@ -10,7 +10,7 @@
 	(select c.jejosa as jejosa, count(*) as count 
 	from category c inner join detail d on c.car_num=d.car_num 
 	inner join grade g on g.d_id=d.d_id 
-	inner join sell s on s.g_id = g.g_id group by c.jejosa) t 
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by c.jejosa) t 
 	on cate.jejosa = t.jejosa
 </select>
 
@@ -20,7 +20,7 @@
 	(select * from category where jejosa=#{jejosa}) c 
 	inner join detail d on c.car_num=d.car_num 
 	inner join grade g on g.d_id=d.d_id 
-	inner join sell s on s.g_id = g.g_id group by model) t 
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by model) t 
 	on mo.model = t.model
 </select>
 
@@ -33,14 +33,14 @@
 	(select * from category where car_num=#{car_num}) m 
 	inner join detail d where m.car_num = d.car_num) t 
 	inner join grade g on g.d_id=t.d_id 
-	inner join sell s on s.g_id = g.g_id group by detail) t2 on t1.detail = t2.detail
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by detail) t2 on t1.detail = t2.detail
 </select>
 
 <select id="gradeselect" resultType="hashmap" parameterType="String">
 	select * from (select * from grade where d_id=#{d_id} group by grade1) t1 
 	left join (select grade1, count(*) as count from 
 	(select * from grade where d_id=#{d_id}) g 
-	inner join sell s on s.g_id = g.g_id group by grade1) t2 on t1.grade1 = t2.grade1 
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by grade1) t2 on t1.grade1 = t2.grade1 
 	order by t1.grade1
 </select>
 
@@ -48,7 +48,7 @@
 	select * from (select * from grade where d_id=#{d_id} and grade1=#{grade1}) t1 
 	left join (select grade2, count(*) as count from 
 	(select * from grade where d_id=#{d_id} and grade1=#{grade1}) g 
-	inner join sell s on s.g_id = g.g_id group by grade2) t2 on t1.grade2 = t2.grade2
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by grade2) t2 on t1.grade2 = t2.grade2
 </select>
 
 <select id="countryselect" resultType="hashmap" parameterType="String">
@@ -56,7 +56,7 @@
 	left join (select jejosa, count(*) as count from 
 	(select * from category where abroad = #{abroad}) c 
 	inner join detail d on c.car_num=d.car_num inner join grade g on g.d_id=d.d_id 
-	inner join sell s on s.g_id = g.g_id group by jejosa) t2 on t1.jejosa = t2.jejosa
+	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by jejosa) t2 on t1.jejosa = t2.jejosa
 </select>
 
 <select id="sellselect" resultType="hashmap" parameterType="heart">
@@ -76,7 +76,7 @@ WHERE abroad = #{date})
 c
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t,
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
@@ -86,7 +86,7 @@ left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_
 SELECT * FROM category c
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
-inner join sell s on s.g_id = g.g_id
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on s.sell_id=h.sell_id 
 ORDER by w_date DESC LIMIT 0,6;
 </select>
@@ -103,7 +103,7 @@ SELECT ht, o.* FROM
 (SELECT * from category where jejosa = #{date}) c 
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t,
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
@@ -119,7 +119,7 @@ SELECT ht, o.* FROM
 (SELECT * from category where car_num = #{date}) c 
 inner join detail d on c.car_num = d.car_num  
 inner join grade g on g.d_id=d.d_id   
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t,
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t,
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
@@ -135,7 +135,7 @@ SELECT ht, o.* FROM
 (SELECT s1.d_id,s2.g_id,s2.grade1,s2.grade2 FROM (SELECT * FROM detail WHERE car_num=#{w_id}) s1 
 LEFT JOIN grade s2 ON s1.d_id=s2.d_id 
 WHERE detail IN ('${date}')) g
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t, 
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t, 
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
@@ -151,7 +151,7 @@ SELECT ht, o.* FROM
 (SELECT s1.d_id,s2.g_id,s2.grade1,s2.grade2 FROM (SELECT * FROM detail WHERE car_num=#{m_pw}) s1 
 LEFT JOIN grade s2 ON s1.d_id=s2.d_id 
 WHERE detail IN ('${auth}') and s2.grade1 IN ('${birth}')) g
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t, 
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t, 
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
@@ -167,42 +167,42 @@ SELECT ht, o.* FROM
 (SELECT s1.d_id,s2.g_id,s2.grade1,s2.grade2 FROM (SELECT * FROM detail WHERE car_num=#{m_pw}) s1 
 LEFT JOIN grade s2 ON s1.d_id=s2.d_id 
 WHERE detail IN ('${auth}') and s2.grade1 IN ('${birth}') and s2.grade2 IN ('${m_name}')) g
-inner join sell s on s.g_id = g.g_id) a order by w_date DESC) t, 
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id) a order by w_date DESC) t, 
 (select <![CDATA[@rownum:=0]]>) AS r ORDER by w_date DESC) re) b 
 where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
 <select id="searchselect" resultType="hashmap" parameterType="heart">
-SELECT * FROM sell s 
+SELECT * FROM (SELECT * FROM sell WHERE status='게시중') s 
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on s.sell_id=h.sell_id
 WHERE title LIKE '%${date}%' ORDER BY w_date desc LIMIT ${sell_id},15
 </select>
 <select id="sellcount" resultType="Integer">
-SELECT COUNT(*) AS count FROM sell
+SELECT COUNT(*) AS count FROM sell WHERE status='게시중'
 </select>
 
 <select id="country_count" resultType="Integer" parameterType="String">
 select COUNT(*) AS COUNT from category c 
 inner join detail d on c.car_num=d.car_num inner join grade g on g.d_id=d.d_id 
-inner join sell s on s.g_id = g.g_id where abroad=#{country}
+inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id where abroad=#{country}
 </select>
 
 <select id="search_count" resultType="Integer" parameterType="String">
-SELECT COUNT(*) AS COUNT FROM sell WHERE title LIKE '%${value}%' ORDER BY w_date
+SELECT COUNT(*) AS COUNT FROM sell WHERE title LIKE '%${value}%' and status='게시중' ORDER BY w_date
 </select>
 
 <select id="heartlistselect" resultType="hashmap" parameterType="heart">
 SELECT * FROM 
 (SELECT * FROM heart WHERE m_id=#{m_id}) h 
-INNER JOIN sell s ON h.sell_id=s.sell_id 
+INNER JOIN (SELECT * FROM sell WHERE status='게시중') s ON h.sell_id=s.sell_id 
 ORDER BY w_date DESC LIMIT ${sell_id},15
 </select>
 
 <select id="heartlistcount" resultType="Integer" parameterType="heart">
 SELECT COUNT(*) as count FROM 
 (SELECT * FROM heart WHERE m_id=#{m_id}) h 
-INNER JOIN sell s ON h.sell_id=s.sell_id 
+INNER JOIN (SELECT * FROM sell WHERE status='게시중') s ON h.sell_id=s.sell_id 
 ORDER BY w_date
 </select>
 

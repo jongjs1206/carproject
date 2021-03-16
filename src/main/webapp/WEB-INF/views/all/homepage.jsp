@@ -59,7 +59,7 @@
 	<%@ include file="../header.jsp"%>
 
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
-	<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 6) %></c:set>
+	<c:set var="ran"><%= java.lang.Math.floor(java.lang.Math.random() * 3) %></c:set>
 	
 	<main style="margin-bottom: 150px;">
 		<!-- slider Area Start-->
@@ -73,9 +73,22 @@
 						<div class="row justify-content-center text-center">
 							<div class="col-xl-9">
 								<div class="h1-slider-caption">
+									<c:if test="${ran eq '0.0'}">
+										<img class='bluecar' alt=""
+											style="width: 80%; position: absolute; z-index: 0; top: 42%; right: -28%;"
+											src="../resources/img/car1.png">
+									</c:if>
+									<c:if test="${ran eq '1.0'}">
 									<img class='bluecar' alt=""
-										style="width: 80%; position: absolute; z-index: 0; top: 42%; right: -28%;"
-										src="../resources/img/car1.png">
+										style="width: 110%; position: absolute; z-index: 0; top: 20%; right: -30%;"
+										src="../resources/img/car2.png">
+									</c:if>
+									<c:if test="${ran eq '2.0'}">
+										<img class='bluecar' alt=""
+											style="width: 80%; position: absolute; z-index: 0; top: 10%; right: -30%;"
+											src="../resources/img/car3.png">
+									</c:if>
+
 									<h1 data-animation="fadeInUp" data-delay=".4s">중고차 사이트
 										사차원!</h1>
 									<h3 data-animation="fadeInDown" data-delay=".4s">가짜 매물 X</h3>
