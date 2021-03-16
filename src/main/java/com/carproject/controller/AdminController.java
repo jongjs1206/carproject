@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -130,7 +131,7 @@ public class AdminController {
 	public void product_list(MemberVO vo, Model model, HttpSession session,
 			@RequestParam HashMap<String, Object> param)
 	{
-		
+		//날짜 미리 세팅 1달것만
 		if(param.get("startDate")=="" || param.get("startDate")==null){			
 			param.put("startDate", memberservice.beforeMonth());	
 		}
@@ -139,10 +140,7 @@ public class AdminController {
 		}
 		
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
-		int len = salesList.size();
 		model.addAttribute("salesList", salesList);
-		model.addAttribute("len",len);
-		
 		 	
 	}
 	
@@ -152,6 +150,7 @@ public class AdminController {
 	public void searchMySales(HttpSession session, Model model
 			, @RequestParam HashMap<String, Object> param
 			) {
+		
 		//검색
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
 		model.addAttribute("salesList", salesList);
@@ -161,8 +160,12 @@ public class AdminController {
 	
 	//admin 등록대기->게시중 [등록버튼]
 	@RequestMapping(value = "/admin/setPosting.do")
-	public String setPosting(HttpSession session, Model model, SalesVO vo	) {
-		memberservice.setPosting(vo);
+	public String setPosting(HttpSession session, Model model, @RequestParam String sellid) {
+		
+	SalesVO vo = new SalesVO();	
+	vo.setSell_id(Integer.parseInt(sellid));	
+	memberservice.setPosting(vo);
+	
 	return "redirect: salesList.do ";
 	
 	}

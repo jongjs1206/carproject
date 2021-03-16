@@ -12,7 +12,7 @@
 <meta name="google-signin-client_id" content="720645188606-a3u36ofdsi5rp6goo6g3i9emjk0eahrd.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<title>Hotel</title>
+<title>login</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -41,7 +41,6 @@
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
 const googleLogin = function doGoogleLogin() {
-	alert('클릭!');
 	location.href = '/carproject/all/googleLogin.do';
 }
 </script>
@@ -125,9 +124,9 @@ const googleLogin = function doGoogleLogin() {
               
                     <div class="LoginSnsButton_tit_area__bRqmB"><strong class="LoginSnsButton_tit__1kT5i">간편하게 시작하기</strong></div>
                     <div class="LoginSnsButton_btn_area__1HZfa">
-                        <div class=" " style="margin-top: 15px;"><button type="button"  class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_naver_s__23ZSw " style="vertical-align: bottom; margin: 0px 6px 17px 0px;">네이버</span> 네이버로 시작하기 </button></div>
+<!--                         <div class=" " style="margin-top: 15px;"><button type="button"  class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_naver_s__23ZSw " style="vertical-align: bottom; margin: 0px 6px 17px 0px;">네이버</span> 네이버로 시작하기 </button></div>
                         <div class=" " style="margin-top: 15px;"><button type="button" class="Button_uibtn__1tGCl Button_uibtn_white__3l1tT Button_uibtn_size_h50__cWPtg"><span class="Icon_uiico__3CpFs Icon_login_sns_kakao_s__2oyHe " style="vertical-align: bottom; margin: 0px 6px 16px 0px;">카카오</span> 카카오로 시작하기 </button></div>
-                    
+        -->             
                         
                         <div class=" " style="margin-top: 15px;">
                         	<!--  <button type="button" onclick="${google_url}" -->

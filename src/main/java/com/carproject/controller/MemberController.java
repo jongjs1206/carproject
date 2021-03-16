@@ -3,12 +3,14 @@ package com.carproject.controller;
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,10 +22,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +77,24 @@ public class MemberController {
 		return "redirect:/all/login.do";
 	}
 	
+
+	// sns 회원 가입
+		@RequestMapping(value = "/all/snsUserInsert.do")
+		public String snsUserInsert(MemberVO vo, HttpSession session) {
+
+			// 삽입
+			memberservice.userInsert(vo);
+			memberservice.addGoogle(vo);
+			// 권한
+			AuthVO authVo = new AuthVO();
+			authVo.setM_id(vo.getM_id());
+			authService.insertAuth(authVo);
+
+			return "redirect:/all/login.do";
+		}
+		
+		
+	
 	// 회원가입 시 아이디 중복 확인
 	@RequestMapping(value = "/all/idCheck.do", produces = "application/text;charset=utf-8")
 	@ResponseBody
@@ -86,9 +109,7 @@ public class MemberController {
 	}
 
 	
-	
-//sns로그인
-
+	//sns로그인
 	// 구글 로그인
 	@RequestMapping(value = "/all/googleLogin.do")
 	public String googleLogin(MemberVO vo, HttpSession session) {
@@ -97,55 +118,67 @@ public class MemberController {
 		return "redirect:" + snsLoginService.googleRedirect();
 	}
 	
-	
-	
-	@Autowired
-	@Qualifier("org.springframework.security.authenticationManager")
-	private AuthenticationManager authenticationManager;
-	
-	// 가입자인지 확인
-	@RequestMapping(value = "all/googleToken.do")
-	public String googleToken(Model model, @RequestParam(name = "code") String code, HttpSession session, HttpServletRequest request) {
-
-		String googleLoginInfo = snsLoginService.getToken(code);
-		String googleEmail = snsLoginService.getGoogleInfo(googleLoginInfo, "email");
-		String googleName = snsLoginService.getGoogleInfo(googleLoginInfo, "name");
-
-		MemberVO vo = new MemberVO();
-		
-		//google과 email 둘다 받아온 이메일 값을 넣음
-		vo.setGoogle(googleEmail);
-		vo.setEmail(googleEmail);
-		vo.setM_name(googleName);
-		System.out.println("****************************");
-		System.out.println(googleEmail);
-		System.out.println(googleName);
-
-		
-		MemberVO userinfo = memberservice.selectByEmail(vo);
-		
-		
-		model.addAttribute("userinfo", userinfo);
-	
-		
 		
 
-		return"redirect: login_sns.do"; // 데이터 토스
+		
+		@Autowired
+		@Qualifier("org.springframework.security.authenticationManager")
+		private AuthenticationManager authenticationManager;
+		
+		@Resource(name="userDetailsService")
+		protected UserDetailsService userDetailsService;
+		
+		@RequestMapping(value = "all/googleToken.do")
+		public String googleToken(Model model, @RequestParam(name = "code") String code, 
+				HttpSession session, HttpServletRequest request) {
 
+			String googleLoginInfo = snsLoginService.getToken(code);
+			String googleEmail = snsLoginService.getGoogleInfo(googleLoginInfo, "email");
+			String googleName = snsLoginService.getGoogleInfo(googleLoginInfo, "name");
 
-	}
+			MemberVO vo = new MemberVO();
+			
+			//google과 email 둘다 받아온 이메일 값을 넣음
+			vo.setGoogle(googleEmail);
+			vo.setEmail(googleEmail);
+			vo.setM_name(googleName);
+			
+			//구글 이메일로 구글 이메일을 가지고 있는 회원 조회
+			MemberVO userGoogle = memberservice.selectByGoogle(vo);
+			//구글 이메일로 일반 이메일을 가지고 있는 회원 조회
+			MemberVO userEmail = memberservice.selectByEmail(vo);
+			
+			//구글 email을 가지고 있으면 -> 로그인		
+			if(userGoogle != null) {
 
-//	 @RequestMapping("/all/login_sns.do")
-//	 public void login_sns(@RequestParam("m_id") String m_id, @RequestParam("m_pw") String m_pw) {
-//		 System.out.println("m_id : " + m_id);
-//		 System.out.println("m_pw : " + m_pw);
-//}
-	
+				snsLoginService.snsLogin(userGoogle);
+				session = request.getSession(true);
+				
+				return"redirect: log.do";
+			//구글 email과 같은 그냥 email을 가지고 있으면 -> 연동(gmail 넣어 줌) 후 로그인
+			}else if(userEmail != null){
+				userEmail.setGoogle(googleEmail);
+				memberservice.addGoogle(userEmail);
+				session = request.getSession(true);
+				
+			return "redirect:log.do";
+						
+			//구글 email도 그냥 email도 같은게 없으면 -> 간편가입
+			}else{
+				
+				model.addAttribute("vo",vo);
+				
+				//가입 시킴
+				return "forward:sns_join.do";
+			}
+		}
+		
+		// 연결 # 붙어서 제거를 위한
+		@RequestMapping(value = "all/sns_join.do", method= {RequestMethod.POST})
+		public void sns(MemberVO vo, HttpSession session, Model model) {
+			model.addAttribute("vo",vo);
+		}
 
-
-	
-	
-	
 
 	@Autowired
 	private MailSendService mailservice;

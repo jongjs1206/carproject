@@ -11,21 +11,10 @@ $(function() {
 	var m_id = $('#m_id');
 	var m_pw = $('#m_pw');
 	var m_pwConfirm = $('#m_pwConfirm');			
-	var m_name = $('#m_name');
-	var gender = $('#gender');
-	
-	var email1 = $('#email1');
-	var email2 = $('#email2');
-	
-	
-	var birth = $('#birth');
-	var tel = $('#tel');
-	var w_date = $('#w_date');
 	
 	var idPassCheck= false;
 	var pwPassCheck = false;
 	var joinPassCheck = false;
-	var emailPassCheck = false;
 	
 	var Length = 0; 
 	var engCheck = /[a-z]/; 
@@ -49,24 +38,6 @@ $(function() {
     return len;
 	}
 	
-
-
-//성별 체크
-$('#gender_m').click(function(){
-
-	$('#gender_w').removeClass('genderOn');
-	$('#gender_m').addClass('genderOn');
-	gender.val($('#gender_m').val())
-})
-
-$('#gender_w').click(function(){
-	$('#gender_m').removeClass('genderOn');
-	$('#gender_w').addClass('genderOn');
-	gender.val($('#gender_w').val())
-})
-
-
-
 
 
 
@@ -185,98 +156,6 @@ if(idPassCheck){
 		
 		});
 		
-		
-
-		
-		
-//메일 인증번호 보내기
-$('#btnMailSend').click(function(){
-
-	var email = email1.val()+'@'+email2.val()
-
-	if(email1.val()=='' || email2.val()==''){
-	alert('이메일을 입력 해 주세요.')
-	}else{
-	
-	alert(email+' \n 인증번호가 발송 되었습니다  \n 이메일을 확인 해 주세요.')
-		//인증번호칸 보이기
-	$('#confirmNumDiv').show();	
-
-
-	$.ajax({
-		type : 'post',
-		async : true,
-		url : '../all/mailCheck.do',
-		beforeSend : function(xhr)
-		{	
-			xhr.setRequestHeader(header, token);
-		},
-		contentType: "application/x-www-form-urlencoded;charset=utf-8",
-	 	
-	 	data : {'email' :  email
-	 			
-	 	},
-	 	
-	 	success : function(result){
-			
-
-	 	},
-	 	
-	 	error : function(err){
-	 		console.log(err);
-	 	}
-	 	
-	 })  
-}//end of else
-
-})//end of MailSender
-
-
-		
-//메일 인증번호 확인
-$('#certNumChk').click(function(){
-
-//유효성 체크 통과 시, 중복 체크
-	$.ajax({
-		type : 'post',
-		async : true,
-		url : '../all/certNumChk.do',
-		beforeSend : function(xhr)
-		{	
-			xhr.setRequestHeader(header, token);
-		},
-		contentType: "application/x-www-form-urlencoded;charset=utf-8",
-	 	
-	 	data : {'certCode' : $('#certCode').val()
-	 			
-	 	},
-	 	
-	 	success : function(result){
-	 	
-	 		if(result=='인증'){
-	 		alert('이메일 인증에 성공하셨습니다');
-	 		emailPassCheck=true;
-	 		
-	 		//이메일칸 readonly
-	 		$("#email1").prop("readonly",true);
-	 		$("#email2").prop("readonly",true);
-	 		
-	 		}else{
-	 		alert(result);
-	 		emailPassCheck=false;
-	 		}
-	 	},
-	 	
-	 	error : function(err){
-	 		console.log(err);
-	 	}
-	 })  
-
-})//end of certNumChk
-
-
-
-
 
 
 //회원가입 버튼 클릭 시
@@ -294,30 +173,8 @@ $(document).on("click","#joinDiv",function(){
 	else if(!pwPassCheck){
 	alert("비밀번호를 확인해 주세요.")
 	return
-	}
-//이름, 성별, 생년월일, 이메일, 폰번호
-	else if(gender.val() == ''){
-	alert("성별을 선택해 주세요.")
-	return
-	}
-	else if(m_name.val() == ''){
-	alert("이름을 입력해 주세요.")
-	return
-	}else if(birth.val() == ''){
-	alert("생일을 입력해 주세요.")
-	return
-	}else if(tel.val() == ''){
-	alert("휴대폰 번호를 입력해 주세요.")
-	return
-	}else if(!emailPassCheck){
-	alert("이메일을 인증해 주세요.")
-	return
-//이메일 인증
-	}else if(!emailPassCheck){
-	alert("이메일을 인증해 주세요.")
-	}	else{
-	alert("회원가입이 완료되었습니다.")
-	$('#join').submit()
+	}else{
+		$('#join').submit()
 	
 	}
 

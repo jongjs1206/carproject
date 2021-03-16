@@ -19,7 +19,7 @@ $(function(){
 	var byTitle = $('#byTitle')
 	
 	
-	
+
 	
 	
 	
@@ -51,40 +51,6 @@ function getDateStr(myDate){
 	return (myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate())
 }
 
-/* 오늘 날짜를 문자열로 반환 */
-function today() {
-  var d = new Date()
-  return getDateStr(d)
-}
-
-/* 오늘로부터 1주일전 날짜 반환 */
-function lastWeek() {
-  var d = new Date()
-  var dayOfMonth = d.getDate()
-  d.setDate(dayOfMonth - 7)
-  return getDateStr(d)
-}
-
-/* 오늘로부터 1개월전 날짜 반환 */
-function lastMonth() {
-  var d = new Date()
-  var monthOfYear = d.getMonth()
-  d.setMonth(monthOfYear - 1)
-  return getDateStr(d)
-}
-$(".srch_area :radio").click(function(){
-  var rname = $(this).attr("name")
-  $("#search_end_date").val(today())
-	if( rname == "today"){
-    $("#search_start_date").val(today())
-  }else if(rname == "week") {
-  	$("#search_start_date").val(lastWeek())
-  }else{
-  	$("#search_start_date").val(lastMonth())
-  }
-})
- 
-
 
 //현재 url 파싱
 function getParameterByName(name) {
@@ -93,6 +59,19 @@ function getParameterByName(name) {
                 results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
+
+
+//파라미터를 받아 처음 세팅
+
+if(getParameterByName("status") != ''){
+$('#searchStatus').val(getParameterByName("status"));
+}
+if(getParameterByName("startDate") != ''){
+$('#startDate').val(getParameterByName("startDate"));
+}
+if(getParameterByName("endDate") != ''){
+$('#endDate').val(getParameterByName("endDate"));
+}
 
 
 
@@ -109,7 +88,11 @@ search();
 
 
 
+
+
+
 var search = function(){
+
 
 
 

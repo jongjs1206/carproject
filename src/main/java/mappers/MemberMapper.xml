@@ -170,16 +170,27 @@
 	<select id="selectSale_admin" parameterType="hashmap" resultType="hashmap">
 		
 		SELECT * FROM sell
-		<if test="startDate != null and endDate != null ">
 		WHERE
+		<if test="startDate != null and endDate != null ">		
 		<![CDATA[
 		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
 		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
 		</if>
-	    <if test="status !=null and status != '상태선택' ">
+		<if test="startDate == null and endDate != null ">
+		<![CDATA[
+		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
+		]]>
+		</if>
+		<if test="endDate == null  and startDate != null">
+		<![CDATA[
+		w_date >= str_to_date(#{startDate}, '%Y-%m-%d')
+		]]>
+		</if>
+	    <if test="status != null and status != '상태선택' ">
 	     AND status = #{status}
 	    </if>
+	    
 		<if test="byTitle != null and byTitle != '' and byTitle != 'undefined' ">
 				AND
 				title LIKE CONCAT('%',#{byTitle},'%')
@@ -196,6 +207,15 @@
 		SET status='게시중'
 		WHERE sell_id=#{sell_id}
 		
+	</update>
+	
+	
+	<!-- 2주 지난 게시물 삭제 -->
+	
+	<update id="expiredPosting" parameterType="sales">
+		UPDATE sell
+		SET status='게시종료'
+		WHERE sell_id=#{sell_id}
 	</update>
 	
 

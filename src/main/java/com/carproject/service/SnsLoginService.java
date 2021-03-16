@@ -6,14 +6,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import com.carproject.domain.MemberVO;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -33,6 +43,9 @@ public class SnsLoginService {
 	private String googleScope;
 	@Value("#{config['google.redirect']}")
 	private String redirect;
+	
+	@Autowired
+	private MemberService memberservice;
 	
 //google login redirect url
   public String googleRedirect() {
@@ -103,6 +116,22 @@ public String getGoogleInfo(String googleLoginInfo, String key) {
     JsonObject jsonPayload =  (JsonObject) Parser.parse(new String(payload));
     
 	return jsonPayload.get(key).getAsString();
+}
+
+
+public void snsLogin(MemberVO userGoogle) {
+	//권한 가져오기
+	String userauth = memberservice.checkAuth(userGoogle);
+	//권한 리스트 만들기
+	ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+    auth.add(new SimpleGrantedAuthority(userauth));
+    //유저 생성
+    User user = new User(userGoogle.getM_id(), "", auth);
+    //생성한 유저로 로그인 체크
+    Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, auth);			
+	
+	SecurityContext securityContext = SecurityContextHolder.getContext();
+	securityContext.setAuthentication(authentication);
 }
 
 }
