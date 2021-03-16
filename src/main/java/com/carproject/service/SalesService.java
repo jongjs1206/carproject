@@ -32,6 +32,10 @@ public interface SalesService {
 	public SalesVO salesDetail(Long num);  // 상세화면 
 	
 	public String pystart(String sell_id);			// 이미지 분석 
-	public void insertAnalysis(HashMap<String, String> analysis);	// 이미지분석 결과를 해당 판매글의 DB에 입력 
+	public void insertAnalysis(HashMap<String, String> analysis);	// 이미지분석 결과를 해당 판매글의 DB에 입력
+	
+	// 글 등록시 코인 -1 반영 (코인테이블, 멤버테이블)
+	public void useCoinC(MemberVO vo);				
+	public void useCoinM(MemberVO vo);
 	
 }

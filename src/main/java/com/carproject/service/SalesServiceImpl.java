@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carproject.dao.SalesDAOImpl;
+import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 
 @Repository("SalesService") 
@@ -157,6 +158,14 @@ public class SalesServiceImpl implements SalesService {
 	// 이미지분석 결과를 해당 판매글의 DB에 입력
 	public void insertAnalysis(HashMap<String, String> analysis) {
 		salesDAO.insertAnalysis(analysis);
+	}
+	
+	// 글 등록시 코인 -1 반영 (코인테이블, 멤버테이블)
+	public void useCoinC(MemberVO vo) {
+		salesDAO.useCoinC(vo);
+	}
+	public void useCoinM(MemberVO vo) {
+		salesDAO.useCoinM(vo);
 	}
 		
 	

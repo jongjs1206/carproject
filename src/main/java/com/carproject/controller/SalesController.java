@@ -60,7 +60,32 @@ public class SalesController {
 	//////////////////////////////////////////////////////////
 	// 제조사
 	@RequestMapping("user/sales.do")
-	public void brandList(Model model,HttpSession session) {
+	public String brandList(Model model,HttpSession session) {
+		
+		// (1) m_id값 가져오기
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id = "";
+		if (principal instanceof UserDetails) {
+			id = ((UserDetails)principal).getUsername();
+	    } else {
+	    	id = principal.toString();
+	    }
+
+		// (2) 글 작성하는 id로 작성자정보 가져오기      
+		MemberVO mvo = new MemberVO();
+		mvo.setM_id(id);
+		MemberVO info = memberService.checkUniqueId(mvo);
+		System.out.println("글 작성자 정보 : " + info.getM_name() + "님 ID : " + info.getM_id());
+		
+		// (3) 코인 충전량이 있는지 확인 -- 코인이 없을 경우 코인충전페이지로 이동
+		String coin = info.getCoin();
+		System.out.println("코인검사 : " + coin);
+		String zero = "0";
+		if (coin.equals(zero)) {
+			System.out.println("충전된 코인이 없습니다.");
+			return "redirect:/all/alert.do";
+		}
+		
 		List<HashMap<String, Object>> list = salesService.brandList();
 		model.addAttribute("brandList", list);
 		
@@ -86,6 +111,8 @@ public class SalesController {
 		model.addAttribute("arr", array);
 		
 		System.out.println("제조사리스트");
+		
+		return null;
 	}
 	
 	// 모델
@@ -320,6 +347,10 @@ public class SalesController {
 		analysis.put("sell_id", Integer.toString(sell_id));
 		analysis.put("v_result", v_result);
 		salesService.insertAnalysis(analysis);
+		
+		// (10) 글 등록시 코인 -1 반영 (코인테이블, 멤버테이블)
+		salesService.useCoinC(info);
+		salesService.useCoinM(info);
 		
 		return "redirect:/all/product_list.do";
 	}
