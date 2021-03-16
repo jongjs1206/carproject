@@ -59,8 +59,8 @@
 	<%@ include file="../header.jsp"%>
 
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
-
-
+	<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 6) %></c:set>
+	
 	<main style="margin-bottom: 150px;">
 		<!-- slider Area Start-->
 		<div class="slider-area ">

@@ -26,6 +26,7 @@
 		<typeAlias alias="reply" type="com.carproject.domain.ReplyVO"/>			
 		<typeAlias alias="mycar" type="com.carproject.domain.MycarVO"/>			
 		<typeAlias alias="letter" type="com.carproject.domain.LetterVO"/>			
+		<typeAlias alias="declaration" type="com.carproject.domain.DeclarationVO"/>			
 	</typeAliases>
 
 

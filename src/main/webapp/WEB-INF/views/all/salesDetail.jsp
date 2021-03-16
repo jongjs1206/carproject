@@ -714,12 +714,13 @@
 					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sales.tel}</span>
 				                	</div>
 				                	<input class='sale_id' type="hidden" value="${sales.m_id}">
+				                	<input class='sale_name' type="hidden" value="${sales.m_name}">
 				           		</div> 
 				            </div>
 	                    </div>	<!-- end of 판매자 정보 -->
 				        <div class="favorite" style="font-size:14px; display:flex; margin:5px 0 0 0;">
 				        	<div class="icons" style="margin-left:150px; display:flex;">
-				        		<div class='pointer'>
+				        		<div class='pointer declaration'>
 				        			<span style="margin:0 5px 0 5px; font-size:15px; position: relative; top:2px;">신고하기</span> 
 				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">
 				        		</div>

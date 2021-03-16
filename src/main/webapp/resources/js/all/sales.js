@@ -457,23 +457,23 @@ $(function() {
 					$(this).next().val('on');
 					$(this).addClass('color_pink');
 										
-			$.ajax({
-			type : 'post',
-			async : true,
-			url : '../all/heart_on.do',
-			beforeSend : function(xhr)
-			{	
-				xhr.setRequestHeader(header, token);
-			},
-			contentType: "application/x-www-form-urlencoded;charset=utf-8",
-			dataType : 'json',
-			data : {"id" : $('.login_on').val(),
-			"sell_id":$('#sell_id').val()},
-			success: function(){
-				
-        	},
-				error : function(err){ console.log(err)}  //실패했을때
-				});
+					$.ajax({
+					type : 'post',
+					async : true,
+					url : '../all/heart_on.do',
+					beforeSend : function(xhr)
+					{	
+						xhr.setRequestHeader(header, token);
+					},
+					contentType: "application/x-www-form-urlencoded;charset=utf-8",
+					dataType : 'json',
+					data : {"id" : $('.login_on').val(),
+					"sell_id":$('#sell_id').val()},
+					success: function(){
+						
+		        	},
+						error : function(err){ console.log(err)}  //실패했을때
+					});
 				}
 			}
 	});
@@ -485,6 +485,15 @@ $(function() {
 			+$('.sale_id').val()
 			+'&title='
 			+$('.note_title').val().split(' ')[0]+' 문의', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
+		}
+	})
+	
+	$('.declaration').click(function(){
+		if($('.login_on').val()==''){
+			alert('로그인시 신고 할 수 있습니다.');
+		}else{
+			window.open('../user/declaration.do?id='+
+			$('.sale_id').val()+'&name='+$('.sale_name').val(), 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
 		}
 	})
 	
