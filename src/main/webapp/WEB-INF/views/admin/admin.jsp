@@ -49,20 +49,19 @@
                     <div class="container-fluid"> 
                     <ul></ul> 
                         <div class="row"> 
+							<!-- 메인페이지 카드 메뉴 1 -->
                             <div class="col-xl-3 col-md-6">
-                            
-                                <!-- 메인페이지 카드 메뉴 1 -->
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">판매글</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="salesarticlelist.do">자세히 보기</a>
+                                        <a class="small text-white stretched-link" href="salesList.do">자세히 보기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- 메인페이지 카드 메뉴 2 -->
-                            <div class="col-xl-3 col-md-6">
+                            <!-- <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">고객문의</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -70,7 +69,7 @@
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- 메인페이지 카드 메뉴 3 -->
                             <div class="col-xl-3 col-md-6">
@@ -84,7 +83,7 @@
                             </div>
                             
                             <!-- 메인페이지 카드 메뉴 4 -->
-                            <div class="col-xl-3 col-md-6">
+                           <!--  <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">구매후기</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -93,7 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <!-- 그래프 부분-->
                         <div class="row">
@@ -104,7 +103,16 @@
                                         <i class="fas fa-chart-area mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+                                    	<canvas id="myChart" width="100%" height="40">
+		                                    <c:forEach items="${coinList}" var="coin">
+		                                    	<tr>
+		                                        	<td>${coin.day}</td>
+		                                           	<td>${coin.price}</td>
+		                                        </tr>
+		                                    </c:forEach>    
+                                    	</canvas>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -120,7 +128,7 @@
                             </div>
                             
                             <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6">
+                            <!-- <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area mr-2"></i>
@@ -128,10 +136,10 @@
                                     </div>
                                     <div class="card-body"><canvas id="sellAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- 막대 그래프 -->
-                            <div class="col-xl-6">
+                            <!-- <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar mr-2"></i>
@@ -140,7 +148,7 @@
                                     <div class="card-body"><canvas id="sellBarChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                 <!-- 최하단 footer -->
                 <footer class="py-4 bg-light mt-auto">
@@ -161,5 +169,73 @@
         <script src="../resources/js/admin/chart-bar-demo.js"></script>
         <script src="../resources/js/admin/chart-area-sell.js"></script>
         <script src="../resources/js/admin/chart-bar-sell.js"></script>
+        
+        
+        <!-- 차트용 스크립트 시작-->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+		<script>
+			var ctx = document.getElementById('myChart');
+			var data = {
+			    labels: [
+			    	<c:forEach items="${coinList}" var="coin">
+						${coin.day},
+					</c:forEach> 
+			    	],
+			    datasets: [{
+			        label: '# 일 매출',
+			        data:[
+			        	<c:forEach items="${coinList}" var="coin">
+			        		${coin.price},
+						</c:forEach> 
+			        ],
+			        borderWidth: 1
+			    }]
+			};
+			
+			var myChart = new Chart(ctx, {
+			    type: 'line',
+			    data: data,
+			    options: {
+			    	maintainAspectRatio: false,
+			        title: {
+			            display: true,
+			            //text: '일별 코인 충전 현황',
+			            position: 'top',
+			            fontSize: 20,
+			            fontColor: '#000'
+			        },
+			        plugins: {
+			            labels: [
+			                {
+			                    render: function (options) {
+			                        var value = options.value;
+			                        return value + "원";
+			                    },
+			                    fontSize: 15,
+			                    fontStyle: 'bold',
+			                    fontColor: '#000',
+			                    position: 'outside',
+			                    outsidePadding: 40,
+			                    textMargin: 10
+			                },
+			                {
+			                    render: 'label',
+			                    fontSize: 15,
+			                    fontStyle: 'bold',
+			                    fontColor: '#000'
+			                }
+			            ],
+			            colorschemes: {
+			                scheme: 'tableau.Tableau20'
+			            }
+			        }
+			    }
+			});
+		</script>
+		<!-- 차트용 스크립트 끝-->
+
+
     </body>
 </html>
