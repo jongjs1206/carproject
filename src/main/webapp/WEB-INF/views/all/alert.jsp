@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> alert.jsp </title>
+<title> 코인비보유자 alert용 페이지 </title>
 </head>
 <body>
 
