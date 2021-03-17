@@ -75,7 +75,6 @@
 					</div>
 				</a>
 				<div class="cnt">100</div>
-		    	<div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div>
 			</div>
 		</c:forEach>
 	</div>

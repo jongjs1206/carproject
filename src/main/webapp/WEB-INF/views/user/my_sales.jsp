@@ -35,7 +35,6 @@
 
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-</script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 	integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
@@ -49,6 +48,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
 <script type="text/javascript" src="../resources/js/user/my_sales.js"></script>
+<script type="text/javascript" src="../resources/js/all/product_list.js"></script>
+<script type="text/javascript" src="../resources/js/all/jquery.cookie.js"></script>
 
 </head>
 <body>
@@ -183,20 +184,16 @@
 						<span>${sale.price} 만원</span>
 					</div>
 				</a>
-				<div class="cnt">12</div>
+				<div class="cnt"></div>
 		    	<!-- <div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div> -->
 			</div>
 			</c:forEach>
 		</div>
-			<!-- 이 안에 DB 내용 가져올 예정 ↑↑↑↑↑  -->
-
-
-
 		</div> <!-- end of container -->
     </section>
 
 	<!-- ### 페이징 시작 ### -->
-<!-- 	<nav class="blog-pagination justify-content-center d-flex">
+	<!-- <nav class="blog-pagination justify-content-center d-flex">
 	    <ul class="pagination">
 	        <li class="page-item">
 	            <a href="#" class="page-link" aria-label="Previous">
@@ -272,7 +269,6 @@
 	<script src="./../resources/assets/js/jquery.ajaxchimp.min.js"></script>
 
 	<!-- Jquery Plugins, main Jquery -->
-
 	<script src="./../resources/assets/js/plugins.js"></script>
 	<script src="./../resources/assets/js/main.js"></script>
 

@@ -166,13 +166,17 @@ public class AdminController {
 	// 은별
 	// 일별 코인 충전 현황 차트
 	@RequestMapping("admin/admin.do")
-	public void coinchart(Model model, CoinVO vo) {
+	public void coinchart(Model model) {
 		List<HashMap<String, Object>> coin = coinservice.allCoinList();
 		model.addAttribute("coinchart", coin);
 		
+		List<HashMap<String, Object>> monthlycoin = coinservice.monthlyCoinList();
+		model.addAttribute("monthlycoin", monthlycoin);
 		
-		//System.out.println("coin차트요");
+		//System.out.println("coin차트요" + coin);
 	}
+	
+	
 	
 	
 }

@@ -97,20 +97,14 @@
                         <!-- 그래프 부분-->
                         <div class="row">
                             <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" style="padding-left:25px">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
+                                        <i class="fas fa-chart-bar mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
-                                    <div class="card-body">
-                                    	<canvas id="dailymyChart" width="100%" height="40">
-		                                    <c:forEach items="${coinList}" var="coin">
-		                                    	<tr>
-		                                        	<td>${coin.day}</td>
-		                                           	<td>${coin.price}</td>
-		                                        </tr>
-		                                    </c:forEach>    
+                                    <div class="card-body" style="width:700px; height:400px;">
+                                    	<canvas id="dailymyChart" width="700px;" height="350px;" style="padding:0 0 0 10px;">
                                     	</canvas>
                                     </div>
                                 </div>
@@ -120,17 +114,11 @@
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i> 
+                                        <i class="fas fa-chart-area mr-1"></i> 
                                         월별 코인 충전 현황
                                     </div>
-                                    <div class="card-body">
-                                    	<canvas id="monthlymyChart" width="100%" height="40">
-		                                    <c:forEach items="${coinList}" var="coin">
-		                                    	<tr>
-		                                        	<td>${coin.day}</td>
-		                                           	<td>${coin.price}</td>
-		                                        </tr>
-		                                    </c:forEach>    
+                                    <div class="card-body" style="width:700px; height:400px;">
+                                    	<canvas id="monthlymyChart" width="700px" height="350px" style="padding:0 0 0 30px;">
                                     	</canvas>
                                     </div>
                                 </div>
@@ -171,138 +159,101 @@
         </div>
         
         <!-- javascript 파일 import -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/chart-area-demo.js"></script>
         <script src="../resources/js/admin/chart-bar-demo.js"></script>
         <script src="../resources/js/admin/chart-area-sell.js"></script>
         <script src="../resources/js/admin/chart-bar-sell.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="../resources/js/admin/datatables-coin.js"></script>
         
         
         <!-- 차트용 스크립트 시작-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+		<!-- 일별 차트용 스크립트 시작 -->
 		<script>
-			var ctx = document.getElementById('dailymyChart');
-			var data = {
-			    labels: [
-			    	<c:forEach items="${coinList}" var="coin">
-						${coin.day},
+		var ctx = document.getElementById('dailymyChart');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [
+					<c:forEach items="${coinchart}" var="coin">
+						'${coin.day}',
 					</c:forEach> 
-			    	],
-			    datasets: [{
-			        label: '# 일 매출',
-			        data:[
-			        	<c:forEach items="${coinList}" var="coin">
-			        		${coin.price},
+				],
+				datasets: [{
+					label: '일별',
+					data: [
+						<c:forEach items="${coinchart}" var="coin">
+		        			'${coin.price}',
 						</c:forEach> 
-			        ],
-			        borderWidth: 1
-			    }]
-			};
-			
-			var dailymyChart = new Chart(ctx, {
-			    type: 'line',
-			    data: data,
-			    options: {
-			    	maintainAspectRatio: false,
-			        title: {
-			            display: true,
-			            //text: '일별 코인 충전 현황',
-			            position: 'top',
-			            fontSize: 20,
-			            fontColor: '#000'
-			        },
-			        plugins: {
-			            labels: [
-			                {
-			                    render: function (options) {
-			                        var value = options.value;
-			                        return value + "원";
-			                    },
-			                    fontSize: 15,
-			                    fontStyle: 'bold',
-			                    fontColor: '#000',
-			                    position: 'outside',
-			                    outsidePadding: 40,
-			                    textMargin: 10
-			                },
-			                {
-			                    render: 'label',
-			                    fontSize: 15,
-			                    fontStyle: 'bold',
-			                    fontColor: '#000'
-			                }
-			            ],
-			            colorschemes: {
-			                scheme: 'tableau.Tableau20'
-			            }
-			        }
-			    }
-			});
+					],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+			        	'rgba(54, 162, 235, 0.2)',
+			        	'rgba(54, 162, 235, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+			        	'rgba(54, 162, 235, 1)',
+			        	'rgba(54, 162, 235, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false
+			}
+		});
 		</script>	<!-- 일별 차트용 스크립트 끝 -->
 		
 		<!-- 월별 차트용 스크립트 시작 -->
 		<script>
-			var ctx = document.getElementById('monthlymyChart');
-			var data = {
-			    labels: [
-			    	<c:forEach items="${coinList}" var="coin">
-						${coin.day},
+		var ctx = document.getElementById('monthlymyChart');
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: [
+					<c:forEach items="${monthlycoin}" var="coin">
+						'${coin.day}',
 					</c:forEach> 
-			    	],
-			    datasets: [{
-			        label: '# 월 매출',
-			        data:[
-			        	<c:forEach items="${coinList}" var="coin">
-			        		${coin.price},
+				],
+				datasets: [{
+					label: '월별',
+					data: [
+						<c:forEach items="${monthlycoin}" var="coin">
+		        			'${coin.price}',
 						</c:forEach> 
-			        ],
-			        borderWidth: 1
-			    }]
-			};
-			
-			var monthlymyChart = new Chart(ctx, {
-			    type: 'line',
-			    data: data,
-			    options: {
-			    	maintainAspectRatio: false,
-			        title: {
-			            display: true,
-			            //text: '일별 코인 충전 현황',
-			            position: 'top',
-			            fontSize: 20,
-			            fontColor: '#000'
-			        },
-			        plugins: {
-			            labels: [
-			                {
-			                    render: function (options) {
-			                        var value = options.value;
-			                        return value + "원";
-			                    },
-			                    fontSize: 15,
-			                    fontStyle: 'bold',
-			                    fontColor: '#000',
-			                    position: 'outside',
-			                    outsidePadding: 40,
-			                    textMargin: 10
-			                },
-			                {
-			                    render: 'label',
-			                    fontSize: 15,
-			                    fontStyle: 'bold',
-			                    fontColor: '#000'
-			                }
-			            ],
-			            colorschemes: {
-			                scheme: 'tableau.Tableau20'
-			            }
-			        }
-			    }
-			});
+					],
+					backgroundColor: 'rgba(220, 167, 58, 0.2)',
+					borderColor: '#dca73a',
+					borderWidth: 1,
+					fill:true
+				}]
+			},
+			options: {
+				responsive: false
+			}
+		});
 		</script>	<!-- 월별 차트용 스크립트 끝-->
 
     </body>
