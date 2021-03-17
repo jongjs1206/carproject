@@ -26,4 +26,6 @@ public interface NewsService {
 	
 	public List<NewsVO> adminNews(NewsVO vo);	// 관리자 자동차뉴스 리스트
 	public void newsDelete(NewsVO vo);			// 관리자 자동차뉴스 삭제
+
+
 }

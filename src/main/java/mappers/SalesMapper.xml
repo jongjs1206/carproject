@@ -83,6 +83,13 @@
 	WHERE m_id=#{m_id}
 </update>
 
+<!-- 글 등록시 시세 예측 결과를 p_price에 업데이트 -->
+<update id="insertPredict" parameterType="hashmap">
+	UPDATE sell SET
+	p_price = #{p_price}
+	WHERE sell_id = #{sell_id}
+</update>
+
 
 
 <!-- 수정하기 버튼 -->
