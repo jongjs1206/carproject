@@ -97,7 +97,7 @@
                         <!-- 그래프 부분-->
                         <div class="row">
                             <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6" style="padding-left:25px">
+                            <div class="col-xl-6" style="padding: 0 30px 0 25px;">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar mr-1"></i>
@@ -244,8 +244,8 @@
 		        			'${coin.price}',
 						</c:forEach> 
 					],
-					backgroundColor: 'rgba(220, 167, 58, 0.2)',
-					borderColor: '#dca73a',
+					backgroundColor: 'rgba(17, 46, 65, 0.2)',
+					borderColor: '#112e41',
 					borderWidth: 1,
 					fill:true
 				}]
