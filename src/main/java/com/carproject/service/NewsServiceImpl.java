@@ -1,10 +1,16 @@
 package com.carproject.service;
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.carproject.dao.NewsDAO;
@@ -106,4 +112,6 @@ public class NewsServiceImpl implements NewsService{
 	public void newsDelete(NewsVO vo) {
 		newsDAO.newsDelete(vo);
 	}
+	
+
 }

@@ -22,6 +22,8 @@ public class SalesServiceImpl implements SalesService {
 
 	@Autowired 
 	private SalesDAOImpl salesDAO;
+	@Autowired
+	private tensorSocket ts;
 
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override 
@@ -202,72 +204,27 @@ public class SalesServiceImpl implements SalesService {
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////
-	// 옵션 정보를 바탕으로 시세 예측 (1)
+	// 옵션 정보를 바탕으로 시세 예측
 	public String predict(SalesVO vo) {
+
 		String p_result = "";
+		tensorSocket ts =new tensorSocket();
 		
-		// 로컬에서 price.py 실행 -> 텐서플로우 깔려있지 않아 실행 X
-		// 클라우드 서버로 SSH 접속 후 test.py 실행 -> import tensorflow 만 하는 파일이지만 마찬가지의 문제 발생
-		// 클라우드 서버로 SSH 접속 후 price.py 실행 -> 현재 할당량 문제로 에러 발생 추정됨
-		
-		// (1) CMD에 입력할 명령어 만들기
-		String[] command = new String[3];
-//		command[0] = "python";
-//		command[1] = "C:\\Python\\local_to_google/price.py";
-//		command[2] = vo.getOld() + " " + vo.getFuel() + " " + vo.getBaeki() + " " + vo.getGear();
-		
-		command[0] = "ssh rhlhrhlh1@104.196.231.62\n";
-		command[1] = "python ";
-		command[2] = "/opt/tensor/test.py ";
-
-//		command[0] = "ssh rhlhrhlh1@104.196.231.62\n";
-//		command[1] = "python ";
-//		command[2] = "/opt/tensor/price.py ";
-//		command[3] = "-year " + vo.getOld() + " -fuel " + vo.getFuel() + " -baeki " + vo.getBaeki() + " -gear " + vo.getGear();
-
-		
-		try {
-			// (2) CMD로 명령어 전송을 담당하는 execTensor 함수 호출 
-			p_result = execTensor(command);
+		try {			
+			String echo_msg = ts.tensor(vo);					// echo_msg 는 echo : XXXX.XXXX 으로 출력됨
+			p_result = echo_msg.split(" : ")[1]; 				// XXXX.XXXX
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally{			
 			return p_result;
 		}
 	}
-	/////////////////////////////////////////////////////////////
 	
-	// 옵션 정보를 바탕으로 시세 예측 (2)
-	public String execTensor(String[] command) throws IOException, InterruptedException {
-		// CMD에 입력을 담당하는 객체 CommandLine 에 인자로 받아온 String 타입의 배열을 파싱하여 넣음
-		CommandLine commandLine = CommandLine.parse(command[0]);
-		for (int i=1; i<command.length; i++) {
-			commandLine.addArgument(command[i]);
-		}
-		String confirm_result = "";
-		
-		// Byte 배열을 전송하는 통로 열기
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		PumpStreamHandler pumpStreamHandler = new PumpStreamHandler(outputStream);
-		// 디폴트 명령자 executor 생성
-		DefaultExecutor executor = new DefaultExecutor();
-		// 디폴트 명령자에 통로 스트림 할당
-		executor.setStreamHandler(pumpStreamHandler);
-		
-		System.out.println("#########################1########################");
-		// 만들어온 CMD명령어를 디폴트 명령자로 전송
-		executor.execute(commandLine);		// price.py 호출
-		System.out.println("#########################2########################");
-		// python 실행 결과를 콘솔로 찍어보기
-		System.out.println("========================================================");
-		System.out.println("output: " + outputStream.toString());
-		System.out.println("========================================================");
-		// CMD에서 받아오는 최종 결과를 String 형변환 후 p_result에 담음
-		String p_result = outputStream.toString();		
-		
-		return confirm_result;
+	/////////////////////////////////////////////////////////////////////////////////////
+	// p_price 값 업데이트
+	public void insertPredict(HashMap<String, String> predict) {
+		salesDAO.insertPredict(predict);
 	}
 		
 	
