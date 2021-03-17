@@ -131,8 +131,6 @@ status = status +','+ $(this).text()
 }
 
 
- 
-alert("status")
 
 	$.ajax({
 		type : 'post',

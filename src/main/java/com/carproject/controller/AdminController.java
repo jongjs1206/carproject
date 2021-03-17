@@ -14,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.carproject.domain.CoinVO;
-import com.carproject.domain.MemberVO;
-import com.carproject.domain.SalesVO;
 import com.carproject.service.CategoryService;
-import com.carproject.service.CoinService;
+import com.carproject.service.DeclarationService;
 import com.carproject.service.MemberService;
 import com.carproject.service.SalesService;
+
+
+import com.carproject.domain.DeclarationVO;
+
+import com.carproject.domain.MemberVO;
+import com.carproject.domain.SalesVO;
+import com.carproject.service.CoinService;
 
 @Controller
 public class AdminController {
@@ -30,6 +34,8 @@ public class AdminController {
 	private SalesService salesservice;	
 	@Autowired
 	private CategoryService categoryservice;
+	@Autowired
+	private DeclarationService declarationservice;
 	@Autowired
 	private CoinService coinservice;	
 	
@@ -109,6 +115,51 @@ public class AdminController {
 	}
 	
 	
+	//신고 목록 불러오기
+	@RequestMapping("admin/userReport_admin.do")
+	//신고목록 de_ok n-> 신고 처리 안됨, y->신고처림 됨
+	public void userReport_admin(@RequestParam @Nullable String ok, Model model) {
+		DeclarationVO vo = new DeclarationVO();
+		
+		//파라미터가 없거나 n이면 처리안된 신고리스트 불러오기
+		if(ok==null || ok=="" || ok=="n") {
+			vo.setDe_ok("n");;			
+		}
+		//아닌 경우에는 처리된 신고리스트 불러오기
+		else {
+			vo.setDe_ok("y");	
+		}
+		List<HashMap<String, Object>> reportList = declarationservice.selectUserReport(vo);
+		model.addAttribute("reportList",reportList);		
+		model.addAttribute("ok",ok);
+		
+		
+		
+	}
+	
+	//신고 보기(새창) : 피신고자에게 쪽지 보내기, 피신고자 블랙, 내용보기 가능
+	@RequestMapping("admin/reporting.do")
+	public void reporting(@RequestParam("num") int num , Model model) {
+		DeclarationVO vo = new DeclarationVO();
+		vo.setDe_num(num);
+		List<HashMap<String, Object>> report = declarationservice.selectUserReport(vo);
+		model.addAttribute("report",report.get(0));
+		
+	}
+	
+	@RequestMapping("admin/de_ok.do")
+	//신고목록 de_ok n-> 신고 처리 안됨, y->신고처림 됨
+	public String de_ok(Model model, @RequestParam("chk") int[] chk) {
+		
+		for(int num : chk) {
+			DeclarationVO vo = new DeclarationVO();
+			vo.setDe_num(num);
+			vo.setDe_ok("y");		
+			declarationservice.updateDe_ok(vo);			
+		}	
+		
+		return "redirect:userReport_admin.do";	
+	}
 	
 	
 	

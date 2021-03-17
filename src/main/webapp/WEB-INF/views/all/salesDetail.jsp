@@ -720,7 +720,7 @@
 				        	<div class="icons" style="margin-left:150px; display:flex;">
 				        		<div class='pointer declaration'>
 				        			<span style="margin:0 5px 0 5px; font-size:15px; position: relative; top:2px;">신고하기</span> 
-				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">
+				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">w
 				        		</div>
 				        		<div class='pointer notego'>
 				        			<span style="margin-left:20px; font-size:15px; position: relative; top:2px;">쪽지보내기</span>

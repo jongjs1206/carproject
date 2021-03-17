@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.carproject.domain.AuthVO;
+import com.carproject.domain.DeclarationVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 
@@ -26,6 +27,10 @@ public interface MemberService {
 	//admin salesList 게시등록
 	public int setPosting(SalesVO vo);
 	public int expiredPosting(SalesVO vo);
+	
+	
+	
+	
 	
 	// 모든 회원 목록을 불러오기 위한 함수
 	public List<HashMap<String, Object>> allMember();

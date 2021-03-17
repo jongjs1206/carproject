@@ -28,7 +28,8 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="member_user.do">회원목록</a> 
                                     <a class="nav-link" href="member_blacklist.do">블랙리스트목록</a>
-                                    <a class="nav-link" href="member_admin.do">관리자목록</a>  
+                                    <a class="nav-link" href="member_admin.do">관리자목록</a> 
+									<a class="nav-link" href="userReport_admin.do">신고목록	</a>  
                                 </nav>
                             </div>
                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsethree" aria-expanded="false" aria-controls="collapseAdd">
