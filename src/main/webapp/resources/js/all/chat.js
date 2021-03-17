@@ -9,7 +9,7 @@ $(function() {
         });
     
 		var webSocket = new WebSocket(
-				"ws://localhost:8080/carproject/chatsocket");
+				"ws://localhost/carproject/chatsocket");
 		// 콘솔 텍스트 에리어 오브젝트
 		var messageTextArea = $(".chat>ul");
 		

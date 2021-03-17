@@ -19,20 +19,23 @@
 .side-vehicle__container{
 	border-top: 1px solid #DCDCDC;
 }
-.side-vehicle__head-text {
+.side-vehicle__head{
 	word-break: keep-all;
 	-webkit-font-smoothing: antialiased;
-	font-size: 14px;
+	font-size: 17px;
 	line-height: inherit;
 	color: inherit;
 	cursor: pointer;
 	font-weight: bolder;
 	display: block;
-	padding: 9px 0;
-	
+	padding: 15px 0 8px 0;
 	text-align: center;
 }
-
+.nolistside{
+	padding: 9px 0 9px;
+	font-size: 15px;
+	text-align: center;
+}
 .side-vehicle__head-number {
 	word-break: keep-all;
 	-webkit-font-smoothing: antialiased;
@@ -50,6 +53,7 @@
 .side-vehicle__image {
 	margin: 10px;
 	width: 80%;
+	height: 76px;
 }
 .side-vehicle__item-delete{
 	border:none;
@@ -79,11 +83,18 @@
 .side_all{
 	z-index : 100;
 	position: fixed;
-	bottom: 130px;
+	top:200px;
 	right: 10px;
 }
+.fa-chevron-left,.fa-chevron-right,._delete{
+	color:#191D34;
+	cursor: pointer;
+}
+.off{
+	display: none;
+}
 @media screen and (max-width:1460px){
-	.recent-view-car-list{
+	.side_all{
 		display: none;
 	}
 }
