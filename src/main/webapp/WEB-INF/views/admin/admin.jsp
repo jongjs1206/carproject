@@ -49,20 +49,19 @@
                     <div class="container-fluid"> 
                     <ul></ul> 
                         <div class="row"> 
+							<!-- 메인페이지 카드 메뉴 1 -->
                             <div class="col-xl-3 col-md-6">
-                            
-                                <!-- 메인페이지 카드 메뉴 1 -->
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">판매글</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="salesarticlelist.do">자세히 보기</a>
+                                        <a class="small text-white stretched-link" href="salesList.do">자세히 보기</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- 메인페이지 카드 메뉴 2 -->
-                            <div class="col-xl-3 col-md-6">
+                            <!-- <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">고객문의</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -70,7 +69,7 @@
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- 메인페이지 카드 메뉴 3 -->
                             <div class="col-xl-3 col-md-6">
@@ -84,7 +83,7 @@
                             </div>
                             
                             <!-- 메인페이지 카드 메뉴 4 -->
-                            <div class="col-xl-3 col-md-6">
+                           <!--  <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">구매후기</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -93,18 +92,21 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <!-- 그래프 부분-->
                         <div class="row">
                             <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" style="padding-left:25px">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
+                                        <i class="fas fa-chart-bar mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body" style="width:700px; height:400px;">
+                                    	<canvas id="dailymyChart" width="700px;" height="350px;" style="padding:0 0 0 10px;">
+                                    	</canvas>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -112,15 +114,18 @@
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i> 
+                                        <i class="fas fa-chart-area mr-1"></i> 
                                         월별 코인 충전 현황
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body" style="width:700px; height:400px;">
+                                    	<canvas id="monthlymyChart" width="700px" height="350px" style="padding:0 0 0 30px;">
+                                    	</canvas>
+                                    </div>
                                 </div>
                             </div>
                             
                             <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6">
+                            <!-- <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area mr-2"></i>
@@ -128,10 +133,10 @@
                                     </div>
                                     <div class="card-body"><canvas id="sellAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- 막대 그래프 -->
-                            <div class="col-xl-6">
+                            <!-- <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar mr-2"></i>
@@ -140,7 +145,7 @@
                                     <div class="card-body"><canvas id="sellBarChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                 <!-- 최하단 footer -->
                 <footer class="py-4 bg-light mt-auto">
@@ -154,12 +159,102 @@
         </div>
         
         <!-- javascript 파일 import -->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="../resources/js/admin/chart-area-demo.js"></script>
         <script src="../resources/js/admin/chart-bar-demo.js"></script>
         <script src="../resources/js/admin/chart-area-sell.js"></script>
         <script src="../resources/js/admin/chart-bar-sell.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="../resources/js/admin/datatables-coin.js"></script>
+        
+        
+        <!-- 차트용 스크립트 시작-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+		<!-- 일별 차트용 스크립트 시작 -->
+		<script>
+		var ctx = document.getElementById('dailymyChart');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [
+					<c:forEach items="${coinchart}" var="coin">
+						'${coin.day}',
+					</c:forEach> 
+				],
+				datasets: [{
+					label: '일별',
+					data: [
+						<c:forEach items="${coinchart}" var="coin">
+		        			'${coin.price}',
+						</c:forEach> 
+					],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+			        	'rgba(54, 162, 235, 0.2)',
+			        	'rgba(54, 162, 235, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)',
+			        	'rgba(255, 206, 86, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+			        	'rgba(54, 162, 235, 1)',
+			        	'rgba(54, 162, 235, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)',
+			        	'rgba(255, 206, 86, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: false
+			}
+		});
+		</script>	<!-- 일별 차트용 스크립트 끝 -->
+		
+		<!-- 월별 차트용 스크립트 시작 -->
+		<script>
+		var ctx = document.getElementById('monthlymyChart');
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: [
+					<c:forEach items="${monthlycoin}" var="coin">
+						'${coin.day}',
+					</c:forEach> 
+				],
+				datasets: [{
+					label: '월별',
+					data: [
+						<c:forEach items="${monthlycoin}" var="coin">
+		        			'${coin.price}',
+						</c:forEach> 
+					],
+					backgroundColor: 'rgba(220, 167, 58, 0.2)',
+					borderColor: '#dca73a',
+					borderWidth: 1,
+					fill:true
+				}]
+			},
+			options: {
+				responsive: false
+			}
+		});
+		</script>	<!-- 월별 차트용 스크립트 끝-->
+
     </body>
 </html>

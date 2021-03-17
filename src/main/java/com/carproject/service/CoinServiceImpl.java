@@ -56,7 +56,7 @@ public class CoinServiceImpl implements CoinService{
 	// 관리자
 	// 코인 충전량 불러오기 위한 함수
 	@Override	
-	public List<CoinVO> allCoinList()
+	public List<HashMap<String, Object>> allCoinList()
 	{   
 		return coinDAO.allCoinList(); 
 	}
@@ -64,7 +64,7 @@ public class CoinServiceImpl implements CoinService{
 	// 관리자
 	// 월별 코인량을 불러오기 위한 메소드
 	@Override
-	public List<CoinVO> monthlyCoinList() {
+	public List<HashMap<String, Object>> monthlyCoinList() {
 		return coinDAO.monthlyCoinList();
 	}
 	

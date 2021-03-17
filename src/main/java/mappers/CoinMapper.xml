@@ -51,18 +51,18 @@
 
 
 
-	<!-- 관리자 - 코인현황 목록 가져오기 -->
-	<select id="allCoinList" parameterType="String" resultType="coin" >
-		SELECT * FROM coin
+	<!-- 관리자 - 일별 코인 충전 현황 -->
+	<select id="allCoinList" parameterType="string" resultType="hashmap" >
+		SELECT day,	sum(price) AS price
+		FROM (SELECT DATE_FORMAT(day, '%m월 %d일') AS day, price FROM coin WHERE price IS NOT NULL) c 
+		GROUP BY day ORDER BY day ASC
 	</select>
-
-	<select id="monthlyCoin" parameterType="string" resultType="coin">
-	SELECT A.*
-      FROM (SELECT DATE_FORMAT(DAY, '%Y년 %m월') AS day
-                 , SUM(PRICE)                   AS price
-              FROM coin
-           ) A
-    GROUP BY A.DAY
+	
+	<!-- 관리자 - 월별 코인 충전 현황 -->
+	<select id="monthlyCoin" parameterType="string" resultType="hashmap">
+		SELECT  day, sum(price) AS price
+		FROM (SELECT DATE_FORMAT(day, '%Y년 %m월') AS day, price FROM coin) A
+		GROUP BY day
 	</select>
 	
 	

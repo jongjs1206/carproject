@@ -113,8 +113,8 @@ public class CoinController {
 	// 관리자
 	// 일일 코인 페이지에 매핑 -> coin테이블의 데이터를 모두 출력
 	@RequestMapping("admin/dailycoin.do")
-	public void coinlist(Model model) {
-		List<CoinVO> list = coinService.allCoinList();
+	public void coinlist(Model model, CoinVO vo) {
+		List<HashMap<String, Object>> list = coinService.allCoinList();
 		model.addAttribute("coinList", list);
 	}
 	
@@ -122,7 +122,7 @@ public class CoinController {
 	// 월별 코인량을 불러오기 위한 함수
 	@RequestMapping("admin/monthlycoin.do")
 	public void monthlyCoinList(Model model) {
-		List<CoinVO> list = coinService.monthlyCoinList();
+		List<HashMap<String, Object>> list = coinService.monthlyCoinList();
 		model.addAttribute("coinList", list);
 	}
 }

@@ -1,24 +1,14 @@
 package com.carproject.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Member;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,14 +18,13 @@ import com.carproject.service.CategoryService;
 import com.carproject.service.DeclarationService;
 import com.carproject.service.MemberService;
 import com.carproject.service.SalesService;
-import com.google.rpc.context.AttributeContext.Auth;
 
-import ch.qos.logback.core.util.SystemInfo;
 
 import com.carproject.domain.DeclarationVO;
-import com.carproject.domain.HeartVO;
+
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
+import com.carproject.service.CoinService;
 
 @Controller
 public class AdminController {
@@ -47,6 +36,8 @@ public class AdminController {
 	private CategoryService categoryservice;
 	@Autowired
 	private DeclarationService declarationservice;
+	@Autowired
+	private CoinService coinservice;	
 	
 	String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", "HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", "데이라이트",
 			"하이빔어시스트", "압축도어", "자동슬라이딩도어", "전동사이드스탭", "루프랙", "가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "열선시트(뒷좌석)",
@@ -222,9 +213,21 @@ public class AdminController {
 	
 	
 	
+	////////////////////////////////////////////////////////////////////////////
+	// 은별
+	// 일별 코인 충전 현황 차트
+	@RequestMapping("admin/admin.do")
+	public void coinchart(Model model) {
+		List<HashMap<String, Object>> coin = coinservice.allCoinList();
+		model.addAttribute("coinchart", coin);
+		
+		List<HashMap<String, Object>> monthlycoin = coinservice.monthlyCoinList();
+		model.addAttribute("monthlycoin", monthlycoin);
+		
+		//System.out.println("coin차트요" + coin);
+	}
 	
 	
 	
-
 	
 }

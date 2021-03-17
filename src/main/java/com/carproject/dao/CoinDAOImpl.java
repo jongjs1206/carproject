@@ -64,18 +64,18 @@ public class CoinDAOImpl implements CoinDAO{
 	
 	
 	// 관리자
-	// 코인현황 목록 가져오기 - 코인 충전량 불러오기 위한 함수
+	// 코인현황 목록 가져오기 - 일별 충전량 불러오기 위한 함수
 	@Override
-	public List<CoinVO> allCoinList() {
-	    System.out.println("===> CoinMapper checkUniqueId  호출");
+	public List<HashMap<String, Object>> allCoinList() {
+	    System.out.println("===> CoinMapper checkUniqueId 호출");
 	    return mybatis.selectList("CoinMap.allCoinList"); 
 	}
 
 	// 관리자
 	// 코인현황 목록 가져오기 - 월별 코인량을 불러오기 위한 함수
 	@Override
-	public List<CoinVO> monthlyCoinList() {
-		System.out.println("===> CoinMapper checkUniqueId  호출");
+	public List<HashMap<String, Object>> monthlyCoinList() {
+		System.out.println("===> CoinMapper checkUniqueId 호출");
 		return mybatis.selectList("CoinMap.monthlyCoin");
 	}
 
