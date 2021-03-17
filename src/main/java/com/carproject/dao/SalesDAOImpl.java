@@ -136,5 +136,11 @@ public class SalesDAOImpl implements SalesDAO {
 		mybatis.update("salesMap.useCoinM", vo);
 	}
 	
+	@Override
+	public void insertPredict(HashMap<String, String> predict) {				// 글 등록시 시세 예측결과를 p_price에 업데이트
+		System.out.println("===> salesMap insertPredict 호출");
+		mybatis.update("salesMap.insertPredict", predict);
+	}
+	
 	
 }

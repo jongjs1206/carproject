@@ -340,17 +340,33 @@ public class SalesController {
 		
 		// 이미지 분석
 		// (9) 파이썬으로 sell_id 보내기 -> 파이썬에서 검사 -> 결과를 수신
-		String v_result = salesService.pystart(Integer.toString(sell_id));
-		System.out.println("이미지 분석 결과 : " + v_result);
-				
-		HashMap<String, String> analysis = new HashMap<String, String>();
-		analysis.put("sell_id", Integer.toString(sell_id));
-		analysis.put("v_result", v_result);
-		salesService.insertAnalysis(analysis);
+		String v_result = "";
+		try {
+			v_result = salesService.pystart(Integer.toString(sell_id));
+			System.out.println("이미지 분석 결과 : " + v_result);
+			
+			HashMap<String, String> analysis = new HashMap<String, String>();
+			analysis.put("sell_id", Integer.toString(sell_id));
+			analysis.put("v_result", v_result);
+			salesService.insertAnalysis(analysis);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		// (10) 글 등록시 코인 -1 반영 (코인테이블, 멤버테이블)
 		salesService.useCoinC(info);
 		salesService.useCoinM(info);
+		
+		// (11) 시세 예측
+		try {
+			String p_price = salesService.predict(svo);
+			HashMap<String, String> predict = new HashMap<String, String>();
+			predict.put("sell_id", Integer.toString(sell_id));
+			predict.put("p_price", p_price);		
+			salesService.insertPredict(predict);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "redirect:/all/product_list.do";
 	}
