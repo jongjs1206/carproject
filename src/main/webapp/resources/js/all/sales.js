@@ -187,7 +187,7 @@ $(function() {
 			//result = beforeTitle + " " + rslt1 + " " + rslt2
 			result = beforeTitle + " " + rslt1 + " " + grade + " " + rslt2
 		} else {
-			result = beforeTitle + " " + rslt1 + " " + grade + " " + detailGrade
+			result = beforeTitle + " " + detailModel + " " + grade + " " + detailGrade
 		}
 
 		$("#title").val(result);
@@ -196,6 +196,8 @@ $(function() {
 		//console.log(g_id);
 		$('#selectId').val(g_id);
 	});
+	
+	
 	
 	
 	/////////////////////////////////////////////////////////

@@ -29,7 +29,7 @@ public interface SalesService {
 	public void saveModify(SalesVO vo);		// 수정하기 버튼(글 수정 페이지)
 	public void deleteBtn(SalesVO vo);		// 삭제하기 버튼
 	
-	public SalesVO salesDetail(Long num);  // 상세화면 
+	public SalesVO salesDetail(long num);  // 상세화면 
 	
 	public String pystart(String sell_id);			// 이미지 분석 
 	public void insertAnalysis(HashMap<String, String> analysis);	// 이미지분석 결과를 해당 판매글의 DB에 입력

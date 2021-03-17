@@ -114,7 +114,7 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public SalesVO salesDetail(Long num) {									// 상세페이지
+	public SalesVO salesDetail(long num) {									// 상세페이지
 		SalesVO sales = mybatis.selectOne("salesMap.salesCheck", num);
 		return sales;
 	}

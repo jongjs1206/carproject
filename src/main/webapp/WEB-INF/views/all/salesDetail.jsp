@@ -91,8 +91,8 @@
 	                	<!-- ----------------썸네일---------------- -->
 	                    <div class="thumbnail" style="display: flex; flex-wrap: wrap; margin:0 0 0 20px;" >
 	                    <c:forEach items="${allphoto}" var="thumbUrl"> 
-							<div style="width: 15%; margin:3px;">
-								<img class="thumbImg" style="width: 100%; margin: 0px; cursor:pointer;" src="${thumbUrl.url}" onclick="imgClick(this);">
+							<div style="width: 97px; height:73px; margin:3px;">
+								<img class="thumbImg" style="width: 97px; height:73px; margin: 0px; cursor:pointer;" src="${thumbUrl.url}" onclick="imgClick(this);">
 				            </div>
 				        </c:forEach>
 						</div><br/><br/>	<!-- end of 썸네일 -->

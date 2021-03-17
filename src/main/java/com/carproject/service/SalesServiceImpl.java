@@ -100,7 +100,7 @@ public class SalesServiceImpl implements SalesService {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public SalesVO salesDetail(Long num) {		// 상세페이지
+	public SalesVO salesDetail(long num) {		// 상세페이지
 		return salesDAO.salesDetail(num);
 	}
 	
