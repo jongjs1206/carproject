@@ -165,6 +165,7 @@
 			
 			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
 		<div id="indexListAjax">
+		
 			<c:forEach items="${sale_list}" var="sale">
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
