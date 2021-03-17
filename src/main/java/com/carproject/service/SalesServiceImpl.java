@@ -110,10 +110,18 @@ public class SalesServiceImpl implements SalesService {
 		System.out.println("Python Call");
 		String v_result = "";
 
-		String[] command = new String[3];
-		command[0] = "python";
-		command[1] = "C:\\Python\\sachawon/main.py";
-		command[2] = "gs://car_image_for_analysis/" + sell_id + "/img1.png";
+		// 원본 코드
+//		String[] command = new String[3];
+//		command[0] = "python ";
+//		command[1] = "C:\\Python\\local_to_google/vision.py";
+//		command[2] = "gs://car_image_for_analysis/" + sell_id + "/img1.png";
+		
+		// 클라우드 서버로 SSH 접속 후 vision.py 실행
+		String[] command = new String[4];
+		command[0] = "ssh root@35.222.239.26\n";
+		command[1] = "python3 ";
+		command[2] = "/opt/server/vision.py ";
+		command[3] = "gs://car_image_for_analysis/" + sell_id + "/img1.png";
 		try {
 			v_result = execPython(command, sell_id);
 		}catch(Exception e) {
