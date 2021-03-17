@@ -104,7 +104,6 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    
                                         <!-- 예시 데이터 삽입 -->
                                         <thead>
                                             <tr>
@@ -119,7 +118,6 @@
 			                                    	<td>${coin.price}</td>
 			                                    </tr>     
                                         	</c:forEach>  
-                                        	 
                                         </tbody>
                                     </table>
                                 </div>

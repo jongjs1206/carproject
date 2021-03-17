@@ -103,15 +103,9 @@
                                         <i class="fas fa-chart-area mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
-                                    		                                    <c:forEach items="${coinchart}" var="coin">
-		                                    	<tr>
-		                                        	<td>${coin.day}</td>
-		                                           	<td>${coin.price}</td>
-		                                        </tr>
-		                                    </c:forEach>    
                                     <div class="card-body">
-                                    	<canvas id="myChart" width="100%" height="40">
-		                                    <c:forEach items="${coinchart}" var="coin">
+                                    	<canvas id="dailymyChart" width="100%" height="40">
+		                                    <c:forEach items="${coinList}" var="coin">
 		                                    	<tr>
 		                                        	<td>${coin.day}</td>
 		                                           	<td>${coin.price}</td>
@@ -129,7 +123,16 @@
                                         <i class="fas fa-chart-bar mr-1"></i> 
                                         월별 코인 충전 현황
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body">
+                                    	<canvas id="monthlymyChart" width="100%" height="40">
+		                                    <c:forEach items="${coinList}" var="coin">
+		                                    	<tr>
+		                                        	<td>${coin.day}</td>
+		                                           	<td>${coin.price}</td>
+		                                        </tr>
+		                                    </c:forEach>    
+                                    	</canvas>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -182,17 +185,17 @@
 		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
 		<script>
-			var ctx = document.getElementById('myChart');
+			var ctx = document.getElementById('dailymyChart');
 			var data = {
 			    labels: [
-			    	<c:forEach items="${coinchart}" var="coin">
+			    	<c:forEach items="${coinList}" var="coin">
 						${coin.day},
 					</c:forEach> 
 			    	],
 			    datasets: [{
 			        label: '# 일 매출',
 			        data:[
-			        	<c:forEach items="${coinchart}" var="coin">
+			        	<c:forEach items="${coinList}" var="coin">
 			        		${coin.price},
 						</c:forEach> 
 			        ],
@@ -200,7 +203,7 @@
 			    }]
 			};
 			
-			var myChart = new Chart(ctx, {
+			var dailymyChart = new Chart(ctx, {
 			    type: 'line',
 			    data: data,
 			    options: {
@@ -239,9 +242,68 @@
 			        }
 			    }
 			});
-		</script>
-		<!-- 차트용 스크립트 끝-->
-
+		</script>	<!-- 일별 차트용 스크립트 끝 -->
+		
+		<!-- 월별 차트용 스크립트 시작 -->
+		<script>
+			var ctx = document.getElementById('monthlymyChart');
+			var data = {
+			    labels: [
+			    	<c:forEach items="${coinList}" var="coin">
+						${coin.day},
+					</c:forEach> 
+			    	],
+			    datasets: [{
+			        label: '# 월 매출',
+			        data:[
+			        	<c:forEach items="${coinList}" var="coin">
+			        		${coin.price},
+						</c:forEach> 
+			        ],
+			        borderWidth: 1
+			    }]
+			};
+			
+			var monthlymyChart = new Chart(ctx, {
+			    type: 'line',
+			    data: data,
+			    options: {
+			    	maintainAspectRatio: false,
+			        title: {
+			            display: true,
+			            //text: '일별 코인 충전 현황',
+			            position: 'top',
+			            fontSize: 20,
+			            fontColor: '#000'
+			        },
+			        plugins: {
+			            labels: [
+			                {
+			                    render: function (options) {
+			                        var value = options.value;
+			                        return value + "원";
+			                    },
+			                    fontSize: 15,
+			                    fontStyle: 'bold',
+			                    fontColor: '#000',
+			                    position: 'outside',
+			                    outsidePadding: 40,
+			                    textMargin: 10
+			                },
+			                {
+			                    render: 'label',
+			                    fontSize: 15,
+			                    fontStyle: 'bold',
+			                    fontColor: '#000'
+			                }
+			            ],
+			            colorschemes: {
+			                scheme: 'tableau.Tableau20'
+			            }
+			        }
+			    }
+			});
+		</script>	<!-- 월별 차트용 스크립트 끝-->
 
     </body>
 </html>

@@ -113,7 +113,7 @@ public class CoinController {
 	// 관리자
 	// 일일 코인 페이지에 매핑 -> coin테이블의 데이터를 모두 출력
 	@RequestMapping("admin/dailycoin.do")
-	public void coinlist(Model model) {
+	public void coinlist(Model model, CoinVO vo) {
 		List<HashMap<String, Object>> list = coinService.allCoinList();
 		model.addAttribute("coinList", list);
 	}

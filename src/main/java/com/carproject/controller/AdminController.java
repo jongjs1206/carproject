@@ -162,8 +162,8 @@ public class AdminController {
 	
 	
 	
-	// 은별
 	////////////////////////////////////////////////////////////////////////////
+	// 은별
 	// 일별 코인 충전 현황 차트
 	@RequestMapping("admin/admin.do")
 	public void coinchart(Model model, CoinVO vo) {
@@ -173,9 +173,6 @@ public class AdminController {
 		
 		//System.out.println("coin차트요");
 	}
-		
 	
-	
-
 	
 }
