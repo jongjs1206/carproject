@@ -23,3 +23,34 @@ img#profileImg{
 	cursor: pointer;
 	
 }
+.cursor{
+	
+	cursor: pointer !important;
+}
+button.btn_send{
+	margin: 2px;
+}
+
+div.borderBoxGold{
+	border:10px solid #DCA73A;
+}
+div.borderBoxRed{
+	border:10px solid #B9062F;	
+}
+div.borderBoxGreen{
+	border:10px solid #006400;
+	
+}
+
+.gray{
+	
+	color: gray;
+	
+}
+.bold{
+	font-weight: bold;
+	color: #323C73;
+	
+}
+
+

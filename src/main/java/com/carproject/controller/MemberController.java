@@ -171,8 +171,7 @@ public class MemberController {
 			//구글 email도 그냥 email도 같은게 없으면 -> 간편가입
 			}else{
 				
-				model.addAttribute("vo",vo);
-				
+				model.addAttribute("vo",vo);				
 				//가입 시킴
 				return "forward:sns_join.do";
 			}

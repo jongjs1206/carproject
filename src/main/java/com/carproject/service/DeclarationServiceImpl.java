@@ -1,6 +1,9 @@
 package com.carproject.service;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,16 @@ public class DeclarationServiceImpl implements DeclarationService{
 	@Override
 	public void declaration_insert(DeclarationVO vo) {
 		declarationDAO.declaration_insert(vo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectUserReport(DeclarationVO vo) {
+		return declarationDAO.selectUserReport(vo);
+	}
+	
+	@Override
+	public int updateDe_ok(DeclarationVO vo) {
+		return declarationDAO.updateDe_ok(vo);
 	}
 
 }

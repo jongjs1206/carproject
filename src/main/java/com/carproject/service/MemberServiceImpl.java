@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.carproject.dao.DeclarationDAO;
 import com.carproject.dao.MemberDAO;
+import com.carproject.domain.DeclarationVO;
 import com.carproject.domain.MemberVO;
 import com.carproject.domain.SalesVO;
 
@@ -110,6 +112,9 @@ public class MemberServiceImpl implements MemberService{
 		}
 	
 
+		
+		
+		
 	  
 	  	public List<HashMap<String, Object>> allMember()
 		  {   
@@ -195,6 +200,8 @@ public class MemberServiceImpl implements MemberService{
 		    String beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
 		    return beforeWeek;			
 		}
+
+
 		
 		
 		

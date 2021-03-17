@@ -24,9 +24,20 @@
         crossorigin="anonymous"></script>
         <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>    
 </head>
-
+     
      <!-- 대시보드 내용 -->
-        <div id="layoutSidenav_content">
+     <c:choose>
+     <c:when test="${auth eq 'ROLE_ADMIN'}">
+      <div id="layoutSidenav_content" class="borderBoxGold">
+	</c:when>
+     <c:when test="${user.state eq 'black'}">
+      <div id="layoutSidenav_content" class="borderBoxRed">
+    </c:when>
+     <c:otherwise>
+     <div id="layoutSidenav_content" class="borderBoxGreen">
+    </c:otherwise>
+     </c:choose>
+       
             <main>
                 <form method="post" action="updateUserEtc.do" id="updateUserEtc">
                   <input type="hidden" name="${_csrf.parameterName}"
@@ -44,6 +55,32 @@
                          <div class="form-group col-md-12">                        
                             <img id='profileImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${user.m_id}.jpg" alt="profile" />
                         </div>    
+                        
+                        
+                          <div class="form-group col-md-6">  
+                        
+                        <c:choose>
+                        <c:when test="${auth eq 'ROLE_ADMIN'}">                        
+                        <a href="member_status.do?id=${user.m_id}&stateChange=user"><input type="button" class="btn btn-primary" value="관리자 해제"></a>
+                        </c:when>
+                        <c:when test="${auth eq 'ROLE_USER' and state eq 'normal'}">
+                        <a href="member_status.do?id=${user.m_id}&stateChange=admin"><input type="button" class="btn btn-primary" value="관리자 전환"></a>
+                        </c:when>                        
+                        </c:choose>
+                        
+                         
+                        
+                        <c:choose>
+                        <c:when test="${auth eq 'ROLE_USER' and state eq 'normal'}">
+                         <a href="member_status.do?id=${user.m_id}&stateChange=black"><input type="button" class="btn btn-primary" value="블랙리스트 전환"></a>
+                        </c:when>
+                        <c:when test="${state eq 'black'}">
+                        <a href="member_status.do?id=${user.m_id}&stateChange=normal"><input type="button" class="btn btn-primary" value="블랙리스트 해제"></a>
+                        </c:when>
+                        </c:choose>                                  
+                        </div>
+                        
+                        
 
                          <label for="inputID">ID</label>
                             <input type="text" class="form-control" id="m_id" name="m_id" readonly="readonly" value="${user.m_id}">
@@ -102,33 +139,9 @@
 						
 						
 						<div class="form-group col-md-3">
-                          <input type="submit" id="confirm" class="btn btn-primary" value="확인">
-                        </div>  				
-
-        
-                        
-                        <div class="form-group col-md-6">  
-                        
-                        <c:choose>
-                        <c:when test="${auth eq 'ROLE_ADMIN'}">                        
-                        <a href="member_status.do?id=${user.m_id}&stateChange=user"><input type="button" class="btn btn-primary" value="관리자 해제"></a>
-                        </c:when>
-                        <c:when test="${auth eq 'ROLE_USER'}">
-                        <a href="member_status.do?id=${user.m_id}&stateChange=admin"><input type="button" class="btn btn-primary" value="관리자 전환"></a>
-                        </c:when>                        
-                        </c:choose>
-                        
-                         
-                        
-                        <c:choose>
-                        <c:when test="${state eq 'normal'}">
-                         <a href="member_status.do?id=${user.m_id}&stateChange=black"><input type="button" class="btn btn-primary" value="블랙리스트 전환"></a>
-                        </c:when>
-                        <c:when test="${state eq 'black'}">
-                        <a href="member_status.do?id=${user.m_id}&stateChange=normal"><input type="button" class="btn btn-primary" value="블랙리스트 해제"></a>
-                        </c:when>
-                        </c:choose>                                  
-                        </div>
+                          <input type="submit" id="confirm" class="btn btn-primary" value="저장">
+                        </div>  				       
+                      
                                            
                     </div>
 	

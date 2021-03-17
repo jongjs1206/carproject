@@ -7,7 +7,7 @@ public class DeclarationVO {
 	private String content;
 	private String de_date;
 	private String de_show;
-	private String m_ok;
+	private String de_ok;
 	
 	public int getDe_num() {
 		return de_num;
@@ -45,11 +45,12 @@ public class DeclarationVO {
 	public void setDe_show(String de_show) {
 		this.de_show = de_show;
 	}
-	public String getM_ok() {
-		return m_ok;
+	public String getDe_ok() {
+		return de_ok;
 	}
-	public void setM_ok(String m_ok) {
-		this.m_ok = m_ok;
+	public void setDe_ok(String de_ok) {
+		this.de_ok = de_ok;
 	}
+
 	
 }
