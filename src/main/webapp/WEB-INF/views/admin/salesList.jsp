@@ -116,7 +116,7 @@
                                                 <td>${sale.status}</td>
                                                 <c:set var="status" value="${sale.status}" />
 													<c:choose>
-														<c:when test="${status ne '게시중'}">
+														<c:when test="${status eq '등록대기'}">
 															<td align="center">											
 															<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
 															</td>
@@ -126,7 +126,7 @@
 														</c:otherwise>
 													</c:choose>
 												<td>
-													<c:if test="${status ne '반려'}">
+													<c:if test="${status eq '등록대기'}">
 														<input type="button" class="btn btn-danger" onclick="location.href='returnPosting.do?sellid=${sale.sell_id}' " value="반려">
 													</c:if>
 												</td>

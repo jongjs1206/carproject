@@ -236,11 +236,8 @@ public class MemberController {
 	    MemberVO info = memberservice.checkUniqueId(vo);
 	    session.setAttribute("info", info);
 	    
-	    
-	    
 		// 유저정보 가져오기
 		MemberVO member = (MemberVO) session.getAttribute("info");
-//		System.out.println("+++userinfo+++++ "+member.getEmail());
 
 		// 세팅
 		String email = (String)member.getEmail();
@@ -347,7 +344,6 @@ public class MemberController {
 		int cnt = list.size();
 		int perpage =10;
 		int totalpage;
-
 		
 		if(cnt%perpage==0) {			
 			 totalpage=cnt/perpage;		
@@ -359,8 +355,7 @@ public class MemberController {
 		HashMap<String, Object> param = new HashMap<String, Object>();
 		param.put("m_id", id);
 		param.put("start", 0);
-		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(param);
-		
+		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(param);		
 		
 		//날짜에서 시간 자르기
 		for(HashMap<String, Object> s : sale_list) {	
@@ -386,8 +381,8 @@ public class MemberController {
 	@RequestMapping(value = "user/my_sales_ajax.do", method= {RequestMethod.POST})
 	//@ResponseBody 지우기
 	public void  searchMySales(MemberVO vo, HttpSession session, Model model,
-			@RequestParam HashMap<String, Object> param
-			) {
+			@RequestParam HashMap<String, Object> param) 
+	{
 		
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id ="";
@@ -467,8 +462,6 @@ public class MemberController {
 		}else {
 			totalpage=cnt/perpage+1;
 		}
-
-		System.out.println(cnt+"+++cnt");
 		
 		model.addAttribute("cnt",cnt);
 		model.addAttribute("totalpage",totalpage);
