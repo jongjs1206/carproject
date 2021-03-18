@@ -3,17 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="salesMap">
 
-<!-- 글 등록 -->
-<!-- <insert id="salesInsert" parameterType="sales">
-	INSERT INTO sell 
-	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content
-	, vehicle_num, fuel, gear, status, baeki, guarantee, seller) 
-	VALUES 
-	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}
-	, #{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}
-	,#{fuel}, #{gear}, #{status}, #{baeki}, #{guarantee}, #{seller})
-</insert> -->
-
 <!-- 글 상세페이지(확인) -->
 <select id="salesCheck" parameterType="long" resultType="sales">
 	<![CDATA[
