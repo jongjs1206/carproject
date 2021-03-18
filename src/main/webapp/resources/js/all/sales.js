@@ -170,7 +170,7 @@ $(function() {
 		var result = brand + " " + detailModel + " " + grade + " " + detailGrade;
 		
 		if(detailGrade == '0') {
-			result = brand + "" + detailModel + " " + grade
+			result = brand + " " + detailModel + " " + grade
 		}
 
 		$("#title").val(result);

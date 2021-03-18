@@ -46,7 +46,7 @@
             <!-- 대시보드 내용 -->
             <div id="layoutSidenav_content">
                 <main>
-                    <div class="container-fluid"> 
+                    <div class="container-fluid" style="margin-top:10px;"> 
                         <div class="row"> 
 							<!-- 메인페이지 카드 메뉴 1 -->
                             <div class="col-xl-3 col-md-6">

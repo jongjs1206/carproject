@@ -26,13 +26,6 @@
 	]]>
 </update>
 
-<!-- 글 삭제 -->
-<delete id="salesDelete" parameterType="sales">
-	<![CDATA[
-		DELETE FROM sell
-		WHERE sell_id=#{sell_id}
-	]]>
-</delete>
 
 <!-- 버튼으로 작업 ////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- 글 등록을 위한 sell_id 찾아오기 -->

@@ -136,7 +136,7 @@
 								<div class="marketPredict" style="font-size:14px; width:1000px;">
 									<!-- <img src="../resources/img/used_car_price.png" style="margin:0 150px 0 50px;"> -->
 									<div class="card-body" style="display: flex;">
-										<canvas id="predict_price" width="700" height="400">
+										<canvas id="predict_price" width="700" height="350">
 			                            	<!-- 선 그래프 -->
 			                            </canvas>
 			                          	<span style="width:300px; font-size:18px; margin: 100px 0 0 50px;">
@@ -148,7 +148,7 @@
 									</div>
 								</div>
 							</div>	
-						</div><br/><br/><br/>	<!-- end of 시세 예측 -->
+						</div><br/><br/>	<!-- end of 시세 예측 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6">	<!-- start of 옵션 정보 -->
 							<div class="course__details__feature" style="width:1000px;">	
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
@@ -701,7 +701,7 @@
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
 	                		<input type="hidden" class='note_title' value='${sales.title}'>
 	                        <div class="carNameInfo" style="text-align:center;"><span style="font-size:22px;">${sales.title}</span></div>
-	                        <div class="carInfo" style="text-align:center; "><span style="font-size:16px; margin:10px 0;">${sales.old}년형 | ${sales.color} | ${sales.fuel}</span></div>
+	                        <div class="carInfo" style="text-align:center; "><span style="font-size:16px; margin:10px 0;">${sales.old} | ${sales.color} | ${sales.fuel}</span></div>
 	                        <div class="" style="text-align:center;"><span style="font-size:18px;"><b class="salesPrice" style="color:#dca73a; margin-right:5px;">
 	                        <fmt:formatNumber value="${sales.price}" pattern="#,###" /></b>만원</span></div><br/>
 	                        <div class="carInfo1">
