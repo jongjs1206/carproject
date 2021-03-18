@@ -8,8 +8,10 @@
 
 <%
 	String sell_id = request.getParameter("num");
+	String status = request.getParameter("status");
 	SalesVO vo = new SalesVO();
 	vo.setSell_id(Integer.parseInt(sell_id));
+	vo.setStatus(status);
 %>
 
 
@@ -760,12 +762,19 @@
 				</div>	<!-- end of 오른쪽 위 -->
 			</div>	<!-- end of row -->
 			<input type="hidden" name="sell_id" id="sell_id" value="<%=sell_id%>">
-			<c:if test="${sales.m_id == sessionScope.info.m_id}">	<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
-				<div class="modify-delete" style="margin:50px 0;">
-					<a id="modifyCar"><span style="margin-left:450px;">수정하기</span></a>
-					<a id="deleteCar"><span style="margin-left:50px;">삭제하기</span></a>
-				</div>
-			</c:if>
+			<input type="hidden" name="status" id="status" value="<%=status%>">
+			<div class="modify-delete" style="margin:50px 0;">
+				<c:choose> 
+					<c:when test="${sales.m_id == sessionScope.info.m_id && sales.status != '게시종료'}">	<!-- m_id가 같고 게시종료 상태가 아닐때 -->
+						<a id="modifyCar"><span style="margin-left:450px; cursor:pointer;">수정하기</span></a>
+						<a id="deleteCar"><span style="margin-left:50px; cursor:pointer;">삭제하기</span></a>
+					</c:when>
+					<c:otherwise>	<!-- m_id가 같고 게시종료 상태일 때 -->
+						<a id="reEnroll"><span style="margin-left:450px; cursor:pointer;">재등록하기</span></a>
+						<a id="deleteCar"><span style="margin-left:50px; cursor:pointer;">삭제하기</span></a>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
 		</form>
 	</section>

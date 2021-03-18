@@ -394,6 +394,13 @@ $(function() {
 	});		// end of 수정하기 버튼
 	
 	
+	// 재등록하기 버튼 <= m_id값이 같고 게시종료일 때
+	$(document).on("click", "#reEnroll", function(){
+		next_url = '../user/salesModify.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 수정하기 버튼을 눌렀을 때 타고갈 다음 url
+		window.location.href = next_url;
+	});
+	
+	
 	// 삭제하기 => 내 판매글로 넘어감
 	$(document).on("click", "#deleteCar", function(){
 		var delConfirm = confirm('삭제하시겠습니까?');

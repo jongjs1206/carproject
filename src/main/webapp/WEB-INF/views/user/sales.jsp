@@ -429,15 +429,15 @@
 								</tr>
 							</table>
 							<div class="uploadBtn" style="margin: 50px 0;">
-								<a id="enrollCar"><span style="margin-left: 550px;">등록하기</span></a>
+								<a id="enrollCar"><span style="margin-left: 550px; cursor:pointer;">등록하기</span></a>
 							</div>
 							<c:if test="${sales.m_id == sessionScope.info.m_id}">
 								<!-- 수정 / 삭제하기 버튼 : m_id가 같을 때만 보이게 -->
 								<div class="modify-delete" style="margin: 50px 0;">
 									<a href="../user/sales.do" id="modifyCar"><span
-										class="modifyBtn" style="margin-left: 450px;">수정하기</span></a> <a
+										class="modifyBtn" style="margin-left: 450px; cursor:pointer;">수정하기</span></a> <a
 										href="product_list.do" id="deleteCar"><span
-										class="deleteBtn" style="margin-left: 50px;">삭제하기</span></a>
+										class="deleteBtn" style="margin-left: 50px; cursor:pointer;">삭제하기</span></a>
 								</div>
 							</c:if>
 						</form>

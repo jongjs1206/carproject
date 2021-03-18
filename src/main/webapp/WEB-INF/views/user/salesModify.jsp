@@ -35,6 +35,7 @@
 <link rel="stylesheet" href="../resources/assets/css/slick.css">
 <link rel="stylesheet" href="../resources/assets/css/nice-select_eb.css">
 <link rel="stylesheet" href="../resources/assets/css/style_eb.css">
+<link rel="stylesheet" href="../resources/assets/css/style.css">
 <link rel="stylesheet" href="../resources/assets/css/responsive.css">
 
 <script type="text/javascript"
@@ -477,7 +478,7 @@
 								<div class="modify-delete" style="margin: 50px 0;">
 									<input type="hidden" name="sell_id" id="sell_id" value="<%=sell_id%>">
 									<a id="modifyEnroll"><span class="modifyBtn"
-										style="margin-left: 500px;">수정하기</span></a>
+										style="margin-left: 500px; cursor:pointer;">수정하기</span></a>
 								</div>
 							</form>
 						</div>
