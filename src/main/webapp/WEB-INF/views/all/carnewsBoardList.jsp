@@ -58,8 +58,8 @@
 
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
-	<%@ include file="../header.jsp"%>
-	<!-- header -->
+	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- 최근 본 목록 -->
 	
 			
 	<!-- slider Area Start-->

@@ -115,16 +115,16 @@
 											value="${sessionScope.info.tel}"></td>
 									</tr>
 									<tr>
-									<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
+										<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
 										<th>이미지 등록</th>
 										<!--  이미지 등록 부분 -->
 										<td width=100><img src="../resources/img/photos.png"
-											width="50px" height="50px" id="photo"><span
-											id="phototo"></span></td>
+											width="50px" height="50px" id="photo" >
+											<span id="phototo"></span></td>
 										<td colspan=2 style="font-size: 14px;">
 											<!-- 이미지 미리보기 --> <input type="file" name="file" id="picFile"
-											accept="image/*" multiple="multiple" /> 이미지 파일은 6개까지 등록할 수
-											있습니다.
+											accept="image/*" multiple="multiple" /> 
+											이미지 파일은 6개까지 등록할 수 있습니다.
 										</td>
 									</tr>
 									<tr>
@@ -181,13 +181,11 @@
 														<option value="${year}">${year}</option>
 													</c:forEach>
 												</select>
-												<!-- <input type="date" id="carYear" class="carYear" name="old" style="height:35px; color:#9d9d9d; border-color:#dca73a; 
-                                        		text-align:center; border-radius: 7px; margin:0 150px 0 55px;">  -->
 												<span>색상</span> <select class='carColor' name='color'
 													style="margin-left: 25px;">
-													<option value="선택">선택</option>
+													<option value="선택">선택</option>		<!-- 원래 선택된 데이터로 보임 -->
 													<option value="검정색"
-														<c:if test='${sales.color eq "검정색"}'>selected="selected"</c:if>>검정색</option>
+														<c:if test="${sales.color eq '검정색'}">selected="selected"</c:if>>검정색</option>
 													<option value="은색"
 														<c:if test="${sales.color eq '은색'}">selected="selected"</c:if>>은색</option>
 													<option value="금색"

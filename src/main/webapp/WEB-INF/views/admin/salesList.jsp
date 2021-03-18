@@ -59,10 +59,11 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                 <input type="date" id="startDate">
-                                <span><i class="fas fa-wave-square"></i></span>
+                                <span><i class="fas fa-wave-square"></i></span>                            
                                 
                                 <input type="date" id="endDate">
                                 <a id="searchDates"><i class="fas fa-search"></i></a>
+
                                
                                <div  id="indexListAjax">                         
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -73,6 +74,7 @@
                                             <tr>
                                             	<td>num</td>                                                
                                                 <td>썸네일</td>
+                                                <th>이미지분석</th>
                                                 <th>판매자</th>
                                                 <th>판매차량</th>
                                                 <th>날짜(등록/게시)</th>
@@ -82,10 +84,11 @@
 												<option value="게시중">게시중</option>
 												<option value="게시종료">게시종료</option>
 												<option value="판매완료">판매완료</option>
-												<option value="삭제">삭제</option>
+												<option value="반려">반려</option>
 												</select> 
                                                 
                                                 </th>
+                                                <th></th>
                                                 <th></th>  
                                             </tr> 
                                         </thead>
@@ -97,23 +100,37 @@
                                             <tr>                                      
                                            		<td>${sale.sell_id}</td>
                                                 <td><img src="${sale.image}img1.png" alt="썸네일" style="width: 70px"></td>
+                                                <td>
+                                                	<c:choose>
+                                                		<c:when test="${sale.analysis eq 'True'}">
+                                                			${sale.analysis}
+                                               			</c:when>
+                                               			<c:when test="${sale.analysis eq 'False'}">
+                                                			<b>${sale.analysis}</b>
+                                               			</c:when>
+                                                	</c:choose>
+                                                </td>
                                                 <td>${sale.m_id}</td>
                                                 <td><a href="../all/salesDetail.do?num=${sale.sell_id}">${sale.title}</a></td>
                                                 <td>${sale.w_date}</td>
                                                 <td>${sale.status}</td>
                                                 <c:set var="status" value="${sale.status}" />
-											<c:choose>
-												<c:when test="${status eq '등록대기'}">
-													<td align="center">											
-													<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
-													</td>
-												</c:when>
-											<c:otherwise>											
-													<td align="center"></td>
-												</c:otherwise>
-											</c:choose>
-											
-										</tr> 
+													<c:choose>
+														<c:when test="${status ne '게시중'}">
+															<td align="center">											
+															<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
+															</td>
+														</c:when>
+														<c:otherwise>											
+															<td align="center"></td>
+														</c:otherwise>
+													</c:choose>
+												<td>
+													<c:if test="${status ne '반려'}">
+														<input type="button" class="btn btn-danger" onclick="location.href='returnPosting.do?sellid=${sale.sell_id}' " value="반려">
+													</c:if>
+												</td>
+											</tr> 
                                            
                                             </c:forEach>
                                             

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.carproject.domain.*" %>
 <%@ page import="java.sql.*" %>
 
@@ -92,7 +93,8 @@
 	                    <div class="thumbnail" style="display: flex; flex-wrap: wrap; margin:0 0 0 20px;" >
 		                    <c:forEach items="${allphoto}" var="thumbUrl"> 
 								<div style="margin:3px;">
-									<img class="thumbImg" style="width: 97px; height:73px; margin: 0px; cursor:pointer;" src="${thumbUrl.url}" onclick="imgClick(this);">
+									<img class="thumbImg" style="width: 97px; height:73px; margin: 0px; cursor:pointer;" 
+										src="${thumbUrl.url}" onclick="imgClick(this);" onerror="this.parentNode.style.display='none'">
 					            </div>
 					        </c:forEach>
 						</div><br/><br/>	<!-- end of 썸네일 -->
@@ -129,13 +131,24 @@
 							</div>	
 						</div><br/>	<!-- end of  기본 정보-->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
-							<div class="course__details__feature" style="width:700px; height:200px;" >
-								<h5>시세 예측</h5><hr style="margin:20px 0 10px 0;">
-								<div class="marketPredict" style="font-size:14px; width:700px; height:200px; display: flex;">
-										<!-- 시세 예측 내용!!!!!!!!!!!! -->								
+							<div class="course__details__feature">
+								<h5>시세 정보 및 예측</h5><hr style="margin:20px 0 10px 0; width:1000px;">
+								<div class="marketPredict" style="font-size:14px; width:1000px;">
+									<!-- <img src="../resources/img/used_car_price.png" style="margin:0 150px 0 50px;"> -->
+									<div class="card-body" style="display: flex;">
+										<canvas id="predict_price" width="700" height="350">
+			                            	<!-- 선 그래프 -->
+			                            </canvas>
+			                          	<span style="width:300px; font-size:18px; margin: 100px 0 0 50px;">
+				                            &nbsp;현재 <fmt:formatNumber value="${fn:split(sales.p_price,'.')[0]}" pattern="#,###" />만원<br/>
+				                            2년 후 <fmt:formatNumber value="${fn:split(sales.after2_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
+				                            4년 후 <fmt:formatNumber value="${fn:split(sales.after4_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
+				                            6년 후 <fmt:formatNumber value="${fn:split(sales.f_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
+			                            </span>
+									</div>
 								</div>
-							</div>	<!-- end of 시세 예측 -->
-						</div><br/>	<!-- end of 시세 정보 / 예측 --> 
+							</div>	
+						</div><br/><br/>	<!-- end of 시세 예측 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6">	<!-- start of 옵션 정보 -->
 							<div class="course__details__feature" style="width:1000px;">	
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
@@ -143,10 +156,10 @@
 								&nbsp;&nbsp;&nbsp;외관&nbsp;&nbsp;&nbsp;<hr style="margin:10px 0;">
 									<div class="outside" style="display: flex;">	<!-- 외관 -->
 										<ul class="optionList" style="font-size:14px;" >
-											<c:if test="${result_option.get(0) ne '0'}">	<!--옵션의 값이 1일때 빨간체크표시 + 검은색 -->
+											<c:if test="${result_option.get(0) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
 												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>선루프</li>
 											</c:if>
-											<c:if test="${result_option.get(0) eq '0'}">	<!--옵션의 값이 0일때 회색 -->
+											<c:if test="${result_option.get(0) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
 												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">선루프</li> 
 											</c:if>
 											<c:if test="${result_option.get(1) ne '0'}">
@@ -688,16 +701,16 @@
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
 	                		<input type="hidden" class='note_title' value='${sales.title}'>
 	                        <div class="carNameInfo" style="text-align:center;"><span style="font-size:22px;">${sales.title}</span></div>
-	                        <div class="carInfo" style="text-align:center; "><span style="font-size:16px; margin:10px 0;">${sales.old}년형 | ${sales.color} | ${sales.fuel}</span></div>
+	                        <div class="carInfo" style="text-align:center; "><span style="font-size:16px; margin:10px 0;">${sales.old} | ${sales.color} | ${sales.fuel}</span></div>
 	                        <div class="" style="text-align:center;"><span style="font-size:18px;"><b class="salesPrice" style="color:#dca73a; margin-right:5px;">
-	                        ${sales.price}</b>만원</span></div><br/>
+	                        <fmt:formatNumber value="${sales.price}" pattern="#,###" /></b>만원</span></div><br/>
 	                        <div class="carInfo1">
 		                        <span style="color:#112e41; font-size:12px; margin-left:160px;">
 		                        <i class="fas fa-tools fa-2x"></i>	<!-- 성능 -->
 		                        <i class="fas fa-file-alt fa-2x" style="margin-left:90px;"></i>	<!-- 보험이력 -->
 	                            <br/>
 								<span style="margin-left:150px; font-size:13px;">성능점검</span>
-								<span style="margin-left:60px; font-size:13px;">보험이력 2건</span>	
+								<span style="margin-left:67px; font-size:13px;">보험이력</span>	
 	                            </span>
 	                        </div><br/>	<!-- end of 차 정보 -->
 	                    </div><br/>
@@ -757,9 +770,68 @@
 		</form>
 	</section>
 	<!--================ end of 상세페이지 글 내용 =================-->
-  	
-  	
-  	<!-- 챗봇 -->
+	
+	<!-- 차트용 스크립트 시작-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes@0.4.0/dist/chartjs-plugin-colorschemes.min.js"></script>
+	<!-- 시세 예측 스크립트 시작 -->
+	<script>
+		var ctx = document.getElementById('predict_price');
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: [ '현재', '2년 후', '4년 후', '6년 후' ],
+				datasets: [{
+					label: '시세 (단위 : 만원)',
+					data: [
+		        		'${sales.p_price}',
+		        		'${sales.after2_price}',
+		        		'${sales.after4_price}',
+		        		'${sales.f_price}'
+					],
+					backgroundColor: 'rgba(220, 167, 58, 0.2)',
+					borderColor: '#dca73a',
+					borderWidth: 1,
+					fill:true
+				}]
+			},
+			options: {
+				responsive: false,
+				tooltips: {
+					enabled: false
+				},
+				hover: {
+					animationDuration: 0
+				},
+				animation: {
+					duration: 1,
+					onComplete: function () {
+						var chartInstance = this.chart,
+							ctx = chartInstance.ctx;
+						ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+						ctx.fillStyle = '#112e41';
+						ctx.textAlign = 'center';
+						ctx.textBaseline = 'bottom';
+
+						this.data.datasets.forEach(function (dataset, i) {
+							var meta = chartInstance.controller.getDatasetMeta(i);
+							meta.data.forEach(function (bar, index) {
+								var data = dataset.data[index];							
+								ctx.fillText(data, bar._model.x, bar._model.y - 5);
+							});
+						});
+					}
+				}
+			}
+		});
+	</script>
+	<!-- 시세 예측 스크립트 끝-->
+
+
+	<!-- 챗봇 -->
   	<div id="frogue-container" class="position-right-bottom"
       data-chatbot="4e13c93c-d37f-4fa8-ad40-ce2fc1707a9f"
       data-user="사용자ID"

@@ -22,10 +22,12 @@ public interface MemberService {
 	//필터 
 	public List<HashMap<String, Object>> selectMySale( HashMap<String, Object> map);
 	public HashMap<String, Object> saleSearchDefault( HashMap<String, Object> map, MemberVO vo);
-	//admin 검색
-	public List<HashMap<String, Object>> selectSale_admin( HashMap<String, Object> map);	
+	//admin 판매글 관리 검색
+	public List<HashMap<String, Object>> selectSale_admin( HashMap<String, Object> map);
+
 	//admin salesList 게시등록
 	public int setPosting(SalesVO vo);
+	public int returnPosting(SalesVO vo);
 	public int expiredPosting(SalesVO vo);
 	
 	

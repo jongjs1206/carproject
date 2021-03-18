@@ -205,27 +205,33 @@ public class SalesServiceImpl implements SalesService {
 	
 	/////////////////////////////////////////////////////////////////////////////////////
 	// 옵션 정보를 바탕으로 시세 예측
-	public String predict(SalesVO vo) {
+	public SalesVO predict(SalesVO vo) {
 
-		String p_result = "";
+		// 결과값을 받을 VO 객체 생성
+		SalesVO result = new SalesVO();
 		tensorSocket ts =new tensorSocket();
 		
 		try {			
-			String echo_msg = ts.tensor(vo);					// echo_msg 는 echo : XXXX.XXXX 으로 출력됨
-			p_result = echo_msg.split(" : ")[1]; 				// XXXX.XXXX
+			String echo_msg = ts.tensor(vo);				
+			// echo_msg 는 4개 시세가 모두 담겨있어 salesVO의 각 변수에 나눠담음
+			result.setP_price(echo_msg.split("/")[0]);
+			result.setAfter2_price(echo_msg.split("/")[1]);
+			result.setAfter4_price(echo_msg.split("/")[2]);
+			result.setF_price(echo_msg.split("/")[3]);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally{			
-			return p_result;
+			return result;
 		}
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////
-	// p_price 값 업데이트
-	public void insertPredict(HashMap<String, String> predict) {
+	// 시세 예측 업데이트
+	public void insertPredict(SalesVO predict) {
 		salesDAO.insertPredict(predict);
 	}
+
 		
 	
 }

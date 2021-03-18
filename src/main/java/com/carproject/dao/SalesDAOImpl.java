@@ -137,10 +137,11 @@ public class SalesDAOImpl implements SalesDAO {
 	}
 	
 	@Override
-	public void insertPredict(HashMap<String, String> predict) {				// 글 등록시 시세 예측결과를 p_price에 업데이트
+	public void insertPredict(SalesVO predict) {				// 글 등록시 시세 예측결과를 업데이트
 		System.out.println("===> salesMap insertPredict 호출");
 		mybatis.update("salesMap.insertPredict", predict);
 	}
 	
+
 	
 }

@@ -73,15 +73,9 @@ $(function() {
 		var result = "";
 		var beforeTitle = brand + " " + model;
 		
-		detailModel = detailModel.replace(model, "");				// 모델명과 세부모델명 중복 처리
-			
-		if (detailModel.indexOf('(') != -1) {						// 글제목에 들어갈 세부모델명 ()값 제거
-			var startIndex = detailModel.indexOf('(')
-			var rslt = detailModel.substring(0, startIndex)
-			result = beforeTitle + "" + rslt
-		} else {
-			result = beforeTitle + "" + detailModel
-		}
+		detailModel = detailModel.split('(')[0];
+		
+		var result = brand + " " + detailModel;
 		
 		$("#title").val(result);
 		
@@ -118,18 +112,14 @@ $(function() {
 		var model = $("#carModel").val();
 		var detailModel = $("#carDetailModel").val();
 		
-		if (detailModel.indexOf('(') != -1) {						// 글제목에 들어갈 세부모델명 ()값 제거
-			var startIndex = detailModel.indexOf('(')
-			var rslt = detailModel.substring(0, startIndex)
-			detailModel = rslt
-		}
+		detailModel = detailModel.split('(')[0];
 		
 		var grade = $("#carGrade").val();
 		
-		detailModel = detailModel.replace(model, "");
+		//var beforeTitle = brand + " " + model + "" + detailModel;
+		//var result = beforeTitle + " " + grade;
 		
-		var beforeTitle = brand + " " + model + "" + detailModel;
-		var result = beforeTitle + " " + grade;
+		var result = brand + " " + detailModel + " " + grade;
 		
 		$("#title").val(result);
 		
@@ -172,22 +162,15 @@ $(function() {
 		
 		//var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
 		//var result = beforeTitle + " " + detailGrade;
-		//var result = beforeTitle + " ";
-		var beforeTitle = brand + " " + model;
+		//var beforeTitle = brand + " " + model;
 		
-		detailModel = detailModel.replace(model, "");
+		detailModel = detailModel.split('(')[0];
+		detailGrade = detailGrade.split('(')[0];
 		
-		if (detailModel.indexOf('(') != -1 || detailGrade.indexOf('(') != -1) {		// 글제목에 들어갈 세부모델, 세부등급 ()값 제거
-			var startIndex1 = detailModel.indexOf('(')		// 세부모델
-			var startIndex2 = detailGrade.indexOf('(')		// 세부등급
-			var rslt1 = detailModel.substring(0, startIndex1)	// 세부모델
-			var rslt2 = detailGrade.substring(0, startIndex2)	// 세부등급
-			detailModel = rslt1		// 세부모델
-			detailGrade = rslt2		// 세부등급
-			//result = beforeTitle + " " + rslt1 + " " + rslt2
-			result = beforeTitle + "" + rslt1 + " " + grade + " " + rslt2
-		} else {
-			result = beforeTitle + "" + detailModel + " " + grade + " " + detailGrade
+		var result = brand + " " + detailModel + " " + grade + " " + detailGrade;
+		
+		if(detailGrade == '0') {
+			result = brand + " " + detailModel + " " + grade
 		}
 
 		$("#title").val(result);

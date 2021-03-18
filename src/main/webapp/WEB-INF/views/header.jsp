@@ -184,10 +184,10 @@ $(function() {
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 
 												<c:if test="${sessionScope.crash ne '0'}">
-													<span class='crash_sub' style="color: red">${sessionScope.crash}</span>
+													<span class='crash_sub' style="color: red">+ ${sessionScope.crash}</span>
 												</c:if>
 												<c:if test="${sessionScope.crash eq '0'}">
-													<span class='crash_sub off' style="color: red">${sessionScope.crash}</span>
+													<span class='crash_sub off' style="color: red">+ ${sessionScope.crash}</span>
 												</c:if>
 												</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>

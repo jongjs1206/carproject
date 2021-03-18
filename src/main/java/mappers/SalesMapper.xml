@@ -3,22 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="salesMap">
 
-<!-- 글 등록 -->
-<!-- <insert id="salesInsert" parameterType="sales">
-	INSERT INTO sell 
-	(sell_id, m_id, title, w_date, old, mile, color, accident, price, image, option, content
-	, vehicle_num, fuel, gear, status, baeki, guarantee, seller) 
-	VALUES 
-	(nextval(sell_sell_id_sq), #{m_id}, #{title}, now(), #{old}, #{mile}, #{color}, #{accident}
-	, #{price}, #{image}, #{strOption}, #{content}, #{vehicle_num}
-	,#{fuel}, #{gear}, #{status}, #{baeki}, #{guarantee}, #{seller})
-</insert> -->
-
 <!-- 글 상세페이지(확인) -->
 <select id="salesCheck" parameterType="long" resultType="sales">
 	<![CDATA[
 		SELECT s.m_id, s.title, s.old, s.mile, s.color, s.accident, s.price, s.image, s.option, s.content, s.vehicle_num, 
-			s.baeki, s.guarantee, s.fuel, s.gear, m.m_id, m.m_name, m.tel
+			s.baeki, s.guarantee, s.fuel, s.gear, s.p_price, s.f_price, s.after2_price, s.after4_price, 
+			m.m_id, m.m_name, m.tel
 		FROM sell s 
 		INNER JOIN (SELECT * FROM member ) m  ON m.m_id = s.m_id 
 		where s.sell_id = #{num};
@@ -36,13 +26,6 @@
 	]]>
 </update>
 
-<!-- 글 삭제 -->
-<delete id="salesDelete" parameterType="sales">
-	<![CDATA[
-		DELETE FROM sell
-		WHERE sell_id=#{sell_id}
-	]]>
-</delete>
 
 <!-- 버튼으로 작업 ////////////////////////////////////////////////////////////////////////////////////// -->
 <!-- 글 등록을 위한 sell_id 찾아오기 -->
@@ -84,12 +67,18 @@
 </update>
 
 <!-- 글 등록시 시세 예측 결과를 p_price에 업데이트 -->
-<update id="insertPredict" parameterType="hashmap">
+<update id="insertPredict" parameterType="sales">
 	UPDATE sell SET
-	p_price = #{p_price}
+	p_price = #{p_price}, after2_price=#{after2_price}, after4_price=#{after4_price}, f_price=#{f_price}
 	WHERE sell_id = #{sell_id}
 </update>
 
+<!-- 5년 뒤 시세 예측 결과를 f_price에 업데이트 -->
+<update id="insertFuture" parameterType="hashmap">
+	UPDATE sell SET
+	f_price = #{f_price}
+	WHERE sell_id = #{sell_id}
+</update>
 
 
 <!-- 수정하기 버튼 -->

@@ -165,7 +165,32 @@ public class SalesController {
 
 	ArrayList nowlist = new ArrayList();
 	ArrayList numlist = new ArrayList();
-			
+	
+		
+	@RequestMapping("all/side_del.do")
+	@ResponseBody
+	public void side_del(String number, HttpSession session) {
+		SalesVO sales  = salesService.salesDetail(Long.parseLong(number));
+		 ArrayList templist = new ArrayList();
+		 templist.add(Long.parseLong(number));
+		 templist.add(sales.getImage());
+		 numlist.remove(Long.parseLong(number));
+		 nowlist.remove(templist);
+		session.setAttribute("nowlist", nowlist);
+	}
+	
+	@RequestMapping("all/side_null.do")
+	@ResponseBody
+	public void side_null(String number,HttpSession session) {
+		SalesVO sales  = salesService.salesDetail(Long.parseLong(number));
+		 ArrayList templist = new ArrayList();
+		 templist.add(Long.parseLong(number));
+		 templist.add(sales.getImage());
+		 numlist.remove(Long.parseLong(number));
+		 nowlist.remove(templist);
+		session.removeAttribute("nowlist");
+	}
+		
 	/*
 	 * 상세페이지 => sell_id값으로 불러옴
 	 */
@@ -364,6 +389,7 @@ public class SalesController {
 			v_result = salesService.pystart(Integer.toString(sell_id));
 			System.out.println("이미지 분석 결과 : " + v_result);
 			
+			// 글 번호와 분석결과(T/F)를 해쉬맵에 담아서 mapper로 전달, DB 입력
 			HashMap<String, String> analysis = new HashMap<String, String>();
 			analysis.put("sell_id", Integer.toString(sell_id));
 			analysis.put("v_result", v_result);
@@ -378,11 +404,13 @@ public class SalesController {
 		
 		// (11) 시세 예측
 		try {
-			String p_price = salesService.predict(svo);
-			HashMap<String, String> predict = new HashMap<String, String>();
-			predict.put("sell_id", Integer.toString(sell_id));
-			predict.put("p_price", p_price);		
+			// 당해년도 ~ 6년뒤 시세 구하기 - VO에 시세결과 4개 담음
+			SalesVO predict = salesService.predict(svo);
+			predict.setSell_id(sell_id);
+			// sell 테이블에 시세 DB 입력
 			salesService.insertPredict(predict);
+			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -521,6 +549,7 @@ public class SalesController {
 		String v_result = salesService.pystart(Integer.toString(sell_id));
 		System.out.println("이미지 분석 결과 : " + v_result);
 
+		// 글 번호와 분석결과(T/F)를 해쉬맵에 담아서 mapper로 전달, DB 입력
 		HashMap<String, String> analysis = new HashMap<String, String>();
 		analysis.put("sell_id", Integer.toString(sell_id));
 		analysis.put("v_result", v_result);

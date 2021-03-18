@@ -38,8 +38,9 @@ public interface SalesService {
 	public void useCoinC(MemberVO vo);				
 	public void useCoinM(MemberVO vo);
 	
-	// 시세 예측 및 p_price 값 업데이트
-	public String predict(SalesVO vo);
-	public void insertPredict(HashMap<String, String> predict);
+	// 시세 예측 업데이트
+	public SalesVO predict(SalesVO vo);
+	public void insertPredict(SalesVO predict);
+
 	
 }
