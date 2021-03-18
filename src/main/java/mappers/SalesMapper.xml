@@ -85,9 +85,9 @@
 </update>
 
 <!-- 글 등록시 시세 예측 결과를 p_price에 업데이트 -->
-<update id="insertPredict" parameterType="hashmap">
+<update id="insertPredict" parameterType="sales">
 	UPDATE sell SET
-	p_price = #{p_price}
+	p_price = #{p_price}, after2_price=#{after2_price}, after4_price=#{after4_price}, f_price=#{f_price}
 	WHERE sell_id = #{sell_id}
 </update>
 
