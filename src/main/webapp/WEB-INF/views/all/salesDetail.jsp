@@ -127,14 +127,14 @@
 								</table>
 							</div>	
 						</div><br/>	<!-- end of  기본 정보-->
-						<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
 							<div class="course__details__feature" style="width:700px; height:200px;" >
 								<h5>시세 예측</h5><hr style="margin:20px 0 10px 0;">
 								<div class="marketPredict" style="font-size:14px; width:700px; height:200px; display: flex;">
-										시세 예측 내용!!!!!!!!!!!!								
+										<!-- 시세 예측 내용!!!!!!!!!!!! -->								
 								</div>
-							</div>	end of 시세 예측
-						</div><br/>	end of 시세 정보 / 예측 -->
+							</div>	<!-- end of 시세 예측 -->
+						</div><br/>	<!-- end of 시세 정보 / 예측 --> 
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6">	<!-- start of 옵션 정보 -->
 							<div class="course__details__feature" style="width:1000px;">	
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
