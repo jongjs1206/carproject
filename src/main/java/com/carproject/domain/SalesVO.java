@@ -47,9 +47,11 @@ public class SalesVO {
    
    private String[] re_option;      // 옵션값들
    
+   private String analysis;			// vision 이미지분석 결과 (T/F)
+   
    private String p_price;         // 현재 시세
-   private String after2_price;   // 2년 후 시세
-   private String after4_price;   // 4년 후 시세
+   private String after2_price;    // 2년 후 시세
+   private String after4_price;    // 4년 후 시세
    private String f_price;         // 6년 후 시세
    
    
@@ -282,6 +284,13 @@ public class SalesVO {
    }
    public void setNum(long num) {
       this.num = num;
+   }
+   
+   public String getAnalysis() {
+	   return analysis;
+   }
+   public void setAnalysis(String analysis) {
+	   this.analysis = analysis;
    }
    
    public String getP_price() {

@@ -195,7 +195,6 @@ public class AdminController {
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
 		model.addAttribute("salesList", salesList);
 
-	
 	}
 	
 	//admin 등록대기->게시중 [등록버튼]
@@ -210,8 +209,32 @@ public class AdminController {
 	
 	}
 	
+	// admin 등록대기->반려 [반려버튼]
+	@RequestMapping(value="/admin/returnPosting.do")
+	public String returnPosting(HttpSession session, Model model, @RequestParam String sellid) {
+		
+	SalesVO vo = new SalesVO();	
+	vo.setSell_id(Integer.parseInt(sellid));	
+	memberservice.returnPosting(vo);
 	
+	return "redirect: salesList.do ";
 	
+	}
+	
+	//admin_판매글-이미지분석 필터링 관리//////////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "/admin/filterList.do")
+	public void filter_list(MemberVO vo, Model model, HttpSession session,
+			@RequestParam HashMap<String, Object> param) {
+		
+		//날짜 미리 세팅 1달것만
+		if(param.get("startDate")=="" || param.get("startDate")==null){			
+			param.put("startDate", memberservice.beforeMonth());	
+		}
+		if(param.get("endDate")=="" || param.get("endDate")==null){
+			param.put("endDate", memberservice.today());	
+		}
+		
+	}
 	
 	////////////////////////////////////////////////////////////////////////////
 	// 은별

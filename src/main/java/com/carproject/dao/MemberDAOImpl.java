@@ -74,15 +74,24 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("===>  MemberMapper selectMySale() 호출");
 		return mybatis.selectList("MemberMAP.selectMySale", map);
 	}
-	@Override
+	
+	//admin 판매글 관리
+	@Override		
 	public List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map) {
 		System.out.println("===>  MemberMapper selectSale_admin() 호출");
 		return mybatis.selectList("MemberMAP.selectSale_admin", map);
 	}
+	
+	// admin 판매글 등록 관리
 	@Override
 	public int setPosting(SalesVO vo) {
 		System.out.println("===>  MemberMAP setPosting() 호출");
 		return mybatis.update("MemberMAP.setPosting", vo);
+	}
+	@Override
+	public int returnPosting(SalesVO vo) {
+		System.out.println("===>  MemberMAP returnPosting() 호출");
+		return mybatis.update("MemberMAP.returnPosting", vo);
 	}
 	@Override
 	public int expiredPosting(SalesVO vo) {

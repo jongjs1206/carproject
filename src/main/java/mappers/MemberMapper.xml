@@ -209,6 +209,13 @@
 		
 	</update>
 	
+	<!-- admin 등록대기 -> 반려 변경 -->
+	<update id="returnPosting" parameterType="sales">
+		UPDATE sell
+		SET status='반려' 
+		WHERE sell_id=#{sell_id}
+	</update>
+	
 	
 	<!-- 2주 지난 게시물 삭제 -->
 	
