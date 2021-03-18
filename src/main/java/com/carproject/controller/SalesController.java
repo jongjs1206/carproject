@@ -165,7 +165,32 @@ public class SalesController {
 
 	ArrayList nowlist = new ArrayList();
 	ArrayList numlist = new ArrayList();
-			
+	
+		
+	@RequestMapping("all/side_del.do")
+	@ResponseBody
+	public void side_del(String number, HttpSession session) {
+		SalesVO sales  = salesService.salesDetail(Long.parseLong(number));
+		 ArrayList templist = new ArrayList();
+		 templist.add(Long.parseLong(number));
+		 templist.add(sales.getImage());
+		 numlist.remove(Long.parseLong(number));
+		 nowlist.remove(templist);
+		session.setAttribute("nowlist", nowlist);
+	}
+	
+	@RequestMapping("all/side_null.do")
+	@ResponseBody
+	public void side_null(String number,HttpSession session) {
+		SalesVO sales  = salesService.salesDetail(Long.parseLong(number));
+		 ArrayList templist = new ArrayList();
+		 templist.add(Long.parseLong(number));
+		 templist.add(sales.getImage());
+		 numlist.remove(Long.parseLong(number));
+		 nowlist.remove(templist);
+		session.removeAttribute("nowlist");
+	}
+		
 	/*
 	 * 상세페이지 => sell_id값으로 불러옴
 	 */
