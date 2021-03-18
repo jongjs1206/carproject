@@ -14,13 +14,13 @@
 		<form-login login-page="/all/login.do" default-target-url="/all/log.do"
 		 authentication-failure-url="/all/login.do?error"
 		  username-parameter="m_id" password-parameter="m_pw" />
-		 <logout invalidate-session="false"></logout> 
+		 <logout invalidate-session="false" logout-success-url="/all/out.do"></logout> 
 		<access-denied-handler error-page="/all/noaccess.do" />
 		
 		<csrf disabled="false" /> 
 		
-		<session-management  invalid-session-url="/all/out.do">
-    	    <concurrency-control max-sessions="1" expired-url="/all/logout.do"/>
+		<session-management invalid-session-url="/all/out.do">
+    	    <concurrency-control max-sessions="1" expired-url="/logout"/>
 	    </session-management>
 
 		

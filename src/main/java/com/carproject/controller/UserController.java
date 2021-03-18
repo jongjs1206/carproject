@@ -90,7 +90,6 @@ public class UserController {
 	 */
 	@RequestMapping("all/out.do")
 	public String out(HttpSession session) {
-		System.out.println("Aasdgsdgsdgsgd");
 		session.removeAttribute("info");
 		session.removeAttribute("auth");
 		session.removeAttribute("crash");
