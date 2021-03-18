@@ -47,7 +47,6 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid"> 
-                    <ul></ul> 
                         <div class="row"> 
 							<!-- 메인페이지 카드 메뉴 1 -->
                             <div class="col-xl-3 col-md-6">
@@ -91,34 +90,34 @@
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> -->
+                            </div>	-->
+                        </div> 
                         
                         <!-- 그래프 부분-->
                         <div class="row">
-                            <!-- 꺾은선 그래프 -->
-                            <div class="col-xl-6" style="padding: 0 30px 0 25px;">
-                                <div class="card mb-4">
+                            <!-- 막대 그래프 -->
+                            <div class="col-xl-6" style="padding-left:10px">
+                                <div class="card mb-5">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar mr-1"></i>
                                         일별 코인 충전 현황 
                                     </div>
-                                    <div class="card-body" style="width:700px; height:400px;">
-                                    	<canvas id="dailymyChart" width="700px;" height="350px;" style="padding:0 0 0 10px;">
+                                    <div class="card-body" style="width:100%;">
+                                    	<canvas id="dailymyChart" width="700px;" height="350px;" >
                                     	</canvas>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- 막대 그래프 -->
+                            <!-- 꺾은선 그래프 -->
                             <div class="col-xl-6">
-                                <div class="card mb-4">
+                                <div class="card mb-5">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area mr-1"></i> 
                                         월별 코인 충전 현황
                                     </div>
-                                    <div class="card-body" style="width:700px; height:400px;">
-                                    	<canvas id="monthlymyChart" width="700px" height="350px" style="padding:0 0 0 30px;">
+                                    <div class="card-body" style="width:100%;">
+                                    	<canvas id="monthlymyChart" width="700px" height="350px">
                                     	</canvas>
                                     </div>
                                 </div>
@@ -126,35 +125,38 @@
                             
                             <!-- 꺾은선 그래프 -->
                             <!-- <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area mr-2"></i>
-                                        일일 방문 현황(엘라스틱 서치)
-                                    </div>
-                                    <div class="card-body"><canvas id="sellAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div> -->
+	                                <div class="card mb-4">
+	                                    <div class="card-header">
+	                                        <i class="fas fa-chart-area mr-2"></i>
+	                                        일일 방문 현황(엘라스틱 서치)
+	                                    </div>
+	                                    <div class="card-body"><canvas id="sellAreaChart" width="100%" height="40"></canvas></div>
+	                                </div>
+                            	</div> -->
                             
                             <!-- 막대 그래프 -->
                             <!-- <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-2"></i>
-                                        월별 방문 현황(엘라스틱 서치)
-                                    </div>
-                                    <div class="card-body"><canvas id="sellBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div> -->
+		                         	<div class="card mb-4">
+		                            	<div class="card-header">
+		                                	<i class="fas fa-chart-bar mr-2"></i>
+		                                        월별 방문 현황(엘라스틱 서치)
+		                                </div>
+		                                <div class="card-body"><canvas id="sellBarChart" width="100%" height="40"></canvas></div>
+			                        </div>
+			                	</div>
+                        	</div> -->
+                    	</div>	<!-- end of 그래프(row) -->
+                	</div>
                         
-                <!-- 최하단 footer -->
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; 사차원</div>
-                        </div>
-                    </div>
-                </footer>
+	                <!-- 최하단 footer -->
+	                <footer class="py-4 bg-light mt-auto">
+	                    <div class="container-fluid">
+	                        <div class="d-flex align-items-center justify-content-between small">
+	                            <div class="text-muted">Copyright &copy; 사차원</div>
+	                        </div>
+	                    </div>
+	                </footer>
+				</main>
             </div>
         </div>
         
