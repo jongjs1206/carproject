@@ -177,7 +177,14 @@ public class MemberServiceImpl implements MemberService{
 			System.out.println(filePath);
 		}
 
+		@Override
+		public int memberOut(MemberVO vo) {
+			return memberDAO.memberOut(vo);
+		}
 		
+		public int deleteMember(String id) {
+			return memberDAO.deleteMember(id);
+		}
 
 		
 		public String today() {
@@ -200,6 +207,8 @@ public class MemberServiceImpl implements MemberService{
 		    String beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
 		    return beforeWeek;			
 		}
+
+
 
 
 		

@@ -161,7 +161,8 @@
 				title LIKE CONCAT('%',#{byTitle},'%')
 		</if> 
 		<![CDATA[
-		ORDER BY w_date DESC
+		ORDER BY w_date DESC		
+		LIMIT #{limit}, #{offset}
 		]]>
 	</select>
 	
@@ -204,7 +205,7 @@
 		<!-- admin 등록대기->등록 -->
 	<update id="setPosting" parameterType="sales">
 		UPDATE sell
-		SET status='게시중'
+		SET status='게시중', w_date=sysdate()
 		WHERE sell_id=#{sell_id}
 		
 	</update>
@@ -218,7 +219,18 @@
 		WHERE sell_id=#{sell_id}
 	</update>
 	
+<!-- 회원탈퇴 member에서 탈퇴회원 delete, 그 정보를 memberOUT에 insert -->
+<insert id="memberOut" parameterType="member"> 
+<selectKey resultType="member" keyProperty="m_id,m_pw,m_name,gender,email,birth,tel,photo,w_date,state,enabled,coin,etc,google" order="BEFORE">
+ SELECT * FROM member WHERE m_id = #{m_id}
+</selectKey> 
+		INSERT INTO memberOut
+		(m_id, m_pw, m_name, gender, email, birth, tel, photo,w_date, ex_date, state, enabled, coin, etc, google)
+		VALUES
+		(#{m_id},#{m_pw},#{m_name},#{gender},#{email},#{birth},#{tel}, #{photo}, #{w_date}, sysdate(),'out',1, #{coin}, #{etc}, #{google}) 
+</insert>
+<delete id="deleteMember" parameterType="string"> 
+	DELETE FROM member WHERE m_id=#{m_id}
+</delete>
 
-	
-	
 </mapper>

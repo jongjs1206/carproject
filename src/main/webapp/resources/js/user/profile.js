@@ -26,7 +26,6 @@ $(function() {
 	var idPassCheck= false;
 	var pwPassCheck = false;
 	var joinPassCheck = false;
-	var emailPassCheck = false;
 	
 	var Length = 0; 
 	var engCheck = /[a-z]/; 
@@ -102,6 +101,94 @@ $('#gender_w').click(function(){
 	$('#gender_m').removeClass('genderOn');
 	$('#gender_w').addClass('genderOn');
 })
+
+
+
+
+		
+//메일 인증번호 보내기
+$('#btnMailSend').click(function(){
+
+	var email = email1.val()+'@'+email2.val()
+
+
+	alert(email+' \n 인증번호가 발송 되었습니다  \n 이메일을 확인 해 주세요.')
+		//인증번호칸 보이기
+	$('#confirmNumDiv').show();	
+	$('#btnMailSend').hide();
+
+
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../all/mailCheck.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+	 	
+	 	data : {'email' :  email
+	 			
+	 	},
+	 	
+	 	success : function(result){
+			
+
+	 	},
+	 	
+	 	error : function(err){
+	 		console.log(err);
+	 	}
+	 	
+	 })  
+
+})//end of MailSender
+
+
+		
+//메일 인증번호 확인
+$('#certNumChk').click(function(){
+
+//유효성 체크 통과 시, 중복 체크
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../all/certNumChk.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+	 	
+	 	data : {'certCode' : $('#certCode').val()
+	 			
+	 	},
+	 	
+	 	success : function(result){
+	 	
+	 		if(result=='인증'){
+	 		
+	 		if(confirm('정말 탈퇴하시겠습니까?')){
+	 		
+	 		alert("탈퇴되었습니다.")
+	 		
+	 		location.href="memberOut.do";
+	 		
+	 		}
+	 		
+	 		}else{
+	 		alert(result);
+	 		}
+	 	},
+	 	
+	 	error : function(err){
+	 		console.log(err);
+	 	}
+	 })  
+
+})//end of certNumChk
+
 
 
 

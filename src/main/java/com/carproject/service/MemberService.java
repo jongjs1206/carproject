@@ -58,8 +58,9 @@ public interface MemberService {
 	public int updatePhoto(MemberVO vo);
 	public void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
 	
-
-	
+	//탈퇴
+	public int memberOut(MemberVO vo);
+	public int deleteMember(String id);
 	
 	public String today();
 	public String beforeMonth();

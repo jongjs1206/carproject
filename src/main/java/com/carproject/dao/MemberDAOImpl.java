@@ -165,7 +165,19 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);		
 	}
 
+	
+	//탈퇴
+	@Override
+	public int memberOut(MemberVO vo) {
+		System.out.println("===>  MemberMapper memberOut() 호출");
+		return mybatis.insert("MemberMAP.memberOut", vo);
+	}
 
+	@Override
+	public int deleteMember(String id) {
+		System.out.println("===>  MemberMapper deleteMember() 호출");
+		return mybatis.delete("MemberMAP.deleteMember", id);
+	}
 
 
 	

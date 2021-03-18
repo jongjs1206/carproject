@@ -58,7 +58,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                <input type="date" id="startDate"><span><i class="fas fa-wave-square"></i></span><input type="date" id="endDate"><a id="searchDates"><i class="fas fa-search"></i></a>
+                                <input type="date" id="startDate">
+                                <span><i class="fas fa-wave-square"></i></span>
+                                
+                                <input type="date" id="endDate">
+                                <a id="searchDates"><i class="fas fa-search"></i></a>
                                
                                <div  id="indexListAjax">                         
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -1,6 +1,7 @@
 package com.carproject.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -305,6 +306,28 @@ public class MemberController {
 			
 		}
 	
+		
+	//회원탈퇴
+		@RequestMapping(value = "/user/memberOut.do")
+		public String memberOut() {
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id ="";
+			if (principal instanceof UserDetails) {
+			   id = ((UserDetails)principal).getUsername();
+			} else {
+			   id = principal.toString();
+			}
+				
+			MemberVO vo = new MemberVO();
+			vo.setM_id(id);
+			
+			memberservice.memberOut(vo);
+			memberservice.deleteMember(id);
+
+			return "redirect:/all/out.do";
+		}	
+		
 	
 
 	
@@ -323,6 +346,8 @@ public class MemberController {
 		
 		//검색
 		List<HashMap<String, Object>> sale_list = memberservice.selectAllsale(vo);
+		int cnt = sale_list.size();
+		
 		//날짜에서 시간 자르기
 		for(HashMap<String, Object> s : sale_list) {	
 		String date = s.get("w_date").toString();
@@ -331,9 +356,12 @@ public class MemberController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());	
+		
 		session.setAttribute("note", note);
 		model.addAttribute("sale_list", sale_list);
+		model.addAttribute("cnt",cnt);
+
 
 	}
 	
@@ -357,11 +385,17 @@ public class MemberController {
 		MemberVO info = memberservice.checkUniqueId(vo);
 		
 		
-		//비어있는 곳 기본 세팅
-		HashMap<String, Object> m = memberservice.saleSearchDefault(param, info);
+		System.out.println("my_sales_ajax : "+param.get("page"));
 		
+		/*
 		//검색
 		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(m);
+		int cnt = sale_list.size(); //총게시글
+
+
+		
+		
+		
 		
 		//날짜에서 시간 자르기
 		for(HashMap<String, Object> s : sale_list) {	
@@ -370,8 +404,9 @@ public class MemberController {
 		}
 		
 		model.addAttribute("sale_list", sale_list);
+		model.addAttribute("cnt",cnt);
 
-	
+	*/
 	}
 	
 	

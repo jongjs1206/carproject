@@ -12,12 +12,12 @@ $(function(){
 	
 	//날짜
 
-	var startDate = $('#datepicker1').datepicker({dateFormat: 'yy-mm-dd'});
-	var endDate = $('#datepicker2').datepicker({dateFormat: 'yy-mm-dd'});
+	var startDate = $('#startDate')
+	var endDate = $('#endDate')
 	
 	var btnSearch = $('#btnSearch')
 	var byTitle = $('#byTitle')
-	
+
 	
  //날짜 함수(yyyy-mm-dd 형식)
 function getTimeStamp() {
@@ -40,6 +40,17 @@ function leadingZeros(n, digits) {
     return zero + n;
 }
  
+function getDateStr(myDate){
+	return (myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate())
+}
+
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 
 
@@ -100,7 +111,14 @@ search();
 
 
 
+
+
+
+
 var search = function(){
+
+
+
 
 //날짜 빈칸 처리
 if(startDate.val()==''){
@@ -119,9 +137,9 @@ var status = '';
 //status 모두 클래스가 없을때 (선택x) 모두 선택된 것 처럼 보이기
 if($("a.on").length == 0 ){
 
-for (i = 0; i < $('#statusBtn > a').length; i++) {
-status = status +','+  $('#statusBtn > a').text()
-}
+$('#statusBtn > a').each(function(){
+status = status +','+ $(this).text()
+ })
 
 //그 외의 경우에는 선택된 클래스의 text만 보내기
 }else{
@@ -147,8 +165,10 @@ status = status +','+ $(this).text()
 	 			"status" : status,
 	 			"byTitle" : byTitle.val()
 	 	
+	 	
 	 	},				
 	 	success : function(result){
+	 	
 
 	 	var html = jQuery('<div>').html(result);
 			$( '#indexListAjax' ).html(html);
@@ -160,7 +180,6 @@ status = status +','+ $(this).text()
 	 	}
 	 	
 	 }) 
-
 
 	
 

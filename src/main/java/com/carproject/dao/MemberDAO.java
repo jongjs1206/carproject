@@ -62,7 +62,10 @@ public interface MemberDAO {
 	int updatePhoto(MemberVO vo);
 	void insertImg (String projectId, String bucketName, String objectName, String filePath) throws Exception;
 	
+	//탈퇴
 	
+	int memberOut(MemberVO vo);
+	int deleteMember(String id);
 	
 	
 	
