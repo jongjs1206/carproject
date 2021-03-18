@@ -65,6 +65,13 @@ $(function() {
 				error : function(err){ console.log(err)}  //실패했을때
 			});
 	};
+	setTimeout(function() {
+		if($('.login-state').val()=='black'){
+			alert('블랙리스트 처리가 되어 로그인할 수 없습니다.');
+			$('.form_out').submit();
+		}
+		}, 500);
+	
 })
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -92,6 +99,8 @@ $(function() {
             </div>
         </div>
     </div>
+    <input type="hidden" class='login-state' value='${sessionScope.info.state}'/>
+	
     <!-- Preloader Start -->
 	<input type="hidden" class='login-header' value='${sessionScope.info.m_id}'/>
 	<header>
@@ -108,7 +117,7 @@ $(function() {
 									height="70" alt=""></a>
 							</div>
 						</div>
-												
+						<input type="hidden" class='url' value='${pageContext.request.contextPath}/logout'/>		
 						<div class="col-xl-10 col-lg-10">
 						<form:form class='form_out' action="${pageContext.request.contextPath}/logout" method="POST">
 							<!-- main-menu -->
@@ -184,10 +193,10 @@ $(function() {
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
 												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 
 												<c:if test="${sessionScope.crash ne '0'}">
-													<span class='crash_sub' style="color: red">+ ${sessionScope.crash}</span>
+													<span class='crash_sub' style="color: red">${sessionScope.crash}</span>
 												</c:if>
 												<c:if test="${sessionScope.crash eq '0'}">
-													<span class='crash_sub off' style="color: red">+ ${sessionScope.crash}</span>
+													<span class='crash_sub off' style="color: red">${sessionScope.crash}</span>
 												</c:if>
 												</a></li>
 												<li><a href="../user/coin.do?m_id=${sessionScope.info.m_id}">내 코인</a></li>
