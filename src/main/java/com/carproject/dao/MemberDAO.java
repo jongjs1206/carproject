@@ -29,10 +29,13 @@ public interface MemberDAO {
 	List<HashMap<String, Object>> selectAllsale(MemberVO vo);
 	//필터 걸어서 불러오기
 	List<HashMap<String, Object>> selectMySale(HashMap<String, Object> map);
+	
+	//admin 판매글 관리
 	List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map);
 	
 	//admin 게시글 등록
 	int setPosting(SalesVO vo);
+	int returnPosting(SalesVO vo);
 	int expiredPosting(SalesVO vo);
 
 	// 모든 회원 목록을 불러오기 위한 함수

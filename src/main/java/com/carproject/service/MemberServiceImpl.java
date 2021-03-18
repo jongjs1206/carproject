@@ -95,20 +95,25 @@ public class MemberServiceImpl implements MemberService{
 			
 		}
 		
+		// admin 판매글 관리 페이지
 		@Override
 		public List<HashMap<String, Object>> selectSale_admin(HashMap<String, Object> map) {
 			 return memberDAO.selectSale_admin(map);
 		}
 
-		//admin 게시글 등록
 
+		//admin 게시글 등록 관리
 		@Override
 		public int setPosting(SalesVO vo) {
-		return memberDAO.setPosting(vo);
+			return memberDAO.setPosting(vo);
+		}
+		@Override
+		public int returnPosting(SalesVO vo) {
+			return memberDAO.returnPosting(vo);
 		}
 		@Override
 		public int expiredPosting(SalesVO vo) {
-		return memberDAO.expiredPosting(vo);
+			return memberDAO.expiredPosting(vo);
 		}
 	
 
