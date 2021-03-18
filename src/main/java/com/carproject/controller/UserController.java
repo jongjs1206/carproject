@@ -90,8 +90,12 @@ public class UserController {
 	 */
 	@RequestMapping("all/out.do")
 	public String out(HttpSession session) {
-		session.invalidate();
-		return "all/login";
+		System.out.println("Aasdgsdgsdgsgd");
+		session.removeAttribute("info");
+		session.removeAttribute("auth");
+		session.removeAttribute("crash");
+		session.removeAttribute("note");
+		return "all/logout";
 	}
 	
 	/*
@@ -127,6 +131,7 @@ public class UserController {
 			}
 			sell.get(i).put("resultoption", resultoption);
 		}
+		
 		
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);

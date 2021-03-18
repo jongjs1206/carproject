@@ -163,6 +163,9 @@ public class SalesController {
 		return map;
 	}	
 
+	ArrayList nowlist = new ArrayList();
+	ArrayList numlist = new ArrayList();
+			
 	/*
 	 * 상세페이지 => sell_id값으로 불러옴
 	 */
@@ -171,7 +174,23 @@ public class SalesController {
 		SalesVO sales  = salesService.salesDetail(num);
 		model.addAttribute("sales", sales);
 		System.out.println(sales.getOption());
+		 if(!(numlist.contains(num))){
+			 ArrayList templist = new ArrayList();
+			 templist.add(num);
+			 templist.add(sales.getImage());
+			 numlist.add(0,num);
+			 nowlist.add(0,templist);
+		 }else {
+			 ArrayList templist = new ArrayList();
+			 templist.add(num);
+			 templist.add(sales.getImage());
+			 numlist.remove(num);
+			 nowlist.remove(templist);
+			 numlist.add(0,num);
+			 nowlist.add(0,templist);
+		 }
 		
+		session.setAttribute("nowlist", nowlist);
 		// 메인 이미지
 		// 사진 파일 주소 정제
 		String raw_url = sales.getImage();

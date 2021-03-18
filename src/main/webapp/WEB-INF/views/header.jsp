@@ -43,7 +43,7 @@ $(function() {
 	})
 
 	var webSocket = new WebSocket(
-				"ws://localhost:8080/carproject/carsocket");
+				"ws://localhost/carproject/carsocket");
 		webSocket.onmessage = function(message) {
 			$.ajax({
 				type : 'post',
@@ -131,7 +131,11 @@ $(function() {
 												<li><a href="../user/mem.do">mem.do</a></li>
 												<li><a href="../admin/admin.do">어드민</a></li>
 											</ul></li>
- -->										
+											
+ -->									
+ 										<c:if test="${sessionScope.info.m_id ne null}">
+ 											<li><a href="../user/my_heart.do">찜 목록</a></li>
+ 										</c:if>	
 										<li>
                                         	<a href="#" onclick="window.open('../all/chat.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
                                         	<i class="far fa-comments" style="color:#dca73a; font-size:25px;"></i> 채팅</a>
@@ -178,7 +182,6 @@ $(function() {
 												</c:if>
 												</a></li>
 												<li><a href="../user/my_sales.do">내 판매글</a></li>
-												<li><a href="../user/my_heart.do">내 찜목록</a></li>
 												<li><a class='url_black' href="../user/blackbox.do?num=${sessionScope.crash}">DashCam 
 												<c:if test="${sessionScope.crash ne '0'}">
 													<span class='crash_sub' style="color: red">${sessionScope.crash}</span>

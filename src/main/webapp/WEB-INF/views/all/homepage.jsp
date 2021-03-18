@@ -57,6 +57,7 @@
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 	<%@ include file="../header.jsp"%>
+	
 
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}' />
 	<c:set var="ran"><%= java.lang.Math.floor(java.lang.Math.random() * 3) %></c:set>
