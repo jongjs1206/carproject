@@ -226,6 +226,10 @@ public class SalesServiceImpl implements SalesService {
 	public void insertPredict(HashMap<String, String> predict) {
 		salesDAO.insertPredict(predict);
 	}
+	// f_price 값 업데이트
+	public void insertFuture(HashMap<String, String> future) {
+		salesDAO.insertFuture(future);
+	}
 		
 	
 }

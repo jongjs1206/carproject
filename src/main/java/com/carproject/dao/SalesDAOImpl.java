@@ -142,5 +142,10 @@ public class SalesDAOImpl implements SalesDAO {
 		mybatis.update("salesMap.insertPredict", predict);
 	}
 	
+	@Override
+	public void insertFuture(HashMap<String, String> future) {					// f_price 값 업데이트
+		System.out.println("===> salesMap insertFuture 호출");
+		mybatis.update("salesMap.insertFuture", future);
+	}
 	
 }

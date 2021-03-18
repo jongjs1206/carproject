@@ -90,6 +90,12 @@
 	WHERE sell_id = #{sell_id}
 </update>
 
+<!-- 5년 뒤 시세 예측 결과를 f_price에 업데이트 -->
+<update id="insertFuture" parameterType="hashmap">
+	UPDATE sell SET
+	f_price = #{f_price}
+	WHERE sell_id = #{sell_id}
+</update>
 
 
 <!-- 수정하기 버튼 -->
