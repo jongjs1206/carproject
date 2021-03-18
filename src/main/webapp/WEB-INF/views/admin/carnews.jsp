@@ -68,7 +68,8 @@
 								<tbody>
 									<c:forEach var="news" items="${adminNews}">
 										<tr>
-											<td>${news.title}</td>
+											<!-- 뉴스 제목 누르면 링크로 이동 -->
+											<td><a href="../all/carnewsBoardview.do?num=${news.w_id}">${news.title}</a></td>
 											<td><img src="${news.thumb}"></td>
 											<td>${news.headline}</td>
 											<td align="center"><input type="hidden" name="w_id"

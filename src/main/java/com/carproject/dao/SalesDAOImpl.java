@@ -114,7 +114,7 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public SalesVO salesDetail(Long num) {									// 상세페이지
+	public SalesVO salesDetail(long num) {									// 상세페이지
 		SalesVO sales = mybatis.selectOne("salesMap.salesCheck", num);
 		return sales;
 	}
@@ -134,6 +134,12 @@ public class SalesDAOImpl implements SalesDAO {
 	public void useCoinM(MemberVO vo) {						// 글 등록시 코인 -1 반영 (멤버테이블)
 		System.out.println("===> salesMap useCoinM 호출");
 		mybatis.update("salesMap.useCoinM", vo);
+	}
+	
+	@Override
+	public void insertPredict(HashMap<String, String> predict) {				// 글 등록시 시세 예측결과를 p_price에 업데이트
+		System.out.println("===> salesMap insertPredict 호출");
+		mybatis.update("salesMap.insertPredict", predict);
 	}
 	
 	

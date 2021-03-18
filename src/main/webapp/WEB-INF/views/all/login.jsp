@@ -10,7 +10,7 @@
 
 
 <meta name="google-signin-client_id" content="720645188606-a3u36ofdsi5rp6goo6g3i9emjk0eahrd.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 
 <title>로그인</title>
 <meta name="description" content="">
@@ -37,12 +37,10 @@
 <link rel="stylesheet" href="../resources/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<link rel="stylesheet" href="../resources/css/all/join_login.css"
+	type="text/css">
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-const googleLogin = function doGoogleLogin() {
-	location.href = '/carproject/all/googleLogin.do';
-}
 </script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -56,12 +54,15 @@ const googleLogin = function doGoogleLogin() {
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript">
+const googleLogin = function doGoogleLogin() {
+	location.href = '/carproject/all/googleLogin.do';
+}
+</script>
 
-<link rel="stylesheet" href="../resources/css/all/join_login.css"
-	type="text/css">
-
-<script type="text/javascript" src="../resources/js/all/find_idpw.js"></script>
 <script type="text/javascript" src="../resources/js/all/login.js"></script>
+<script type="text/javascript" src="../resources/js/all/find_idpw.js"></script>
 
 
 </head>

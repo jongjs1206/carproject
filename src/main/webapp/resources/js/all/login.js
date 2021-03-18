@@ -3,7 +3,8 @@
 */
 
 $(function(){
-
+	var token = $("input[name='_csrf']").val();
+	var header = "X-CSRF-TOKEN";
 
 	$.ajax({
 		type : 'post',

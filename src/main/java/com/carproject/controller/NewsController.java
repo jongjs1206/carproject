@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class NewsController {
 	@Autowired
 	private LetterService letterService;
 	
+	// 사용자 뉴스 목록 페이지 진입시
 	@RequestMapping("all/carnewsBoardList.do")
 	public void news_list(String page, Model model,HttpSession session) {
 		int page_re = (Integer.parseInt(page)-1)*15;
@@ -54,7 +56,7 @@ public class NewsController {
 		model.addAttribute("page", page);
 	}
 	
-	
+	// 사용자 뉴스 상세 페이지 진입시
 	@RequestMapping("all/carnewsBoardview.do")
 	public void carnewsBoardview(String num, Model model, HttpSession session) {
 		HeartVO vo = new HeartVO();
@@ -83,6 +85,7 @@ public class NewsController {
 		model.addAttribute("reply_count", reply_count);
 	}
 	
+	// 좋아요 하기
 	@RequestMapping("all/good_news.do")
 	@ResponseBody
 	public void good(String id, String news_num) {
@@ -93,6 +96,7 @@ public class NewsController {
 		newsservice.goodinsert(vo);
 	}
 	
+	// 좋아요 취소
 	@RequestMapping("all/nogood_news.do")
 	@ResponseBody
 	public void nogood(String id, String news_num) {
@@ -103,6 +107,7 @@ public class NewsController {
 		newsservice.gooddelete(vo);
 	}
 	
+	// 뉴스 댓글
 	@RequestMapping("all/review_insert.do")
 	@ResponseBody
 	public void review_insert(String id, String w_id, String content) {
@@ -113,6 +118,7 @@ public class NewsController {
 		newsservice.replyinsert(vo);
 	}
 	
+	// 뉴스 댓글 가져오기
 	@RequestMapping("all/review_add.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> review_add(String w_id, String page) {
@@ -128,6 +134,8 @@ public class NewsController {
 		}
 		return reply;
 	}
+	
+	// 뉴스 댓글 갯수 가져오기
 	@RequestMapping("all/reply_num.do")
 	@ResponseBody
 	public int reply_num(String id,String w_id) {
@@ -137,6 +145,8 @@ public class NewsController {
 		ReplyVO num = newsservice.reply_num(vo);
 		return num.getW_id();
 	}
+	
+	// 뉴스 댓글 삭제하기
 	@RequestMapping("all/reply_delete.do")
 	@ResponseBody
 	public void reply_delete(String r_id) {
@@ -150,6 +160,7 @@ public class NewsController {
 	@RequestMapping("admin/carnews.do")
 	public void adminNews(NewsVO vo, Model model) {
 		model.addAttribute("adminNews", newsservice.adminNews(vo));
+		
 		System.out.println("관리자 자동차뉴스");
 	}
 
@@ -161,5 +172,9 @@ public class NewsController {
 
 		return "redirect:/admin/carnews.do";
 	}
+	
+
+	
+	
 	
 }

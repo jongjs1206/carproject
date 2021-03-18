@@ -59,7 +59,7 @@
 <body>
 
 	<%@ include file="../header.jsp"%>
-	
+	<%@ include file="../side.jsp"%>
 	<!-- slider Area Start-->
 
 	<input type="hidden" name="${_csrf.parameterName}"

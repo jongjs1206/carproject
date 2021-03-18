@@ -14,19 +14,16 @@
 		<form-login login-page="/all/login.do" default-target-url="/all/log.do"
 		 authentication-failure-url="/all/login.do?error"
 		  username-parameter="m_id" password-parameter="m_pw" />
-		  
-		<logout logout-url="/logout" logout-success-url="/all/out.do" invalidate-session="false"/>
+		 <logout invalidate-session="false"></logout> 
 		<access-denied-handler error-page="/all/noaccess.do" />
 		
 		<csrf disabled="false" /> 
 		
+		<session-management  invalid-session-url="/all/out.do">
+    	    <concurrency-control max-sessions="1" expired-url="/all/logout.do"/>
+	    </session-management>
+
 		
-		<session-management invalid-session-url="/all/logout.do"> 
-		    <concurrency-control 
-		    					max-sessions="1" 
-		                         expired-url="/all/logout.do"   
-		                         error-if-maximum-exceeded="false" />
-		</session-management>
 	</http>
 
 	<beans:bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
