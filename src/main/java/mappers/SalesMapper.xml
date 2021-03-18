@@ -18,7 +18,8 @@
 <select id="salesCheck" parameterType="long" resultType="sales">
 	<![CDATA[
 		SELECT s.m_id, s.title, s.old, s.mile, s.color, s.accident, s.price, s.image, s.option, s.content, s.vehicle_num, 
-			s.baeki, s.guarantee, s.fuel, s.gear, m.m_id, m.m_name, m.tel
+			s.baeki, s.guarantee, s.fuel, s.gear, s.p_price, s.f_price, 
+			m.m_id, m.m_name, m.tel
 		FROM sell s 
 		INNER JOIN (SELECT * FROM member ) m  ON m.m_id = s.m_id 
 		where s.sell_id = #{num};
@@ -90,6 +91,12 @@
 	WHERE sell_id = #{sell_id}
 </update>
 
+<!-- 5년 뒤 시세 예측 결과를 f_price에 업데이트 -->
+<update id="insertFuture" parameterType="hashmap">
+	UPDATE sell SET
+	f_price = #{f_price}
+	WHERE sell_id = #{sell_id}
+</update>
 
 
 <!-- 수정하기 버튼 -->

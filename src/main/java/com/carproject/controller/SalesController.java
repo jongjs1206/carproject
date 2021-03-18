@@ -378,11 +378,29 @@ public class SalesController {
 		
 		// (11) 시세 예측
 		try {
+			// 당해년도 시세 구하기
 			String p_price = salesService.predict(svo);
+			// sell_id와 p_price를 해쉬맵에 담음
 			HashMap<String, String> predict = new HashMap<String, String>();
 			predict.put("sell_id", Integer.toString(sell_id));
-			predict.put("p_price", p_price);		
+			predict.put("p_price", p_price);
+			// sell 테이블의 p_price 에 DB 입력
 			salesService.insertPredict(predict);
+			
+			// 5년을 추가한 년도 구하기
+			SalesVO svo2 = new SalesVO();			// 새 연도 정보를 담을 객체 생성
+			int yearafter = Integer.parseInt(svo.getOld()) - 5;
+			svo2.setOld(Integer.toString(yearafter));
+			svo2.setFuel(svo.getFuel());
+			svo2.setBaeki(svo.getBaeki());
+			svo2.setGear(svo.getGear());
+			// 5년이 추가된 시세 구하기
+			String f_price = salesService.predict(svo2);
+			//// sell_id와 f_price를 해쉬맵에 담음
+			HashMap<String, String> future = new HashMap<String, String>();
+			future.put("sell_id", Integer.toString(sell_id));
+			future.put("f_price", f_price);		
+			salesService.insertFuture(future);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
