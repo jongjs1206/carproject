@@ -57,7 +57,7 @@
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
-	
+	<%@ include file="../side.jsp"%>	<!-- 최근 본 목록 -->
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
 	
@@ -90,17 +90,17 @@
 	                	</div><hr style="margin:10px 0 10px 0;">
 	                	<!-- ----------------썸네일---------------- -->
 	                    <div class="thumbnail" style="display: flex; flex-wrap: wrap; margin:0 0 0 20px;" >
-	                    <c:forEach items="${allphoto}" var="thumbUrl"> 
-							<div style="width: 15%; margin:3px;">
-								<img class="thumbImg" style="width: 100%; margin: 0px; cursor:pointer;" src="${thumbUrl.url}" onclick="imgClick(this);">
-				            </div>
-				        </c:forEach>
+		                    <c:forEach items="${allphoto}" var="thumbUrl"> 
+								<div style="margin:3px;">
+									<img class="thumbImg" style="width: 97px; height:73px; margin: 0px; cursor:pointer;" src="${thumbUrl.url}" onclick="imgClick(this);">
+					            </div>
+					        </c:forEach>
 						</div><br/><br/>	<!-- end of 썸네일 -->
 					</div><!-- 이미지 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
 							<div class="course__details__feature" style="width:500px; margin:0 80px 30px 0;">
 								<h5>기본 정보</h5><hr style="margin:20px 0 10px 0;">
-								<table class="detail-info-table" style="font-size:14px; width:500px; height:200px; ">
+								<table class="detail-info-table" style="font-size:14px; width:500px; height:200px; margin-left:15px;">
 									<tbody>
 										<tr style="padding:0px; margin:0px;">
 											<th scope="col">차량 번호</th>
@@ -135,7 +135,7 @@
 										<!-- 시세 예측 내용!!!!!!!!!!!! -->								
 								</div>
 							</div>	<!-- end of 시세 예측 -->
-						</div><br/>	<!-- end of 시세 정보 / 예측 -->
+						</div><br/>	<!-- end of 시세 정보 / 예측 --> 
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6">	<!-- start of 옵션 정보 -->
 							<div class="course__details__feature" style="width:1000px;">	
 								<h5>옵선 정보</h5><hr style="margin:20px 0 10px 0">
@@ -196,42 +196,42 @@
 										</ul>
 										<ul class="optionList" >	
 											<c:if test="${result_option.get(8) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>데이라이트</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>데이라이트</li>
 											</c:if>
 											<c:if test="${result_option.get(8) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">데이라이트</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">데이라이트</li> 
 											</c:if>
 											<c:if test="${result_option.get(9) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>LED하이빔어시스트</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>LED하이빔어시스트</li>
 											</c:if>
 											<c:if test="${result_option.get(9) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">LED하이빔어시스트</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">LED하이빔어시스트</li> 
 											</c:if>
 											<c:if test="${result_option.get(10) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>압축도어</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>압축도어</li>
 											</c:if>
 											<c:if test="${result_option.get(10) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">압축도어</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">압축도어</li> 
 											</c:if>
 											<c:if test="${result_option.get(11) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>LED자동슬라이딩도어</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>LED자동슬라이딩도어</li>
 											</c:if>
 											<c:if test="${result_option.get(11) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">LED자동슬라이딩도어</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">LED자동슬라이딩도어</li> 
 											</c:if>
 										</ul>
 										<ul class="optionList">
 											<c:if test="${result_option.get(12) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 20px;"><i class="fas fa-check" style="color:red"></i>전동사이드스탭</li>
+												<li style="font-size:14px; padding:0 80px 8px 10px;"><i class="fas fa-check" style="color:red"></i>전동사이드스탭</li>
 											</c:if>
 											<c:if test="${result_option.get(12) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 20px;">전동사이드스탭</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 10px;">전동사이드스탭</li> 
 											</c:if>
 											<c:if test="${result_option.get(13) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 20px;"><i class="fas fa-check" style="color:red"></i>루프랙</li>
+												<li style="font-size:14px; padding:0 80px 8px 10px;"><i class="fas fa-check" style="color:red"></i>루프랙</li>
 											</c:if>
 											<c:if test="${result_option.get(13) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 20px;">루프랙</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 10px;">루프랙</li> 
 											</c:if>
 										</ul>
 									</div>
@@ -325,28 +325,28 @@
 										</ul>
 										<ul class="optionList">
 											<c:if test="${result_option.get(27) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>ECM룸미러</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>ECM룸미러</li>
 											</c:if>
 											<c:if test="${result_option.get(27) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">ECM룸미러</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">ECM룸미러</li> 
 											</c:if>
 											<c:if test="${result_option.get(28) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>뒷자석에어벤트</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>뒷자석에어벤트</li>
 											</c:if>
 											<c:if test="${result_option.get(28) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">뒷자석에어벤트</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">뒷자석에어벤트</li> 
 											</c:if>
 											<c:if test="${result_option.get(29) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>패들쉬프트</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>패들쉬프트</li>
 											</c:if>
 											<c:if test="${result_option.get(29) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">패들쉬프트</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">패들쉬프트</li> 
 											</c:if>
 											<c:if test="${result_option.get(30) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>전동햇빛가리개</li>
+												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>전동햇빛가리개</li>
 											</c:if>
 											<c:if test="${result_option.get(30) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">전동햇빛가리개</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">전동햇빛가리개</li> 
 											</c:if>
 										</ul>
 									</div>
@@ -388,34 +388,34 @@
 										</ul>
 										<ul class="optionList">
 											<c:if test="${result_option.get(36) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>승객감지에어백</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>승객감지에어백</li>
 											</c:if>
 											<c:if test="${result_option.get(36) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">승객감지에어백</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">승객감지에어백</li> 
 											</c:if>
 											<c:if test="${result_option.get(37) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>브레이크잠김방지(ABS)</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>브레이크잠김방지(ABS)</li>
 											</c:if>
 											<c:if test="${result_option.get(37) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">브레이크잠김방지(ABS)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">브레이크잠김방지(ABS)</li> 
 											</c:if>
 											<c:if test="${result_option.get(38) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>차체자세제어장치(ESC)</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>차체자세제어장치(ESC)</li>
 											</c:if>
 											<c:if test="${result_option.get(38) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">차체자세제어장치(ESC)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">차체자세제어장치(ESC)</li> 
 											</c:if>
 											<c:if test="${result_option.get(39) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>후방센서</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>후방센서</li>
 											</c:if>
 											<c:if test="${result_option.get(39) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">후방센서</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">후방센서</li> 
 											</c:if>
 											<c:if test="${result_option.get(40) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>미끄럼방지(TCS)</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>미끄럼방지(TCS)</li>
 											</c:if>
 											<c:if test="${result_option.get(40) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">미끄럼방지(TCS)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">미끄럼방지(TCS)</li> 
 											</c:if>
 										</ul>
 										<ul class="optionList">
@@ -446,28 +446,28 @@
 										</ul>
 										<ul class="optionList">
 											<c:if test="${result_option.get(45) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>타이어공기압감지(TPMS)</li>
+												<li style="font-size:14px; padding:0 80px 8px 70px;"><i class="fas fa-check" style="color:red"></i>타이어공기압감지(TPMS)</li>
 											</c:if>
 											<c:if test="${result_option.get(45) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">타이어공기압감지(TPMS)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 70px;">타이어공기압감지(TPMS)</li> 
 											</c:if>
 											<c:if test="${result_option.get(46) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>차선이탈경보(LDWS)</li>
+												<li style="font-size:14px; padding:0 80px 8px 70px;"><i class="fas fa-check" style="color:red"></i>차선이탈경보(LDWS)</li>
 											</c:if>
 											<c:if test="${result_option.get(46) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">차선이탈경보(LDWS)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 70px;">차선이탈경보(LDWS)</li> 
 											</c:if>
 											<c:if test="${result_option.get(47) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>자동긴급제동</li>
+												<li style="font-size:14px; padding:0 80px 8px 70px;"><i class="fas fa-check" style="color:red"></i>자동긴급제동</li>
 											</c:if>
 											<c:if test="${result_option.get(47) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">자동긴급제동</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 70px;">자동긴급제동</li> 
 											</c:if>
 											<c:if test="${result_option.get(48) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>전자제어서스펜션(ECS)</li>
+												<li style="font-size:14px; padding:0 80px 8px 70px;"><i class="fas fa-check" style="color:red"></i>전자제어서스펜션(ECS)</li>
 											</c:if>
 											<c:if test="${result_option.get(48) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">전자제어서스펜션(ECS)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 70px;">전자제어서스펜션(ECS)</li> 
 											</c:if>
 										</ul>
 									</div>
@@ -535,28 +535,28 @@
 										</ul>
 										<ul class="optionList">
 											<c:if test="${result_option.get(58) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 65px;"><i class="fas fa-check" style="color:red"></i>스탑앤고</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>스탑앤고</li>
 											</c:if>
 											<c:if test="${result_option.get(58) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 65px;">스탑앤고</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">스탑앤고</li> 
 											</c:if>
 											<c:if test="${result_option.get(59) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 65px;"><i class="fas fa-check" style="color:red"></i>전동트렁크</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>전동트렁크</li>
 											</c:if>
 											<c:if test="${result_option.get(59) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 65px;">전동트렁크</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">전동트렁크</li> 
 											</c:if>
 											<c:if test="${result_option.get(60) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 65px;"><i class="fas fa-check" style="color:red"></i>스마트트렁크</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>스마트트렁크</li>
 											</c:if>
 											<c:if test="${result_option.get(60) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 65px;">스마트트렁크</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">스마트트렁크</li> 
 											</c:if>
 											<c:if test="${result_option.get(61) ne '0'}">
-												<li style="font-size:14px; padding:0 80px 8px 65px;"><i class="fas fa-check" style="color:red"></i>전자주차브레이크(EPB)</li>
+												<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>전자주차브레이크(EPB)</li>
 											</c:if>
 											<c:if test="${result_option.get(61) eq '0'}">
-												<li style="color:#929292; font-size:14px; padding:0 80px 8px 65px;">전자주차브레이크(EPB)</li> 
+												<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">전자주차브레이크(EPB)</li> 
 											</c:if>
 										</ul>
 										<ul class="optionList">
@@ -688,9 +688,9 @@
 	                	<div class="rightSideTop1" style="border:1px solid #9d9d9d;"><br/>
 	                		<input type="hidden" class='note_title' value='${sales.title}'>
 	                        <div class="carNameInfo" style="text-align:center;"><span style="font-size:22px;">${sales.title}</span></div>
-	                        <div class="carInfo"><h6 style="text-align:center">${sales.old} | ${sales.color} | ${sales.fuel}</h6></div>
+	                        <div class="carInfo" style="text-align:center; "><span style="font-size:16px; margin:10px 0;">${sales.old}년형 | ${sales.color} | ${sales.fuel}</span></div>
 	                        <div class="" style="text-align:center;"><span style="font-size:18px;"><b class="salesPrice" style="color:#dca73a; margin-right:5px;">
-	                        ${sales.price}</b>만원</span></div><br/><br/>
+	                        ${sales.price}</b>만원</span></div><br/>
 	                        <div class="carInfo1">
 		                        <span style="color:#112e41; font-size:12px; margin-left:160px;">
 		                        <i class="fas fa-tools fa-2x"></i>	<!-- 성능 -->
@@ -708,8 +708,8 @@
 	                        		<!-- 프로필 사진이 떠야함 : 프사가 없는 사람은 기본이미지가 떠야함-->
 				           			<img src="https://storage.cloud.google.com/car_image_for_analysis/profile/${sales.m_id}.jpg" alt="" style="width:15%; margin:10px 30px 20px 50px;">
 				           			<div class="salesMan">
-				           				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sales.m_name} (${sales.m_id})</span><br/>
-					           			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${sales.tel}</span>
+				           				<span style="margin-left:30px;">${sales.m_name} (${sales.m_id})</span><br/>
+					           			<span style="margin-left:30px;">${sales.tel}</span>
 				                	</div>
 				                	<input class='sale_id' type="hidden" value="${sales.m_id}">
 				                	<input class='sale_name' type="hidden" value="${sales.m_name}">
@@ -720,7 +720,7 @@
 				        	<div class="icons" style="margin-left:150px; display:flex;">
 				        		<div class='pointer declaration'>
 				        			<span style="margin:0 5px 0 5px; font-size:15px; position: relative; top:2px;">신고하기</span> 
-				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">w
+				        			<img src="../resources/img/siren.PNG" style="width:26px; height:30px;">
 				        		</div>
 				        		<div class='pointer notego'>
 				        			<span style="margin-left:20px; font-size:15px; position: relative; top:2px;">쪽지보내기</span>

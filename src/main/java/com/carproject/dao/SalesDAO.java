@@ -27,7 +27,7 @@ public interface SalesDAO {
 	public void saveModify(SalesVO vo);		// 수정하기 버튼(글 수정 페이지)
 	public void deleteBtn(SalesVO vo);		// 삭제하기 버튼
 	
-	public SalesVO salesDetail(Long num);	// 상세페이지
+	public SalesVO salesDetail(long num);	// 상세페이지
 	
 	public void insertAnalysis(HashMap<String, String> analysis);		// 이미지분석 결과를 해당 판매글의 DB에 입력
 	
@@ -37,4 +37,6 @@ public interface SalesDAO {
 	
 	// 시세 예측 및 p_price 값 업데이트
 	public void insertPredict(HashMap<String, String> predict);
+	// f_price 값 업데이트
+	public void insertFuture(HashMap<String, String> future);
 }

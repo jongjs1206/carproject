@@ -102,7 +102,7 @@ public class SalesServiceImpl implements SalesService {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public SalesVO salesDetail(Long num) {		// 상세페이지
+	public SalesVO salesDetail(long num) {		// 상세페이지
 		return salesDAO.salesDetail(num);
 	}
 	
@@ -225,6 +225,10 @@ public class SalesServiceImpl implements SalesService {
 	// p_price 값 업데이트
 	public void insertPredict(HashMap<String, String> predict) {
 		salesDAO.insertPredict(predict);
+	}
+	// f_price 값 업데이트
+	public void insertFuture(HashMap<String, String> future) {
+		salesDAO.insertFuture(future);
 	}
 		
 	

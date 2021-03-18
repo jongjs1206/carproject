@@ -78,9 +78,9 @@ $(function() {
 		if (detailModel.indexOf('(') != -1) {						// 글제목에 들어갈 세부모델명 ()값 제거
 			var startIndex = detailModel.indexOf('(')
 			var rslt = detailModel.substring(0, startIndex)
-			result = beforeTitle + " " + rslt
+			result = beforeTitle + "" + rslt
 		} else {
-			result = beforeTitle + " " + detailModel
+			result = beforeTitle + "" + detailModel
 		}
 		
 		$("#title").val(result);
@@ -128,7 +128,7 @@ $(function() {
 		
 		detailModel = detailModel.replace(model, "");
 		
-		var beforeTitle = brand + " " + model + " " + detailModel;
+		var beforeTitle = brand + " " + model + "" + detailModel;
 		var result = beforeTitle + " " + grade;
 		
 		$("#title").val(result);
@@ -172,12 +172,12 @@ $(function() {
 		
 		//var beforeTitle = brand + " " + model + " " + detailModel + " " + grade;
 		//var result = beforeTitle + " " + detailGrade;
-		var beforeTitle = brand + " " + model;
 		//var result = beforeTitle + " ";
+		var beforeTitle = brand + " " + model;
 		
 		detailModel = detailModel.replace(model, "");
 		
-		if (detailModel.indexOf('(') != -1 && detailGrade.indexOf('(') != -1) {		// 글제목에 들어갈 세부모델, 세부등급 ()값 제거
+		if (detailModel.indexOf('(') != -1 || detailGrade.indexOf('(') != -1) {		// 글제목에 들어갈 세부모델, 세부등급 ()값 제거
 			var startIndex1 = detailModel.indexOf('(')		// 세부모델
 			var startIndex2 = detailGrade.indexOf('(')		// 세부등급
 			var rslt1 = detailModel.substring(0, startIndex1)	// 세부모델
@@ -185,9 +185,9 @@ $(function() {
 			detailModel = rslt1		// 세부모델
 			detailGrade = rslt2		// 세부등급
 			//result = beforeTitle + " " + rslt1 + " " + rslt2
-			result = beforeTitle + " " + rslt1 + " " + grade + " " + rslt2
+			result = beforeTitle + "" + rslt1 + " " + grade + " " + rslt2
 		} else {
-			result = beforeTitle + " " + rslt1 + " " + grade + " " + detailGrade
+			result = beforeTitle + "" + detailModel + " " + grade + " " + detailGrade
 		}
 
 		$("#title").val(result);
@@ -196,6 +196,8 @@ $(function() {
 		//console.log(g_id);
 		$('#selectId').val(g_id);
 	});
+	
+	
 	
 	
 	/////////////////////////////////////////////////////////

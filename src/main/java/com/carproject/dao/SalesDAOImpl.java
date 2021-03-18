@@ -114,7 +114,7 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	//////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public SalesVO salesDetail(Long num) {									// 상세페이지
+	public SalesVO salesDetail(long num) {									// 상세페이지
 		SalesVO sales = mybatis.selectOne("salesMap.salesCheck", num);
 		return sales;
 	}
@@ -142,5 +142,10 @@ public class SalesDAOImpl implements SalesDAO {
 		mybatis.update("salesMap.insertPredict", predict);
 	}
 	
+	@Override
+	public void insertFuture(HashMap<String, String> future) {					// f_price 값 업데이트
+		System.out.println("===> salesMap insertFuture 호출");
+		mybatis.update("salesMap.insertFuture", future);
+	}
 	
 }
