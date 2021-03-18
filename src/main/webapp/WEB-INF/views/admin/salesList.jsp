@@ -58,14 +58,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                	<input type="date" id="startDate">
-                               		<span><i class="fas fa-wave-square"></i></span>
-                               		<input type="date" id="endDate">
-                               		<a id="searchDates"><i class="fas fa-search"></i></a>
-                               		<!-- <input type="button" class="btn btn-warning" value="쪽지" style="margin-left:50px;"/> -->
-                               		<a onclick="window.open('../user/noteinsert.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
-										<input type="button" class="btn btn-warning" value="쪽지" style="margin-left:50px;">
-									</a>
+                                <input type="date" id="startDate">
+                                <span><i class="fas fa-wave-square"></i></span>                            
+                                
+                                <input type="date" id="endDate">
+                                <a id="searchDates"><i class="fas fa-search"></i></a>
+
                                
                                <div  id="indexListAjax">                         
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -118,7 +116,7 @@
                                                 <td>${sale.status}</td>
                                                 <c:set var="status" value="${sale.status}" />
 													<c:choose>
-														<c:when test="${status ne '게시중'}">
+														<c:when test="${status eq '등록대기'}">
 															<td align="center">											
 															<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
 															</td>
@@ -128,7 +126,7 @@
 														</c:otherwise>
 													</c:choose>
 												<td>
-													<c:if test="${status ne '반려'}">
+													<c:if test="${status eq '등록대기'}">
 														<input type="button" class="btn btn-danger" onclick="location.href='returnPosting.do?sellid=${sale.sell_id}' " value="반려">
 													</c:if>
 												</td>

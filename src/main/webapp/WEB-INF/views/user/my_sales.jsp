@@ -32,6 +32,8 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" type="text/css" href="../resources/css/all/my_sales.css">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/all/news.css">
 
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -47,9 +49,11 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/CSSRulePlugin.min.js'></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/EaselPlugin.min.js"></script>
+
 <script type="text/javascript" src="../resources/js/user/my_sales.js"></script>
-<script type="text/javascript" src="../resources/js/all/product_list.js"></script>
+
 <script type="text/javascript" src="../resources/js/all/jquery.cookie.js"></script>
+
 
 </head>
 <body>
@@ -95,60 +99,63 @@
         
         
 
+
 			<!-- tag_status -->
 			<div class="container saleHeader">
-				  
-                    <!-- select in date -->
-                   <div class="datePicker">
-               
-                  <input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				 <div><a id="datepickerReset"> <i class="fas fa-sync-alt"></i></a></div>
-                    <div class="single-select-box mb-30">
-                        <!-- select out date -->
-                        <div class="boking-tittle">                          
-                        </div>
-                        <div class="boking-datepicker">
-                            <input id="datepicker1" type="date"  placeholder="" />                             
-                        </div>
-                   </div>            
-                      
-                    <!-- Single Select Box -->
-                    <div class="single-select-box mb-30">
-                        <!-- select out date -->
-                        <div class="boking-tittle">
-                         
-                        </div>
-                        <div class="boking-datepicker">
-                            <input id="datepicker2"  type="date" placeholder="" />
-                        </div>
-                     
-                   </div>
-                    <div><a id="datepickerBtn"> <i class="fas fa-search"></i></a>
-                    </div>
-                
-                  
-                  </div>                
-				<div class="statusBtn" id="statusBtn">
-				<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">게시중</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a>
-				<a href="javascript:void(0);" onclick="statusOn(this)">삭제</a>
-		  </div>
-				<!-- 검색창 -->
-			<div class="divSearch">
-	
-				<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-					<span id="resetSearch" class="form-icon"> <a> <i class="fas fa-sync-alt"></i></a></span>
-					<input type="text" id="byTitle" name="byTitle" placeholder=" 제목 검색 "/> 						
-						<a id="btnSearch"> <i class="fas fa-search"></i></a>
-			
-			</div>
-</div>
 
-        
+				<!-- select in date -->
+				<div class="datePicker">
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+
+					<div class="single-select-box mb-30">
+
+
+						<!-- select out date -->
+						<div class="boking-datepicker">
+							<a id="datepickerReset"> <i class="fas fa-sync-alt"></i></a> <input
+								type="date" id="startDate">
+						</div>
+					</div>
+
+					<!-- Single Select Box -->
+					<div class="single-select-box mb-30">
+						<!-- select out date -->
+						<div class="boking-tittle"></div>
+						<div class="boking-datepicker">
+							<input type="date" id="endDate"> <a id="btnSearch">
+								<i class="fas fa-search"></i>
+							</a>
+						</div>
+
+					</div>
+					<div></div>
+					<hr />
+
+				</div>
+				<div class="statusBtn" id="statusBtn">
+					<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a> <a
+						href="javascript:void(0);" onclick="statusOn(this)">게시중</a> <a
+						href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
+						<br /><br />
+					<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a> <a
+						href="javascript:void(0);" onclick="statusOn(this)">반려</a>
+				</div>
+				<!-- 검색창 -->
+				<div class="divSearch">
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" /> <span id="resetSearch"
+						class="form-icon"> <a> <i class="fas fa-sync-alt"></i></a></span>
+					<input type="text" id="byTitle" name="byTitle"
+						placeholder=" 제목 검색 " /> <a id="btnSearch"> <i
+						class="fas fa-search"></i></a>
+
+				</div>
+			</div>
+
+
 
 
 
@@ -157,16 +164,17 @@
             
 			
 			<div class="sale-info">
-				<span>제목</span>
-				<span>찜</span>
+				<span></span>
 				<!-- <span>삭제 </span> -->
 			</div>
 			
 			
-			
 			<!-- 이 안에 DB 내용 가져올 예정 ↓↓↓↓↓  -->
-		<div id="indexListAjax">
-		
+		<div id="indexListAjax">	
+				<!-- js로 총 게시물 개 수 넘기기 -->		
+<input type="hidden" id="totalcnt" value="${cnt}"/>
+<input type="hidden" id="totalpage" value="${totalpage}"/>
+	
 			<c:forEach items="${sale_list}" var="sale">
 			<div class="blog_details news-container">
 				<a class="d-inline-block news-thumb"
@@ -185,8 +193,6 @@
 						<span>${sale.price} 만원</span>
 					</div>
 				</a>
-				<div class="cnt"></div>
-		    	<!-- <div class="deleteBtn"><a><i class="far fa-trash-alt fa-lg" aria-hidden="true"></i></a></div> -->
 			</div>
 			</c:forEach>
 		</div>
@@ -194,27 +200,34 @@
     </section>
 
 	<!-- ### 페이징 시작 ### -->
-	<!-- <nav class="blog-pagination justify-content-center d-flex">
-	    <ul class="pagination">
-	        <li class="page-item">
-	            <a href="#" class="page-link" aria-label="Previous">
-	                <i class="ti-angle-left"></i>
-	            </a>
+
+	<nav id="navpage" class="paging" style="display: flex; justify-content: center;">	
+
+
+		<ul class="pagination">
+			<li class="page-item start_page">
+			<a class="page-link gofirst" aria-label="Previous"> <i class="fas fa-angle-double-left"></i></a>
+			</li>	
+				<li class="page-item prev_page"><a class="page-link goprev" aria-label="Previous"> <i class="fas fa-angle-left"></i>
+				</a></li>
+		</ul>
+		<ul class="pagination page_number">
+	        <c:forEach var="i" begin="1" end="${totalpage}">
+	        <li class="page-item page_number">
+	            <a class="page-link page-num">${i}</a>
 	        </li>
-	        <li class="page-item">
-	            <a href="#" class="page-link">1</a>
-	        </li>
-	        <li class="page-item active">
-	            <a href="#" class="page-link">2</a>
-	        </li>
-	        <li class="page-item">
-	            <a href="#" class="page-link" aria-label="Next">
-	                <i class="ti-angle-right"></i>
-	            </a>
-	        </li>
-	    </ul>
-	</nav> -->
-	<!-- ### 페이징 끝 ### -->
+	       </c:forEach>
+		</ul>
+		<ul class="pagination">
+				<li class="page-item next_page"><a class="page-link gonext" aria-label="Next"> <i class="fas fa-angle-right"></i>
+				</a></li>
+			<li class="page-item end_page"><a class="page-link goend"
+				aria-label="Previous"> <i class="fas fa-angle-double-right"></i>
+			</a></li>
+		</ul>
+	</nav>
+
+	<!-- ### 페이징 끝 ### 
                 
 	<!-- 챗봇 -->
   	<div id="frogue-container" class="position-right-bottom"

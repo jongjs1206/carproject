@@ -1,6 +1,7 @@
 package com.carproject.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -124,8 +125,6 @@ public class MemberController {
 	}
 	
 		
-
-		
 		@Autowired
 		@Qualifier("org.springframework.security.authenticationManager")
 		private AuthenticationManager authenticationManager;
@@ -237,11 +236,8 @@ public class MemberController {
 	    MemberVO info = memberservice.checkUniqueId(vo);
 	    session.setAttribute("info", info);
 	    
-	    
-	    
 		// 유저정보 가져오기
 		MemberVO member = (MemberVO) session.getAttribute("info");
-//		System.out.println("+++userinfo+++++ "+member.getEmail());
 
 		// 세팅
 		String email = (String)member.getEmail();
@@ -305,6 +301,28 @@ public class MemberController {
 			
 		}
 	
+		
+	//회원탈퇴
+		@RequestMapping(value = "/user/memberOut.do")
+		public String memberOut() {
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id ="";
+			if (principal instanceof UserDetails) {
+			   id = ((UserDetails)principal).getUsername();
+			} else {
+			   id = principal.toString();
+			}
+				
+			MemberVO vo = new MemberVO();
+			vo.setM_id(id);
+			
+			memberservice.memberOut(vo);
+			memberservice.deleteMember(id);
+
+			return "redirect:/all/out.do";
+		}	
+		
 	
 
 	
@@ -321,8 +339,24 @@ public class MemberController {
 		}
 		vo.setM_id(id);
 		
-		//검색
-		List<HashMap<String, Object>> sale_list = memberservice.selectAllsale(vo);
+		//다 가져오기 -> 전체 페이지 갯수를 알기 위함
+		List<HashMap<String, Object>> list = memberservice.selectAllsale(vo);
+		int cnt = list.size();
+		int perpage =10;
+		int totalpage;
+		
+		if(cnt%perpage==0) {			
+			 totalpage=cnt/perpage;		
+		}else {
+			totalpage=cnt/perpage+1;
+		}
+		
+		//10개만 가져와서 초기 페이지 설정
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("m_id", id);
+		param.put("start", 0);
+		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(param);		
+		
 		//날짜에서 시간 자르기
 		for(HashMap<String, Object> s : sale_list) {	
 		String date = s.get("w_date").toString();
@@ -331,9 +365,13 @@ public class MemberController {
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
-		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());
+		String note = letterService.selectnotecount(((MemberVO)session.getAttribute("info")).getM_id());	
+		
 		session.setAttribute("note", note);
 		model.addAttribute("sale_list", sale_list);
+		model.addAttribute("cnt",cnt);
+		model.addAttribute("totalpage",totalpage);
+
 
 	}
 	
@@ -343,6 +381,58 @@ public class MemberController {
 	@RequestMapping(value = "user/my_sales_ajax.do", method= {RequestMethod.POST})
 	//@ResponseBody 지우기
 	public void  searchMySales(MemberVO vo, HttpSession session, Model model,
+			@RequestParam HashMap<String, Object> param) 
+	{
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String id ="";
+		if (principal instanceof UserDetails) {
+		   id = ((UserDetails)principal).getUsername();
+		} else {
+		   id = principal.toString();
+		}
+		vo.setM_id(id);
+		
+		//초기값 세팅(id, status)
+		param = memberservice.saleSearchDefault(param, vo);
+
+		//필터걸린 거 검색
+		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(param);
+		
+		//필터걸린거 총 겁색
+				param.put("start", null);
+				List<HashMap<String, Object>> list = memberservice.selectMySale(param);
+				int cnt = list.size();
+				int perpage =10;
+				int totalpage;
+
+				
+				if(cnt%perpage==0) {			
+					 totalpage=cnt/perpage;		
+				}else {
+					totalpage=cnt/perpage+1;
+				}
+		
+		
+		//날짜에서 시간 자르기
+		for(HashMap<String, Object> s : sale_list) {	
+		String date = s.get("w_date").toString();
+		s.put("w_date", date.split(" ")[0]);
+		}
+		
+		model.addAttribute("sale_list", sale_list);
+		model.addAttribute("cnt",cnt);
+		model.addAttribute("totalpage",totalpage);	
+
+
+	}
+	
+	
+	//페이징
+	@RequestMapping(value = "/user/my_sales_page.do", produces ="application/json" 
+			, method= {RequestMethod.POST})
+	@ResponseBody
+	public int  my_sales_page(HttpSession session, Model model,
 			@RequestParam HashMap<String, Object> param
 			) {
 		
@@ -353,27 +443,32 @@ public class MemberController {
 		} else {
 		   id = principal.toString();
 		}
+		MemberVO vo = new MemberVO();
 		vo.setM_id(id);
-		MemberVO info = memberservice.checkUniqueId(vo);
 		
+		//초기값 세팅(id, status)
+		param = memberservice.saleSearchDefault(param, vo);
 		
-		//비어있는 곳 기본 세팅
-		HashMap<String, Object> m = memberservice.saleSearchDefault(param, info);
+		//필터걸린거 총 겁색
+		param.put("start", null);
+		List<HashMap<String, Object>> list = memberservice.selectMySale(param);
+		int cnt = list.size();
+		int perpage =10;
+		int totalpage;
+
 		
-		//검색
-		List<HashMap<String, Object>> sale_list = memberservice.selectMySale(m);
-		
-		//날짜에서 시간 자르기
-		for(HashMap<String, Object> s : sale_list) {	
-		String date = s.get("w_date").toString();
-		s.put("w_date", date.split(" ")[0]);
+		if(cnt%perpage==0) {			
+			 totalpage=cnt/perpage;		
+		}else {
+			totalpage=cnt/perpage+1;
 		}
 		
-		model.addAttribute("sale_list", sale_list);
-
+		model.addAttribute("cnt",cnt);
+		model.addAttribute("totalpage",totalpage);
+		
+		return totalpage;
 	
 	}
-	
 	
 	
 	

@@ -19,9 +19,6 @@
 		
 		<csrf disabled="false" /> 
 		
-		<session-management invalid-session-url="/all/out.do">
-    	    <concurrency-control max-sessions="1" expired-url="/logout"/>
-	    </session-management>
 
 		
 	</http>

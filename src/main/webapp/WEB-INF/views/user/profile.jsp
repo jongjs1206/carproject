@@ -188,6 +188,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="cmm-basic-info">
 						<div class="cmm-tit">
 							<span>생년월일</span>
@@ -206,20 +207,36 @@
 					<div class="cmm-basic-info">
 						<div class="cmm-tit">
 							<span>이메일</span>
-						</div>
-						<div class="cmm-input-area">
-							<span class="inp-t" style="width: 140px;"> <input
-								type="text" id="email1" class='readonly' name="email1"
-								title="이메일 주소" value="${email[0]}" tk_security="true" readonly>
-							</span> <span class="form-t">@</span> <span class="inp-t"
-								style="width: 140px;"> <input type="text" id="email2"
-								class="readonly" name="email2" title="직접입력 이메일"
-								value="${email[1]}" readonly></span> <input type="hidden"
-								id="email" name="email">
+						</div>				
+						
+							<div class="cmm-input-area">
+							<span class="inp-t" style="width: 140px;"> 
+							<input type="text" id="email1" name="email1" value="${email[0]}" readonly title="이메일 주소" tk_security="true"></span> <span class="form-t">@</span>
+							 <span 	class="inp-t" style="width: 140px;"> 
+							 <input type="text"
+								id="email2" name="email2" value="${email[1]}" readonly title="직접입력 이메일"></span> 
+								<input type="hidden" id="email" name="email">
+							<button type="button" class="joinBtns more-btn1" id="btnMailSend">
+								<span>탈퇴하기</span>
+							</button>
 							<div class="form-txt">
 								<span class="ft-red" id="emailAlert"></span>
 							</div>
+							<div id="confirmNumDiv" style="display: none">
+								<div class="inp-t inp-time w400">
+									<input type="text" title="인증번호 입력" name="certCode"	id="certCode" maxlength="10" autocomplete="off" placeholder="인증번호 입력">
+									<div class="t-txt" id="timer" style="display: block;"></div>
+								</div>
+								<button type="button" class="joinBtns more-btn1" id="certNumChk">
+									<span>인증번호 확인</span>
+								</button><br/>
+								<div class="form-txt">
+									<span class="ft-red" id="certAlert"></span>
+								</div>
+							</div>
 						</div>
+						
+						
 
 
 					</div>

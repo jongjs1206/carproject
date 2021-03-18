@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Noto+Serif:400,400i,700&display=swap");
 @font-face{
 	src:url("../../Cafe24Dangdanghae/Cafe24Dangdanghae.ttf");
@@ -99,13 +98,18 @@ span.status {
 
 div.saleHeader{
 	display:flex;
-	justify-content: flex-end;
-	margin: 5% 0;
+	justify-content: flex-start;
+	margin-bottom: 10%
+}
+
+div.statusBtn{
+	
+	text-align: center;
 }
 
 div.statusBtn > a{
 	padding: 10px;
-	margin: 10px;
+	margin: 10px 10px;
 	color: #dca73a !important;
 	/* border: 1px solid #dca73a; */
     border-radius: 20px;
@@ -157,6 +161,7 @@ div.divSearch{
 div.datePicker{
  display: flex;
  margin-right: 10px;
+ text-align: center;
 }
 
 div.datePicker div.single-select-box input{
@@ -178,7 +183,12 @@ nav.blog-pagination {
     margin-bottom: 200px;
 }
 
-
+div.nothingToInsert{
+	
+	text-align: center;
+	color: gray !important;
+	padding: 10%;
+}
 
 
 

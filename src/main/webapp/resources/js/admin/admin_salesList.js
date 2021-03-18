@@ -114,6 +114,7 @@ var search = function(){
 	 	},
 	 	success : function(result){
 	 	
+	 	
 	 	location.href="salesList.do?startDate="+startDate.val()+"&endDate="+endDate.val()+"&status="+searchStatus.val()+"&byTitle="+byTitle.val();
 	 	
 	 	

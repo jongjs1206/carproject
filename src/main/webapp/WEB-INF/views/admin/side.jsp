@@ -12,8 +12,25 @@
         <title>side</title>
         <link href="../resources/css/admin/styles.css" rel="stylesheet" type="text/css"/> <!-- css파일 import -->
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+		integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+		crossorigin="anonymous"></script>
+	        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(function(){        	
+
+        	$('#ga4').click(function(){
+        		url = 'https://analytics.google.com/analytics/web';
+        		alias = '애널리틱스';
+        		window.open(url, alias);
+        	}) 
+        })
+        
+        </script>
+        
     </head>
+  
  
     <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -50,14 +67,11 @@
                                     <a class="nav-link" href="monthlycoin.do">월별코인충전</a>  
                                 </nav>
                             </div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>방문현황
+                            <a id="ga4" class="nav-link collapsed" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="false" aria-controls="collapseAdd"
+                            	style="cursor: pointer;">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>애널리틱스
                             </a>
                             <div class="collapse" id="collapsetwo" aria-labelledby="headingOne" data-parent="#sidenavAccordion" style="">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="dailylog.do">일일방문현황</a> 
-                                    <a class="nav-link" href="monthlylog.do">월별방문현황</a> 
-                                </nav>
                             </div>
                             
 
