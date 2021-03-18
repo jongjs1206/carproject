@@ -136,15 +136,15 @@
 								<div class="marketPredict" style="font-size:14px; width:1000px;">
 									<!-- <img src="../resources/img/used_car_price.png" style="margin:0 150px 0 50px;"> -->
 									<div class="card-body" style="display: flex;">
-										<canvas id="predict_price" width="900" height="400">
+										<canvas id="predict_price" width="700" height="400">
 			                            	<!-- 선 그래프 -->
 			                            </canvas>
-			                           <%--  <span style="width:300px; font-size:20px; margin-left:30px;">
-				                            현재 <fmt:formatNumber value="${fn:split(sales.p_price,'.')[0]}" pattern="#,###" />만원<br/>
+			                          	<span style="width:300px; font-size:18px; margin: 100px 0 0 50px;">
+				                            &nbsp;현재 <fmt:formatNumber value="${fn:split(sales.p_price,'.')[0]}" pattern="#,###" />만원<br/>
 				                            2년 후 <fmt:formatNumber value="${fn:split(sales.after2_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
 				                            4년 후 <fmt:formatNumber value="${fn:split(sales.after4_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
 				                            6년 후 <fmt:formatNumber value="${fn:split(sales.f_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
-			                            </span> --%>
+			                            </span>
 									</div>
 								</div>
 							</div>	
