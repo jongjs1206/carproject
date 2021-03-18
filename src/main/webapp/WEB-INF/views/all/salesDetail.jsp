@@ -57,6 +57,7 @@
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- 최근 본 목록 -->
 	
 	<input type="hidden" class='login_on' value='${sessionScope.info.m_id}'/>
 	
