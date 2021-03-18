@@ -1,14 +1,21 @@
 /**
  * 작성자 문희주
  * 내 판매 목록
+ 
+ 날자/ 태그/ 검색어/ 페이징 등
+ 이벤트 마다 데이터를 받는 방식
+ 
  */
  
 $(function(){
  
+ //글로벌 변수 선언
+ 
  	var token = $("input[name='_csrf']").val();
 	var header = "X-CSRF-TOKEN";
 
-
+	var pageNow = 1;
+	var totalpage = $('#totalpage').val();
 	
 	//날짜
 
@@ -17,6 +24,9 @@ $(function(){
 	
 	var btnSearch = $('#btnSearch')
 	var byTitle = $('#byTitle')
+	
+//status
+	var status = '';
 
 	
  //날짜 함수(yyyy-mm-dd 형식)
@@ -40,10 +50,11 @@ function leadingZeros(n, digits) {
     return zero + n;
 }
  
+ 
+ //파라미터 받아오는 함수
 function getDateStr(myDate){
 	return (myDate.getFullYear() + '-' + (myDate.getMonth() + 1) + '-' + myDate.getDate())
 }
-
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -54,44 +65,31 @@ function getParameterByName(name) {
 
 
 
+
+
 //날짜 리셋 버튼
-$('#datepickerReset').on('click', function(){
+$(document).on('click','#datepickerReset',function(){
 startDate.val("");
 endDate.val("");
 search();
-
 })
 
-//날짜 검색 버튼
-$('#datepickerBtn').on('click', function(){
-search();
-})
-
-//엔터
-endDate.keydown(function(key) {
-if (key.keyCode == 13) {
-search();
-}
-
-});
 
 //검색 리셋 버튼
 $('#resetSearch').on('click', function(){
 byTitle.val("");
-
 })
 
-//검색 검색 버튼
-$('#btnSearch').on('click', function(){
+//날짜, 제목검색 검색 버튼
+$(document).on('click','#btnSearch',function(){
 search();
 })
 
-//엔터
-byTitle.keydown(function(key) {
+//검색창 엔터
+$(document).on('keydown',byTitle,function(key){
 if (key.keyCode == 13) {
 search();
 }
-
 });
 
 
@@ -101,14 +99,46 @@ search();
 //상태 클래스 toggle
  window.statusOn = function(obj) {
   $(obj).toggleClass( 'on' );
-  
    search();
-
 }
 
 
+//페이지 숫자 클릭
+$(document).on('click','.page-num',function(){
+pageNow=$(this).text();
+search();
+})
 
 
+//페이지 << 클릭
+$(document).on('click','.gofirst',function(){
+pageNow=1;
+   search();
+})
+
+
+//페이지 < 클릭
+$(document).on('click','.goprev',function(){
+if(pageNow != 1){
+pageNow=pageNow-1;
+}
+   search();
+})
+
+//페이지 >>클릭
+$(document).on('click','.goend',function(){
+pageNow= totalpage;
+   search();
+})
+
+
+//페이지 > 클릭
+$(document).on('click','.gonext',function(){
+if(pageNow != totalpage){
+pageNow=pageNow+1;
+}
+  search();
+})
 
 
 
@@ -118,6 +148,8 @@ search();
 var search = function(){
 
 
+//mapper에 보낼 pageNow(처음 페이지 , 0부터 시작)
+let start = (pageNow-1)*10;
 
 
 //날짜 빈칸 처리
@@ -131,12 +163,10 @@ endDate.val(today)
 
 
 //status 클래스 상태에 따라서 쿼리문에 보낼 string 만들기
-var status = '';
-
+status='';
 
 //status 모두 클래스가 없을때 (선택x) 모두 선택된 것 처럼 보이기
 if($("a.on").length == 0 ){
-
 $('#statusBtn > a').each(function(){
 status = status +','+ $(this).text()
  })
@@ -146,9 +176,11 @@ status = status +','+ $(this).text()
 $("a.on").each(function(){
 status = status +','+ $(this).text()
  })
-}
 
 
+}//end of else
+
+//데이터 보내서 검색결과에 맞는 ajax 페이지 구성 후 본페이지에 합성
 
 	$.ajax({
 		type : 'post',
@@ -163,30 +195,59 @@ status = status +','+ $(this).text()
 	 	data : {"startDate" : startDate.val(),
 	 			"endDate": endDate.val(),
 	 			"status" : status,
-	 			"byTitle" : byTitle.val()
+	 			"byTitle" : byTitle.val(),
+	 			"start" : start,
+	 			"cnt" : $('#totalcnt').val()
 	 	
 	 	
 	 	},				
 	 	success : function(result){
-	 	
-
+		
 	 	var html = jQuery('<div>').html(result);
 			$( '#indexListAjax' ).html(html);
-	 	},
+			
+			
+//검색 결과에 따라서 페이지 조건 바꾸기
+			
+	$.ajax({
+		type : 'post',
+		async : true,
+		url : '../user/my_sales_page.do',
+		beforeSend : function(xhr)
+		{	
+			xhr.setRequestHeader(header, token);
+		},
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			 	data : {"startDate" : startDate.val(),
+	 			"endDate": endDate.val(),
+	 			"status" : status,
+	 			"byTitle" : byTitle.val(),
+	 			"start" : start,
+	 			"cnt" : $('#totalcnt').val()
 	 	
+	 	},		
+		
+	 	success : function(result){		
+		totalpage = $('#totalpage').val();		
+		
+		//인덱스 페이지 바꾸기		
+		$('ul.page_number li').remove();		
+		for (i = 1; i <= totalpage ; i++) {
+		$('ul.pagination.page_number').append('<li class="page-item"><a class="page-link page-num">'+i+'</a> </li>')
+		}
+	 }, 	
 	 	
+	error:function(request, status, error){
+		console.log(err);
+		}	 	
+	 }) 
+	 	},	 	
 	 	error : function(err){
 	 		console.log(err);
-	 	}
-	 	
+	 	}	 	
 	 }) 
 
-	
-
-
 }
-
-
 
 
 

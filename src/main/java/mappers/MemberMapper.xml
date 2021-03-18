@@ -145,11 +145,14 @@
 	<select id="selectMySale" parameterType="hashmap" resultType="hashmap">
 		
 		SELECT * FROM sell 
-		WHERE m_id=#{m_id} AND 
+		WHERE m_id=#{m_id} 
+		 <if test="startDate != null and endDate != null">
 		<![CDATA[
-		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
-		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
+		AND 
+		str_to_date(w_date, '%Y-%m-%d') >= str_to_date(#{startDate}, '%Y-%m-%d') AND
+		str_to_date(w_date, '%Y-%m-%d') <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
+		</if>
 	    <if test="statusList != null and statusList != ''">
 	     AND status IN 
 	     <foreach collection="statusList" item="status" separator="," open="(" close=")">
@@ -160,10 +163,12 @@
 				AND
 				title LIKE CONCAT('%',#{byTitle},'%')
 		</if> 
+		ORDER BY w_date DESC	 
+		<if test="start != null">
 		<![CDATA[
-		ORDER BY w_date DESC		
-		LIMIT #{limit}, #{offset}
+		LIMIT ${start}, 10
 		]]>
+		</if>
 	</select>
 	
 	
@@ -174,18 +179,18 @@
 		WHERE
 		<if test="startDate != null and endDate != null ">		
 		<![CDATA[
-		w_date >= str_to_date(#{startDate}, '%Y-%m-%d') AND
-		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
+		str_to_date(w_date, '%Y-%m-%d') >= str_to_date(#{startDate}, '%Y-%m-%d') AND		
+		 str_to_date(w_date, '%Y-%m-%d') <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
 		</if>
 		<if test="startDate == null and endDate != null ">
 		<![CDATA[
-		w_date <= str_to_date(#{endDate}, '%Y-%m-%d')
+		str_to_date(w_date, '%Y-%m-%d') <= str_to_date(#{endDate}, '%Y-%m-%d')
 		]]>
 		</if>
 		<if test="endDate == null  and startDate != null">
 		<![CDATA[
-		w_date >= str_to_date(#{startDate}, '%Y-%m-%d')
+		str_to_date(w_date, '%Y-%m-%d') >= str_to_date(#{startDate}, '%Y-%m-%d')
 		]]>
 		</if>
 	    <if test="status != null and status != '상태선택' ">
@@ -211,7 +216,7 @@
 	</update>
 	
 	
-	<!-- 2주 지난 게시물 삭제 -->
+	<!-- 2주 지난 게시물 상태 바꿔줌 게시종료로 -->
 	
 	<update id="expiredPosting" parameterType="sales">
 		UPDATE sell

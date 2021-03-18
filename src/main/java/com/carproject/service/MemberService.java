@@ -65,5 +65,6 @@ public interface MemberService {
 	public String today();
 	public String beforeMonth();
 	public String beforeTwoWeeks();
+	public String afterOneday();
 }
 

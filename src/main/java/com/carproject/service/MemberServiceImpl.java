@@ -207,6 +207,13 @@ public class MemberServiceImpl implements MemberService{
 		    String beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
 		    return beforeWeek;			
 		}
+		
+		public String afterOneday() {
+		    Calendar week = Calendar.getInstance();
+		    week.add(Calendar.DATE , +1);
+		    String beforeWeek = new java.text.SimpleDateFormat("yyyy-MM-dd").format(week.getTime());
+		    return beforeWeek;			
+		}
 
 
 
