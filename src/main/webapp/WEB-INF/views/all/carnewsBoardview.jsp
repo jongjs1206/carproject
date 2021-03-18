@@ -55,6 +55,9 @@
 <body>
 
 	<%@ include file="../header.jsp"%>	<!-- header -->
+	<%@ include file="../side.jsp"%>	<!-- 최근 본 목록 -->
+	
+	
 	<input type="hidden" name="${_csrf.parameterName}"
 		value="${_csrf.token}" />
 	
