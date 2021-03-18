@@ -18,7 +18,8 @@
 <select id="salesCheck" parameterType="long" resultType="sales">
 	<![CDATA[
 		SELECT s.m_id, s.title, s.old, s.mile, s.color, s.accident, s.price, s.image, s.option, s.content, s.vehicle_num, 
-			s.baeki, s.guarantee, s.fuel, s.gear, m.m_id, m.m_name, m.tel
+			s.baeki, s.guarantee, s.fuel, s.gear, s.p_price, s.f_price, 
+			m.m_id, m.m_name, m.tel
 		FROM sell s 
 		INNER JOIN (SELECT * FROM member ) m  ON m.m_id = s.m_id 
 		where s.sell_id = #{num};
