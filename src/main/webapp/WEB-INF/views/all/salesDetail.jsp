@@ -197,6 +197,194 @@
 												</c:if>
 											</c:forEach>
 										</ul>
+										</div>
+								</div><hr style="margin:10px 0;">	
+								<!-- end of 외관 -->
+								<div class="" style="font-size:14px; list-style-type: none !important; ">	
+								<!-- 내관 -->
+								&nbsp;&nbsp;&nbsp;내관&nbsp;&nbsp;&nbsp;<hr style="margin:10px 0;">
+									<div class="inside" style="display: flex;">
+										<ul class="optionList" >
+											<c:forEach var="i" begin="14" end="18">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>										
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="19" end="22">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 40px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 40px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="23" end="26">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="27" end="30">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 45px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 45px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+									</div>
+								</div><hr style="margin:10px 0;">	
+								<!-- end of 내관 -->
+								<div class="" style="font-size:14px; list-style-type: none !important; ">	
+								<!-- 안전 -->
+									&nbsp;&nbsp;&nbsp;안전&nbsp;&nbsp;&nbsp;<hr style="margin:10px 0;">
+									<div class="safe" style="display: flex;">
+										<ul class="optionList">
+											<c:forEach var="i" begin="31" end="35">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="36" end="40">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="41" end="44">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 25px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 25px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="45" end="48">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 70px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 70px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+									</div>
+								</div><hr style="margin:10px 0;">	
+								<!-- end of 안전 -->
+								<div class="" style="font-size:14px; list-style-type: none !important; ">	
+								<!-- 편의 -->
+									&nbsp;&nbsp;&nbsp;편의&nbsp;&nbsp;&nbsp;<hr style="margin:10px 0;">
+									<div class="comfort" style="display: flex;">
+										<ul class="optionList">
+											<c:forEach var="i" begin="49" end="53">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="54" end="57">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 60px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 60px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="58" end="61">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 50px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 50px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="62" end="65">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 0px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 0px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+									</div>
+								</div><hr style="margin:10px 0;">	
+								<!-- end of 편의 -->
+								<div class="" style="font-size:14px; list-style-type: none !important; ">	
+								<!-- 멀티미디어 -->
+									&nbsp;&nbsp;&nbsp;멀티미디어&nbsp;&nbsp;&nbsp;<hr style="margin:10px 0;">
+									<div class="multimedia" style="display: flex;">
+										<ul class="optionList" >
+											<c:forEach var="i" begin="66" end="68">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 54px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 54px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="69" end="71">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 100px 8px 20px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 100px 8px 20px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="72" end="74">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 170px 8px 90px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 170px 8px 90px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
+										<ul class="optionList">
+											<c:forEach var="i" begin="75" end="77">										
+												<c:if test="${result_option.get(i) ne '0'}">	<!--옵션의 값이 1일때(체크O) 빨간체크 + 검은색 -->
+													<li style="font-size:14px; padding:0 80px 8px 10px;"><i class="fas fa-check" style="color:red"></i>${option_name[i]}</li>
+												</c:if>
+												<c:if test="${result_option.get(i) eq '0'}">	<!--옵션의 값이 0일때(체크X) 회색 -->
+													<li style="color:#929292; font-size:14px; padding:0 80px 8px 10px;">${option_name[i]}</li> 
+												</c:if>
+											</c:forEach>
+										</ul>
 									</div>
 								</div>	<!-- end of 멀티미디어 -->
 							</div>
