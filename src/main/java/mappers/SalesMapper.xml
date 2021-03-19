@@ -6,11 +6,9 @@
 <!-- 글 상세페이지(확인) -->
 <select id="salesCheck" parameterType="long" resultType="sales">
 	<![CDATA[
-		SELECT s.m_id, s.title, s.old, s.mile, s.color, s.accident, s.price, s.image, s.option, s.content, s.vehicle_num, 
-			s.baeki, s.guarantee, s.fuel, s.gear, s.p_price, s.f_price, s.after2_price, s.after4_price, 
-			m.m_id, m.m_name, m.tel
+ 		SELECT s.*, m.*
 		FROM sell s 
-		INNER JOIN (SELECT * FROM member ) m  ON m.m_id = s.m_id 
+		INNER JOIN (SELECT * FROM member) m  ON m.m_id = s.m_id 
 		where s.sell_id = #{num};
 	]]>
 </select>
@@ -21,7 +19,7 @@
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
 				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
-				gear=#{gear}, baeki=#{baeki}
+				gear=#{gear}, baeki=#{baeki}, status='등록대기'
 		WHERE sell_id=#{sell_id}
 	]]>
 </update>

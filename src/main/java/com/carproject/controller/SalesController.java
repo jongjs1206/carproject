@@ -219,8 +219,7 @@ public class SalesController {
 		// 메인 이미지
 		// 사진 파일 주소 정제
 		String raw_url = sales.getImage();
-		String final_url = raw_url.replace("https://storage.googleapis.com/car_image_for_analysis/", "");
-		System.out.println(final_url + "dudldldflkjalsj");
+		String final_url = raw_url.replace("https://storage.googleapis.com/car_image_for_analysis/", "https://storage.cloud.google.com/car_image_for_analysis/");
 		model.addAttribute("mainphoto", final_url);	// String 값 : 폴더명에 해당하는 숫자 0000000
 
 		// 이미지 업로드 수 대로만 뜨게 (썸네일)
@@ -442,6 +441,57 @@ public class SalesController {
 		// 차량명 - 제조사 불러오기
 		List<HashMap<String, Object>> list = salesService.brandList();
 		model.addAttribute("brandList", list);	
+		
+		// 사진 파일 주소 정제
+		String raw_url = sales.getImage();
+		String final_url = raw_url.replace("https://storage.googleapis.com/car_image_for_analysis/", "https://storage.cloud.google.com/car_image_for_analysis/");
+
+		// 사진 6장에 해당하는 주소 만들어 allphoto 라는 이름의 model 에 담기
+		List<HashMap<String, Object>> photoArr = new ArrayList<HashMap<String, Object>>();
+		for (int i = 1; i < 7; i++) {
+			String photo_url = raw_url + "img" + i + ".png";   //img1~img20 까지의 주소 만들기      
+			try {
+				URL url = new URL(photo_url);
+
+				// 해당 URL이 있으면 200에러, 없으면 404에러 responseCode
+				URLConnection con = url.openConnection();
+				HttpURLConnection exitCode = (HttpURLConnection)con;
+				int responseCode = exitCode.getResponseCode();
+
+				if(responseCode == 200){
+					photoArr.add(getPhotoUrl(i, photo_url));   // 사진이 있을 경우 배열에 추가
+				}else {
+					System.out.println("문제발생" + responseCode);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(photo_url);
+				System.out.println("예외 발생");
+			}
+		}	// end of for 문
+		model.addAttribute("allphoto", photoArr);
+		
+		// 옵션값 불러오기
+		StringBuffer temp = new StringBuffer();
+		String option = sales.getOption();
+		ArrayList result_option = new ArrayList();
+		if(option == null || option.length() < 10) {		// 옵션값이 없을때 옵션값을 0으로 처리
+			for (int i = 0; i < 78; i++) {
+				result_option.add("0");
+			}
+		} else {											// 옵션값이 있을 때 
+			if (option.split("/").length > 0) {
+				for (int j = 0; j < option.split("/").length; j++) {
+					temp.append(option.split("/")[j]);
+				}
+				for (int k = 0; k < temp.length(); k++) {
+					result_option.add(Character.toString(temp.charAt(k)));
+				}
+			}
+		}
+		model.addAttribute("result_option", result_option);
+		
+		System.out.println(result_option);
 	}
 	
 	

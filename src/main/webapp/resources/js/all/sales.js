@@ -323,10 +323,12 @@ $(function() {
 		//alert($('#sell_id').val());
 		
 		// 유효성 검사 
-		if ($('#phototo > img').length == 0) {
-			$('#picFile').focus();
-			alert("사진 등록은 필수 입력사항입니다. ");
-			return 
+		if ($('#photo img').length == 0) {
+			if($('#phototo img').length == 0) {
+				$('#picFile').focus();
+				alert("사진 등록은 필수 입력사항입니다. ");			
+				return
+			} 
 		}else if ($('#carNumber').val() == "") {
 			$('#carNumber').focus();
 			alert("차량번호를 입력해주세요");
@@ -392,6 +394,13 @@ $(function() {
 
         }	// end of if
 	});		// end of 수정하기 버튼
+	
+	
+	// 재등록하기 버튼 <= m_id값이 같고 게시종료일 때
+	$(document).on("click", "#reEnroll", function(){
+		next_url = '../user/salesModify.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 수정하기 버튼을 눌렀을 때 타고갈 다음 url
+		window.location.href = next_url;
+	});
 	
 	
 	// 삭제하기 => 내 판매글로 넘어감
