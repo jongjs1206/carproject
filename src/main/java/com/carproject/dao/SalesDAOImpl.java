@@ -51,28 +51,24 @@ public class SalesDAOImpl implements SalesDAO {
 	@Override
 	public List<HashMap<String, Object>> model(SalesVO vo) {			// 모델
 		System.out.println("===> salesMap model() 호출");
-		System.out.println(vo.getModel());
 		return mybatis.selectList("salesMap.model", vo);
 	}
 	
 	@Override	
 	public List<HashMap<String, Object>> detailmodel(SalesVO vo) {		// 세부모델
 		System.out.println("===> salesMap detailmodel() 호출");
-		System.out.println(vo.getDetail());
 		return mybatis.selectList("salesMap.detailmodel", vo);
 	}
 	
 	@Override
 	public List<HashMap<String, Object>> grade(SalesVO vo) {			// 등급
 		System.out.println("===> salesMap grade() 호출");
-		System.out.println(vo.getGrade1());
 		return mybatis.selectList("salesMap.grade", vo);
 	}
 	
 	@Override
 	public List<HashMap<String, Object>> detailgrade(SalesVO vo) {		// 세부등급
 		System.out.println("===> salesMap detailgrade() 호출");
-		System.out.println(vo.getGrade2());
 		return mybatis.selectList("salesMap.detailgrade", vo);
 	}
 	
@@ -82,7 +78,6 @@ public class SalesDAOImpl implements SalesDAO {
 	@Override
 	public void uploadBtn(SalesVO vo) {										// 등록하기 버튼
 		System.out.println("===> salesMap uploadBtn() 호출");
-		System.out.println(vo.getM_id()); 
 		mybatis.insert("salesMap.uploadBtn", vo);
 	}
 	
@@ -95,7 +90,6 @@ public class SalesDAOImpl implements SalesDAO {
 	@Override
 	public void saveModify(SalesVO vo) {									// 수정하기 버튼(글 수정 페이지)
 		System.out.println("===> salesMap saveModify() 호출");
-		System.out.println("글수정" + vo.getM_id()); 
 		mybatis.update("salesMap.modifyBtn");
 	}
 	
@@ -121,23 +115,24 @@ public class SalesDAOImpl implements SalesDAO {
 	
 	@Override
 	public void insertAnalysis(HashMap<String, String> analysis) {			// 이미지분석 결과를 해당 판매글의 DB에 입력
+		System.out.println("===> salesMap insertAnalysis 호출");
 		mybatis.update("salesMap.insertAnalysis", analysis);
 	}
 	
 	@Override
-	public void useCoinC(MemberVO vo) {						// 글 등록시 코인 -1 반영 (코인테이블)
+	public void useCoinC(MemberVO vo) {										// 글 등록시 코인 -1 반영 (코인테이블)
 		System.out.println("===> salesMap useCoinC 호출");
 		mybatis.insert("salesMap.useCoinC", vo);
 	}
 	
 	@Override
-	public void useCoinM(MemberVO vo) {						// 글 등록시 코인 -1 반영 (멤버테이블)
+	public void useCoinM(MemberVO vo) {										// 글 등록시 코인 -1 반영 (멤버테이블)
 		System.out.println("===> salesMap useCoinM 호출");
 		mybatis.update("salesMap.useCoinM", vo);
 	}
 	
 	@Override
-	public void insertPredict(SalesVO predict) {				// 글 등록시 시세 예측결과를 업데이트
+	public void insertPredict(SalesVO predict) {							// 글 등록시 시세 예측결과를 업데이트
 		System.out.println("===> salesMap insertPredict 호출");
 		mybatis.update("salesMap.insertPredict", predict);
 	}

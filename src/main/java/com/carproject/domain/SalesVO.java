@@ -11,48 +11,48 @@ public class SalesVO {
    private int sell_id;         // 판매글 번호
    private int g_id;            // 등급 번호
    private String m_id;         // 회원 아이디
-   private String title;         // 글 제목
-   private String w_date;         // 글 등록 날짜
-   private String old;            // 연식
+   private String title;        // 글 제목
+   private String w_date;       // 글 등록 날짜
+   private String old;          // 연식
    private String mile;         // 주행 거리
-   private String color;         // 차 색깔
-   private String accident;      // 사고 여부
-   private int price;            // 판매 가격
-   private String option;         // 차량 옵션
-   private String status;         // 게시 상태
-   private String url;            // url
-   private String vehicle_num;      // 차량 번호
-   private String baeki;         // 배기량
-   private String guarantee;      // 보증
+   private String color;        // 차 색깔
+   private String accident;     // 사고 여부
+   private int price;           // 판매 가격
+   private String option;       // 차량 옵션
+   private String status;       // 게시 상태
+   private String url;          // url
+   private String vehicle_num;  // 차량 번호
+   private String baeki;        // 배기량
+   private String guarantee;    // 보증
    private String fuel;         // 연료
    private String gear;         // 변속기
-   private String seller;         // 판매자
-   private String m_name;         // 회원 이름
-   private String tel;            // 회원 전화번호
-   private String content;         // 설명글
+   private String seller;       // 판매자
+   private String m_name;       // 회원 이름
+   private String tel;          // 회원 전화번호
+   private String content;      // 설명글
    
-   private String jejosa;         // 제조사
-   private String model;         // 모델
-   private String detail;         // 세부 모델
-   private String grade1;         // 등급
-   private String grade2;         // 세부 등급
+   private String jejosa;       // 제조사
+   private String model;        // 모델
+   private String detail;       // 세부 모델
+   private String grade1;       // 등급
+   private String grade2;       // 세부 등급
    
-   private String image;         // 이미지
-   private String rFname;          /* 업로드 사진 */
+   private String image;        // 이미지
+   private String rFname;       // 업로드 사진
 
-   private long rFsize;
+   private long rFsize;			// 업로드 사진 크기
    
-   private String strOption;      // 가공한 option 값
+   private String strOption;    // 가공한 option 값
    private long num;            // 상세페이지에 불러올 sell_id 값
    
-   private String[] re_option;      // 옵션값들
+   private String[] re_option;  // 옵션값들
    
-   private String analysis;			// vision 이미지분석 결과 (T/F)
+   private String analysis;		// vision 이미지분석 결과 (T/F)
    
-   private String p_price;         // 현재 시세
-   private String after2_price;    // 2년 후 시세
-   private String after4_price;    // 4년 후 시세
-   private String f_price;         // 6년 후 시세
+   private String p_price;       // 현재 시세
+   private String after2_price;  // 2년 후 시세
+   private String after4_price;  // 4년 후 시세
+   private String f_price;       // 6년 후 시세
    
    
    public int getSell_id() {

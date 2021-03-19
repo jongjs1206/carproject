@@ -58,7 +58,7 @@ public class SalesController {
 			"USB", "AUX", "블루투스", "MP3", "DMB", "CD플레이어", "AV시스템", "뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
 	
 	//////////////////////////////////////////////////////////
-	// 제조사
+	// 제조사 리스트
 	@RequestMapping("user/sales.do")
 	public String brandList(Model model,HttpSession session) {
 		
@@ -115,7 +115,7 @@ public class SalesController {
 		return null;
 	}
 	
-	// 모델
+	// 모델 리스트
 	@RequestMapping("user/model.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> model(SalesVO vo) {
@@ -124,7 +124,7 @@ public class SalesController {
 		return list;
 	}
 		
-	// 세부모델
+	// 세부모델 리스트
 	@RequestMapping("user/detailmodel.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> detailmodel(SalesVO vo) {
@@ -133,7 +133,7 @@ public class SalesController {
 		return list;
 	}
 	
-	// 등급
+	// 등급 리스트
 	@RequestMapping("user/grade.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> grade(SalesVO vo) {
@@ -142,7 +142,7 @@ public class SalesController {
 		return list;
 	}
 	
-	// 세부 등급
+	// 세부 등급 리스트
 	@RequestMapping("user/detailgrade.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> detailgrade(SalesVO vo) {

@@ -136,12 +136,11 @@
 							<div class="course__details__feature">
 								<h5>시세 정보 및 예측</h5><hr style="margin:20px 0 10px 0; width:1000px;">
 								<div class="marketPredict" style="font-size:14px; width:1000px;">
-									<!-- <img src="../resources/img/used_car_price.png" style="margin:0 150px 0 50px;"> -->
 									<div class="card-body" style="display: flex;">
 										<canvas id="predict_price" width="700" height="350">
 			                            	<!-- 선 그래프 -->
 			                            </canvas>
-			                          	<span style="width:300px; font-size:18px; margin: 100px 0 0 50px;">
+			                          	<span style="width:300px; font-size:18px; margin: 100px 0 0 50px; text-align:right;">
 				                            &nbsp;현재 <fmt:formatNumber value="${fn:split(sales.p_price,'.')[0]}" pattern="#,###" />만원<br/>
 				                            2년 후 <fmt:formatNumber value="${fn:split(sales.after2_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
 				                            4년 후 <fmt:formatNumber value="${fn:split(sales.after4_price,'.')[0]}" pattern="#,###" />만원<br/>				                            
@@ -763,16 +762,20 @@
 			</div>	<!-- end of row -->
 			<input type="hidden" name="sell_id" id="sell_id" value="<%=sell_id%>">
 			<input type="hidden" name="status" id="status" value="<%=status%>">
+			<!-- 버튼들 -->
 			<div class="modify-delete" style="margin:50px 0;">
 				<c:choose> 
-					<c:when test="${sales.m_id == sessionScope.info.m_id && sales.status != '게시종료'}">	<!-- m_id가 같고 게시종료 상태가 아닐때 -->
+					<c:when test="${sales.m_id == sessionScope.info.m_id && sales.status != '게시종료' && sales.status != '판매완료'}">	<!-- m_id가 같고 게시종료 상태가 아닐때 -->
 						<a id="modifyCar"><span style="margin-left:450px; cursor:pointer;">수정하기</span></a>
 						<a id="deleteCar"><span style="margin-left:50px; cursor:pointer;">삭제하기</span></a>
 					</c:when>
-					<c:otherwise>	<!-- m_id가 같고 게시종료 상태일 때 -->
+					<c:when test="${sales.m_id == sessionScope.info.m_id && sales.status == '게시종료'}">	<!-- m_id가 같고 게시종료 상태일 때 -->
 						<a id="reEnroll"><span style="margin-left:450px; cursor:pointer;">재등록하기</span></a>
 						<a id="deleteCar"><span style="margin-left:50px; cursor:pointer;">삭제하기</span></a>
-					</c:otherwise>
+					</c:when>
+					<c:when test="${sales.m_id == sessionScope.info.m_id && sales.status == '판매완료'}">	<!-- m_id가 같고 판매완료일 때 아무것도 안떠야함 -->
+						<a></a>
+					</c:when>
 				</c:choose>
 			</div>
 		</div>
@@ -796,10 +799,10 @@
 				datasets: [{
 					label: '시세 (단위 : 만원)',
 					data: [
-		        		'${sales.p_price}',
-		        		'${sales.after2_price}',
-		        		'${sales.after4_price}',
-		        		'${sales.f_price}'
+						'${fn:split(sales.p_price,".")[0]}',
+						'${fn:split(sales.after2_price,".")[0]}',
+						'${fn:split(sales.after4_price,".")[0]}',
+						'${fn:split(sales.f_price,".")[0]}'
 					],
 					backgroundColor: 'rgba(220, 167, 58, 0.2)',
 					borderColor: '#dca73a',
@@ -810,7 +813,7 @@
 			options: {
 				responsive: false,
 				tooltips: {
-					enabled: false
+					enabled: true
 				},
 				hover: {
 					animationDuration: 0
@@ -848,13 +851,13 @@
       ></div>
 	<!-- data-init-식별키=값 으로 셋팅하면 챗플로우에 파라미터와 연동가능. 식별키는 소문자만 가능 -->
 	<script>
-	(function(d, s, id){
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id)) {return;}
-	    js = d.createElement(s); js.id = id;
-	    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
-	    fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'frogue-embed'));
+		(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https:\/\/danbee.ai/js/plugins/frogue-embed/frogue-embed.min.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'frogue-embed'));
 	</script>
   	
   	<%@ include file="../footer.jsp"%>
