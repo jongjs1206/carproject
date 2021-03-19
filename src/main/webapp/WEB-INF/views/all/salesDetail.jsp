@@ -99,7 +99,8 @@
 										src="${thumbUrl.url}" onclick="imgClick(this);" onerror="this.parentNode.style.display='none'">
 					            </div>
 					        </c:forEach>
-						</div><br/><br/>	<!-- end of 썸네일 -->
+						</div><br/><br/>	
+						<!-- end of 썸네일 -->
 					</div><!-- 이미지 -->
 						<div class="col-lg-6 col-md-6 col-sm-6 col-md-3 col-sm-6" style="display: flex;">
 							<div class="course__details__feature" style="width:500px; margin:0 80px 30px 0;">

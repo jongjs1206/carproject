@@ -50,8 +50,6 @@
 			/WEB-INF/spring/context-security.xml
 		</param-value>
 	</context-param>
-	
-		
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
@@ -81,6 +79,15 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 
+
+<error-page> 
+<error-code>404</error-code> 
+<location>/WEB-INF/views/error/error404.jsp</location> 
+</error-page> 
+<error-page> 
+<error-code>500</error-code>
+ <location>/WEB-INF/views/error/error500.jsp</location> 
+</error-page>
 	  
 	  
 </web-app>

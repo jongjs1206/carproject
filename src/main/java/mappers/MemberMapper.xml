@@ -211,7 +211,7 @@
 	<update id="setPosting" parameterType="sales">
 		UPDATE sell
 		SET status='게시중', w_date=sysdate()
-		WHERE sell_id=#{sell_id}
+		WHERE sell_id=#{sell_id} and status='등록대기'
 		
 	</update>
 	

@@ -322,10 +322,12 @@ $(function() {
 	$(document).on("click", "#modifyEnroll", function(){
 	
 		// 유효성 검사 
-		if ($('#phototo > img').length == 0) {
-			$('#picFile').focus();
-			alert("사진 등록은 필수 입력사항입니다. ");
-			return 
+		if ($('#photo img').length == 0) {
+			if($('#phototo img').length == 0) {
+				$('#picFile').focus();
+				alert("사진 등록은 필수 입력사항입니다. ");			
+				return
+			} 
 		}else if ($('#carNumber').val() == "") {
 			$('#carNumber').focus();
 			alert("차량번호를 입력해주세요");
