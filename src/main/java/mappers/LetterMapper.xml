@@ -3,52 +3,62 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="LetterMAP">
 
-
+	<!-- 쪽지 등록 -->
 	<insert id="insertsend" parameterType="letter">
 		INSERT INTO letter(l_id,m_id,to_id,title,content,w_date,m_show,to_show)
 		VALUES (nextval(letter_sq),#{m_id},#{to_id},#{title},#{content},sysdate(),'1','1')
 	</insert>
 	
+	<!-- 받은 쪽지 가져오기 -->
 	<select id="getselect" resultType="hashmap" parameterType="member">
 		SELECT m.m_name,l.* FROM member m INNER JOIN letter l ON m.m_id=l.m_id 
 		WHERE l.to_id=#{m_id} AND to_show=1 ORDER BY w_date DESC LIMIT ${google},15
 	</select>
 	
+	<!-- 보낸 쪽지 가져오기 -->
 	<select id="sendselect" resultType="hashmap" parameterType="member">
 		SELECT m.m_name,l.* FROM member m RIGHT JOIN letter l ON m.m_id=l.to_id 
 		WHERE l.m_id=#{m_id} AND m_show=1 ORDER BY w_date DESC LIMIT ${google},15
 	</select>
 	
+	<!-- 받은 쪽지 수 -->
 	<select id="getcount" resultType="String" parameterType="member">
 		SELECT count(*) FROM letter where to_id=#{m_id} and to_show='1'
 	</select>
 	
+	<!-- 보낸 쪽지 수 -->
 	<select id="sendcount" resultType="String" parameterType="member">
 		SELECT count(*) FROM letter where m_id=#{m_id} and m_show='1'
 	</select>
 	
+	<!-- 받은 쪽지  -->
 	<select id="selectgetnote" resultType="hashmap" parameterType="String">
 		SELECT m.m_name,l.* FROM 
 		(SELECT * FROM letter where l_id=${value}) l INNER JOIN member m ON l.m_id=m.m_id
 	</select>
 	
+	<!-- 보낸 쪽지 -->
 	<select id="selectsendnote" resultType="hashmap" parameterType="String">
 		SELECT m.m_name,l.* FROM 
 		(SELECT * FROM letter where l_id=${value}) l LEFT JOIN member m ON l.to_id=m.m_id
 	</select>
 	
+	<!-- 쪽지 봤을 때 -->
 	<update id="updatesend" parameterType="String">
 		UPDATE letter SET r_date=sysdate() WHERE l_id=#{value}
 	</update>
 	
+	<!-- 받은사람 쪽지 삭제 -->
 	<update id="noshowget" parameterType="String">
 		UPDATE letter SET to_show='0' WHERE l_id=#{value}
 	</update>
 	
+	<!-- 보낸사람 쪽지 삭제 -->
 	<update id="noshowsend" parameterType="String">
 		UPDATE letter SET m_show='0' WHERE l_id=#{value}
 	</update>
 	
+	<!-- 안본 쪽지 수 -->
 	<select id="selectnotecount" resultType="String" parameterType="String">
 		SELECT COUNT(*) FROM letter WHERE to_id=#{value} AND r_date IS NULL
 	</select>

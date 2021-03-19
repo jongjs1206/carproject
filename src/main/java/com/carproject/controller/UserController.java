@@ -108,7 +108,8 @@ public class UserController {
 			vo.setM_id(info.getM_id());
 		}
 		List<HashMap<String, Object>> sell = categoryService.homesellselect(vo);
-
+		
+		//차옵션 처리
 		for (int i = 0; i < sell.size(); i++) {
 			StringBuffer resultoption = new StringBuffer();
 			StringBuffer temp = new StringBuffer();

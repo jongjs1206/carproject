@@ -7,15 +7,26 @@ import com.carproject.domain.LetterVO;
 import com.carproject.domain.MemberVO;
 
 public interface LetterService {
+	//쪽지 등록
 	public void insertsend(LetterVO vo);
+	//받은 쪽지 가져오기
 	public List<HashMap<String, Object>> getselect(MemberVO vo);
+	//보낸 쪽지 가져오기
 	public List<HashMap<String, Object>> sendselect(MemberVO vo);
+	//받은 쪽지 
 	public HashMap<String, Object> selectgetnote(String l_id);
+	//보낸 쪽지
 	public HashMap<String, Object> selectsendnote(String l_id);
+	//쪽지 봤을 때
 	public void updatesend(String l_id);
+	//받은 쪽지 수
 	public String getcount(MemberVO vo);
+	//보낸 쪽지 수
 	public String sendcount(MemberVO vo);
+	//받은사람 쪽지 삭제
 	public void noshowget(String l_id);
+	//보낸사람 쪽지 삭제
 	public void noshowsend(String l_id);
+	//안본 쪽지 수
 	public String selectnotecount(String id);
 }

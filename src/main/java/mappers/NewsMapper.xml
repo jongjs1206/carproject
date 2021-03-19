@@ -3,70 +3,85 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="NewsMAP">
 
+<!-- 뉴스 불러오기 -->
 <select id="news_list" resultType="hashmap" parameterType="String">
 	SELECT r.count, n.* FROM news n left JOIN 
 (SELECT COUNT(*) AS COUNT ,w_id FROM reply GROUP by w_id) r
 ON n.w_id=r.w_id ORDER BY w_date DESC LIMIT ${value},15
 </select>
 
+<!-- 뉴스 총 개수 -->
 <select id="newscount" resultType="Integer">
 	SELECT count(*) as count FROM news;
 </select>
 
+<!-- 좋아요 여부 불러오기 -->
 <select id="popularity" resultType="hashmap">
 	SELECT r.count, n.* FROM news n left JOIN 
 (SELECT COUNT(*) AS COUNT ,w_id FROM reply GROUP by w_id) r
 ON n.w_id=r.w_id ORDER BY love_cnt DESC,read_cnt DESC LIMIT 0,5
 </select>
 
+<!-- 뉴스 보기 -->
 <select id="newsview" resultType="hashmap" parameterType="String">
 	SELECT * FROM news WHERE w_id=#{value}
 </select>
 
+<!-- 뉴스 좋아요 갯수 추가 -->
 <update id="goodadd" parameterType="String">
 	update news SET love_cnt=love_cnt+1 WHERE w_id=#{value}
 </update>
 
+<!-- 뉴스 좋아요 갯수 빼기 -->
 <update id="goodsub" parameterType="String">
 	update news SET love_cnt=love_cnt-1 WHERE w_id=#{value}
 </update>
 
+<!-- 좋아요 추가 -->
 <insert id="goodinsert" parameterType="heart">
 	INSERT INTO newsheart VALUES(#{m_id},#{w_id})
 </insert>
 
+<!-- 좋아요 취소 -->
 <delete id="gooddelete" parameterType="heart">
 	delete FROM newsheart where m_id=#{m_id} and w_id=#{w_id}
 </delete>
 
+<!-- 좋아요 가져오기 -->
 <select id="goodselect" resultType="String" parameterType="heart">
 	SELECT w_id FROM newsheart where m_id=#{m_id} and w_id=#{w_id}
 </select>
 
+<!-- 읽은 수 추가 -->
 <update id="viewadd" parameterType="String">
 	update news SET read_cnt=read_cnt+1 WHERE w_id=#{value}
 </update>
 
+<!-- 댓글 달기 -->
 <insert id="replyinsert" parameterType="reply">
 	INSERT INTO reply 
 	VALUES(nextval(reply_r_id_sq),#{w_id},#{content},#{writer},sysdate())
 </insert>
 
+<!-- 댓글 불러오기 -->
 <select id="selectreply" resultType="hashmap" parameterType="String">
 	SELECT m_name,photo,m_id,n.* FROM member m 
 inner JOIN (SELECT r_id,content,writer,w_date FROM reply WHERE w_id=#{w_id}) n
 ON m.m_id=n.writer ORDER BY w_date DESC LIMIT ${r_id},15
 </select>
 
+<!-- 댓글 수 -->
 <select id="reply_count" resultType="Integer" parameterType="String">
 	SELECT COUNT(*) AS count FROM reply WHERE w_id=#{value}
 </select>
 
+<!-- 댓글 삭제버튼 여부 -->
 <select id="reply_num" resultType="reply" parameterType="reply">
 SELECT w_id FROM reply WHERE w_id=#{w_id} AND writer=#{writer} AND  
 w_date=(SELECT MAX(w_date) FROM reply WHERE w_id=#{w_id} AND writer=#{writer})
 </select>
 
+<!-- 댓글 삭제 -->
 <select id="reply_delete" parameterType="String">
 delete from reply where r_id=#{value}
 </select>
