@@ -99,8 +99,7 @@
 										value="${sessionScope.info.m_id}" />
 									<th>이미지 등록</th>
 									<!--  이미지 등록 부분 -->
-									<td width=100><img src="../resources/img/photos.png"
-										width="50px" height="50px" id="photo"><span id="phototo"></span>
+									<td width=100><img src="../resources/img/photos.png" width="50px" height="50px" id="photo"><span id="phototo"></span>
 									</td>
 									<td colspan=2 style="font-size: 14px;">
 										<!-- 이미지 미리보기 --> <input type="file" name="file" id="picFile"

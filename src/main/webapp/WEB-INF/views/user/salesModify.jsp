@@ -119,9 +119,15 @@
 										<input type="hidden" name="m_id" value="${sessionScope.info.m_id}" />
 										<th>이미지 등록</th>
 										<!--  이미지 등록 부분 -->
-										<td width=100><img src="../resources/img/photos.png"
-											width="50px" height="50px" id="photo" >
-											<span id="phototo"></span></td>
+										<td width=100>
+											<span id="photo">
+												<c:forEach items="${allphoto}" var="thumbUrl"> 
+													<img class="thumbImg" style="width: 50px; height:50px; margin: 0px; cursor:pointer;" 
+														src="${thumbUrl.url}" onerror="this.parentNode.style.display='none'">
+												</c:forEach>
+											</span>
+											<span id="phototo"></span>
+										</td>
 										<td colspan=2 style="font-size: 14px;">
 											<!-- 이미지 미리보기 --> <input type="file" name="file" id="picFile"
 											accept="image/*" multiple="multiple" /> 
@@ -296,174 +302,416 @@
 												<tr style="font-size: 12px; font-weight: lighter;">
 													<td class="outside">
 														<!-- 외관 -->
-														<li><input type="checkbox" id="options_1"
-															name="option"> 선루프</li>
-														<li><input type="checkbox" id="options_2"
-															name="option"> 파노라마선루프</li>
-														<li><input type="checkbox" id="options_3"
-															name="option"> 알루미늄휠</li>
-														<li><input type="checkbox" id="options_4"
-															name="option"> 전동사이드미러</li>
-														<li><input type="checkbox" id="options_5"
-															name="option"> HID램프</li>
-														<li><input type="checkbox" id="options_6"
-															name="option"> LED헤드램프</li>
-														<li><input type="checkbox" id="options_7"
-															name="option"> 어댑티드헤드램프</li>
-														<li><input type="checkbox" id="options_8"
-															name="option"> LED리어램프</li>
-														<li><input type="checkbox" id="options_9"
-															name="option"> 데이라이트</li>
-														<li><input type="checkbox" id="options_10"
-															name="option"> 하이빔어시스트</li>
-														<li><input type="checkbox" id="options_11"
-															name="option"> 압축도어</li>
-														<li><input type="checkbox" id="options_12"
-															name="option"> 자동슬라이딩도어</li>
-														<li><input type="checkbox" id="options_13"
-															name="option"> 전동사이드스탭</li>
-														<li><input type="checkbox" id="options_14"
-															name="option"> 루프랙</li>
+														<li>
+															<c:if test="${result_option.get(0) eq '0'}">
+																<input type="checkbox" id="options_1" name="option">
+															</c:if>
+															<c:if test="${result_option.get(0) eq '1'}">
+																<input type="checkbox" id="options_1" name="option" checked>
+															</c:if>
+															 선루프
+														</li>
+														<li>
+															<c:if test="${result_option.get(1) eq '0'}">
+																<input type="checkbox" id="options_2" name="option">
+															</c:if>
+															<c:if test="${result_option.get(1) eq '1'}">
+																<input type="checkbox" id="options_2" name="option" checked>
+															</c:if>
+															 파노라마선루프
+														 </li>
+														<li>
+															<c:if test="${result_option.get(2) eq '0'}">
+																<input type="checkbox" id="options_3" name="option">
+															</c:if>
+															<c:if test="${result_option.get(2) eq '1'}">
+																<input type="checkbox" id="options_3" name="option" checked>
+															</c:if>
+														 	 알루미늄휠
+														 </li>
+														<li>
+															<c:if test="${result_option.get(3) eq '0'}">
+																<input type="checkbox" id="options_4" name="option">
+															</c:if>
+															<c:if test="${result_option.get(3) eq '1'}">
+																<input type="checkbox" id="options_4" name="option" checked>
+															</c:if>
+															 전동사이드미러
+														 </li>
+														<li>
+															<c:if test="${result_option.get(4) eq '0'}">
+															<input type="checkbox" id="options_5" name="option">
+															</c:if>
+															<c:if test="${result_option.get(4) eq '1'}">
+															<input type="checkbox" id="options_5" name="option" checked>
+															</c:if>
+															 HID램프
+														 </li>
+														<li>
+															<c:if test="${result_option.get(5) eq '0'}">
+																<input type="checkbox" id="options_6" name="option">
+															</c:if>
+															<c:if test="${result_option.get(5) eq '1'}">
+																<input type="checkbox" id="options_6" name="option" checked>
+															</c:if>
+															 LED헤드램프
+														 </li>
+														<li>
+															<c:if test="${result_option.get(6) eq '0'}">
+																<input type="checkbox" id="options_7" name="option">
+															</c:if>
+															<<c:if test="${result_option.get(6) eq '1'}">
+																<input type="checkbox" id="options_7" name="option" checked>
+															</c:if>
+														 어댑티드헤드램프
+														</li>
+														<li>
+															<c:if test="${result_option.get(7) eq '0'}">
+																<input type="checkbox" id="options_8" name="option">
+															</c:if>
+															<c:if test="${result_option.get(7) eq '1'}">
+																<input type="checkbox" id="options_8" name="option" checked>
+															</c:if>
+														 LED리어램프
+														</li>
+														<li>
+															<c:if test="${result_option.get(8) eq '0'}">
+																<input type="checkbox" id="options_9" name="option">
+															</c:if>
+															<c:if test="${result_option.get(8) eq '1'}">
+																<input type="checkbox" id="options_9" name="option" checked>
+															</c:if>
+														 데이라이트
+														</li>
+														<li>
+															<c:if test="${result_option.get(9) eq '0'}">
+																<input type="checkbox" id="options_10" name="option">
+															</c:if>
+															<c:if test="${result_option.get(9) eq '1'}">
+																<input type="checkbox" id="options_10" name="option" checked>
+															</c:if>
+														 하이빔어시스트
+														</li>
+														<li>
+															<c:if test="${result_option.get(10) eq '0'}">
+																<input type="checkbox" id="options_11" name="option">
+															</c:if>
+															<c:if test="${result_option.get(10) eq '1'}">
+																<input type="checkbox" id="options_11" name="option" checked>
+															</c:if>
+														 압축도어
+														</li>
+														<li>
+															<c:if test="${result_option.get(11) eq '0'}">
+																<input type="checkbox" id="options_12" name="option">
+															</c:if>
+															<c:if test="${result_option.get(11) eq '1'}">
+																<input type="checkbox" id="options_12" name="option" checked>
+															</c:if>
+														 자동슬라이딩도어
+														</li>
+														<li>
+															<c:if test="${result_option.get(12) eq '0'}">
+																<input type="checkbox" id="options_13" name="option">
+															</c:if>
+															<c:if test="${result_option.get(12) eq '1'}">
+																<input type="checkbox" id="options_13" name="option" checked>
+															</c:if>
+														 전동사이드스탭
+														</li>
+														<li>
+															<c:if test="${result_option.get(13) eq '0'}">
+																<input type="checkbox" id="options_14" name="option">
+															</c:if>
+															<c:if test="${result_option.get(13) eq '1'}">
+																<input type="checkbox" id="options_14" name="option" checked>
+															</c:if>
+														 루프랙
+														</li>
 													</td>
 													<td class="inside">
 														<!-- 내장 -->
-														<li><input type="checkbox" id="options_15"
-															name="option"> 가죽시트</li>
-														<li><input type="checkbox" id="options_16"
-															name="option"> 전동시트(운전석)</li>
-														<li><input type="checkbox" id="options_17"
-															name="option"> 전동시트(동승석)</li>
-														<li><input type="checkbox" id="options_18"
-															name="option"> 열선시트(앞좌석)</li>
-														<li><input type="checkbox" id="options_19"
-															name="option"> 열선시트(뒷좌석)</li>
-														<li><input type="checkbox" id="options_20"
-															name="option"> 통풍시트</li>
-														<li><input type="checkbox" id="options_21"
-															name="option"> 메모리시트</li>
-														<li><input type="checkbox" id="options_22"
-															name="option"> 폴딩시트</li>
-														<li><input type="checkbox" id="options_23"
-															name="option"> 마사지시트</li>
-														<li><input type="checkbox" id="options_24"
-															name="option"> 워크인시트</li>
-														<li><input type="checkbox" id="options_25"
-															name="option"> 요추받침</li>
-														<li><input type="checkbox" id="options_26"
-															name="option"> 하이패스룸미러</li>
-														<li><input type="checkbox" id="options_27"
-															name="option"> ECM룸미러</li>
-														<li><input type="checkbox" id="options_28"
-															name="option"> 뒷자석에어벤트</li>
-														<li><input type="checkbox" id="options_29"
-															name="option"> 패들쉬프트</li>
-														<li><input type="checkbox" id="options_30"
-															name="option"> 전동햇빛가리개</li>
-														<li><input type="checkbox" id="options_31"
-															name="option"> 엠비언트라이트</li>
+														<li>
+															<c:if test="${result_option.get(14) eq '0'}">
+																<input type="checkbox" id="options_15" name="option">
+															</c:if>
+															<c:if test="${result_option.get(14) eq '1'}">
+																<input type="checkbox" id="options_15" name="option" checked>
+															</c:if>
+														 가죽시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(15) eq '0'}">
+																<input type="checkbox" id="options_16" name="option">
+															</c:if>
+															<c:if test="${result_option.get(15) eq '1'}">
+																<input type="checkbox" id="options_16" name="option" checked>
+															</c:if>
+														 전동시트(운전석)
+														</li>
+														<li>
+															<c:if test="${result_option.get(16) eq '0'}">
+																<input type="checkbox" id="options_17" name="option">
+															</c:if>
+															<c:if test="${result_option.get(16) eq '1'}">
+																<input type="checkbox" id="options_17" name="option" checked>
+															</c:if>
+														 전동시트(동승석)
+														</li>
+														<li>
+															<c:if test="${result_option.get(17) eq '0'}">
+																<input type="checkbox" id="options_18" name="option">
+															</c:if>
+															<c:if test="${result_option.get(17) eq '1'}">
+																<input type="checkbox" id="options_18" name="option" checked>
+															</c:if>
+														 열선시트(앞좌석)
+														</li>
+														<li>
+															<c:if test="${result_option.get(18) eq '0'}">
+																<input type="checkbox" id="options_19" name="option">
+															</c:if>
+															<c:if test="${result_option.get(18) eq '1'}">
+																<input type="checkbox" id="options_19" name="option" checked>
+															</c:if>
+														 열선시트(뒷좌석)
+														</li>
+														<li>
+															<c:if test="${result_option.get(19) eq '0'}">
+																<input type="checkbox" id="options_20" name="option">
+															</c:if>
+															<c:if test="${result_option.get(19) eq '1'}">
+																<input type="checkbox" id="options_20" name="option" checked>
+															</c:if>
+														 통풍시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(20) eq '0'}">
+																<input type="checkbox" id="options_21" name="option">
+															</c:if>
+															<c:if test="${result_option.get(20) eq '1'}">
+																<input type="checkbox" id="options_21" name="option" checked>
+															</c:if>
+														 메모리시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(21) eq '0'}">
+																<input type="checkbox" id="options_22" name="option">
+															</c:if>
+															<c:if test="${result_option.get(21) eq '1'}">
+																<input type="checkbox" id="options_22" name="option" checked>
+															</c:if>
+														 폴딩시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(22) eq '0'}">
+																<input type="checkbox" id="options_23" name="option">
+															</c:if>
+															<c:if test="${result_option.get(22) eq '1'}">
+																<input type="checkbox" id="options_23" name="option" checked>
+															</c:if>
+														 마사지시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(23) eq '0'}">
+																<input type="checkbox" id="options_24" name="option">
+															</c:if>
+															<c:if test="${result_option.get(23) eq '1'}">
+																<input type="checkbox" id="options_24" name="option" checked>
+															</c:if>
+														 워크인시트
+														</li>
+														<li>
+															<c:if test="${result_option.get(24) eq '0'}">
+																<input type="checkbox" id="options_25" name="option">
+															</c:if>
+															<c:if test="${result_option.get(24) eq '1'}">
+																<input type="checkbox" id="options_25" name="option" checked>
+															</c:if> 
+														 요추받침
+														</li>
+														<li>
+															<c:if test="${result_option.get(25) eq '0'}">
+																<input type="checkbox" id="options_26" name="option">
+															</c:if>
+															<c:if test="${result_option.get(25) eq '1'}">
+																<input type="checkbox" id="options_26" name="option" checked>
+															</c:if>
+														 하이패스룸미러
+														</li>
+														<li>
+															<c:if test="${result_option.get(26) eq '0'}">
+																<input type="checkbox" id="options_27" name="option">
+															</c:if>
+															<c:if test="${result_option.get(26) eq '1'}">
+																<input type="checkbox" id="options_27" name="option" checked>
+															</c:if>	 
+														 ECM룸미러
+														</li>
+														<li>
+															<c:if test="${result_option.get(27) eq '0'}">
+																<input type="checkbox" id="options_28" name="option">
+															</c:if>
+															<c:if test="${result_option.get(27) eq '1'}">
+																<input type="checkbox" id="options_28" name="option" checked>
+															</c:if>
+														 뒷자석에어벤트
+														</li>
+														<li>
+															<c:if test="${result_option.get(28) eq '0'}">
+																<input type="checkbox" id="options_29" name="option">
+															</c:if>
+															<c:if test="${result_option.get(28) eq '1'}">
+																<input type="checkbox" id="options_29" name="option" checked>
+															</c:if>
+														 패들쉬프트
+														</li>
+														<li>
+															<c:if test="${result_option.get(29) eq '0'}">
+																<input type="checkbox" id="options_30" name="option">
+															</c:if>
+															<c:if test="${result_option.get(29) eq '1'}">
+																<input type="checkbox" id="options_30" name="option" checked>
+															</c:if>
+														 전동햇빛가리개
+														</li>
+														<li>
+															<c:if test="${result_option.get(30) eq '0'}">
+																<input type="checkbox" id="options_31" name="option">
+															</c:if>
+															<c:if test="${result_option.get(30) eq '1'}">
+																<input type="checkbox" id="options_31" name="option" checked>
+															</c:if>
+														 엠비언트라이트
+														</li>
 													</td>
 													<td class="safe">
 														<!-- 안전 -->
-														<li><input type="checkbox" id="options_32"
-															name="option"> 동승석에어백</li>
-														<li><input type="checkbox" id="options_33"
-															name="option"> 측면에어백</li>
-														<li><input type="checkbox" id="options_34"
-															name="option"> 커튼에어백</li>
-														<li><input type="checkbox" id="options_35"
-															name="option"> 무릎에어백</li>
-														<li><input type="checkbox" id="options_36"
-															name="option"> 승객감지에어백</li>
-														<li><input type="checkbox" id="options_37"
-															name="option"> 브레이크잠금방지(ABS)</li>
-														<li><input type="checkbox" id="options_38"
-															name="option"> 차체자세제어장치(ESC)</li>
-														<li><input type="checkbox" id="options_39"
-															name="option"> 후방센서</li>
-														<li><input type="checkbox" id="options_40"
-															name="option"> 전방센서</li>
-														<li><input type="checkbox" id="options_41"
-															name="option"> 후방카메라</li>
-														<li><input type="checkbox" id="options_42"
-															name="option"> 전방카메라</li>
-														<li><input type="checkbox" id="options_43"
-															name="option"> 어라운드뷰</li>
-														<li><input type="checkbox" id="options_44"
-															name="option"> 타이어공기압감지(TPMS)</li>
-														<li><input type="checkbox" id="options_45"
-															name="option"> 차선이탈경보(LDWS)</li>
-														<li><input type="checkbox" id="options_46"
-															name="option"> 자동긴급제동</li>
-														<li><input type="checkbox" id="options_47"
-															name="option"> 전자제어서스펜션(ECS)</li>
-														<li><input type="checkbox" id="options_48"
-															name="option"> 후측방경보</li>
-														<li><input type="checkbox" id="options_49"
-															name="option"> 미끄럼방지(TCS)</li>
+														<li>
+															<c:if test="${result_option.get(31) eq '0'}">
+																<input type="checkbox" id="options_32" name="option">
+															</c:if>
+															<c:if test="${result_option.get(31) eq '1'}">
+																<input type="checkbox" id="options_32" name="option" checked>
+															</c:if>
+														 동승석에어백
+														</li>
+														<li>
+															<c:if test="${result_option.get(32) eq '0'}">
+																<input type="checkbox" id="options_33" name="option">
+															</c:if>
+															<c:if test="${result_option.get(32) eq '1'}">
+																<input type="checkbox" id="options_33" name="option" checked>
+															</c:if>
+														 측면에어백
+														</li>
+														<li>
+															<c:if test="${result_option.get(33) eq '0'}">
+																<input type="checkbox" id="options_34" name="option">
+															</c:if>
+															<c:if test="${result_option.get(33) eq '1'}">
+																<input type="checkbox" id="options_34" name="option" checked>
+															</c:if>
+														 커튼에어백
+														</li>
+														<li>
+															<c:if test="${result_option.get(34) eq '0'}">
+																<input type="checkbox" id="options_35" name="option">
+															</c:if>
+															<c:if test="${result_option.get(34) eq '1'}">
+																<input type="checkbox" id="options_35" name="option" checked>
+															</c:if>
+														 무릎에어백
+														</li>
+														<li>
+															<c:if test="${result_option.get(35) eq '0'}">
+																<input type="checkbox" id="options_36" name="option">
+															</c:if>
+															<c:if test="${result_option.get(35) eq '1'}">
+																<input type="checkbox" id="options_36" name="option" checked>
+															</c:if>
+														 승객감지에어백
+														</li>
+														<li>
+															<c:if test="${result_option.get(36) eq '0'}">
+																<input type="checkbox" id="options_37" name="option">
+															</c:if>
+															<c:if test="${result_option.get(36) eq '0'}">
+																<input type="checkbox" id="options_37" name="option" checked>
+															</c:if>
+														 브레이크잠금방지(ABS)
+														</li>
+														<li>
+															<c:if test="${result_option.get(37) eq '0'}">
+																<input type="checkbox" id="options_38" name="option">
+															</c:if>
+															<c:if test="${result_option.get(37) eq '1'}">
+																<input type="checkbox" id="options_38" name="option" checked>
+															</c:if>
+														 차체자세제어장치(ESC)
+														</li>
+														<li>
+															<c:if test="${result_option.get(38) eq '0'}">
+																<input type="checkbox" id="options_39" name="option">
+															</c:if>
+															<c:if test="${result_option.get(38) eq '1'}">
+																<input type="checkbox" id="options_39" name="option" checked>
+															</c:if>
+														 후방센서
+														</li>
+														<li>
+															<c:if test="${result_option.get(39) eq '0'}">
+																<input type="checkbox" id="options_40" name="option">
+															</c:if>
+															<c:if test="${result_option.get(39) eq '1'}">
+																<input type="checkbox" id="options_40" name="option" checked>
+															</c:if>
+														 전방센서
+														</li>
+														<li><input type="checkbox" id="options_41" name="option"> 후방카메라</li>
+														<li><input type="checkbox" id="options_42" name="option"> 전방카메라</li>
+														<li><input type="checkbox" id="options_43" name="option"> 어라운드뷰</li>
+														<li><input type="checkbox" id="options_44" name="option"> 타이어공기압감지(TPMS)</li>
+														<li><input type="checkbox" id="options_45" name="option"> 차선이탈경보(LDWS)</li>
+														<li><input type="checkbox" id="options_46" name="option"> 자동긴급제동</li>
+														<li><input type="checkbox" id="options_47" name="option"> 전자제어서스펜션(ECS)</li>
+														<li><input type="checkbox" id="options_48" name="option"> 후측방경보</li>
+														<li><input type="checkbox" id="options_49" name="option"> 미끄럼방지(TCS)</li>
 													</td>
 													<td class="comfort">
 														<!-- 편의 -->
-														<li><input type="checkbox" id="options_50"
-															name="option"> 스마트키</li>
-														<li><input type="checkbox" id="options_51"
-															name="option"> 열선핸들</li>
-														<li><input type="checkbox" id="options_52"
-															name="option"> 리모컨핸들</li>
-														<li><input type="checkbox" id="options_53"
-															name="option"> 자동에어컨</li>
-														<li><input type="checkbox" id="options_54"
-															name="option"> 좌우독립에어컨</li>
-														<li><input type="checkbox" id="options_55"
-															name="option"> 오토라이트</li>
-														<li><input type="checkbox" id="options_56"
-															name="option"> 크루즈컨트롤</li>
-														<li><input type="checkbox" id="options_57"
-															name="option"> 스마트크루즈컨트롤</li>
-														<li><input type="checkbox" id="options_58"
-															name="option"> 스탑앤고</li>
-														<li><input type="checkbox" id="options_59"
-															name="option"> 전동트렁크</li>
-														<li><input type="checkbox" id="options_60"
-															name="option"> 스마트트렁크</li>
-														<li><input type="checkbox" id="options_61"
-															name="option"> 전자주차브레이크(EPB)</li>
-														<li><input type="checkbox" id="options_62"
-															name="option"> 경사로밀림방지</li>
-														<li><input type="checkbox" id="options_63"
-															name="option"> 헤드업디스플레이(HUD)</li>
-														<li><input type="checkbox" id="options_64"
-															name="option"> 무선충전</li>
-														<li><input type="checkbox" id="options_65"
-															name="option"> 자동주차</li>
-														<li><input type="checkbox" id="options_66"
-															name="option"> 냉장고</li>
+														<li><input type="checkbox" id="options_50" name="option"> 스마트키</li>
+														<li><input type="checkbox" id="options_51" name="option"> 열선핸들</li>
+														<li><input type="checkbox" id="options_52" name="option"> 리모컨핸들</li>
+														<li><input type="checkbox" id="options_53" name="option"> 자동에어컨</li>
+														<li><input type="checkbox" id="options_54" name="option"> 좌우독립에어컨</li>
+														<li><input type="checkbox" id="options_55" name="option"> 오토라이트</li>
+														<li><input type="checkbox" id="options_56" name="option"> 크루즈컨트롤</li>
+														<li><input type="checkbox" id="options_57" name="option"> 스마트크루즈컨트롤</li>
+														<li><input type="checkbox" id="options_58" name="option"> 스탑앤고</li>
+														<li><input type="checkbox" id="options_59" name="option"> 전동트렁크</li>
+														<li><input type="checkbox" id="options_60" name="option"> 스마트트렁크</li>
+														<li><input type="checkbox" id="options_61" name="option"> 전자주차브레이크(EPB)</li>
+														<li><input type="checkbox" id="options_62" name="option"> 경사로밀림방지</li>
+														<li><input type="checkbox" id="options_63" name="option"> 헤드업디스플레이(HUD)</li>
+														<li><input type="checkbox" id="options_64" name="option"> 무선충전</li>
+														<li><input type="checkbox" id="options_65" name="option"> 자동주차</li>
+														<li><input type="checkbox" id="options_66" name="option"> 냉장고</li>
 													</td>
 													<td class="multimedia">
 														<!-- 멀티미디어 -->
-														<li><input type="checkbox" id="options_67"
-															name="option"> 네비게이션(순정)</li>
-														<li><input type="checkbox" id="options_68"
-															name="option"> 네비게이션(비순정)</li>
-														<li><input type="checkbox" id="options_69"
-															name="option"> USB</li>
-														<li><input type="checkbox" id="options_70"
-															name="option"> AUX</li>
-														<li><input type="checkbox" id="options_71"
-															name="option"> 블루투스</li>
-														<li><input type="checkbox" id="options_72"
-															name="option"> MP3</li>
-														<li><input type="checkbox" id="options_73"
-															name="option"> DMB</li>
-														<li><input type="checkbox" id="options_74"
-															name="option"> CD플레이어</li>
-														<li><input type="checkbox" id="options_75"
-															name="option"> AV시스템</li>
-														<li><input type="checkbox" id="options_76"
-															name="option"> 뒷좌석TV</li>
-														<li><input type="checkbox" id="options_77"
-															name="option"> 텔레매틱스</li>
-														<li><input type="checkbox" id="options_78"
-															name="option"> 스마트폰미러링</li>
+														<li><input type="checkbox" id="options_67" name="option"> 네비게이션(순정)</li>
+														<li><input type="checkbox" id="options_68" name="option"> 네비게이션(비순정)</li>
+														<li><input type="checkbox" id="options_69" name="option"> USB</li>
+														<li><input type="checkbox" id="options_70" name="option"> AUX</li>
+														<li><input type="checkbox" id="options_71" name="option"> 블루투스</li>
+														<li><input type="checkbox" id="options_72" name="option"> MP3</li>
+														<li><input type="checkbox" id="options_73" name="option"> DMB</li>
+														<li><input type="checkbox" id="options_74" name="option"> CD플레이어</li>
+														<li><input type="checkbox" id="options_75" name="option"> AV시스템</li>
+														<li><input type="checkbox" id="options_76" name="option"> 뒷좌석TV</li>
+														<li><input type="checkbox" id="options_77" name="option"> 텔레매틱스</li>
+														<li><input type="checkbox" id="options_78" name="option"> 스마트폰미러링</li>
 													</td>
 												</tr>
 											</table> <!-- end of option_table -->
