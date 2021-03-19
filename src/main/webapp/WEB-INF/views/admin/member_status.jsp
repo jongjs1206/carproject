@@ -22,7 +22,7 @@
      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
         crossorigin="anonymous"></script>
-        <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>    
+  
 </head>
      
      <!-- 대시보드 내용 -->
@@ -52,8 +52,10 @@
          			 
                         <!-- 아이디 -->                       
                         <div class="form-group col-md-12">
-                         <div class="form-group col-md-12">                        
-                            <img id='profileImg' src="https://storage.cloud.google.com/car_image_for_analysis/profile/${user.m_id}.jpg" alt="profile" />
+                         <div class="form-group col-md-12">
+                                                
+                            <img id='profileImg' onerror="this.parentNode.style.display='none'" src="https://storage.cloud.google.com/car_image_for_analysis/profile/${user.m_id}.jpg" alt="profile" />
+                       	   
                         </div>    
                         
                         
@@ -153,6 +155,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
+  <script type="text/javascript" src="../resources/js/admin/admin_status.js"></script>  
 </body>
 
 </html>
