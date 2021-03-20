@@ -64,10 +64,10 @@
 		고</div>
 	<div class="container note_content">
 		<div>
-			<label>피신고자</label><span class='you_id'>${report.m_id}</span>
+			<label>피신고자</label><span class='you_id'>${report.to_id}</span>
 		</div>
 		<div>
-			<label>신고자</label><span class='you_id'>${report.to_id}</span>
+			<label>신고자</label><span class='you_id'>${report.m_id}</span>
 		</div>
 		<span class='de_con'>신고 내용</span>
 		<textarea class='content'>${report.content}</textarea>

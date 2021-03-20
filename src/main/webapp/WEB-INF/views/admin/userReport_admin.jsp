@@ -89,11 +89,11 @@
 			                                	<tr>
 			                                    	<td><input type="checkbox" name="chkbox" class="ck_note"></td>
 			                                    	<td>${report.de_num}</td>			                                    
-			                                    	<td>${report.m_id}
+			                                    	<td>${report.to_id}
 			                                    	<c:if test="${report.state eq 'black'}"><span style="color : #B9062F;">(블랙유저)</span> </c:if>
 			                                    	
 			                                    	</td>
-			                                    	<td>${report.to_id}</td>
+			                                    	<td>${report.m_id}</td>
 			                                    	<td><a  href="javascript:void(0);" id="${report.de_num}" class="cursor" onclick="showReport(this)">${report.content}</a></td>
 			                                    	<td>${report.de_date}</td>			                   
 			                                   	 </tr>    
