@@ -172,9 +172,4 @@ public class NewsController {
 
 		return "redirect:/admin/carnews.do";
 	}
-	
-
-	
-	
-	
 }

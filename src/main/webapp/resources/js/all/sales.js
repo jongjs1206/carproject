@@ -64,6 +64,7 @@ $(function() {
 	
 	////////////////////////////////////////////////////// 세부 모델 -> 등급
 	$("#carDetailModel").change(function() {
+	
 		$("#title").val("");
 		
 		var brand = $("#carBrand").val();
@@ -73,11 +74,11 @@ $(function() {
 		var result = "";
 		var beforeTitle = brand + " " + model;
 		
-		detailModel = detailModel.split('(')[0];
+		detailModel = detailModel.split('(')[0];	// 세부모델 : ( 기준으로 앞에 내용만
 		
-		var result = brand + " " + detailModel;
+		var result = brand + " " + detailModel;	
 		
-		$("#title").val(result);
+		$("#title").val(result);					// 제목에 제조사 + 세부모델(모델명과 세부모델명이 겹치기 때문에 세부모델명으로 대체)
 		
 		$.ajax({
 	    	type : 'post',
@@ -112,16 +113,16 @@ $(function() {
 		var model = $("#carModel").val();
 		var detailModel = $("#carDetailModel").val();
 		
-		detailModel = detailModel.split('(')[0];
+		detailModel = detailModel.split('(')[0];		// 세부모델 : ( 기준으로 앞에 내용만
 		
 		var grade = $("#carGrade").val();
 		
 		//var beforeTitle = brand + " " + model + "" + detailModel;
 		//var result = beforeTitle + " " + grade;
 		
-		var result = brand + " " + detailModel + " " + grade;
+		var result = brand + " " + detailModel + " " + grade;		
 		
-		$("#title").val(result);
+		$("#title").val(result);			// 제목에 제조사 + 세부모델 + 등급(모델명과 세부모델명이 겹치기 때문에 세부모델명으로 대체)
 		
 		$.ajax({
 			type : 'post',
@@ -164,16 +165,16 @@ $(function() {
 		//var result = beforeTitle + " " + detailGrade;
 		//var beforeTitle = brand + " " + model;
 		
-		detailModel = detailModel.split('(')[0];
-		detailGrade = detailGrade.split('(')[0];
+		detailModel = detailModel.split('(')[0];		// 세부모델 : ( 기준으로 앞에 내용만
+		detailGrade = detailGrade.split('(')[0];		// 세부등급 : ( 기준으로 앞에 내용만
 		
 		var result = brand + " " + detailModel + " " + grade + " " + detailGrade;
 		
-		if(detailGrade == '0') {
-			result = brand + " " + detailModel + " " + grade
+		if(detailGrade == '0') {								// 세부등급명이 0이면(0이 존재)
+			result = brand + " " + detailModel + " " + grade	// 제조사 + 세부모델 + 등급
 		}
 
-		$("#title").val(result);
+		$("#title").val(result);			// 제목에 제조사 + 세부모델 + 등급 + 세부등급(모델명과 세부모델명이 겹치기 때문에 세부모델명으로 대체)
 	
 		var g_id = $('#carDetailGrade option:selected').attr('id');		// 선택한 세부모델의 g_id값
 		//console.log(g_id);
@@ -320,8 +321,6 @@ $(function() {
 	// 수정하기 버튼 => 수정 페이지!!!!!!!!!!!!!!!!!!!!!!!!!!에서 내 판매글로 이동
 	$(document).on("click", "#modifyEnroll", function(){
 	
-		//alert($('#sell_id').val());
-		
 		// 유효성 검사 
 		if ($('#photo img').length == 0) {
 			if($('#phototo img').length == 0) {
@@ -396,14 +395,14 @@ $(function() {
 	});		// end of 수정하기 버튼
 	
 	
-	// 재등록하기 버튼 <= m_id값이 같고 게시종료일 때
+	// 재등록하기 버튼 <= m_id값이 같고 게시종료일 때 다시 수정페이지로 넘어감
 	$(document).on("click", "#reEnroll", function(){
-		next_url = '../user/salesModify.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 수정하기 버튼을 눌렀을 때 타고갈 다음 url
+		next_url = '../user/salesModify.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 재등록하기 버튼을 눌렀을 때 타고갈 다음 url
 		window.location.href = next_url;
 	});
 	
 	
-	// 삭제하기 => 내 판매글로 넘어감
+	// 삭제하기 버튼 => 내 판매글로 넘어감
 	$(document).on("click", "#deleteCar", function(){
 		var delConfirm = confirm('삭제하시겠습니까?');
 		 
@@ -413,11 +412,13 @@ $(function() {
    		else {
       		alert('삭제가 취소되었습니다.');
    		}
-   		url = '../user/deleteSales.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 수정하기 버튼을 눌렀을 때 타고갈 다음 url
+   		url = '../user/deleteSales.do?num=' + $('#sell_id').val();		// 상세페이지에 있는 삭제하기 버튼을 눌렀을 때 타고갈 다음 url
 		window.location.href = url;
    		
 	});	// end of 삭제
 	
+	
+	//////////////////////////////////////////////////////
 	//찜기능
 	$(document).on("click",".fa-heart",function(){
 			if($('.login_on').val()==""){
@@ -468,7 +469,10 @@ $(function() {
 					});
 				}
 			}
-	});
+	});	// end of 찜기능
+	
+	
+	// 쪽지 보내기
 	$('.notego').click(function(){
 		if($('.login_on').val()==''){
 			alert('로그인시 쪽지 기능을 사용할 수 있습니다.');
@@ -478,8 +482,9 @@ $(function() {
 			+'&title='
 			+$('.note_title').val().split(' ')[0]+' 문의', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
 		}
-	})
+	})	// end of 쪽지보내기
 	
+	// 신고하기
 	$('.declaration').click(function(){
 		if($('.login_on').val()==''){
 			alert('로그인시 신고 할 수 있습니다.');
@@ -487,6 +492,6 @@ $(function() {
 			window.open('../user/declaration.do?id='+
 			$('.sale_id').val()+'&name='+$('.sale_name').val(), 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0')
 		}
-	})
+	})	// end of 신고하기
 	
 })	// end of 전체 function()

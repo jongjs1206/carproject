@@ -3,11 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="HeartMAP">
 
-
+	<!-- 찜 등록 -->
 	<insert id="insertHeart" parameterType="heart">
 		INSERT INTO heart VALUES (nextval(heart_w_id_sq),#{m_id},#{sell_id},sysdate())
 	</insert>
 
+	<!-- 찜 제거 -->
 	<insert id="deleteHeart" parameterType="heart">
 		delete from heart where m_id = #{m_id}  
 		<if test="sell_id!=0">
@@ -15,10 +16,12 @@
 		</if>
 	</insert>
 
+	<!-- 찜 가져오기 -->
 	<select id="selectHeart" resultType="heart" parameterType="String">
 		select * from heart where m_id=#{m_id}
 	</select>
 	
+	<!-- 찜 숫자 가져오기 -->
 	<select id="seletheartone" resultType="String" parameterType="heart">
 		SELECT COUNT(*) FROM heart WHERE m_id=#{m_id} AND sell_id=#{sell_id}
 	</select>

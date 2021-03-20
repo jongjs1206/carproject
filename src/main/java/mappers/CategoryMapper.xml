@@ -14,6 +14,7 @@
 	on cate.jejosa = t.jejosa
 </select>
 
+<!--모델 가져오기 -->
 <select id="modelselect" resultType="hashmap" parameterType="String">
 	select * from (select * from category where jejosa=#{jejosa}) mo 
 	left join (select model,count(*) as count from 
@@ -24,6 +25,7 @@
 	on mo.model = t.model
 </select>
 
+<!-- 세부모델 가져오기 -->
 <select id="detailselect" resultType="hashmap" parameterType="String">
 	select * from (select d_id, detail from 
 	(select * from category where car_num=#{car_num}) m 
@@ -36,6 +38,7 @@
 	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by detail) t2 on t1.detail = t2.detail
 </select>
 
+<!-- 등급 가져오기 -->
 <select id="gradeselect" resultType="hashmap" parameterType="String">
 	select * from (select * from grade where d_id=#{d_id} group by grade1) t1 
 	left join (select grade1, count(*) as count from 
@@ -44,6 +47,7 @@
 	order by t1.grade1
 </select>
 
+<!-- 세부등급 가져오기 -->
 <select id="grade2select" resultType="hashmap" parameterType="grade">
 	select * from (select * from grade where d_id=#{d_id} and grade1=#{grade1}) t1 
 	left join (select grade2, count(*) as count from 
@@ -51,6 +55,7 @@
 	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by grade2) t2 on t1.grade2 = t2.grade2
 </select>
 
+<!-- 나라 가져오기 -->
 <select id="countryselect" resultType="hashmap" parameterType="String">
 	select * from (select * from category where abroad = #{abroad} group by jejosa) t1 
 	left join (select jejosa, count(*) as count from 
@@ -59,6 +64,7 @@
 	inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id group by jejosa) t2 on t1.jejosa = t2.jejosa
 </select>
 
+<!-- 판매 리스트 가져오기 -->
 <select id="sellselect" resultType="hashmap" parameterType="heart">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -82,6 +88,7 @@ where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 최신 등록 글 가져오기 -->
 <select id="homesellselect" resultType="hashmap" parameterType="heart">
 SELECT * FROM category c
 inner join detail d on c.car_num = d.car_num  
@@ -92,7 +99,7 @@ ORDER by w_date DESC LIMIT 0,6;
 </select>
 
 
-
+<!-- 카테고리 글 가져오기 -->
 <select id="category_productselect" resultType="hashmap" parameterType="heart">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -109,6 +116,7 @@ where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 모델 글 가져오기 -->
 <select id="model_productselect" resultType="hashmap" parameterType="heart">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -125,6 +133,7 @@ where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 세부모델 글 가져오기 -->
 <select id="detail_productselect" resultType="hashmap" parameterType="heart">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -141,6 +150,7 @@ where <![CDATA[rnum]]> BETWEEN #{sell_id} AND #{sell_id}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 등급 글 가져오기 -->
 <select id="grade1_productselect" resultType="hashmap" parameterType="member">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -157,6 +167,7 @@ where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 세부등급 글 가져오기 -->
 <select id="grade2_productselect" resultType="hashmap" parameterType="member">
 SELECT ht, o.* FROM 
 (SELECT b.sell_id, w_date, price, image, title, option, <![CDATA[rnum]]> FROM 
@@ -173,25 +184,31 @@ where <![CDATA[rnum]]> BETWEEN #{coin} AND #{coin}+14) o
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on o.sell_id=h.sell_id
 </select>
 
+<!-- 검색 가져오기 -->
 <select id="searchselect" resultType="hashmap" parameterType="heart">
 SELECT * FROM (SELECT * FROM sell WHERE status='게시중') s 
 left JOIN (SELECT sell_id, '1' as ht FROM heart WHERE m_id=#{m_id}) h on s.sell_id=h.sell_id
 WHERE title LIKE '%${date}%' ORDER BY w_date desc LIMIT ${sell_id},15
 </select>
+
+<!-- 글 등록 숫자 가져오기 -->
 <select id="sellcount" resultType="Integer">
 SELECT COUNT(*) AS count FROM sell WHERE status='게시중'
 </select>
 
+<!-- 나라 글 등록 숫자 가져오기 -->
 <select id="country_count" resultType="Integer" parameterType="String">
 select COUNT(*) AS COUNT from category c 
 inner join detail d on c.car_num=d.car_num inner join grade g on g.d_id=d.d_id 
 inner join (SELECT * FROM sell WHERE status='게시중') s on s.g_id = g.g_id where abroad=#{country}
 </select>
 
+<!-- 검색된 글 숫자 가져오기 -->
 <select id="search_count" resultType="Integer" parameterType="String">
 SELECT COUNT(*) AS COUNT FROM sell WHERE title LIKE '%${value}%' and status='게시중' ORDER BY w_date
 </select>
 
+<!-- 찜 목록 가져오기 -->
 <select id="heartlistselect" resultType="hashmap" parameterType="heart">
 SELECT * FROM 
 (SELECT * FROM heart WHERE m_id=#{m_id}) h 
@@ -199,6 +216,7 @@ INNER JOIN (SELECT * FROM sell WHERE status='게시중') s ON h.sell_id=s.sell_i
 ORDER BY w_date DESC LIMIT ${sell_id},15
 </select>
 
+<!-- 찜 숫자 가져오기 -->
 <select id="heartlistcount" resultType="Integer" parameterType="heart">
 SELECT COUNT(*) as count FROM 
 (SELECT * FROM heart WHERE m_id=#{m_id}) h 

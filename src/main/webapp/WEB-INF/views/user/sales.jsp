@@ -245,178 +245,62 @@
 													style="text-align: center; font-size: 14px; padding: 5px; font-weight: initial;">멀티미디어</th>
 											</tr>
 											<tr style="font-size: 12px; font-weight: lighter;">
+											
+												<!-- --------------------차량옵션 start------------------- -->											
+												<!-- 
+													<li><input type="checkbox" id="options_1" name="option"> 선루프</li>
+												 -->
+												<!-- 
+													<li>
+														<c:if test="${result_option.get(0) eq '0'}">
+															<input type="checkbox" id="options_1" name="option">
+														</c:if>
+														<c:if test="${result_option.get(0) eq '1'}">
+															<input type="checkbox" id="options_1" name="option" checked>
+														</c:if>
+														 선루프
+													</li>
+												 -->											
+											 
+												<!-- 외관 -->
 												<td class="outside">
-													<!-- 외관 -->
-													<li><input type="checkbox" id="options_1"
-														name="option"> 선루프</li>
-													<li><input type="checkbox" id="options_2"
-														name="option"> 파노라마선루프</li>
-													<li><input type="checkbox" id="options_3"
-														name="option"> 알루미늄휠</li>
-													<li><input type="checkbox" id="options_4"
-														name="option"> 전동사이드미러</li>
-													<li><input type="checkbox" id="options_5"
-														name="option"> HID램프</li>
-													<li><input type="checkbox" id="options_6"
-														name="option"> LED헤드램프</li>
-													<li><input type="checkbox" id="options_7"
-														name="option"> 어댑티드헤드램프</li>
-													<li><input type="checkbox" id="options_8"
-														name="option"> LED리어램프</li>
-													<li><input type="checkbox" id="options_9"
-														name="option"> 데이라이트</li>
-													<li><input type="checkbox" id="options_10"
-														name="option"> 하이빔어시스트</li>
-													<li><input type="checkbox" id="options_11"
-														name="option"> 압축도어</li>
-													<li><input type="checkbox" id="options_12"
-														name="option"> 자동슬라이딩도어</li>
-													<li><input type="checkbox" id="options_13"
-														name="option"> 전동사이드스탭</li>
-													<li><input type="checkbox" id="options_14"
-														name="option"> 루프랙</li>
+													<c:forEach var="i" begin="0" end="13">
+														<li><input type="checkbox" id="options_'${i+1}'"
+															name="option"> ${option_name[i]}</li>
+													</c:forEach>
 												</td>
+												<!-- 내장 -->
 												<td class="inside">
-													<!-- 내장 -->
-													<li><input type="checkbox" id="options_15"
-														name="option"> 가죽시트</li>
-													<li><input type="checkbox" id="options_16"
-														name="option"> 전동시트(운전석)</li>
-													<li><input type="checkbox" id="options_17"
-														name="option"> 전동시트(동승석)</li>
-													<li><input type="checkbox" id="options_18"
-														name="option"> 열선시트(앞좌석)</li>
-													<li><input type="checkbox" id="options_19"
-														name="option"> 열선시트(뒷좌석)</li>
-													<li><input type="checkbox" id="options_20"
-														name="option"> 통풍시트</li>
-													<li><input type="checkbox" id="options_21"
-														name="option"> 메모리시트</li>
-													<li><input type="checkbox" id="options_22"
-														name="option"> 폴딩시트</li>
-													<li><input type="checkbox" id="options_23"
-														name="option"> 마사지시트</li>
-													<li><input type="checkbox" id="options_24"
-														name="option"> 워크인시트</li>
-													<li><input type="checkbox" id="options_25"
-														name="option"> 요추받침</li>
-													<li><input type="checkbox" id="options_26"
-														name="option"> 하이패스룸미러</li>
-													<li><input type="checkbox" id="options_27"
-														name="option"> ECM룸미러</li>
-													<li><input type="checkbox" id="options_28"
-														name="option"> 뒷자석에어벤트</li>
-													<li><input type="checkbox" id="options_29"
-														name="option"> 패들쉬프트</li>
-													<li><input type="checkbox" id="options_30"
-														name="option"> 전동햇빛가리개</li>
-													<li><input type="checkbox" id="options_31"
-														name="option"> 엠비언트라이트</li>
+													<c:forEach var="i" begin="14" end="30">
+														<li><input type="checkbox" id="options_'${i+1}'"
+															name="option"> ${option_name[i]}</li>
+													</c:forEach>												
 												</td>
+												<!-- 안전 -->
 												<td class="safe">
-													<!-- 안전 -->
-													<li><input type="checkbox" id="options_32"
-														name="option"> 동승석에어백</li>
-													<li><input type="checkbox" id="options_33"
-														name="option"> 측면에어백</li>
-													<li><input type="checkbox" id="options_34"
-														name="option"> 커튼에어백</li>
-													<li><input type="checkbox" id="options_35"
-														name="option"> 무릎에어백</li>
-													<li><input type="checkbox" id="options_36"
-														name="option"> 승객감지에어백</li>
-													<li><input type="checkbox" id="options_37"
-														name="option"> 브레이크잠금방지(ABS)</li>
-													<li><input type="checkbox" id="options_38"
-														name="option"> 차체자세제어장치(ESC)</li>
-													<li><input type="checkbox" id="options_39"
-														name="option"> 후방센서</li>
-													<li><input type="checkbox" id="options_40"
-														name="option"> 전방센서</li>
-													<li><input type="checkbox" id="options_41"
-														name="option"> 후방카메라</li>
-													<li><input type="checkbox" id="options_42"
-														name="option"> 전방카메라</li>
-													<li><input type="checkbox" id="options_43"
-														name="option"> 어라운드뷰</li>
-													<li><input type="checkbox" id="options_44"
-														name="option"> 타이어공기압감지(TPMS)</li>
-													<li><input type="checkbox" id="options_45"
-														name="option"> 차선이탈경보(LDWS)</li>
-													<li><input type="checkbox" id="options_46"
-														name="option"> 자동긴급제동</li>
-													<li><input type="checkbox" id="options_47"
-														name="option"> 전자제어서스펜션(ECS)</li>
-													<li><input type="checkbox" id="options_48"
-														name="option"> 후측방경보</li>
-													<li><input type="checkbox" id="options_49"
-														name="option"> 미끄럼방지(TCS)</li>
+													<c:forEach var="i" begin="31" end="48">
+														<li><input type="checkbox" id="options_'${i+1}'"
+															name="option"> ${option_name[i]}</li>
+													</c:forEach>												
 												</td>
+												<!-- 편의 -->
 												<td class="comfort">
-													<!-- 편의 -->
-													<li><input type="checkbox" id="options_50"
-														name="option"> 스마트키</li>
-													<li><input type="checkbox" id="options_51"
-														name="option"> 열선핸들</li>
-													<li><input type="checkbox" id="options_52"
-														name="option"> 리모컨핸들</li>
-													<li><input type="checkbox" id="options_53"
-														name="option"> 자동에어컨</li>
-													<li><input type="checkbox" id="options_54"
-														name="option"> 좌우독립에어컨</li>
-													<li><input type="checkbox" id="options_55"
-														name="option"> 오토라이트</li>
-													<li><input type="checkbox" id="options_56"
-														name="option"> 크루즈컨트롤</li>
-													<li><input type="checkbox" id="options_57"
-														name="option"> 스마트크루즈컨트롤</li>
-													<li><input type="checkbox" id="options_58"
-														name="option"> 스탑앤고</li>
-													<li><input type="checkbox" id="options_59"
-														name="option"> 전동트렁크</li>
-													<li><input type="checkbox" id="options_60"
-														name="option"> 스마트트렁크</li>
-													<li><input type="checkbox" id="options_61"
-														name="option"> 전자주차브레이크(EPB)</li>
-													<li><input type="checkbox" id="options_62"
-														name="option"> 경사로밀림방지</li>
-													<li><input type="checkbox" id="options_63"
-														name="option"> 헤드업디스플레이(HUD)</li>
-													<li><input type="checkbox" id="options_64"
-														name="option"> 무선충전</li>
-													<li><input type="checkbox" id="options_65"
-														name="option"> 자동주차</li>
-													<li><input type="checkbox" id="options_66"
-														name="option"> 냉장고</li>
+													<c:forEach var="i" begin="49" end="65">
+														<li><input type="checkbox" id="options_'${i+1}'"
+															name="option"> ${option_name[i]}</li>
+													</c:forEach>												
 												</td>
+												<!-- 멀티미디어 -->
 												<td class="multimedia">
-													<!-- 멀티미디어 -->
-													<li><input type="checkbox" id="options_67"
-														name="option"> 네비게이션(순정)</li>
-													<li><input type="checkbox" id="options_68"
-														name="option"> 네비게이션(비순정)</li>
-													<li><input type="checkbox" id="options_69"
-														name="option"> USB</li>
-													<li><input type="checkbox" id="options_70"
-														name="option"> AUX</li>
-													<li><input type="checkbox" id="options_71"
-														name="option"> 블루투스</li>
-													<li><input type="checkbox" id="options_72"
-														name="option"> MP3</li>
-													<li><input type="checkbox" id="options_73"
-														name="option"> DMB</li>
-													<li><input type="checkbox" id="options_74"
-														name="option"> CD플레이어</li>
-													<li><input type="checkbox" id="options_75"
-														name="option"> AV시스템</li>
-													<li><input type="checkbox" id="options_76"
-														name="option"> 뒷좌석TV</li>
-													<li><input type="checkbox" id="options_77"
-														name="option"> 텔레매틱스</li>
-													<li><input type="checkbox" id="options_78"
-														name="option"> 스마트폰미러링</li>
+													<c:forEach var="i" begin="66" end="77">
+														<li><input type="checkbox" id="options_'${i+1}'"
+															name="option"> ${option_name[i]}</li>
+													</c:forEach>												
 												</td>
 											</tr>
+											
+											<!-- --------------------차량옵션 end------------------- -->
+											
 										</table> <!-- end of option_table -->
 									</td>
 								</tr>

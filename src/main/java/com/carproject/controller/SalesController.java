@@ -58,7 +58,7 @@ public class SalesController {
 			"USB", "AUX", "블루투스", "MP3", "DMB", "CD플레이어", "AV시스템", "뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
 	
 	//////////////////////////////////////////////////////////
-	// 제조사
+	// 제조사 리스트
 	@RequestMapping("user/sales.do")
 	public String brandList(Model model,HttpSession session) {
 		
@@ -87,6 +87,7 @@ public class SalesController {
 		}
 		
 		List<HashMap<String, Object>> list = salesService.brandList();
+		System.out.println("제조사리스트");
 		model.addAttribute("brandList", list);
 		
 		// 연식
@@ -96,6 +97,7 @@ public class SalesController {
 			String year = String.valueOf(2021 - i);
 			array.add(year);
 		}
+		model.addAttribute("arr", array);
 		
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
@@ -108,14 +110,37 @@ public class SalesController {
 		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 		
-		model.addAttribute("arr", array);
-		
-		System.out.println("제조사리스트");
+		// 옵션 정보 model로 넘기기
+		String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", 
+								"HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", 
+								"데이라이트", "LEF하이빔어시스트", "압축도어", "LED자동슬라이딩도어", 
+								"전동사이드스탭", "루프랙", 
+								
+								"가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "엠비언트라이트",
+								"열선시트(뒷좌석)", "통풍시트", "메모리시트", "폴딩시트", 
+								"마사지시트", "워크인시트", "요추받침", "하이패스룸미러", 
+								"ECM룸미러", "뒷자석에어벤트", "패들쉬프트", "전동햇빛가리개",
+								
+								"동승석에어백", "측면에어백", "커튼에어백", "무릎에어백", "후측방경보",
+								"승객감지에어백", "브레이크잠금방지(ABS)", "차체자세제어장치(ESC)", "후방센서", "미끄럼방지(TCS)", 
+								"전방센서", "후방카메라", "전방카메라", "어라운드뷰", 
+								"타이어공기압감지(TPMS)", "차선이탈경보(LDWS)", "자동긴급제동", "전자제어서스펜션(ECS)", 
+								
+								"스마트키", "열선핸들", "리모컨핸들", "자동에어컨", "냉장고", 
+								"좌우독립에어컨", "오토라이트", "크루즈컨트롤", "스마트크루즈컨트롤", 
+								"스탑앤고", "전동트렁크", "스마트트렁크", "전자주차브레이크(EPB)", 
+								"경사로밀림방지", "헤드업디스플레이(HUD)", "무선충전", "자동주차", 
+								
+								"네비게이션(순정)", "네비게이션(비순정)", "USB", 
+								"AUX", "블루투스", "MP3", 
+								"DMB", "CD플레이어", "AV시스템", 
+								"뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
+		model.addAttribute("option_name", alloption);
 		
 		return null;
 	}
 	
-	// 모델
+	// 모델 리스트
 	@RequestMapping("user/model.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> model(SalesVO vo) {
@@ -124,7 +149,7 @@ public class SalesController {
 		return list;
 	}
 		
-	// 세부모델
+	// 세부모델 리스트
 	@RequestMapping("user/detailmodel.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> detailmodel(SalesVO vo) {
@@ -133,7 +158,7 @@ public class SalesController {
 		return list;
 	}
 	
-	// 등급
+	// 등급 리스트
 	@RequestMapping("user/grade.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> grade(SalesVO vo) {
@@ -142,7 +167,7 @@ public class SalesController {
 		return list;
 	}
 	
-	// 세부 등급
+	// 세부 등급 리스트
 	@RequestMapping("user/detailgrade.do")
 	@ResponseBody
 	public List<HashMap<String, Object>> detailgrade(SalesVO vo) {
@@ -266,6 +291,35 @@ public class SalesController {
 				}
 			}
 		}
+		model.addAttribute("result_option", result_option);
+		
+		// 옵션 정보 model로 넘기기
+		String[] alloption = { "선루프", "파노라마선루프", "알루미늄휠", "전동사이드미러", 
+								"HID램프", "LED헤드램프", "어댑티드헤드램프", "LED리어램프", 
+								"데이라이트", "LEF하이빔어시스트", "압축도어", "LED자동슬라이딩도어", 
+								"전동사이드스탭", "루프랙", 
+								
+								"가죽시트", "전동시트(운전석)", "전동시트(동승석)", "열선시트(앞좌석)", "엠비언트라이트",
+								"열선시트(뒷좌석)", "통풍시트", "메모리시트", "폴딩시트", 
+								"마사지시트", "워크인시트", "요추받침", "하이패스룸미러", 
+								"ECM룸미러", "뒷자석에어벤트", "패들쉬프트", "전동햇빛가리개",
+								
+								"동승석에어백", "측면에어백", "커튼에어백", "무릎에어백", "후측방경보",
+								"승객감지에어백", "브레이크잠금방지(ABS)", "차체자세제어장치(ESC)", "후방센서", "미끄럼방지(TCS)", 
+								"전방센서", "후방카메라", "전방카메라", "어라운드뷰", 
+								"타이어공기압감지(TPMS)", "차선이탈경보(LDWS)", "자동긴급제동", "전자제어서스펜션(ECS)", 
+								
+								"스마트키", "열선핸들", "리모컨핸들", "자동에어컨", "냉장고", 
+								"좌우독립에어컨", "오토라이트", "크루즈컨트롤", "스마트크루즈컨트롤", 
+								"스탑앤고", "전동트렁크", "스마트트렁크", "전자주차브레이크(EPB)", 
+								"경사로밀림방지", "헤드업디스플레이(HUD)", "무선충전", "자동주차", 
+								
+								"네비게이션(순정)", "네비게이션(비순정)", "USB", 
+								"AUX", "블루투스", "MP3", 
+								"DMB", "CD플레이어", "AV시스템", 
+								"뒷좌석TV", "텔레매틱스", "스마트폰미러링" };
+		model.addAttribute("option_name", alloption);		
+		
 		HeartVO hvo = new HeartVO();
 		
 		String user_id="";
@@ -276,7 +330,6 @@ public class SalesController {
 		hvo.setM_id(user_id);
 		hvo.setSell_id(num.intValue());
 		String heart = heartService.seletheartone(hvo);
-		model.addAttribute("result_option", result_option);
 		model.addAttribute("heart", heart);
 	}
 	

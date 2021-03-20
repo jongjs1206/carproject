@@ -2,35 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeclarationMAP">
-
+	
+	<!-- 신고 보내기 -->
 	<insert id="declaration_insert" parameterType="declaration">
-		INSERT INTO declaration
+		INSERT INTO
+		declaration
 		(de_num, m_id, to_id, content, de_date, de_ok)
 		VALUES
 		(nextval(declaration_sq),#{m_id},#{to_id},#{content},sysdate(), 'n')
 	</insert>
-	
-		<!-- 신고 리스트 불러오기-->
-	
-<select id="selectUserReport" parameterType="declaration" resultType="hashmap">
-    SELECT declaration.*, member.* FROM declaration, member
-    WHERE declaration.m_id=member.m_id
-    <if test="de_num != null and de_num != '' ">
-    AND 
-    de_num=#{de_num}
-    </if>
-    <if test="de_ok != null">
-    AND
-    de_ok=#{de_ok}    
-    </if>
-	ORDER BY de_date DESC
-  </select>
-  
-  <!-- update de_ok(신고 처리 확인) -->
-  	<update id="updateDe_ok"  parameterType="declaration">
-		UPDATE declaration 
-		SET	de_ok = #{de_ok}
+
+	<!-- 신고 리스트 불러오기 -->
+
+	<select id="selectUserReport" parameterType="declaration"
+		resultType="hashmap">
+		SELECT declaration.*, member.* FROM declaration, member
+		WHERE declaration.m_id=member.m_id
+		<if test="de_num != null and de_num != '' ">
+			AND
+			de_num=#{de_num}
+		</if>
+		<if test="de_ok != null">
+			AND
+			de_ok=#{de_ok}
+		</if>
+		ORDER BY de_date DESC
+	</select>
+
+	<!-- update de_ok(신고 처리 확인) -->
+	<update id="updateDe_ok" parameterType="declaration">
+		UPDATE declaration
+		SET de_ok = #{de_ok}
 		WHERE de_num = #{de_num}
 	</update>
-	
+
 </mapper>

@@ -21,16 +21,19 @@ import com.carproject.service.MycarService;
 @Controller
 public class HomeController {
 	@Autowired
-	private MemberService memberService;
-	
+	private MemberService memberService;	
 	@Autowired
 	private MycarService mycarService;
 	@Autowired
 	private LetterService letterService;
 	
+	
+	/*
+	 * 기본으로 jsp에 들어가는 코드
+	 */
 	@RequestMapping("{step1}/{step2}.do")
 	public String loginPage(@PathVariable String step1,@PathVariable String step2,HttpSession session) {
-		
+		//스프링 시큐리티 값 얻어오는 코드
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		String id = "";
@@ -47,7 +50,8 @@ public class HomeController {
 		// 관리자인지 권한정보를 세션에 저장
 		String auth = memberService.checkAuth(vo);
 		session.setAttribute("auth", auth);
-
+		
+		//차 충격을 세션에 저장
 		String crash = mycarService.selectnow();
 		session.setAttribute("crash", crash);
 		
@@ -56,6 +60,7 @@ public class HomeController {
 			user_id=((MemberVO)session.getAttribute("info")).getM_id();
 		}
 		
+		//쪽지를 세션에 저장
 		String note = letterService.selectnotecount(user_id);
 		session.setAttribute("note", note);
 

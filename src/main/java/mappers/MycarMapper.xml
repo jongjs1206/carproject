@@ -3,18 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MycarMAP">
 
+	<!-- 안본 블랙박스 -->
 	<select id="selectnow" resultType="String">
 		SELECT COUNT(*) FROM mycar where eyes='N'
 	</select>
 	
+	<!-- 블랙박스 리스트 가져오기 -->
 	<select id="selectblackbox" resultType="mycar">
 		SELECT * FROM mycar ORDER BY DAY desc
 	</select>
 	
+	<!-- 블랙박스 사진 가져오기 -->
 	<select id="selectpath" resultType="String" parameterType="String">
 		SELECT img FROM mycar WHERE DAY=#{value}
 	</select>
 	
+	<!-- 사진 본걸로 업데이트 -->
 	<update id="updateblackbox">
 		UPDATE mycar SET eyes='Y'
 	</update>

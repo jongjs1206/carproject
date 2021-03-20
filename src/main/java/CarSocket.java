@@ -57,7 +57,7 @@ public class CarSocket {
 				return;
 			}
 			try {
-// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
+				// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
 				session.getBasicRemote().sendText(msg);
 				String userDeviceIdKey = "eAfX4CvITNG_HscEZewPoG:APA91bEXZHcohMYfY599FbAjpccKq2c3KG8pJYY8lzhAgWsoHNyif406ad2GhPxCWFQP6vnp8JunKDmnEe4mJTP5wOcsU0be8X0dMKppOpJpc-g_WP66BRNCPveOEuwZQRedIc8wir4e";
 				 
@@ -94,7 +94,7 @@ public class CarSocket {
 				wr.flush();
 				conn.getInputStream();  
 			} catch (IOException e) {
-// 에러가 발생하면 콘솔에 표시한다.
+				// 에러가 발생하면 콘솔에 표시한다.
 				e.printStackTrace();
 			}
 		});

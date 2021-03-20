@@ -85,7 +85,7 @@
 		UPDATE sell 
 		SET title=#{title}, old=#{old}, mile=#{mile}, color=#{color}, accident=#{accident}, price=#{price},
 				image=#{image}, option=#{strOption}, content=#{content}, vehicle_num=#{vehicle_num}, fuel=#{fuel},
-				gear=#{gear}, baeki=#{baeki}
+				gear=#{gear}, baeki=#{baeki}, status='등록대기'
 		WHERE sell_id=#{sell_id}
 	]]>
 </update>
