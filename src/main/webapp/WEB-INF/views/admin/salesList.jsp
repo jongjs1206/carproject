@@ -63,7 +63,12 @@
                                 
                                 <input type="date" id="endDate">
                                 <a id="searchDates"><i class="fas fa-search"></i></a>
-
+                                
+                                <!-- 쪽지 start -->
+ 								<a onclick="window.open('../user/noteinsert.do', 'window', 'toolbar=no,directory=no,status=no,menubar=no,scrollbars=no,resizeable=yes,copyhistory=no, width=395, height=630, left=0, top=0');return false">
+                              		<input type="button" class="btn btn-warning" value="쪽지" style="margin-left:50px;">
+                           		</a>
+                           		<!-- 쪽지 end -->
                                
                                <div  id="indexListAjax">                         
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
