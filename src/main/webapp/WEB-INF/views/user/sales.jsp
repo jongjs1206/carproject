@@ -265,35 +265,35 @@
 												<!-- 외관 -->
 												<td class="outside">
 													<c:forEach var="i" begin="0" end="13">
-														<li><input type="checkbox" id="options_'${i+1}'"
+														<li><input type="checkbox" id="options_${i+1}"
 															name="option"> ${option_name[i]}</li>
 													</c:forEach>
 												</td>
 												<!-- 내장 -->
 												<td class="inside">
 													<c:forEach var="i" begin="14" end="30">
-														<li><input type="checkbox" id="options_'${i+1}'"
+														<li><input type="checkbox" id="options_${i+1}"
 															name="option"> ${option_name[i]}</li>
 													</c:forEach>												
 												</td>
 												<!-- 안전 -->
 												<td class="safe">
 													<c:forEach var="i" begin="31" end="48">
-														<li><input type="checkbox" id="options_'${i+1}'"
+														<li><input type="checkbox" id="options_${i+1}"
 															name="option"> ${option_name[i]}</li>
 													</c:forEach>												
 												</td>
 												<!-- 편의 -->
 												<td class="comfort">
 													<c:forEach var="i" begin="49" end="65">
-														<li><input type="checkbox" id="options_'${i+1}'"
+														<li><input type="checkbox" id="options_${i+1}"
 															name="option"> ${option_name[i]}</li>
 													</c:forEach>												
 												</td>
 												<!-- 멀티미디어 -->
 												<td class="multimedia">
 													<c:forEach var="i" begin="66" end="77">
-														<li><input type="checkbox" id="options_'${i+1}'"
+														<li><input type="checkbox" id="options_${i+1}"
 															name="option"> ${option_name[i]}</li>
 													</c:forEach>												
 												</td>
