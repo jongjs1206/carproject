@@ -191,35 +191,23 @@ public class AdminController {
 			, @RequestParam HashMap<String, Object> param
 			) {
 		
+		SalesVO vo = new SalesVO();
+		
+		if(param.get("posting").equals("set")) {
+			vo.setSell_id(Integer.parseInt((String) param.get("sell_id")));
+			memberservice.setPosting(vo);
+			
+		}else if(param.get("posting").equals("return")) {
+			vo.setSell_id(Integer.parseInt((String) param.get("sell_id")));
+			memberservice.returnPosting(vo);			
+		}
+		
 		//검색
 		List<HashMap<String, Object>> salesList = memberservice.selectSale_admin(param);
 		model.addAttribute("salesList", salesList);
 
 	}
 	
-	//admin 등록대기->게시중 [등록버튼]
-	@RequestMapping(value = "/admin/setPosting.do")
-	public String setPosting(HttpSession session, Model model, @RequestParam String sellid) {
-		
-	SalesVO vo = new SalesVO();	
-	vo.setSell_id(Integer.parseInt(sellid));	
-	memberservice.setPosting(vo);
-	
-	return "redirect: salesList.do ";
-	
-	}
-	
-	// admin 등록대기->반려 [반려버튼]
-	@RequestMapping(value="/admin/returnPosting.do")
-	public String returnPosting(HttpSession session, Model model, @RequestParam String sellid) {
-		
-	SalesVO vo = new SalesVO();	
-	vo.setSell_id(Integer.parseInt(sellid));	
-	memberservice.returnPosting(vo);
-	
-	return "redirect: salesList.do ";
-	
-	}
 	
 	//admin_판매글-이미지분석 필터링 관리//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/admin/filterList.do")

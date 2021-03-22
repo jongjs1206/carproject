@@ -73,6 +73,7 @@ $(function() {
 		}, 500);
 	
 })
+
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YD49ED3ZV"></script>

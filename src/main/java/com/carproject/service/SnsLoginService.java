@@ -28,10 +28,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 
-
 @Service("snsLoginService")
 public class SnsLoginService {
-	
 	
 	@Value("#{config['google.url']}")
 	private String googleUrl;
@@ -49,16 +47,13 @@ public class SnsLoginService {
 	
 //google login redirect url
   public String googleRedirect() {
-  
     String googleRedirect = googleUrl+"?scope=email+profile&access_type=offline&response_type=code&client_id="+googleId+"&redirect_uri="+redirect;
-
-  
+ 
 	  return googleRedirect;
   }
   
  //코드 받아서 token 받기
 public String getToken(String code) {
-	
 	
 	 try {
          URL url = new URL("https://oauth2.googleapis.com/token");

@@ -135,12 +135,12 @@
 
 				</div>
 				<div class="statusBtn" id="statusBtn">
-					<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a> <a
-						href="javascript:void(0);" onclick="statusOn(this)">게시중</a> <a
-						href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
+					<a href="javascript:void(0);" onclick="statusOn(this)">등록대기</a> 
+					<a href="javascript:void(0);" onclick="statusOn(this)">게시중</a> 
+					<a href="javascript:void(0);" onclick="statusOn(this)">게시종료</a>
 						<br /><br />
-					<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a> <a
-						href="javascript:void(0);" onclick="statusOn(this)">반려</a>
+					<a href="javascript:void(0);" onclick="statusOn(this)">판매완료</a> 
+					<a href="javascript:void(0);" onclick="statusOn(this)">반려</a>
 				</div>
 				<!-- 검색창 -->
 				<div class="divSearch">
@@ -212,11 +212,25 @@
 				</a></li>
 		</ul>
 		<ul class="pagination page_number">
-	        <c:forEach var="i" begin="1" end="${totalpage}">
+		<c:set var="perBlock" value="5"></c:set>
+		
+		<c:set var="block" value="${(1+perBlock-1)/perBlock}"></c:set>		
+	
+		<c:choose>
+		<c:when test="${totalpage le endPage}">
+		<c:set var="endPage" value="${totalpage}"></c:set>
+		</c:when>
+		<c:otherwise>
+		<c:set var="endPage" value="${block+perBlock-1}"></c:set>
+		</c:otherwise>
+		</c:choose>
+		
+	        <c:forEach var="i" begin="1" end="${endPage}">
 	        <li class="page-item page_number">
 	            <a class="page-link page-num">${i}</a>
 	        </li>
 	       </c:forEach>
+	      
 		</ul>
 		<ul class="pagination">
 				<li class="page-item next_page"><a class="page-link gonext" aria-label="Next"> <i class="fas fa-angle-right"></i>

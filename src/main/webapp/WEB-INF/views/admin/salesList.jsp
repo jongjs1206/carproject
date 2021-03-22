@@ -118,24 +118,23 @@
                                                 <td>${sale.m_id}</td>
                                                 <td><a href="../all/salesDetail.do?num=${sale.sell_id}">${sale.title}</a></td>
                                                 <td>${sale.w_date}</td>
-                                                <td>${sale.status}</td>
-                                                <c:set var="status" value="${sale.status}" />
+													<td>${sale.status}</td>
+													<c:set var="status" value="${sale.status}" />
 													<c:choose>
-														<c:when test="${status eq '등록대기'}">
-															<td align="center">											
-															<input type="button" class="btn btn-primary" onclick="location.href='setPosting.do?sellid=${sale.sell_id}' " value="등록">									
-															</td>
+														<c:when test="${status eq '등록대기'}">															
+															<td align="center">
+															<input type="hidden"  value="${sale.sell_id}">
+															<input type="button"  id="setPosting" class="btn btn-primary" value="등록"></td>
 														</c:when>
-														<c:otherwise>											
+														<c:otherwise>
 															<td align="center"></td>
 														</c:otherwise>
-													</c:choose>
-												<td>
-													<c:if test="${status eq '등록대기'}">
-														<input type="button" class="btn btn-danger" onclick="location.href='returnPosting.do?sellid=${sale.sell_id}' " value="반려">
-													</c:if>
-												</td>
-											</tr> 
+													</c:choose>													
+													<td><c:if test="${status eq '등록대기'}">
+													<input type="hidden"  value="${sale.sell_id}">
+													<input type="button" id="returnPosting" class="btn btn-danger" value="반려">
+												</c:if></td>
+										</tr> 
                                            
                                             </c:forEach>
                                             

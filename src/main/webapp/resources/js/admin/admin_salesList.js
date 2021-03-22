@@ -76,13 +76,27 @@ $('#endDate').val(getParameterByName("endDate"));
 
 
 //날짜 검색 버튼
-$('#searchDates').on('click', function(){
-search();
+$(document).on('click','#searchDates',function(){
+search(null, null);
 })
 
 //상태 샐랙트 시
-searchStatus.on('change', function(){
-search();
+$(document).on('change','#searchStatus',function(){
+search(null, null);
+})
+
+
+
+//등록 클릭시
+$(document).on('click','#setPosting',function(){
+let sell_id = $(this).prev().val()
+search('set', sell_id);
+})
+
+//반려클릭시
+$(document).on('click','#returnPosting',function(){
+let sell_id = $(this).prev().val()
+search('return', sell_id);
 })
 
 
@@ -91,9 +105,8 @@ search();
 
 
 
-var search = function(){
 
-
+var search = function(post, sell_id){
 
 
 	$.ajax({
@@ -109,15 +122,13 @@ var search = function(){
 	 	data : {"startDate" : startDate.val(),
 	 			"endDate": endDate.val(),
 	 			"status" : searchStatus.val(),
-	 			"byTitle" : byTitle.val()
+	 			"byTitle" : byTitle.val(),
+	 			"posting" : post,
+	 			"sell_id" : sell_id
 	 	
 	 	},
-	 	success : function(result){
-	 	
-	 	
+	 	success : function(result){	 	
 	 	location.href="salesList.do?startDate="+startDate.val()+"&endDate="+endDate.val()+"&status="+searchStatus.val()+"&byTitle="+byTitle.val();
-	 	
-	 	
 	 	},
 	 	
 	 	

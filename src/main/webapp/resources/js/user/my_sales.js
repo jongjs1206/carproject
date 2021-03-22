@@ -16,6 +16,7 @@ $(function(){
 
 	var pageNow = 1;
 	var totalpage = $('#totalpage').val();
+	var perBlock =5;
 	
 	//날짜
 
@@ -227,12 +228,19 @@ status = status +','+ $(this).text()
 	 	
 	 	},		
 		
-	 	success : function(result){		
-		totalpage = $('#totalpage').val();		
+	 	success : function(result){
+	 	
+		totalpage = parseInt(result);
+		pageNow = parseInt(pageNow);
 		
+		let block = parseInt((pageNow+perBlock-1)/perBlock);
+		
+		let startPage = block;
+		let endPage = block+perBlock-1;
+
 		//인덱스 페이지 바꾸기		
 		$('ul.page_number li').remove();		
-		for (i = 1; i <= totalpage ; i++) {
+		for (i = startPage; i <= endPage ; i++) {
 		$('ul.pagination.page_number').append('<li class="page-item"><a class="page-link page-num">'+i+'</a> </li>')
 		}
 	 }, 	
