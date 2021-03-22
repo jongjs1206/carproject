@@ -185,7 +185,10 @@
 													id="carYear" class="carYear" name="old"
 													style="margin: 0 230px 0 50px;">
 													<c:forEach var="year" items="${arr}">
-														<option value="${year}">${year}</option>
+														<option 
+														value="${year}" 
+														<c:if test='${year eq "${sales.old}"}'> selected="selected"</c:if>
+														>${year}</option>
 													</c:forEach>
 												</select>
 												<span>색상</span> <select class='carColor' name='color'
@@ -322,10 +325,10 @@
 														<c:forEach var="i" begin="0" end="13">
 															<li>
 																<c:if test="${result_option.get(i) eq '0'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option">
+																	<input type="checkbox" id="options_${i+1}" name="option">
 																</c:if>
 																<c:if test="${result_option.get(i) eq '1'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option" checked>
+																	<input type="checkbox" id="options_${i+1}" name="option" checked>
 																</c:if>
 																 ${option_name[i]}
 															</li>
@@ -336,10 +339,10 @@
 														<c:forEach var="i" begin="14" end="30">
 															<li>
 																<c:if test="${result_option.get(i) eq '0'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option">
+																	<input type="checkbox" id="options_${i+1}" name="option">
 																</c:if>
 																<c:if test="${result_option.get(i) eq '1'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option" checked>
+																	<input type="checkbox" id="options_${i+1}" name="option" checked>
 																</c:if>
 																 ${option_name[i]}
 															</li>
@@ -350,10 +353,10 @@
 														<c:forEach var="i" begin="31" end="48">
 															<li>
 																<c:if test="${result_option.get(i) eq '0'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option">
+																	<input type="checkbox" id="options_${i+1}" name="option">
 																</c:if>
 																<c:if test="${result_option.get(i) eq '1'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option" checked>
+																	<input type="checkbox" id="options_${i+1}" name="option" checked>
 																</c:if>
 																 ${option_name[i]}
 															</li>
@@ -364,10 +367,10 @@
 														<c:forEach var="i" begin="49" end="65">
 															<li>
 																<c:if test="${result_option.get(i) eq '0'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option">
+																	<input type="checkbox" id="options_${i+1}" name="option">
 																</c:if>
 																<c:if test="${result_option.get(i) eq '1'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option" checked>
+																	<input type="checkbox" id="options_${i+1}" name="option" checked>
 																</c:if>
 																 ${option_name[i]}
 															</li>
@@ -378,10 +381,10 @@
 														<c:forEach var="i" begin="66" end="77">
 															<li>
 																<c:if test="${result_option.get(i) eq '0'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option">
+																	<input type="checkbox" id="options_${i+1}" name="option">
 																</c:if>
 																<c:if test="${result_option.get(i) eq '1'}">
-																	<input type="checkbox" id="options_'${i+1}'" name="option" checked>
+																	<input type="checkbox" id="options_${i+1}" name="option" checked>
 																</c:if>
 																 ${option_name[i]}
 															</li>
